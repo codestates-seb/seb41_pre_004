@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @Builder
-public class Member {
+public class Member extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +36,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;//권한 -> USER, ADMIN
 
+    @Column(length = 1000)
+    private String refreshToken;//RefreshToken
+
 
 
 
@@ -55,6 +58,14 @@ public class Member {
 
     public void updateAge(int age){
         this.age = age;
+    }
+
+    public void updateRefreshToken(String refreshToken){
+        this.refreshToken = refreshToken;
+    }
+
+    public void destroyRefreshToken(){
+        this.refreshToken = null;
     }
 
     //== 패스워드 암호화 ==//
