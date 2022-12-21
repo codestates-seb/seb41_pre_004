@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/jpa
+    username: sa
+    password: 1
+
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        user_sql_cooments: true
+
+    hibernate:
+      ddl-auto: create
+
+logging:
+  level:
+    org:
+      apache:
+        coyote:
+          http11: debug
+
+      hiberante:
+        SQL: debug
+
+    boardexample:
+      myboard: info
