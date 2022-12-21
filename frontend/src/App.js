@@ -1,13 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-import styled from 'styled-components';
-import logo_github from './logo_github.svg'
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+`;
 
 function App() {
-
-  return(<>
-  </>)
+  return (
+    <>
+      <GlobalStyle />
+    </>
+  );
 }
 
 export default App;
