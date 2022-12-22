@@ -5,6 +5,7 @@ import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.mapper.MemberMapper;
 import com.preproject.backend.domain.member.service.MemberService;
 import com.preproject.backend.global.dto.MultiResponseDto;
+import com.preproject.backend.global.dto.SingleResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -37,7 +38,9 @@ public class MemberController {
     public ResponseEntity patchMember(
             @PathVariable("member-id") @Positive int member_id,
             @Valid @RequestBody MemberDto.Patch requestBody) {
-        return null;
+        Member member = mapper.memberPatchToMember(requestBody);
+        Member updateMember = memberService.updateMember(member);
+        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(updateMember)), HttpStatus.OK);
     }
 
     // TODO member 조회
