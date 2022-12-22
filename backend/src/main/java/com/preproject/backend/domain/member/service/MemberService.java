@@ -56,9 +56,8 @@ public class MemberService {
     }
 
     // TODO member 전체 조회
-    public Page<Member> findMembers(int page, int size) {
-        return memberRepository.findAll(PageRequest.of(page, size,
-                Sort.by("member_id").descending()));
+    public List<Member> findMembers() {
+        return memberRepository.findAll();
     }
 
     // TODO member 삭제

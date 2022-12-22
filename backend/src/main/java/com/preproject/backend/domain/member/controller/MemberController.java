@@ -1,14 +1,18 @@
 package com.preproject.backend.domain.member.controller;
 
 import com.preproject.backend.domain.member.dto.MemberDto;
+import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.mapper.MemberMapper;
 import com.preproject.backend.domain.member.service.MemberService;
+import com.preproject.backend.global.dto.MultiResponseDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -45,9 +49,10 @@ public class MemberController {
 
     // TODO member 전체 조회
     @GetMapping
-    public ResponseEntity getMembers(@Positive @RequestParam int page,
-                                     @Positive @RequestParam int size) {
-        return null;
+    public ResponseEntity getMembers() {
+        List<Member> members = memberService.findMembers();
+
+        return new ResponseEntity<>(new MultiResponseDto<>(mapper.membersToMemberResponses(members)), HttpStatus.OK);
     }
 
     // TODO member 삭제
