@@ -33,6 +33,33 @@ const AskNotice = styled.div`
   }
 `;
 
+const AskTitle = styled.div`
+  margin-top: 16px;
+  width: 850px;
+  padding: 24px;
+  border: 1px solid gray;
+
+  h2 {
+    font-size: 15px;
+    font-weight: bolder;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: rgb(59, 64, 69);
+  }
+
+  input {
+    width: 730px;
+    height: 40px;
+    border: 1px solid rgb(186, 191, 196);
+    border-radius: 3px;
+    padding-left: 8px;
+  }
+`;
+
 function AskQuestionList() {
   return (
     <>
@@ -57,6 +84,15 @@ function AskQuestionList() {
         </li>
         <li>Review your question and post it to the site.</li>
       </AskNotice>
+      <AskTitle>
+        <div>
+          <h2>Title</h2>
+          <p>
+            Be specific and imagine you’re asking a question to another person.
+          </p>
+        </div>
+        <input type={'text'}></input>
+      </AskTitle>
     </>
   );
 }
