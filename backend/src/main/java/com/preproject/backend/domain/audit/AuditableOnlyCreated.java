@@ -15,5 +15,5 @@ import java.time.LocalDateTime;
 public class AuditableOnlyCreated {
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime created_at;
 }
