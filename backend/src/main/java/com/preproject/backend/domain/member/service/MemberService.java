@@ -5,7 +5,7 @@ import com.preproject.backend.domain.member.entity.MemberStatus;
 import com.preproject.backend.domain.member.repository.MemberRepository;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
-import com.preproject.backend.global.security.auth.utils.CustomAuthorityUtils;
+import com.preproject.backend.global.security.auth.util.CustomAuthorityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

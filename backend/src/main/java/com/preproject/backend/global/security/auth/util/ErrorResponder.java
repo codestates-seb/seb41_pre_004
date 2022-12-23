@@ -1,4 +1,4 @@
-package com.preproject.backend.global.security.auth.utils;
+package com.preproject.backend.global.security.auth.util;
 
 import com.google.gson.Gson;
 import com.preproject.backend.global.exception.response.ErrorResponse;

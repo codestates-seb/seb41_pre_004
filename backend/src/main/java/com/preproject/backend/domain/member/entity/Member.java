@@ -21,7 +21,7 @@ public class Member extends Auditable {
 
     // member 이름
     @Column(length = 100, nullable = false)
-    private String name;
+    private String displayName;
 
     // member 이메일
     @Column(nullable = false, updatable = false, unique = true)

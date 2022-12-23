@@ -1,24 +1,20 @@
 package com.preproject.backend.global.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-// CORS 에러 방지를 위함
-@Configuration
+//@Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOriginPatterns("*")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
-                        .allowedHeaders("*");
-                //.allowCredentials(true);
-            }
-        };
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods(
+                        HttpMethod.GET.name(), HttpMethod.HEAD.name(), HttpMethod.POST.name(),
+                        HttpMethod.PATCH.name(), HttpMethod.PUT.name(), HttpMethod.DELETE.name()
+                );
     }
 }

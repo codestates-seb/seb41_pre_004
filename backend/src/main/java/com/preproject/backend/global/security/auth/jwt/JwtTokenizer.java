@@ -16,11 +16,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-
 @Component
 public class JwtTokenizer {
     @Getter
-    @Value("${jwt.key.secret}")
+    @Value("${jwt.key}")
     private String secretKey;
 
     @Getter
@@ -61,6 +60,7 @@ public class JwtTokenizer {
                 .compact();
     }
 
+    // 검증 후, Claims을 반환 하는 용도
     public Jws<Claims> getClaims(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
@@ -71,6 +71,7 @@ public class JwtTokenizer {
         return claims;
     }
 
+    // 단순히 검증만 하는 용도로 쓰일 경우
     public void verifySignature(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 

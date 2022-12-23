@@ -11,7 +11,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface MemberMapper {
     Member postDtoToEntity(MemberDto.Post postDto);
-
     MemberDto.Response EntityToResponseDto(Member member);
 }
 
