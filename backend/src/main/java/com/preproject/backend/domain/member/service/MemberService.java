@@ -28,6 +28,7 @@ public class MemberService {
     // TODO member 등록 (회원가입) / 보안 적용
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
+        verifyExistsPassword(member.getPassword());
 
 //        String encryptedPassword = passwordEncoder.encode(member.getPassword());
 //        member.setPassword(encryptedPassword);
@@ -43,7 +44,7 @@ public class MemberService {
         // TODO 해당 멤버 식별자에 저장된 이메일이 같을 경우에만 수정 가능하도록하기
         //verifyExistsEmail(member.getEmail()); // 먼저 해당 멤버의 이메일이 존재하는지 확인
         // TODO 근데 이건 이메일이 존재하면 에러 발생시키니까 존재하지 않으면 에러 발생시키는 로직 만들기
-        Member findMember = findVerifiedMember(member.getMember_id()); // 존재한다면 해당 아이디의 멤버 가져와서
+        Member findMember = findVerifiedMember(member.getMemberId()); // 존재한다면 해당 아이디의 멤버 가져와서
 
         beanUtils.copyNonNullProperties(member, findMember);
 
@@ -51,8 +52,8 @@ public class MemberService {
     }
 
     // member 조회
-    public Member findMember(int member_id) {
-        return findVerifiedMember(member_id);
+    public Member findMember(int memberId) {
+        return findVerifiedMember(memberId);
     }
 
     // member 전체 조회
@@ -63,27 +64,35 @@ public class MemberService {
     }
 
     // member 삭제
-    public void deleteMember(int member_id) {
-        Member findMember = findVerifiedMember(member_id);
+    public void deleteMember(int memberId) {
+        Member findMember = findVerifiedMember(memberId);
 
         memberRepository.delete(findMember);
     }
 
     // member id로 검색
-    public Member findVerifiedMember(int member_id) {
+    public Member findVerifiedMember(int memberId) {
         Optional<Member> optionalMember =
-                memberRepository.findById(member_id);
+                memberRepository.findById(memberId);
 
         return optionalMember.orElseThrow(() -> {
                     return new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
                 });
     }
 
-    // member email로 존재하는지 검증
+    // member email 이 존재하는지 검증 ( email 로 해당 member 가 존재하는지 검증 )
     private void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
 
         if (member.isPresent())
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
+    }
+
+    // member Password 가 존재하는지 검증
+    private void verifyExistsPassword(String password) {
+        Optional<Member> memberPassword = memberRepository.findByPassword(password);
+
+        if (memberPassword.isPresent())
+            throw new BusinessLogicException(ExceptionCode.PASSWORD_EXISTS);
     }
 }

@@ -16,7 +16,7 @@ public class Comment {
     // comment 식별자
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int comment_id;
+    private int commentId;
 
     // comment 내용
     @Column(columnDefinition = "TEXT", nullable = false)

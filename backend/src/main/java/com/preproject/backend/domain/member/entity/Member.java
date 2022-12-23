@@ -20,7 +20,7 @@ public class Member extends Auditable {
     // member 식별자
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int member_id;
+    private int memberId;
 
     // member 이름
     @Column(length = 100, nullable = false)
@@ -31,7 +31,7 @@ public class Member extends Auditable {
     private String email;
 
     // member 비밀번호
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false, unique = true)
     private String password;
 
     // 연관관계 매핑 - 한 member 가 여러개의 comment
@@ -40,7 +40,7 @@ public class Member extends Auditable {
 
     // 연관관계 매핑 - 한 member 가 여러개의 answer
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Answer> asnwers = new ArrayList<>();
+    private List<Answer> answers = new ArrayList<>();
 
     // Security 를 위함
 //    @ElementCollection(fetch = FetchType.EAGER)

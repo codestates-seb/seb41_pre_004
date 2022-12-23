@@ -26,7 +26,7 @@ public class MemberDto {
     @Setter
     @AllArgsConstructor
     public static class Patch {
-        private int member_id;
+        private int memberId;
 
         @NotBlank(message = "이름은 공백이 아니어야 합니다.")
         private String name;
@@ -38,7 +38,7 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private int member_id;
+        private int memberId;
         private String name;
         private String email;
         private String password;

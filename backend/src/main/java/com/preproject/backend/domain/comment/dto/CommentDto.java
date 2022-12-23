@@ -20,7 +20,7 @@ public class CommentDto {
     @Setter
     @AllArgsConstructor
     public static class Patch {
-        private int answer_id;
+        private int answerId;
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
@@ -29,7 +29,7 @@ public class CommentDto {
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private int answer_id;
+        private int answerId;
         private String content;
         private String score;
     }

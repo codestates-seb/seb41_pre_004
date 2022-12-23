@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface AnswerRepository extends JpaRepository<Answer, Integer> {
-    Optional<Answer> findByEmail(String email);
+    //Optional<Answer> findByEmail(String email); // 하려고 했는데 answer에는 email이 없음
 }

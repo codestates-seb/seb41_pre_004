@@ -40,7 +40,7 @@ public class MemberController {
     // member 수정
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(
-            @PathVariable("member-id") @Positive int member_id,
+            @PathVariable("member-id") @Positive int memberId,
             @Valid @RequestBody MemberDto.Patch requestBody) {
         Member member = mapper.memberPatchToMember(requestBody);
         Member updateMember = memberService.updateMember(member);
@@ -52,8 +52,8 @@ public class MemberController {
     // member 조회
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(
-            @PathVariable("member-id") @Positive int member_id) {
-        Member member = memberService.findMember(member_id);
+            @PathVariable("member-id") @Positive int memberId) {
+        Member member = memberService.findMember(memberId);
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
@@ -61,18 +61,18 @@ public class MemberController {
 
     // TODO member 전체 조회 - pagenation 추가
     @GetMapping
-    public ResponseEntity getMembers() {
-        List<Member> members = memberService.findMembers();
-
-        return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.membersToMemberResponses(members)), HttpStatus.OK);
-    }
+//    public ResponseEntity getMembers() {
+//        List<Member> members = memberService.findMembers();
+//
+//        return new ResponseEntity<>(
+//                new MultiResponseDto<>(mapper.membersToMemberResponses(members)), HttpStatus.OK);
+//    }
 
     // member 삭제
     @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(
-            @PathVariable("member-id") @Positive int member_id) {
-        memberService.deleteMember(member_id);
+            @PathVariable("member-id") @Positive int memberId) {
+        memberService.deleteMember(memberId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
