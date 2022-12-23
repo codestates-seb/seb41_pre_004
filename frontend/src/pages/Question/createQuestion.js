@@ -130,7 +130,7 @@ function AskQuestionList() {
             to see suggestions.
           </p>
         </div>
-        <input type={'text'}></input>
+        <input type={'text'} placeholder={'e.g (excel string regex)'}></input>
       </AskTags>
     </>
   );
