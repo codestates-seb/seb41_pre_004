@@ -20,7 +20,7 @@ public class Answer extends Auditable {
     // answer 식별자
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int answer_id;
+    private int answerId;
 
     // answer 내용
     @Column(columnDefinition = "TEXT", nullable = false)
@@ -32,7 +32,7 @@ public class Answer extends Auditable {
 
     // 연관관계 매핑 - 한 member 가 여러개의 answer
     @ManyToOne
-    @JoinColumn(name = "MemberID")
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
     // 연관관계 매핑 - 한 question 에 여러개의 answer
