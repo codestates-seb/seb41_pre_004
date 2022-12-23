@@ -56,8 +56,10 @@ public class MemberService {
     }
 
     // member 전체 조회
-    public List<Member> findMembers() {
-        return memberRepository.findAll();
+    public Page<Member> findMembers(int page, int size) {
+        return memberRepository.findAll(
+                PageRequest.of(page, size, Sort.by("member_id").descending())
+        );
     }
 
     // member 삭제
