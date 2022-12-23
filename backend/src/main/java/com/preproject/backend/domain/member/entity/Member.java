@@ -1,76 +1,50 @@
 package com.preproject.backend.domain.member.entity;
 
+import com.preproject.backend.domain.audit.Auditable;
 import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Table(name = "MEMBER")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Member extends BaseTimeEntity{
-
+@Entity
+public class Member extends Auditable {
+    // member 식별자
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
-    private Long id; //primary Key
+    private int memberId;
 
-    @Column(nullable = false, length = 30, unique = true)
-    private String username;//아이디
+    // member 이름
+    @Column(length = 100, nullable = false)
+    private String name;
 
-    private String password;//비밀번호
+    // member 이메일
+    @Column(nullable = false, updatable = false, unique = true)
+    private String email;
 
-    @Column(nullable = false, length = 30)
-    private String name;//이름(실명)
+    // member 비밀번호
+    @Column(length = 100, nullable = false, unique = true)
+    private String password;
 
-    @Column(nullable = false, length = 30)
-    private String nickName;//별명
-
-    @Column(nullable = false, length = 30)
-    private Integer age;//나이
-
+    @Builder.Default
     @Enumerated(EnumType.STRING)
-    private Role role;//권한 -> USER, ADMIN
+    @Column(nullable = false)
+    private MemberStatus memberStatus = MemberStatus.ACTIVE;
 
-    @Column(length = 1000)
-    private String refreshToken;//RefreshToken
+//    // 연관관계 매핑 - 한 member 가 여러개의 comment
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<Comment> comments = new ArrayList<>();
+//
+//    // 연관관계 매핑 - 한 member 가 여러개의 answer
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<Answer> answers = new ArrayList<>();
 
-
-
-
-
-    //== 정보 수정 ==//
-    public void updatePassword(PasswordEncoder passwordEncoder, String password){
-        this.password = passwordEncoder.encode(password);
-    }
-
-    public void updateName(String name){
-        this.name = name;
-    }
-
-    public void updateNickName(String nickName){
-        this.nickName = nickName;
-    }
-
-    public void updateAge(int age){
-        this.age = age;
-    }
-
-    public void updateRefreshToken(String refreshToken){
-        this.refreshToken = refreshToken;
-    }
-
-    public void destroyRefreshToken(){
-        this.refreshToken = null;
-    }
-
-    //== 패스워드 암호화 ==//
-    public void encodePassword(PasswordEncoder passwordEncoder){
-        this.password = passwordEncoder.encode(password);
-    }
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
 }

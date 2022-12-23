@@ -1,36 +1,34 @@
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/jpa
-    username: sa
-    password:
-
-
+    url: jdbc:h2:mem:test
   jpa:
+    hibernate:
+      ddl-auto: create  # (1) 스키마 자동 생성
+    show-sql: true      # (2) SQL 쿼리 출력
     properties:
       hibernate:
-        format_sql: true
-        user_sql_cooments: true
-
-    hibernate:
-      ddl-auto: create
-
-
-  profiles:
-    include: jwt
-
-
-
+        format_sql: true  # (3) SQL pretty print
+  sql:
+    init:
+      data-locations: classpath*:db/h2/data.sql
 logging:
   level:
     org:
-      apache:
-        coyote:
-          http11: debug
-
-      hiberante:
-        SQL: debug
-
-    boardexample:
-      myboard: info
-
+      springframework:
+        orm:
+          jpa: DEBUG
+server:
+  servlet:
+    encoding:
+      force-response: true
+mail:
+  address:
+    admin: admin@gmail.com
+jwt:
+  key: "236979CB6F1AD6B6A6184A31E6BE37DB3818CC36871E26235DD67DCFE4041492"
+  access-token-expiration-minutes: 40
+  refresh-token-expiration-minutes: 420
