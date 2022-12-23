@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TestEditorForm from '../../components/AskMarkdown';
+import AskQuestionHeader from '../../components/AskQuestionHeader';
 
 const AskNotice = styled.div`
   background-color: rgb(235, 244, 251);
@@ -60,10 +61,36 @@ const AskTitle = styled.div`
     padding-left: 8px;
   }
 `;
+const AskTags = styled.div`
+  width: 850px;
+  padding: 24px;
+  border: 1px solid gray;
+
+  h2 {
+    font-size: 15px;
+    font-weight: bolder;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: rgb(59, 64, 69);
+  }
+
+  input {
+    width: 730px;
+    height: 40px;
+    border: 1px solid rgb(186, 191, 196);
+    border-radius: 3px;
+    padding-left: 8px;
+  }
+`;
 
 function AskQuestionList() {
   return (
     <>
+      <AskQuestionHeader></AskQuestionHeader>
       <AskNotice>
         <h2>Writing a good question</h2>
         <p>
@@ -95,6 +122,16 @@ function AskQuestionList() {
         <input type={'text'}></input>
       </AskTitle>
       <TestEditorForm></TestEditorForm>
+      <AskTags>
+        <div>
+          <h2>Tags</h2>
+          <p>
+            Add up to 5 tags describe what your question is about. Start typing
+            to see suggestions.
+          </p>
+        </div>
+        <input type={'text'}></input>
+      </AskTags>
     </>
   );
 }
