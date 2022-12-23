@@ -17,7 +17,7 @@ public class QuestionDto {
         private String title;
 
         @NotBlank(message = "내용을 입력해주세요.")
-        private String context;
+        private String content;
 
         private List<String> tags;
     }
@@ -30,7 +30,7 @@ public class QuestionDto {
         private String title;
 
         @NotBlank(message = "내용을 입력해주세요.")
-        private String context;
+        private String content;
 
         private List<String> tags;
     }
@@ -41,7 +41,7 @@ public class QuestionDto {
     public static class Response {
         private int questionId;
         private String title;
-        private String context;
+        private String content;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
         private int score;
