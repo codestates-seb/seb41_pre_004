@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import TestEditorForm from '../../components/AskMarkdown';
 
 const AskNotice = styled.div`
   background-color: rgb(235, 244, 251);
@@ -93,6 +94,7 @@ function AskQuestionList() {
         </div>
         <input type={'text'}></input>
       </AskTitle>
+      <TestEditorForm></TestEditorForm>
     </>
   );
 }
