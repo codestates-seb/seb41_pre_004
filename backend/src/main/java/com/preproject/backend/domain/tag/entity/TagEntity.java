@@ -1,12 +1,15 @@
 package com.preproject.backend.domain.tag.entity;
 
 import com.preproject.backend.domain.audit.Auditable;
+import com.preproject.backend.domain.question.entity.QuestionTag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,5 +24,16 @@ public class TagEntity extends Auditable {
     @Column(unique = true)
     private String name;
 
+    // 해당 태그가 있는 질문의 갯수
     private Integer count = 1; // 처음 생성했을 때 1
+
+    @OneToMany(mappedBy = "tag")
+    private Set<QuestionTag> questionTagSet = new HashSet<>();
+
+    public void questionCountPlus(){
+        this.count++;
+    }
+    public void questionCountMinus(){
+        this.count--;
+    }
 }

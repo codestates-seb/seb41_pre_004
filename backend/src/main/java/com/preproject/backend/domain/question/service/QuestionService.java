@@ -7,14 +7,12 @@ import com.preproject.backend.domain.question.entity.QuestionTag;
 import com.preproject.backend.domain.question.repository.QuestionRepository;
 import com.preproject.backend.domain.tag.repository.TagRepository;
 import com.preproject.backend.domain.tag.service.TagService;
-import com.preproject.backend.global.exception.BusinessLogicException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -76,12 +74,12 @@ public class QuestionService {
     }
 
     //UPDATE
-    // TODO 현재는 태그 제외 글의 title과 context의 수정만 구현
+    // TODO 현재는 태그 제외 글의 title과 content의 수정만 구현
     public Question updateQuestion(int questionId, Question changedQuestion, List<String> tags){
         Question question = verifyWriter(questionId); // 현재 사용자가 작성자가 맞는지
         // 해당 글 수정
         question.setTitle(changedQuestion.getTitle());
-        question.setContext(changedQuestion.getContext());
+        question.setContent(changedQuestion.getContent());
 
         //TODO tag 관련 로직 작성
         // tag의 삭제 -> 갯수 줄이기

@@ -25,7 +25,7 @@ public class Question extends Auditable {
     private String title;
 
     @Lob  // "Large OBject"를 데이터베이스에 적절하게 저장하기 위한 애노테이션
-    private String context;
+    private String content;
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
