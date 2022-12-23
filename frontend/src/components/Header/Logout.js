@@ -7,6 +7,43 @@ import MenuButton from './MenuButton';
 const Logout = () => {
   return (
     <>
+      <Mobile>
+        <MenuButton />
+        <Link to="/">
+          <strong>
+            <img src={mobileLogo} alt="stackoverflow logo" />
+          </strong>
+        </Link>
+        <button type="button" aria-label="Open the Products modal">
+          Products
+        </button>
+        <Search />
+        <Link to="/login">
+          <strong>Log in</strong>
+        </Link>
+        <Link to="/signup">
+          <strong>Sign up</strong>
+        </Link>
+      </Mobile>
+
+      <Tablet>
+        <Link to="/">
+          <strong>
+            <img src={desktopLogo} alt="stackoverflow logo" />
+          </strong>
+        </Link>
+        <button type="button" aria-label="Open the Products modal">
+          Products
+        </button>
+        <Search />
+        <Link to="/login">
+          <strong>Log in</strong>
+        </Link>
+        <Link to="/signup">
+          <strong>Sign up</strong>
+        </Link>
+      </Tablet>
+
       <Desktop>
         <Link to="/">
           <strong>
@@ -33,43 +70,6 @@ const Logout = () => {
           <strong>Sign up</strong>
         </Link>
       </Desktop>
-
-      <Tablet>
-        <Link to="/">
-          <strong>
-            <img src={desktopLogo} alt="stackoverflow logo" />
-          </strong>
-        </Link>
-        <button type="button" aria-label="Open the Products modal">
-          Products
-        </button>
-        <Search />
-        <Link to="/login">
-          <strong>Log in</strong>
-        </Link>
-        <Link to="/signup">
-          <strong>Sign up</strong>
-        </Link>
-      </Tablet>
-
-      <Mobile>
-        <MenuButton />
-        <Link to="/">
-          <strong>
-            <img src={mobileLogo} alt="stackoverflow logo" />
-          </strong>
-        </Link>
-        <button type="button" aria-label="Open the Products modal">
-          Products
-        </button>
-        <Search />
-        <Link to="/login">
-          <strong>Log in</strong>
-        </Link>
-        <Link to="/signup">
-          <strong>Sign up</strong>
-        </Link>
-      </Mobile>
     </>
   );
 };

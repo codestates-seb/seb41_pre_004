@@ -15,10 +15,11 @@ import ListButton from './ListButton';
 const Login = () => {
   return (
     <>
-      <Desktop>
+      <Mobile>
+        <MenuButton isOpen={false} />
         <Link to="/">
           <strong>
-            <img src={desktopLogo} alt="stackoverflow logo" />
+            <img src={mobileLogo} alt="stackoverflow logo" />
           </strong>
         </Link>
         <button type="button" aria-label="Open the Products modal">
@@ -47,7 +48,7 @@ const Login = () => {
           <img src={snowIcon} alt="" />
         </button>
         <ListButton />
-      </Desktop>
+      </Mobile>
 
       <Tablet>
         <Link to="/">
@@ -83,11 +84,10 @@ const Login = () => {
         <ListButton />
       </Tablet>
 
-      <Mobile>
-        <MenuButton isOpen={false} />
+      <Desktop>
         <Link to="/">
           <strong>
-            <img src={mobileLogo} alt="stackoverflow logo" />
+            <img src={desktopLogo} alt="stackoverflow logo" />
           </strong>
         </Link>
         <button type="button" aria-label="Open the Products modal">
@@ -116,7 +116,7 @@ const Login = () => {
           <img src={snowIcon} alt="" />
         </button>
         <ListButton />
-      </Mobile>
+      </Desktop>
     </>
   );
 };
