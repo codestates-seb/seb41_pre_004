@@ -27,41 +27,53 @@ public class MemberController {
         this.mapper = mapper;
     }
 
-    // TODO member 등록 (회원가입)
+    // member 등록 (회원가입)
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
-        return null;
+        Member member = mapper.memberPostToMember(requestBody);
+        Member createMember = memberService.createMember(member);
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.memberToMemberResponse(createMember)), HttpStatus.CREATED);
     }
 
-    // TODO member 수정 // But, 현재 우리가 만드는 페이지에는 필요할까 생각이 듦
+    // member 수정
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(
             @PathVariable("member-id") @Positive int member_id,
             @Valid @RequestBody MemberDto.Patch requestBody) {
         Member member = mapper.memberPatchToMember(requestBody);
         Member updateMember = memberService.updateMember(member);
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponse(updateMember)), HttpStatus.OK);
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.memberToMemberResponse(updateMember)), HttpStatus.OK);
     }
 
-    // TODO member 조회
+    // member 조회
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(
             @PathVariable("member-id") @Positive int member_id) {
-        return null;
+        Member member = memberService.findMember(member_id);
+
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
     }
 
-    // TODO member 전체 조회
+    // TODO member 전체 조회 - pagenation 추가
     @GetMapping
     public ResponseEntity getMembers() {
         List<Member> members = memberService.findMembers();
 
-        return new ResponseEntity<>(new MultiResponseDto<>(mapper.membersToMemberResponses(members)), HttpStatus.OK);
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.membersToMemberResponses(members)), HttpStatus.OK);
     }
 
-    // TODO member 삭제
+    // member 삭제
     @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(
             @PathVariable("member-id") @Positive int member_id) {
-        return null;
+        memberService.deleteMember(member_id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

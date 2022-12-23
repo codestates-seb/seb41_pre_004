@@ -10,6 +10,6 @@ import java.util.List;
 public interface AnswerMapper {
     Answer answerPostDtoToAnswer(AnswerDto.Post answerPostDto);
     Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPatchDto);
-    AnswerDto.Response answerToCommentResponse(Answer answer);
+    AnswerDto.Response answerToAnswerResponse(Answer answer);
     List<AnswerDto.Response> answersToAnswersResponses(List<Answer> answers);
 }

@@ -42,8 +42,6 @@ public class Member extends Auditable {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Answer> asnwers = new ArrayList<>();
 
-
-
     // Security 를 위함
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    private List<String> roles = new ArrayList<>();
