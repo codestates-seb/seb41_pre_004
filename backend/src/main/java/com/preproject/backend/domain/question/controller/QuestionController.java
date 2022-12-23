@@ -27,9 +27,9 @@ public class QuestionController {
     //CREATE
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
-        Question question = questionService.createQuestion(questionMapper.questionPostDtoToQuestion(post), post.getTags());
-        //TODO response 형태 생각해보기
-        //QuestionDto~~ response = ~~ 형태로 작성할 예정
+        Question question = questionService.createQuestion( questionMapper.questionPostDtoToQuestion(post),
+                                                            post.getTags());
+        QuestionDto.ResponseCheck response = questionMapper.questionToResponseCheck(question);
 
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
@@ -39,7 +39,7 @@ public class QuestionController {
     public ResponseEntity getQuestion(@Positive @PathVariable("question-id") int questionId) {
         Question question = questionService.readQuestion(questionId);
         //TODO Answer 패키지 구현 이후 이곳으로 돌아올 것
-        //List<Answer> answers = answerService.getAnswer~~(question);
+        // List<Answer> answers = answerService.getAnswer~~(question);
 
     }
     //TODO 전체 질문 목록 read (필터, 페이지네이션, 태그 검색)
@@ -52,8 +52,8 @@ public class QuestionController {
         Question question = questionService.updateQuestion( questionId,
                                                     questionMapper.questionPatchDtoToQuestion(patch),
                                                     patch.getTags());
-        //TODO response 연결해주기
-        // QuestionDto.Response response = questionMapper.~~~(question); 형태
+
+        QuestionDto.ResponseCheck response = questionMapper.questionToResponseCheck(question);
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
 
@@ -61,7 +61,7 @@ public class QuestionController {
     @DeleteMapping("/{question-id}")
     public ResponseEntity deleteQuestion(@Positive @PathVariable("question-id") int questionId) {
         questionService.deleteQuestion(questionId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

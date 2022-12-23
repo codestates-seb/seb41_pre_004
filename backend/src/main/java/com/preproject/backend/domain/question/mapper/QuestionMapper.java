@@ -8,4 +8,10 @@ import org.mapstruct.Mapper;
 public interface QuestionMapper {
     Question questionPostDtoToQuestion(QuestionDto.Post post);
     Question questionPatchDtoToQuestion(QuestionDto.Patch patch);
+
+    default QuestionDto.ResponseCheck questionToResponseCheck(Question question){
+        QuestionDto.ResponseCheck response = new QuestionDto.ResponseCheck();
+        response.setId(question.getQuestionId());
+        return response;
+    }
 }

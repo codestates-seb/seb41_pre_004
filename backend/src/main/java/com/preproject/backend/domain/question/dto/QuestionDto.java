@@ -13,10 +13,10 @@ public class QuestionDto {
     @Setter
     @AllArgsConstructor
     public static class Post {
-        @NotBlank
+        @NotBlank(message = "제목을 입력해주세요.")
         private String title;
 
-        @NotBlank
+        @NotBlank(message = "내용을 입력해주세요.")
         private String context;
 
         private List<String> tags;
@@ -26,10 +26,10 @@ public class QuestionDto {
     @Setter
     @AllArgsConstructor
     public static class Patch {
-        @NotBlank
+        @NotBlank(message = "제목을 입력해주세요.")
         private String title;
 
-        @NotBlank
+        @NotBlank(message = "내용을 입력해주세요.")
         private String context;
 
         private List<String> tags;
@@ -49,5 +49,11 @@ public class QuestionDto {
         private List<String> tags;
         //TODO 이후 추가할 것
         // 어떤 사용자인지 (member) 답변 list, [조회수, 답변 갯수] --> 테이블 명세서 추가 예정
+    }
+
+    @Getter
+    @Setter
+    public static class ResponseCheck {
+        private int Id;
     }
 }

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "TAG")
 public class TagEntity extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

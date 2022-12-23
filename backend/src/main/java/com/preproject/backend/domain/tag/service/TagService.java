@@ -16,23 +16,16 @@ import java.util.Optional;
 public class TagService {
     private TagRepository tagRepository;
 
-    public TagEntity createTag(String name){
+    public TagEntity tagCreateUpdate(String name){
         String tagName = name.trim().toLowerCase();
         Optional<TagEntity> optionalTagEntity = tagRepository.findByName(tagName);
-
-        TagEntity tag = new TagEntity();
-        tag.setName(tagName);
-
-        return tagRepository.save(tag);
-    }
-
-    public TagEntity updateTag(String name){
-        String tagName = name.trim().toUpperCase();
-        Optional<TagEntity> optionalTagEntity = tagRepository.findByName(tagName);
-
+        if(!optionalTagEntity.isPresent()) {
+            TagEntity tag = new TagEntity();
+            tag.setName(tagName);
+            return tagRepository.save(tag);
+        }
         TagEntity tag = optionalTagEntity.get();
         // TODO tag count + 1
-
         return tagRepository.save(tag);
     }
 
