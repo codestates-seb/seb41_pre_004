@@ -54,16 +54,16 @@ public class CommentController {
 //        return null;
 //    }
 //
-//    // comment 전체 조회
-//    @GetMapping
-//    public ResponseEntity getComments(@Positive @RequestParam int page,
-//                                      @Positive @RequestParam int size) {
-//        Page<Comment> pageMembers = commentService.findComments(page - 1, size);
-//        List<Comment> comments = pageMembers.getContent();
-//
-//        return new ResponseEntity<>(
-//                new MultiResponseDto<>(mapper.commentsToCommentsResponses(comments),pageMembers), HttpStatus.OK);
-//    }
+    // comment 전체 조회
+    @GetMapping
+    public ResponseEntity getComments(@Positive @RequestParam int page,
+                                      @Positive @RequestParam int size) {
+        Page<Comment> pageMembers = commentService.findComments(page - 1, size);
+        List<Comment> comments = pageMembers.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.commentsToCommentsResponses(comments),pageMembers), HttpStatus.OK);
+    }
 //
 //    // comment 삭제
 //    @DeleteMapping("/{comment-id}")

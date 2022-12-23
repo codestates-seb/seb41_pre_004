@@ -6,6 +6,7 @@ import com.preproject.backend.domain.member.mapper.MemberMapper;
 import com.preproject.backend.domain.member.service.MemberService;
 import com.preproject.backend.global.dto.MultiResponseDto;
 import com.preproject.backend.global.dto.SingleResponseDto;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -61,12 +62,14 @@ public class MemberController {
 
     // TODO member 전체 조회 - pagenation 추가
     @GetMapping
-//    public ResponseEntity getMembers() {
-//        List<Member> members = memberService.findMembers();
-//
-//        return new ResponseEntity<>(
-//                new MultiResponseDto<>(mapper.membersToMemberResponses(members)), HttpStatus.OK);
-//    }
+    public ResponseEntity getMembers(@Positive @RequestParam int page,
+                                     @Positive @RequestParam int size) {
+        Page<Member> pageMembers = memberService.findMembers(page - 1, size);
+        List<Member> members = pageMembers.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(mapper.membersToMemberResponses(members),pageMembers), HttpStatus.OK);
+    }
 
     // member 삭제
     @DeleteMapping("/{member-id}")

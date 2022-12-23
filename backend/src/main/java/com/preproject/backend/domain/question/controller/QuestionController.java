@@ -5,6 +5,7 @@ import com.preproject.backend.domain.question.dto.QuestionDto;
 import com.preproject.backend.domain.question.entity.Question;
 import com.preproject.backend.domain.question.mapper.QuestionMapper;
 import com.preproject.backend.domain.question.service.QuestionService;
+import com.preproject.backend.global.dto.SingleResponseDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class QuestionController {
                                                             post.getTags());
         QuestionDto.ResponseCheck response = questionMapper.questionToResponseCheck(question);
 
-        return new ResponseEntity(response, HttpStatus.CREATED);
+        return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.CREATED);
     }
 
     //READ
