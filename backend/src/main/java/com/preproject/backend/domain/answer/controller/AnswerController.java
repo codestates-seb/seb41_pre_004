@@ -1,8 +1,8 @@
 package com.preproject.backend.domain.answer.controller;
 
+import com.preproject.backend.domain.answer.dto.AnswerDto;
 import com.preproject.backend.domain.answer.mapper.AnswerMapper;
 import com.preproject.backend.domain.answer.service.AnswerService;
-import com.preproject.backend.domain.member.dto.AnswerDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 @RestController
-@RequestMapping(/questions/{question-id}/answers)
+@RequestMapping("/questions/{question-id}/answers")
 @Validated
 public class AnswerController {
     private final AnswerService answerService;
