@@ -28,7 +28,7 @@ public class TagService {
             return tagRepository.save(tag);
         }
         TagEntity tag = optionalTagEntity.get();
-        // TODO tag count + 1
+        tag.questionCountPlus();
         return tagRepository.save(tag);
     }
 
