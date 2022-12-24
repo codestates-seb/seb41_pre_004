@@ -1,26 +1,35 @@
-import styled from 'styled-components';
-import { searchIcon } from '../../assets/headerIcons';
 import { Desktop, Tablet, Mobile } from '../Responsive';
-
-const SearchBlock = styled.div``;
+import { searchIcon } from '../../assets/headerIcons';
+import {
+  SearchBlock,
+  SearchButton,
+  SearchInput,
+  SearchIcon,
+} from '../../styles/headerStyles';
 
 const Search = () => {
   return (
-    <SearchBlock>
+    <>
       <Mobile>
-        <button type="button" title="Click to show search">
+        <SearchButton type="button" title="Click to show search">
           <img src={searchIcon} alt="" />
-        </button>
+        </SearchButton>
       </Mobile>
 
       <Tablet>
-        <input type="text" aria-label="Search" />
+        <SearchBlock>
+          <SearchIcon src={searchIcon} alt="" />
+          <SearchInput type="text" placeholder="Search..." />
+        </SearchBlock>
       </Tablet>
 
       <Desktop>
-        <input type="text" aria-label="Search" />
+        <SearchBlock>
+          <SearchIcon src={searchIcon} alt="" />
+          <SearchInput type="text" placeholder="Search..." />
+        </SearchBlock>
       </Desktop>
-    </SearchBlock>
+    </>
   );
 };
 
