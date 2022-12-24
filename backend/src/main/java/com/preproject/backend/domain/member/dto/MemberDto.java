@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 public class MemberDto {
     @Getter
@@ -42,5 +43,7 @@ public class MemberDto {
         private String name;
         private String email;
         private String password;
+        private LocalDateTime createdAt;
+        private LocalDateTime ModifiedAt;
     }
 }

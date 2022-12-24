@@ -43,8 +43,9 @@ public class MemberController {
     public ResponseEntity patchMember(
             @PathVariable("member-id") @Positive int memberId,
             @Valid @RequestBody MemberDto.Patch requestBody) {
-        Member member = mapper.memberPatchToMember(requestBody);
-        Member updateMember = memberService.updateMember(member);
+
+        requestBody.setMemberId(memberId);
+        Member updateMember = memberService.updateMember(mapper.memberPatchToMember(requestBody));
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.memberToMemberResponse(updateMember)), HttpStatus.OK);

@@ -4,9 +4,7 @@ import com.preproject.backend.domain.audit.Auditable;
 import com.preproject.backend.domain.comment.entity.Comment;
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.question.entity.Question;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +12,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Answer extends Auditable {
@@ -42,5 +42,18 @@ public class Answer extends Auditable {
 
     // 연관관계 매핑 - 한 answer 에 여러개의 comment
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
-    private List<Comment> coments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
+
+    // answerService 의 createAnswer 에서 검증된 memberId/questionId 를 가진 객체를 만들어 저장하기 위한 메서드
+    public static Answer toEntity(String content, Question question, Member member) {
+        Answer answer = Answer.builder()
+                .content(content)
+                .question(question)
+                .member(member)
+                .build();
+
+        question.getAnswers().add(answer);
+
+        return answer;
+    }
 }

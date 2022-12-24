@@ -5,6 +5,7 @@ import com.preproject.backend.domain.member.repository.MemberRepository;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
 import com.preproject.backend.global.utils.CustomBeanUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,20 +16,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
     private final CustomBeanUtils<Member> beanUtils;
     //private final PasswordEncoder passwordEncoder; // security
 
-    public MemberService(MemberRepository memberRepository, CustomBeanUtils<Member> beanUtils) {
-        this.memberRepository = memberRepository;
-        this.beanUtils = beanUtils;
-    }
-
     // TODO member 등록 (회원가입) / 보안 적용
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
-        //verifyExistsPassword(member.getPassword()); // 어차피 이메일로 검증했으니 필요 X
 
         // 보안 관련
 //        String encryptedPassword = passwordEncoder.encode(member.getPassword());
@@ -40,7 +36,7 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    // TODO member 수정 // But, 현재 우리가 만드는 페이지에는 필요할까 생각이 듦
+    // member 수정
     public Member updateMember(Member member) {
         verifyExistsEmail2(member.getEmail()); // 먼저 해당 멤버의 이메일이 존재하는지 확인
 
@@ -95,12 +91,4 @@ public class MemberService {
         if (member.isEmpty())
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
     }
-
-//    // member Password 가 존재하는지 검증
-//    private void verifyExistsPassword(String password) {
-//        Optional<Member> memberPassword = memberRepository.findByPassword(password);
-//
-//        if (memberPassword.isPresent())
-//            throw new BusinessLogicException(ExceptionCode.PASSWORD_EXISTS);
-//    }
 }

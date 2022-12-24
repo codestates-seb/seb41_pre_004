@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 public class AnswerDto {
     @Getter
@@ -14,6 +16,12 @@ public class AnswerDto {
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
+
+        @NotNull
+        private int memberId;
+
+        @NotNull
+        private int questionId;
     }
 
     @Getter
@@ -24,6 +32,12 @@ public class AnswerDto {
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
+
+        @NotNull
+        private int memberId;
+
+        @NotNull
+        private int questionId;
     }
 
     @Getter
@@ -32,5 +46,7 @@ public class AnswerDto {
         private int answerId;
         private String content;
         private String score;
+        private LocalDateTime createdAt;
+        private LocalDateTime ModifiedAt;
     }
 }
