@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const NavbarWrapper = styled.nav`
   height: 100%;
+  border-right: 1px solid #d7d9dd;
 `;
 
 export const NavbarBlock = styled.div`
