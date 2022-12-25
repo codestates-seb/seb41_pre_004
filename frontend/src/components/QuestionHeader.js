@@ -5,7 +5,7 @@ import QuestionHeaderBtn from './QuestionHeaderBtn';
 const QuestionContainer = styled.div`
   border: 1px solid gray;
   font-size: 27px;
-  width: 727px;
+
   height: 100px;
 
   display: flex;
