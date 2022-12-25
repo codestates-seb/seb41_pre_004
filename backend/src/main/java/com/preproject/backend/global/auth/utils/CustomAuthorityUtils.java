@@ -1,4 +1,4 @@
-package com.preproject.backend.global.security.auth.util;
+package com.preproject.backend.global.auth.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,10 +29,10 @@ public class CustomAuthorityUtils {
 
     // DB에 저장된 Role을 기반으로 권한 정보 생성
     public List<GrantedAuthority> createAuthorities(List<String> roles) {
-        List<GrantedAuthority> authorities = roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                .collect(Collectors.toList());
-        return authorities;
+       List<GrantedAuthority> authorities = roles.stream()
+               .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+               .collect(Collectors.toList());
+       return authorities;
     }
 
     // DB 저장 용

@@ -1,11 +1,10 @@
 package com.preproject.backend.global.dto;
 
-import com.preproject.backend.global.page.PageInfo;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+
 
 @Getter
 public class MultiResponseDto<T> {

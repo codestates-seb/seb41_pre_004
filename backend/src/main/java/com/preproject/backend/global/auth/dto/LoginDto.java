@@ -1,4 +1,4 @@
-package com.preproject.backend.global.security.auth.dto;
+package com.preproject.backend.global.auth.dto;
 
 import lombok.Getter;
 

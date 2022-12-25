@@ -1,9 +1,7 @@
-package com.preproject.backend.global.heleper.event;
-
+package com.preproject.backend.global.helper.event;
 
 import com.preproject.backend.domain.member.entity.Member;
 import lombok.Getter;
-import org.springframework.context.ApplicationEvent;
 
 @Getter
 public class MemberRegistrationApplicationEvent {

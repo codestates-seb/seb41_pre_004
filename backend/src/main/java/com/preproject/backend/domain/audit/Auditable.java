@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Auditable {
     @CreatedDate
-    @Column(name = "CreatedAt", updatable = false)
-    private LocalDateTime created_at;
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "ModifiedAt")
-    private LocalDateTime modified_at;
+    @Column(name = "LAST_MODIFIED_AT")
+    private LocalDateTime modifiedAt;
 }

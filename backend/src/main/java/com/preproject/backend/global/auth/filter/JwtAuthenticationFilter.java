@@ -1,15 +1,14 @@
-package com.preproject.backend.global.security.auth.Filter;
+package com.preproject.backend.global.auth.filter;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.preproject.backend.global.auth.dto.LoginDto;
+import com.preproject.backend.global.auth.jwt.JwtTokenizer;
 import com.preproject.backend.domain.member.entity.Member;
-import com.preproject.backend.global.security.auth.dto.LoginDto;
-import com.preproject.backend.global.security.auth.jwt.JwtTokenizer;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -17,8 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
-
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         ObjectMapper objectMapper = new ObjectMapper();
         LoginDto loginDto = objectMapper.readValue(request.getInputStream(), LoginDto.class);
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+                                                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
         return authenticationManager.authenticate(authenticationToken);
     }

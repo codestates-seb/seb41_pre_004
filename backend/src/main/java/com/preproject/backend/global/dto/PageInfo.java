@@ -1,4 +1,4 @@
-package com.preproject.backend.global.page;
+package com.preproject.backend.global.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,4 +11,3 @@ public class PageInfo {
     private long totalElements;
     private int totalPages;
 }
-

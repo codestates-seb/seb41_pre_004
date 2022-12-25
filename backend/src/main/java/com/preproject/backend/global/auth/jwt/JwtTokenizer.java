@@ -1,4 +1,4 @@
-package com.preproject.backend.global.security.auth.jwt;
+package com.preproject.backend.global.auth.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -16,20 +16,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-// (1)
 @Component
 public class JwtTokenizer {
     @Getter
     @Value("${jwt.key}")
-    private String secretKey;       // (2)
+    private String secretKey;
 
     @Getter
     @Value("${jwt.access-token-expiration-minutes}")
-    private int accessTokenExpirationMinutes;        // (3)
+    private int accessTokenExpirationMinutes;
 
     @Getter
     @Value("${jwt.refresh-token-expiration-minutes}")
-    private int refreshTokenExpirationMinutes;          // (4)
+    private int refreshTokenExpirationMinutes;
 
     public String encodeBase64SecretKey(String secretKey) {
         return Encoders.BASE64.encode(secretKey.getBytes(StandardCharsets.UTF_8));
@@ -61,6 +60,7 @@ public class JwtTokenizer {
                 .compact();
     }
 
+    // 검증 후, Claims을 반환 하는 용도
     public Jws<Claims> getClaims(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
@@ -71,6 +71,7 @@ public class JwtTokenizer {
         return claims;
     }
 
+    // 단순히 검증만 하는 용도로 쓰일 경우
     public void verifySignature(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
@@ -80,7 +81,6 @@ public class JwtTokenizer {
                 .parseClaimsJws(jws);
     }
 
-    // (5)
     public Date getTokenExpiration(int expirationMinutes) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, expirationMinutes);

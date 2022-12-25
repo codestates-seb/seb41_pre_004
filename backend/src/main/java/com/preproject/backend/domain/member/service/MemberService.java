@@ -2,10 +2,10 @@ package com.preproject.backend.domain.member.service;
 
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.repository.MemberRepository;
+import com.preproject.backend.global.auth.utils.CustomAuthorityUtils;
+import com.preproject.backend.global.helper.event.MemberRegistrationApplicationEvent;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
-import com.preproject.backend.global.heleper.event.MemberRegistrationApplicationEvent;
-import com.preproject.backend.global.security.auth.util.CustomAuthorityUtils;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ *  - 메서드 구현
+ *  - DI 적용
+ *  - Spring Data JPA 적용
+ *  - 트랜잭션 적용
+ */
 @Transactional
 @Service
 public class MemberService {
@@ -53,15 +58,21 @@ public class MemberService {
 
         Member savedMember = memberRepository.save(member);
 
+
         publisher.publishEvent(new MemberRegistrationApplicationEvent(savedMember));
         return savedMember;
     }
+
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
 
-        Optional.ofNullable(member.getDisplayName())
-                .ifPresent(name -> findMember.setDisplayName(name));
+        Optional.ofNullable(member.getName())
+                .ifPresent(name -> findMember.setName(name));
+//        Optional.ofNullable(member.getPhone())
+//                .ifPresent(phone -> findMember.setPhone(phone));
+//        Optional.ofNullable(member.getMemberStatus())
+//                .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
 
         return memberRepository.save(findMember);
     }

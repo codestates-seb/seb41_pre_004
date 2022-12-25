@@ -6,10 +6,9 @@ import com.preproject.backend.domain.member.mapper.MemberMapper;
 import com.preproject.backend.domain.member.service.MemberService;
 import com.preproject.backend.global.dto.MultiResponseDto;
 import com.preproject.backend.global.dto.SingleResponseDto;
-import com.preproject.backend.global.security.auth.jwt.JwtTokenizer;
-import com.preproject.backend.global.utilities.UriCreator;
-import lombok.RequiredArgsConstructor;
+import com.preproject.backend.global.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +20,18 @@ import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
 
+
 /**
  * - DI 적용
  * - Mapstruct Mapper 적용
  * - @ExceptionHandler 적용
  */
 @RestController
-@RequestMapping("/v11/members")
+@RequestMapping("/members")
 @Validated
 @Slf4j
 public class MemberController {
-    private final static String MEMBER_DEFAULT_URL = "/v11/members";
+    private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
     private final MemberMapper mapper;
 
@@ -43,6 +43,7 @@ public class MemberController {
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
         Member member = mapper.memberPostToMember(requestBody);
+//        member.setStamp(new Stamp());
 
         Member createdMember = memberService.createMember(member);
         URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createdMember.getMemberId());
@@ -63,8 +64,6 @@ public class MemberController {
                 new SingleResponseDto<>(mapper.memberToMemberResponse(member)),
                 HttpStatus.OK);
     }
-
-
 
     @GetMapping("/{member-id}")
     public ResponseEntity getMember(

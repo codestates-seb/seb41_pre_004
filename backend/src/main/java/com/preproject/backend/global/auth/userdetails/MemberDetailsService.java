@@ -1,12 +1,11 @@
-package com.preproject.backend.global.security.auth.userdetails;
+package com.preproject.backend.global.auth.userdetails;
 
 
-
+import com.preproject.backend.global.auth.utils.CustomAuthorityUtils;
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.repository.MemberRepository;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
-import com.preproject.backend.global.security.auth.util.CustomAuthorityUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +15,10 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * - Custom UserDetails 사용
+ * - User Role을 DB에서 조회한 후, HelloAuthorityUtils로 Spring Security에게 Role 정보 제공
+ */
 @Component
 public class MemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
@@ -35,10 +38,8 @@ public class MemberDetailsService implements UserDetailsService {
     }
 
     private final class MemberDetails extends Member implements UserDetails {
-        // (1)
         MemberDetails(Member member) {
             setMemberId(member.getMemberId());
-            setDisplayName(member.getDisplayName());
             setEmail(member.getEmail());
             setPassword(member.getPassword());
             setRoles(member.getRoles());

@@ -1,5 +1,4 @@
-package com.preproject.backend.global.utilities;
-
+package com.preproject.backend.global.utils;
 
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -14,4 +13,3 @@ public class UriCreator {
                 .toUri();
     }
 }
-
