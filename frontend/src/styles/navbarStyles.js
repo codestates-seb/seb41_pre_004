@@ -42,23 +42,37 @@ export const NavPrimary = styled.div`
   color: #525960;
   cursor: pointer;
 
+  &:hover {
+    color: #0c0d0e;
+
+    .home,
+    .collective,
+    .team {
+      color: #0c0d0e;
+    }
+
+    .question {
+      fill: #0c0d0e;
+    }
+  }
+
   ${(props) =>
     props.selected &&
     css`
       border-right: 3px solid #f48123;
       font-weight: 700;
-      color: #0c0e0f;
+      color: #0c0d0e;
       background-color: #f0f2f4;
 
       .home,
       .collective,
       .team {
         font-weight: 700;
-        color: #0c0e0f;
+        color: #0c0d0e;
       }
 
       .question {
-        fill: #0c0e0f;
+        fill: #0c0d0e;
       }
     `}
 `;
