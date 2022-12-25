@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { mobileLogo } from '../../../assets/headerIcons';
+import mobileLogo from '../../../assets/icons/mobileLogo.svg';
 import Search from '../Search';
 import NavButton from '../NavButton';
 import {

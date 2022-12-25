@@ -1,16 +1,17 @@
-import { menuIcon, cancleIcon } from '../../assets/headerIcons';
 import { StyledNavButton } from '../../styles/headerStyles';
+import { ReactComponent as MenuIcon } from '../../assets/icons/menuIcon.svg';
+import { ReactComponent as CloseIcon } from '../../assets/icons/closeIcon.svg';
 
 const NavButton = ({ isOpen }) => {
   return (
     <>
       {isOpen ? (
         <StyledNavButton type="button" aria-label="Close the TabMenu">
-          <img src={cancleIcon} alt="" />
+          <CloseIcon />
         </StyledNavButton>
       ) : (
         <StyledNavButton type="button" aria-label="Open the TabMenu">
-          <img src={menuIcon} alt="" />
+          <MenuIcon />
         </StyledNavButton>
       )}
     </>

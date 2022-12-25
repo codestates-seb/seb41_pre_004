@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
-import { desktopLogo } from '../../../assets/headerIcons';
+import desktopLogo from '../../../assets/icons/desktopLogo.svg';
 import Search from '../Search';
-import { LoginButton, SignupButton } from '../../../styles/headerStyles';
-import { FlexBlock, Logo, ProductsButton } from '../../../styles/headerStyles';
+import {
+  LoginButton,
+  SignupButton,
+  FlexBlock,
+  Logo,
+  ProductsButton,
+} from '../../../styles/headerStyles';
 
 const Logout = () => {
   return (

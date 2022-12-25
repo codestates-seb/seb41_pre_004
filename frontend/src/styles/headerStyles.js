@@ -40,6 +40,9 @@ export const RightBlock = styled.div`
 `;
 
 export const Logo = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 48px;
   padding: 6px 8px 10px;
   transition: background-color 0.5s;
@@ -55,17 +58,23 @@ export const Logo = styled.h1`
 `;
 
 export const MobileLogo = styled(Logo)`
-  padding: 9px 10px;
+  padding: 0 6px;
 
   img {
     width: 25px;
     height: 30px;
+
+    path:first-child {
+      color: #bbbbbb;
+    }
+    path:last-child {
+      color: #f38021;
+    }
   }
 `;
 
 export const MenuButton = styled.button`
   font-size: 13px;
-  font-weight: bold;
   padding: 6px 12px;
   border-radius: 100px;
   color: #525960;
@@ -151,17 +160,13 @@ export const SearchBlock = styled.div`
   flex-grow: 1;
   margin-right: 8px;
   margin-left: 8px;
-`;
 
-export const SearchButton = styled.button`
-  height: 48px;
-  padding: 15px 10px;
-`;
-
-export const SearchIcon = styled.img`
-  position: absolute;
-  top: 8px;
-  left: 8px;
+  svg {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    fill: #525960;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -178,11 +183,13 @@ export const SearchInput = styled.input`
 `;
 
 export const StyledNavButton = styled.button`
-  width: 48px;
   height: 48px;
-  padding: 16px;
-  color: #232629;
+  padding: 0 16px;
   transition: background-color 0.5s;
+
+  svg {
+    fill: #525960;
+  }
 
   &:hover {
     background-color: #e3e6e8;
@@ -190,22 +197,23 @@ export const StyledNavButton = styled.button`
 `;
 
 export const PrimaryButton = styled.button`
-  width: 38px;
   height: 48px;
-  padding: 12px 10px;
+  padding: 0 10px;
   transition: background-color 0.5s;
 
-  img {
-    width: 18px;
+  svg {
+    fill: #525960;
   }
+`;
 
+export const HoverButton = styled(PrimaryButton)`
   &:hover {
     background-color: #e3e6e8;
   }
 `;
 
-export const MyPageButton = styled(PrimaryButton)`
-  width: 48px;
+export const MyPageButton = styled(HoverButton)`
+  padding: 0 12px;
 
   img {
     width: 24px;

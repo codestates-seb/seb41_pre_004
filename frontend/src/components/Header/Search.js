@@ -1,31 +1,30 @@
 import { Desktop, Tablet, Mobile } from '../Responsive';
-import { searchIcon } from '../../assets/headerIcons';
 import {
   SearchBlock,
-  SearchButton,
+  PrimaryButton,
   SearchInput,
-  SearchIcon,
 } from '../../styles/headerStyles';
+import { ReactComponent as SearchIcon } from '../../assets/icons/searchIcon.svg';
 
 const Search = () => {
   return (
     <>
       <Mobile>
-        <SearchButton type="button" title="Click to show search">
-          <img src={searchIcon} alt="" />
-        </SearchButton>
+        <PrimaryButton type="button" title="Click to show search">
+          <SearchIcon />
+        </PrimaryButton>
       </Mobile>
 
       <Tablet>
         <SearchBlock>
-          <SearchIcon src={searchIcon} alt="" />
+          <SearchIcon />
           <SearchInput type="text" placeholder="Search..." />
         </SearchBlock>
       </Tablet>
 
       <Desktop>
         <SearchBlock>
-          <SearchIcon src={searchIcon} alt="" />
+          <SearchIcon />
           <SearchInput type="text" placeholder="Search..." />
         </SearchBlock>
       </Desktop>
