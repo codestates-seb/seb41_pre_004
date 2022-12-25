@@ -19,19 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-/**
- *  - 메서드 구현
- *  - DI 적용
- *  - Spring Data JPA 적용
- *  - 트랜잭션 적용
- */
 @Transactional
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
     private final ApplicationEventPublisher publisher;
 
-    // 추가
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils authorityUtils;
 
@@ -48,11 +41,11 @@ public class MemberService {
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
 
-        // 추가: Password 암호화
+        //Password 암호화
         String encryptedPassword = passwordEncoder.encode(member.getPassword());
         member.setPassword(encryptedPassword);
 
-        // 추가: DB에 User Role 저장
+        //DB에 User Role 저장
         List<String> roles = authorityUtils.createRoles(member.getEmail());
         member.setRoles(roles);
 
@@ -69,10 +62,6 @@ public class MemberService {
 
         Optional.ofNullable(member.getName())
                 .ifPresent(name -> findMember.setName(name));
-//        Optional.ofNullable(member.getPhone())
-//                .ifPresent(phone -> findMember.setPhone(phone));
-//        Optional.ofNullable(member.getMemberStatus())
-//                .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
 
         return memberRepository.save(findMember);
     }

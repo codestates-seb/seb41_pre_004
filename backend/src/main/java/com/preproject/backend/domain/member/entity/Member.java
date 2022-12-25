@@ -21,17 +21,14 @@ public class Member extends Auditable {
     @Column(nullable = false, updatable = false, unique = true)
     private String email;
 
-    // 추가
+
     @Column(length = 100, nullable = false)
     private String password;
 
     @Column(length = 100, nullable = false)
     private String name;
 
-//    @Column(length = 13, nullable = false, unique = true)
-//    private String phone;
 
-    // 추가
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
@@ -43,6 +40,5 @@ public class Member extends Auditable {
     public Member(String email, String name) {
         this.email = email;
         this.name = name;
-//        this.phone = phone;
     }
 }

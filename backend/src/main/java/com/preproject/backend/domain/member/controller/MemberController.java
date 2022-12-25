@@ -21,11 +21,7 @@ import java.net.URI;
 import java.util.List;
 
 
-/**
- * - DI 적용
- * - Mapstruct Mapper 적용
- * - @ExceptionHandler 적용
- */
+
 @RestController
 @RequestMapping("/members")
 @Validated
@@ -43,7 +39,6 @@ public class MemberController {
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
         Member member = mapper.memberPostToMember(requestBody);
-//        member.setStamp(new Stamp());
 
         Member createdMember = memberService.createMember(member);
         URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createdMember.getMemberId());

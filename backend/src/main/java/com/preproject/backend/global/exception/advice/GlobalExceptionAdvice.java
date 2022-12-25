@@ -36,13 +36,6 @@ public class GlobalExceptionAdvice {
         return response;
     }
 
-//    @ExceptionHandler
-//    public ResponseEntity handleBusinessLogicException(BusinessLogicException e) {
-//        final ErrorResponse response = ErrorResponse.of(e.getExceptionCode());
-//
-//        return new ResponseEntity<>(response, HttpStatus.valueOf(e.getExceptionCode()
-//                .getStatus()));
-//    }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)

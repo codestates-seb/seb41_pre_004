@@ -34,7 +34,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
     private final JwtTokenizer jwtTokenizer;
-    private final CustomAuthorityUtils authorityUtils; // 추가
+    private final CustomAuthorityUtils authorityUtils;
 
     public SecurityConfiguration(JwtTokenizer jwtTokenizer,
                                    CustomAuthorityUtils authorityUtils) {
@@ -66,15 +66,6 @@ public class SecurityConfiguration {
 //                    .mvcMatchers(HttpMethod.GET, "/*/members").hasRole("ADMIN")
                     .antMatchers(HttpMethod.GET, "/*/members/**").hasAnyRole("USER", "ADMIN")
                     .antMatchers(HttpMethod.DELETE, "/*/members/**").hasRole("USER")
-                    .antMatchers(HttpMethod.POST, "/*/coffees").hasRole("ADMIN")
-                    .antMatchers(HttpMethod.PATCH, "/*/coffees/**").hasRole("ADMIN")
-                    .antMatchers(HttpMethod.GET, "/*/coffees/**").hasAnyRole("USER", "ADMIN")
-                    .antMatchers(HttpMethod.GET, "/*/coffees").permitAll()
-                    .antMatchers(HttpMethod.DELETE, "/*/coffees").hasRole("ADMIN")
-                    .antMatchers(HttpMethod.POST, "/*/orders").hasRole("USER")
-                    .antMatchers(HttpMethod.PATCH, "/*/orders").hasAnyRole("USER", "ADMIN")
-                    .antMatchers(HttpMethod.GET, "/*/orders/**").hasAnyRole("USER", "ADMIN")
-                    .antMatchers(HttpMethod.DELETE, "/*/orders").hasRole("USER")
                     .anyRequest().permitAll()
             );
         return http.build();
