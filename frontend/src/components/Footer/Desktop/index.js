@@ -1,73 +1,84 @@
-import { ReactComponent as Logo } from '../../../assets/icons/mobileLogo.svg';
-import { FooterWrapper } from '../../../styles/footerStyle';
+import { ReactComponent as LogoIcon } from '../../../assets/icons/mobileLogo.svg';
+import {
+  DesktopWrapper,
+  FlexBox,
+  JustifyEvenly,
+  AlignBetween,
+  Logo,
+  Content,
+  Title,
+  Item,
+  Sns,
+  License,
+} from '../../../styles/footerStyle';
 
 const DesktopFooter = () => {
   return (
-    <FooterWrapper>
-      <div>
-        <Logo />
-      </div>
-      <div>
-        <div>
-          <h5>Stack Overflow</h5>
+    <DesktopWrapper>
+      <Logo>
+        <LogoIcon />
+      </Logo>
+      <JustifyEvenly>
+        <Content>
+          <Title>Stack Overflow</Title>
           <ul>
-            <li>Questions</li>
-            <li>Help</li>
+            <Item>Questions</Item>
+            <Item>Help</Item>
           </ul>
-        </div>
-        <div>
-          <h5>Products</h5>
+        </Content>
+        <Content>
+          <Title>Products</Title>
           <ul>
-            <li>Teams</li>
-            <li>Advertising</li>
-            <li>Collectives</li>
-            <li>Talent</li>
+            <Item>Teams</Item>
+            <Item>Advertising</Item>
+            <Item>Collectives</Item>
+            <Item>Talent</Item>
           </ul>
-        </div>
-        <div>
-          <h5>Company</h5>
+        </Content>
+        <Content>
+          <Title>Company</Title>
           <ul>
-            <li>About</li>
-            <li>Press</li>
-            <li>Work Here</li>
-            <li>Legal</li>
-            <li>Privacy Policy</li>
-            <li>Terms of Service</li>
-            <li>Contact Us</li>
-            <li>Cookie Settings</li>
-            <li>Cookie Policy</li>
+            <Item>About</Item>
+            <Item>Press</Item>
+            <Item>Work Here</Item>
+            <Item>Legal</Item>
+            <Item>Privacy PoItemcy</Item>
+            <Item>Terms of Service</Item>
+            <Item>Contact Us</Item>
+            <Item>Cookie Settings</Item>
+            <Item>Cookie PoItemcy</Item>
           </ul>
-        </div>
-        <div>
-          <h5> Stack Exchange Network</h5>
+        </Content>
+        <Content>
+          <Title> Stack Exchange Network</Title>
           <ul>
-            <li>Technology</li>
-            <li>Culture & recreation</li>
-            <li>Life & arts</li>
-            <li>Science</li>
-            <li>Professional</li>
-            <li>Business</li>
-            <li>API</li>
-            <li>Data</li>
+            <Item>Technology</Item>
+            <Item>Culture & recreation</Item>
+            <Item>Itemfe & arts</Item>
+            <Item>Science</Item>
+            <Item>Professional</Item>
+            <Item>Business</Item>
+            <Item>API</Item>
+            <Item>Data</Item>
           </ul>
-        </div>
-      </div>
-      <div>
-        <ul>
-          <li>Blog</li>
-          <li>Facebook</li>
-          <li>Twitter</li>
-          <li>LinkedIn</li>
-          <li>Instagram</li>
-        </ul>
-        <p>
+        </Content>
+      </JustifyEvenly>
+      <AlignBetween>
+        <FlexBox as={'ul'}>
+          <Sns>Blog</Sns>
+          <Sns>Facebook</Sns>
+          <Sns>Twitter</Sns>
+          <Sns>LinkedIn</Sns>
+          <Sns>Instagram</Sns>
+        </FlexBox>
+        <License>
           Site design / logo © 2022 Stack Exchange Inc; user
           <br />
           contributions licensed under CC BY-SA.
           <br /> rev 2022.12.21.43127
-        </p>
-      </div>
-    </FooterWrapper>
+        </License>
+      </AlignBetween>
+    </DesktopWrapper>
   );
 };
 

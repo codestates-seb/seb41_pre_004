@@ -2,10 +2,11 @@ import { Mobile, Tablet, Desktop } from '../Responsive';
 import MobileFooter from './Mobile';
 import TabletFooter from './Tablet';
 import DesktopFooter from './Desktop';
+import { FooterWrapper } from '../../styles/footerStyle';
 
 const Footer = () => {
   return (
-    <>
+    <FooterWrapper>
       <Mobile>
         <MobileFooter />
       </Mobile>
@@ -17,7 +18,7 @@ const Footer = () => {
       <Desktop>
         <DesktopFooter />
       </Desktop>
-    </>
+    </FooterWrapper>
   );
 };
 

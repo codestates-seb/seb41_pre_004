@@ -1,71 +1,82 @@
-import { ReactComponent as Logo } from '../../../assets/icons/mobileLogo.svg';
-import { FooterWrapper } from '../../../styles/footerStyle';
+import { ReactComponent as LogoIcon } from '../../../assets/icons/mobileLogo.svg';
+import {
+  TabletWrapper,
+  FlexBox,
+  ColumnGap,
+  Logo,
+  Content,
+  Title,
+  Item,
+  Sns,
+  TabletSnsBox,
+  TabletLicense,
+} from '../../../styles/footerStyle';
 
 const TabletFooter = () => {
   return (
-    <FooterWrapper>
+    <TabletWrapper>
+      <Logo>
+        <LogoIcon />
+      </Logo>
       <div>
-        <Logo />
+        <Content>
+          <Title>Stack Overflow</Title>
+          <ColumnGap as={'ul'}>
+            <Item>Questions</Item>
+            <Item>Help</Item>
+          </ColumnGap>
+        </Content>
+        <Content>
+          <Title>Products</Title>
+          <ColumnGap as={'ul'}>
+            <Item>Teams</Item>
+            <Item>Advertising</Item>
+            <Item>Collectives</Item>
+            <Item>Talent</Item>
+          </ColumnGap>
+        </Content>
+        <Content>
+          <Title>Company</Title>
+          <ColumnGap as={'ul'}>
+            <Item>About</Item>
+            <Item>Press</Item>
+            <Item>Work Here</Item>
+            <Item>Legal</Item>
+            <Item>Privacy Policy</Item>
+            <Item>Terms of Service</Item>
+            <Item>Contact Us</Item>
+            <Item>Cookie Settings</Item>
+            <Item>Cookie Policy</Item>
+          </ColumnGap>
+        </Content>
+        <Content>
+          <Title> Stack Exchange Network</Title>
+          <ColumnGap as={'ul'}>
+            <Item>Technology</Item>
+            <Item>Culture & recreation</Item>
+            <Item>Life & arts</Item>
+            <Item>Science</Item>
+            <Item>Professional</Item>
+            <Item>Business</Item>
+            <Item>API</Item>
+            <Item>Data</Item>
+          </ColumnGap>
+        </Content>
       </div>
-      <div>
-        <div>
-          <h5>Stack Overflow</h5>
-          <ul>
-            <li>Questions</li>
-            <li>Help</li>
-          </ul>
-        </div>
-        <div>
-          <h5>Products</h5>
-          <ul>
-            <li>Teams</li>
-            <li>Advertising</li>
-            <li>Collectives</li>
-            <li>Talent</li>
-          </ul>
-        </div>
-        <div>
-          <h5>Company</h5>
-          <ul>
-            <li>About</li>
-            <li>Press</li>
-            <li>Work Here</li>
-            <li>Legal</li>
-            <li>Privacy Policy</li>
-            <li>Terms of Service</li>
-            <li>Contact Us</li>
-            <li>Cookie Settings</li>
-            <li>Cookie Policy</li>
-          </ul>
-        </div>
-        <div>
-          <h5> Stack Exchange Network</h5>
-          <ul>
-            <li>Technology</li>
-            <li>Culture & recreation</li>
-            <li>Life & arts</li>
-            <li>Science</li>
-            <li>Professional</li>
-            <li>Business</li>
-            <li>API</li>
-            <li>Data</li>
-          </ul>
-        </div>
-      </div>
-      <div>
-        <ul>
-          <li>Blog</li>
-          <li>Facebook</li>
-          <li>Twitter</li>
-          <li>LinkedIn</li>
-          <li>Instagram</li>
-        </ul>
-        <p>
+      <div className="mt-24">
+        <TabletSnsBox as={'ul'}>
+          <Sns>Blog</Sns>
+          <Sns>Facebook</Sns>
+          <Sns>Twitter</Sns>
+          <Sns>LinkedIn</Sns>
+          <Sns>Instagram</Sns>
+        </TabletSnsBox>
+        <TabletLicense>
           Site design / logo © 2022 Stack Exchange Inc; user contributions
           licensed under CC BY-SA. rev 2022.12.21.43127
-        </p>
+        </TabletLicense>
       </div>
-    </FooterWrapper>
+    </TabletWrapper>
   );
 };
 
