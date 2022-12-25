@@ -1,5 +1,15 @@
 import { Mobile, Tablet, Desktop } from '../Responsive';
-import { SidebarWrapper, SidebarPost } from '../../styles/sidebarStyles';
+import { ReactComponent as PencilIcon } from '../../assets/icons/pencilIcon.svg';
+import { ReactComponent as MetaIcon } from '../../assets/icons/metaIcon.svg';
+
+import {
+  SidebarWrapper,
+  SidebarPost,
+  PostTitle,
+  PostDesc,
+  PostIcon,
+  PostItem,
+} from '../../styles/sidebarStyles';
 
 const Sidebar = () => {
   return (
@@ -12,26 +22,81 @@ const Sidebar = () => {
         <SidebarWrapper>
           <SidebarPost>
             <ul>
-              <li>The Overflow Blog</li>
               <li>
-                The complete guide to protecting your APIs with OAuth2 (part 1)
+                <PostTitle>The Overflow Blog</PostTitle>
               </li>
               <li>
-                The three top-paying tech roles in 2022 and the skills you need
-                to land them
-                <span>sponsored post</span>
+                <PostDesc>
+                  <PostIcon>
+                    <PencilIcon />
+                  </PostIcon>
+                  <PostItem>
+                    The complete guide to protecting your APIs with OAuth2 (part
+                    1)
+                  </PostItem>
+                </PostDesc>
               </li>
-              <li>Featured on Meta</li>
-              <li>Navigation and UI research starting soon</li>
               <li>
-                2022 Community Moderator Election Results - now with two more
-                mods!
+                <PostDesc>
+                  <PostIcon>
+                    <PencilIcon />
+                  </PostIcon>
+                  <PostItem>
+                    The three top-paying tech roles in 2022 and the skills you
+                    need to land them
+                    <p>sponsored post</p>
+                  </PostItem>
+                </PostDesc>
               </li>
-              <li>I'm standing down as a moderator</li>
-              <li>Temporary policy: ChatGPT is banned</li>
-              <li>Hot Meta Posts</li>
               <li>
-                How are bounties awarded to ChatGPT-sourced answerers handled?
+                <PostTitle>Featured on Meta</PostTitle>
+              </li>
+              <li>
+                <PostDesc>
+                  <PostIcon>
+                    <MetaIcon />
+                  </PostIcon>
+                  <PostItem>Navigation and UI research starting soon</PostItem>
+                </PostDesc>
+              </li>
+              <li>
+                <PostDesc>
+                  <PostIcon>
+                    <MetaIcon />
+                  </PostIcon>
+                  <PostItem>
+                    2022 Community Moderator Election Results - now with two
+                    more mods!
+                  </PostItem>
+                </PostDesc>
+              </li>
+              <li>
+                <PostDesc>
+                  <PostIcon>
+                    <MetaIcon />
+                  </PostIcon>
+                  <PostItem>I'm standing down as a moderator</PostItem>
+                </PostDesc>
+              </li>
+              <li>
+                <PostDesc>
+                  <PostIcon>
+                    <MetaIcon />
+                  </PostIcon>
+                  <PostItem>Temporary policy: ChatGPT is banned</PostItem>
+                </PostDesc>
+              </li>
+              <li>
+                <PostTitle>Hot Meta Posts</PostTitle>
+              </li>
+              <li>
+                <PostDesc>
+                  <PostIcon>9</PostIcon>
+                  <PostItem>
+                    How are bounties awarded to ChatGPT-sourced answerers
+                    handled?
+                  </PostItem>
+                </PostDesc>
               </li>
             </ul>
           </SidebarPost>
