@@ -1,11 +1,12 @@
 package com.preproject.backend.global.security.auth.userdetails;
 
+
+
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.repository.MemberRepository;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
 import com.preproject.backend.global.security.auth.util.CustomAuthorityUtils;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,23 +17,28 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class MemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final CustomAuthorityUtils authorityUtils;
 
-    //오류 가능성
+    public MemberDetailsService(MemberRepository memberRepository, CustomAuthorityUtils authorityUtils) {
+        this.memberRepository = memberRepository;
+        this.authorityUtils = authorityUtils;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Member> optionalMember = memberRepository.findByEmail(username);
-        return new UserDetailsImpl(optionalMember.orElseThrow(
-                () -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND))
-        );
+        Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        return new MemberDetails(findMember);
     }
 
-    private final class UserDetailsImpl extends Member implements UserDetails {
-        UserDetailsImpl(Member member) {
+    private final class MemberDetails extends Member implements UserDetails {
+        // (1)
+        MemberDetails(Member member) {
             setMemberId(member.getMemberId());
+            setDisplayName(member.getDisplayName());
             setEmail(member.getEmail());
             setPassword(member.getPassword());
             setRoles(member.getRoles());
@@ -68,5 +74,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return true;
         }
     }
-
 }

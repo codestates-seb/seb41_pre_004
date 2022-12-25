@@ -4,6 +4,8 @@ import com.preproject.backend.domain.audit.Auditable;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +30,9 @@ public class Member extends Auditable {
     private String email;
 
     // member 비밀번호
+    @NotBlank
     @Column(length = 100, nullable = false, unique = true)
     private String password;
-
-    @Builder.Default
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private MemberStatus memberStatus = MemberStatus.ACTIVE;
 
 //    // 연관관계 매핑 - 한 member 가 여러개의 comment
 //    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
@@ -46,5 +44,4 @@ public class Member extends Auditable {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
-
 }

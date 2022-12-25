@@ -19,14 +19,16 @@ logging:
     org:
       springframework:
         orm:
-          jpa: DEBUG # 로그 단계 설정
+          jpa: DEBUG
 server:
   servlet:
     encoding:
-      force-response: true # MockMVC 테스트에서 응답에 한글이 깨지는 현상 해결 https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#application-properties.server.server.servlet.encoding.force-response
+      force-response: true
+mail:
+  address:
+    admin: admin@gmail.com
 
 jwt:
-  key:
-    secret: ${JWT_SECRET_KEY_STACK}
-  access-token-expiration-minutes: 1051200
+  key: "c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK"
+  access-token-expiration-minutes: 40
   refresh-token-expiration-minutes: 420

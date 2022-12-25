@@ -16,19 +16,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+// (1)
 @Component
 public class JwtTokenizer {
     @Getter
     @Value("${jwt.key}")
-    private String secretKey;
+    private String secretKey;       // (2)
 
     @Getter
     @Value("${jwt.access-token-expiration-minutes}")
-    private int accessTokenExpirationMinutes;
+    private int accessTokenExpirationMinutes;        // (3)
 
     @Getter
     @Value("${jwt.refresh-token-expiration-minutes}")
-    private int refreshTokenExpirationMinutes;
+    private int refreshTokenExpirationMinutes;          // (4)
 
     public String encodeBase64SecretKey(String secretKey) {
         return Encoders.BASE64.encode(secretKey.getBytes(StandardCharsets.UTF_8));
@@ -60,7 +61,6 @@ public class JwtTokenizer {
                 .compact();
     }
 
-    // 검증 후, Claims을 반환 하는 용도
     public Jws<Claims> getClaims(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
@@ -71,7 +71,6 @@ public class JwtTokenizer {
         return claims;
     }
 
-    // 단순히 검증만 하는 용도로 쓰일 경우
     public void verifySignature(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
@@ -81,6 +80,7 @@ public class JwtTokenizer {
                 .parseClaimsJws(jws);
     }
 
+    // (5)
     public Date getTokenExpiration(int expirationMinutes) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, expirationMinutes);
@@ -94,20 +94,5 @@ public class JwtTokenizer {
         Key key = Keys.hmacShaKeyFor(keyBytes);
 
         return key;
-    }
-
-    private Claims parseToken(String token) {
-        Key key = getKeyFromBase64EncodedKey(encodeBase64SecretKey(this.secretKey));
-        String jws = token.replace("Bearer ", "");
-
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(jws)
-                .getBody();
-    }
-
-    public Long getMemberId(String token) {
-        return parseToken(token).get("memberId", Long.class);
     }
 }

@@ -1,11 +1,10 @@
 package com.preproject.backend.domain.member.dto;
 
-import com.preproject.backend.domain.member.entity.MemberStatus;
 import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
+import javax.validation.constraints.Pattern;
 
 public class MemberDto {
     @Getter
@@ -14,11 +13,24 @@ public class MemberDto {
     @Builder
     public static class Response {
         private Long memberId;
-        private String displayName;
         private String email;
-        private MemberStatus memberStatus;
-        private LocalDateTime createdAt;
+        private String displayName;
     }
+    @Getter
+    @AllArgsConstructor
+    public static class Patch {
+        private long memberId;
+
+        @NotBlank
+        private String displayName;
+
+
+        public void setMemberId(long memberId) {
+            this.memberId = memberId;
+        }
+    }
+
+
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
