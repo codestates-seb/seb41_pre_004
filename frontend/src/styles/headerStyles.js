@@ -9,7 +9,9 @@ export const HeaderBlock = styled.header`
   width: 100%;
   height: 51px;
   border-top: 3px solid #f48225;
+  background-color: #f7faf9;
   box-shadow: 0 1px 2px 1px #e7e7e7;
+  z-index: 10;
 `;
 
 export const HeaderContainer = styled.div`
