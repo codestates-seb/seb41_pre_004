@@ -1,25 +1,24 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 import logo_github from '../logo_github.svg'
 import logo_google from '../logo_google.svg'
 import logo_facebook from '../logo_facebook.svg'
-const SocialLoginButton = styled.button`
+
+
+const SocialSignUpButton = styled.button`
 display: inline-block;
 display: flex;
 justify-content: center;
 align-items: center;
-font-family: -apple-system, "system-ui", "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif
+font-family: -apple-system, "system-ui", "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
 word-spacing: normal;
-width: 287px;
-height: 61px;
+width: 316px;
+height: 38px;
 padding: 10px;
 margin-bottom: 16px;
 border-radius: 5px;
 letter-spacing: normal;
 text-align: center;
-font-weight: norbal
 ;
-
-
 
 & > img {
   display: inline-block;
@@ -30,29 +29,26 @@ font-weight: norbal
   margin-right: 10px;
 }
 `
-const GitLogin = styled(SocialLoginButton)`
+
+const GitSignup = styled(SocialSignUpButton)`
   background-color: #232629;
   color: white;
   outline: none;
 
 `
-const GoogleLogin = styled(SocialLoginButton)`
+const GoogleSignup = styled(SocialSignUpButton)`
   outline: none;
 
-
 `
-const FacebookLogin= styled(SocialLoginButton)`
+const FacebookSignup= styled(SocialSignUpButton)`
   background-color: #385499;
   color: white;
   outline: none;
-
-  & > img{
-  }
 `
 const BlueButton = styled.button`
   display: inline-block;
-  width: 240px;
-  height: 37px;
+  width: 268px;
+  height: 38px;
   font-size: 13px;
   line-height: 15px;
   text-align: center;
@@ -65,23 +61,22 @@ const BlueButton = styled.button`
   box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px 0px inset;
   border-radius: 3px;
   outline: none;
-  margin: 10px 0px;
 `
 
-const LoginButton = ({type,onClick}) =>{
-  if(type === 'google') {
-    return <GoogleLogin onClick={onClick}><img src={logo_google} alt='logo_google'/>Log in with Google</GoogleLogin>
+const SignupButton = ({type}) =>{
+  if(type === 'google'){
+    return <GoogleSignup><img src={logo_google} alt='logo_google'/>Sign up with Google</GoogleSignup>
   }
-  if(type === 'github') {
-    return <GitLogin onClick={onClick}><img src={logo_github} alt='logo_github'/>Log in with GitHub</GitLogin>
+  if(type === 'github'){
+    return <GitSignup><img src={logo_github} alt='logo_github'/>Sign up with GitHub</GitSignup>
   }
-  if(type === 'facebook') {
-    return <FacebookLogin onClick={onClick}><img src={logo_facebook} alt='logo_facebook'/>Log in with Facebook</FacebookLogin>
+  if(type === 'facebook'){
+    return <FacebookSignup><img src={logo_facebook} alt='logo_facebook'/>Sign up with Facebook</FacebookSignup>
   }
-  if(type ==='login'){
-    return <BlueButton>Log in</BlueButton>
+  if(type === 'signup'){
+    return <BlueButton>Sign up</BlueButton>;
   }
 
 }
 
-export default LoginButton
+export default SignupButton
