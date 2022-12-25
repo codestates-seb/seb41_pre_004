@@ -1,6 +1,11 @@
 import './App.css';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import Header from './components/Header';
+import Container from './components/Container';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import Footer from './components/Footer';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -34,10 +39,31 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const initialState = {
+  login: true,
+};
+
 function App() {
   return (
     <>
       <GlobalStyle />
+      <Header islogin={initialState.login} />
+      <Container>
+        <Navbar />
+        <div style={{ width: '100%', padding: '24px', display: 'flex' }}>
+          <div className="content" style={{ width: '100%' }}>
+            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
+            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
+            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
+            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
+            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
+            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
+            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
+          </div>
+          <Sidebar />
+        </div>
+      </Container>
+      <Footer />
     </>
   );
 }
