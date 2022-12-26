@@ -17,18 +17,12 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Answer extends Auditable {
-    // answer 식별자
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int answerId;
+    private long answerId;
 
-    // answer 내용
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
-
-    // answer 내 투표 수
-//    @Column(nullable = false)
-//    private String score;
 
     // 연관관계 매핑 - 한 member 가 여러개의 answer
     @ManyToOne
@@ -43,17 +37,4 @@ public class Answer extends Auditable {
     // 연관관계 매핑 - 한 answer 에 여러개의 comment
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
-
-    // answerService 의 createAnswer 에서 검증된 memberId/questionId 를 가진 객체를 만들어 저장하기 위한 메서드
-    public static Answer toEntity(String content, Question question, Member member) {
-        Answer answer = Answer.builder()
-                .content(content)
-                .question(question)
-                .member(member)
-                .build();
-
-        question.getAnswers().add(answer);
-
-        return answer;
-    }
 }

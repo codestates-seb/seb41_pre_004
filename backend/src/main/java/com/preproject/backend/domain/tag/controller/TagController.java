@@ -34,11 +34,7 @@ public class TagController {
     public ResponseEntity getTags(@RequestParam(name = "tagName") String tagName,
             @Positive @RequestParam(name = "page", defaultValue = "1") int page,
             @Positive @RequestParam(name = "page", defaultValue = "15") int size) {
-//        Page<TagEntity> tags = tagService.findTags(tagName, page-1, size, Sort.by("tagId").descending());
-//        PageInfo pageInfo = PageInfo.of(tags, page, size);
-//
-//        List<TagEntity> tagsList = new ArrayList<>();
-//        if(tags != null && tags.hasContent()) {tagsList = tags.getContent();}
+
         Page<TagEntity> pageTag = tagService.findTags(tagName, page-1, size, Sort.by("tagId").descending());
         List<TagEntity> tags = pageTag.getContent();
 

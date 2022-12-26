@@ -42,7 +42,7 @@ public class AnswerController {
 
     // answer 등록 - 시도 2
     @PostMapping
-    public ResponseEntity postAnswer(@PathVariable("question-id") @Positive int questionId,
+    public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
                                      @Valid @RequestBody AnswerDto.Post requestBody) {
         Answer answer = mapper.answerPostDtoToAnswer(requestBody);
         Answer createAnswer = answerService.createAnswer(answer, questionId);
@@ -54,8 +54,8 @@ public class AnswerController {
 
     // answer 수정
     @PatchMapping("/{answer-id}")
-    public ResponseEntity patchAnswer(@PathVariable("question-id") @Positive int questionId,
-                                      @PathVariable("answer-id") @Positive int answerId,
+    public ResponseEntity patchAnswer(@PathVariable("question-id") @Positive long questionId,
+                                      @PathVariable("answer-id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.Patch requestBody) {
         requestBody.setAnswerId(answerId);
         Answer answer = mapper.answerPatchDtoToAnswer(requestBody);
@@ -69,8 +69,8 @@ public class AnswerController {
 
     // answer 조회
     @GetMapping("/{answer-id}")
-    public ResponseEntity getAnswer(@PathVariable("question-id") @Positive int questionId,
-                                    @PathVariable("answer-id") @Positive int answerId) {
+    public ResponseEntity getAnswer(@PathVariable("question-id") @Positive long questionId,
+                                    @PathVariable("answer-id") @Positive long answerId) {
         Answer answer = answerService.findAnswer(answerId);
 
         return new ResponseEntity<>(
@@ -79,7 +79,7 @@ public class AnswerController {
 
     // answer 전체 조회
     @GetMapping
-    public ResponseEntity getAnswers(@PathVariable("question-id") @Positive int questionId,
+    public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId,
                                      @Positive @RequestParam int page,
                                      @Positive @RequestParam int size) {
         Page<Answer> pageAnswer = answerService.findAnswers(questionId,page - 1, size);
@@ -92,8 +92,8 @@ public class AnswerController {
 
     // answer 삭제
     @DeleteMapping("/{answer-id}")
-    public ResponseEntity deleteAnswer(@PathVariable("question-id") @Positive int questionId,
-                                       @PathVariable("answer-id") @Positive int answerId) {
+    public ResponseEntity deleteAnswer(@PathVariable("question-id") @Positive long questionId,
+                                       @PathVariable("answer-id") @Positive long answerId) {
         //answerService.deleteAnswer(answerId, 검증된 객체를 가져오고 getMemberId());
         // TODO 여기서 security 가 추가된 후,
         //  인증된 객체를 가져올 수 있도록 파라미터에 넣고, 거기서 getMemberId() 를 그 인증된 객체에서 가져올 수 있음

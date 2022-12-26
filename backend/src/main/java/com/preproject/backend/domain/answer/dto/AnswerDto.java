@@ -22,7 +22,7 @@ public class AnswerDto {
     @Setter
     @AllArgsConstructor
     public static class Patch {
-        private int answerId;
+        private long answerId;
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
@@ -31,7 +31,7 @@ public class AnswerDto {
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private int answerId;
+        private long answerId;
         private String content;
         private String score;
         private LocalDateTime createdAt;

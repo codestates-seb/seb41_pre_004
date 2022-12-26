@@ -17,15 +17,12 @@ public class Comment {
     // comment 식별자
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int commentId;
+    private long commentId;
 
     // comment 내용
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    // comment 내 투표 수
-//    @Column(nullable = false)
-//    private String score;
 
     // 연관관계 매핑 - 한 member 가 여러개의 comment
     @ManyToOne
@@ -49,9 +46,4 @@ public class Comment {
 
         return comment;
     }
-    // CommentService updateComment 에서 사용하려 했던 로직 - But, 지금 사용 X
-//    public void patch(CommentDto.Patch patchRequest) { // patchRequest == 수정될 대댓글
-//        if(patchRequest.getContent() != null)
-//            this.content = patchRequest.getContent();
-//    }
 }

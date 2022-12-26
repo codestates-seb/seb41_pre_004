@@ -37,7 +37,7 @@ public class CommentService {
     }
 
     // comment 수정
-    public Comment updateComment(int memberId, Comment patchComment) { // patchComment == 수정될 내용
+    public Comment updateComment(long memberId, Comment patchComment) { // patchComment == 수정될 내용
         Comment findComment = findVerifiedComment(patchComment.getCommentId());
 
         verifyWriter(memberId, patchComment.getMember().getMemberId());
@@ -48,7 +48,7 @@ public class CommentService {
     }
 
     // comment 조회
-    public Comment findComment(int commentId) {
+    public Comment findComment(long commentId) {
         return findVerifiedComment(commentId);
     }
 
@@ -59,7 +59,7 @@ public class CommentService {
     }
 
     // comment 삭제
-    public void deleteComment(Comment comment, int memberId) {
+    public void deleteComment(Comment comment, long memberId) {
         Comment findComment = findVerifiedComment(comment.getCommentId());
 
         verifyWriter(memberId, comment.getMember().getMemberId());
@@ -68,7 +68,7 @@ public class CommentService {
     }
 
     // commentId 로 검색해 해당 comment 를 가져오기
-    public Comment findVerifiedComment(int commentId) {
+    public Comment findVerifiedComment(long commentId) {
         Optional<Comment> optionalComment =
                 commentRepository.findById(commentId);
 
@@ -78,7 +78,7 @@ public class CommentService {
     }
 
     // 해당 comment 를 쓴 사람과 요청으로 들어오는 member(수정하려는 사람)가 일치하는지 알아보는 로직
-    public void verifyWriter(Integer postMemberId, Integer editMemberId) {
+    public void verifyWriter(Long postMemberId, Long editMemberId) {
         if (!postMemberId.equals(editMemberId)) {
             throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
         }

@@ -2,6 +2,8 @@ package com.preproject.backend.domain.member.service;
 
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.repository.MemberRepository;
+import com.preproject.backend.global.auth.utils.CustomAuthorityUtils;
+import com.preproject.backend.global.helper.event.MemberRegistrationApplicationEvent;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
 import com.preproject.backend.global.utils.CustomBeanUtils;
@@ -9,34 +11,45 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
     private final CustomBeanUtils<Member> beanUtils;
-    //private final PasswordEncoder passwordEncoder; // security
+    private final PasswordEncoder passwordEncoder;
+    private final CustomAuthorityUtils authorityUtils;
 
     // TODO member 등록 (회원가입) / 보안 적용
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
 
-        // 보안 관련
-//        String encryptedPassword = passwordEncoder.encode(member.getPassword());
-//        member.setPassword(encryptedPassword);
-//
-//        List<String> roles = authorityUtils.createRoles(member.getEmail());
-//        member.setRoles(roles);
+        //Password 암호화
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
+
+        //DB에 User Role 저장
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
+        member.setRoles(roles);
 
         return memberRepository.save(member);
     }
 
     // member 수정
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member) {
+        verifyExistsEmail2(member.getEmail()); // 먼저 해당 멤버의 이메일이 존재하는지 확인
 
         Member findMember = findVerifiedMember(member.getMemberId()); // 존재한다면 해당 아이디의 멤버 가져와서
 
@@ -46,7 +59,8 @@ public class MemberService {
     }
 
     // member 조회
-    public Member findMember(int memberId) {
+    @Transactional(readOnly = true)
+    public Member findMember(long memberId) {
         return findVerifiedMember(memberId);
     }
 
@@ -58,15 +72,17 @@ public class MemberService {
     }
 
     // member 삭제
-    public void deleteMember(int memberId) {
+    public void deleteMember(long memberId) {
         Member findMember = findVerifiedMember(memberId);
 
         memberRepository.delete(findMember);
     }
 
     // member id로 검색
-    public Member findVerifiedMember(int memberId) {
-        Optional<Member> optionalMember = memberRepository.findById(memberId);
+    @Transactional(readOnly = true)
+    public Member findVerifiedMember(long memberId) {
+        Optional<Member> optionalMember =
+                memberRepository.findById(memberId);
 
         return optionalMember.orElseThrow(() -> {
                     return new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
@@ -90,17 +106,18 @@ public class MemberService {
     }
 
     // Login 한 Member 를 가져오는 로직
-//    public Member getLoginMember() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//
-//        if(authentication == null || authentication.getName() == null || authentication.getName().equals("anonymousUser"))
-//            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
-//
-//        Optional<Member> optionalUser = memberRepository.findByEmail(authentication.getName());
-//        Member member = optionalUser.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-//
-//        System.out.println("memberId : " + member.getMemberId());
-//
-//        return member;
-//    }
+    public Member getLoginMember() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // 여기 "anonymousUser" 부분은 security 코드를 보고 권한이 없는 Member 의 이름이 어떻게 되어있는지 확인 후 수정해야할 것 같습니다 !
+        if(authentication == null || authentication.getName() == null || authentication.getName().equals("anonymousMember"))
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
+
+        Optional<Member> optionalUser = memberRepository.findByEmail(authentication.getName());
+        Member member = optionalUser.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        System.out.println("memberId : " + member.getMemberId());
+
+        return member;
+    }
 }
