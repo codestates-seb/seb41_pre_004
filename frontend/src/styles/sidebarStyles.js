@@ -41,6 +41,7 @@ export const PostIcon = styled.div`
 export const PostItem = styled.div`
   font-size: 13px;
   color: #3b4045;
+  cursor: pointer;
 
   p {
     color: #6a737c;
