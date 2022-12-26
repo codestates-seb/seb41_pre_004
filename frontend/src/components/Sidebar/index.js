@@ -9,7 +9,7 @@ import {
   PostDesc,
   PostIcon,
   PostItem,
-} from '../../styles/sidebarStyles';
+} from '../../styles/sidebarStyle';
 
 const Sidebar = () => {
   return (

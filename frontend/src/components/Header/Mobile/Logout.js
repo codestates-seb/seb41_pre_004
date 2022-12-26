@@ -10,7 +10,7 @@ import {
   MobileProductsButton,
   LoginButton,
   SignupButton,
-} from '../../../styles/headerStyles';
+} from '../../../styles/headerStyle';
 
 const Logout = () => {
   return (
