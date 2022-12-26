@@ -6,6 +6,7 @@ import Container from './components/Container';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
+import Home from './pages/Question/';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -52,13 +53,7 @@ function App() {
         <Navbar />
         <div style={{ width: '100%', padding: '24px', display: 'flex' }}>
           <div className="content" style={{ width: '100%' }}>
-            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
-            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
-            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
-            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
-            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
-            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
-            <div style={{ height: '300px', backgroundColor: '#0066ff' }}></div>
+            <Home />
           </div>
           <Sidebar />
         </div>

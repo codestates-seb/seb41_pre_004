@@ -6,7 +6,6 @@ import Questionitem from '../../components/QuestionItem';
 
 const Allrender = styled.main`
   main {
-    width: 740px;
   }
 `;
 
@@ -16,6 +15,24 @@ function AllQuestion() {
       <Allrender>
         <main>
           <QuestionHeader></QuestionHeader>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
+          <Questionitem></Questionitem>
           <Questionitem></Questionitem>
         </main>
       </Allrender>
