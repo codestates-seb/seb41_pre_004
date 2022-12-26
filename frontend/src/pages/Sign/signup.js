@@ -92,12 +92,21 @@ const ContextLogin = styled.p`
   text-align: center;
   letter-spacing: normal;
 
-  >:Link{
-    font-weight: bold;
-    color: #0074cc;
-    
-  }
 `
+const RedirectionLink = styled(Link).attrs(
+  
+  )`
+    font-family: -apple-system, "system-ui", "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
+    text-align: center;
+    color: #0074cc;
+    text-decoration: none;
+    font-size: 13px;
+    &:hover,
+    &:focus,
+    &:active{
+      color: #0074cc;
+      } 
+  `
 const Signup = () =>{
 
   const [displayName,setDisplayName] = useState('')
@@ -124,7 +133,7 @@ const Signup = () =>{
         signupEmail={signupEmail} setSignupEmail={setSignupEmail} 
         signupPassword={signupPassword} setSignupPassword={setSignupPassword}/>
         <ContextLogin>
-        Already have an account? <Link to='/login'>Log in</Link><br/>
+        Already have an account? <RedirectionLink to='/login'>Log in</RedirectionLink><br/>
         Are you an employer? Sign up on Talent 
         </ContextLogin>
     
