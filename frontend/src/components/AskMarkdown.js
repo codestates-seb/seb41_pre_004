@@ -6,9 +6,10 @@ import { EditorState } from 'draft-js';
 
 const MyBlock = styled.div`
   .wrapper-class {
-    width: 700px;
+    width: 850px;
     // margin: 0 auto;
     margin-bottom: 4rem;
+    margin-top: 30px;
   }
   .editor {
     height: 500px !important;
