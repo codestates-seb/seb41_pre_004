@@ -1,10 +1,11 @@
 //회원은 새로운 게시글을 작성할 수 있다. 게시글 작성
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TestEditorForm from '../../components/AskMarkdown';
 import AskQuestionHeader from '../../components/AskQuestionHeader';
 import AskSubmitBtn from '../../components/SubmitQuestionBtn';
+import axios from 'axios';
 
 const AskNotice = styled.div`
   background-color: rgb(235, 244, 251);
@@ -89,6 +90,55 @@ const AskTags = styled.div`
 `;
 
 function AskQuestionList() {
+  const [title, setTitle] = useState('');
+  const [tags, setTags] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    fetch(`http://localhost:3001/title`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: title,
+        tags: tags,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        alert('post 완료!');
+      }
+    });
+  }
+  const handleSetTitle = (event) => {
+    let e = event.target.value;
+    setTitle(e);
+  };
+  const handleSetTags = (event) => {
+    let e = event.target.value;
+    setTags(e);
+  };
+
+  // const [ques, setQues] = useState(null);
+
+  // const fetchData = async () => {
+  //   const response = await axios.get(`http://localhost:3001/title`);
+  //   setQues(response.data);
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const title = e.target.title.value;
+  //   const tags = e.target.tags.value;
+  //   axios.post(`http://localhost:3001/title`, { title, tags });
+  //   fetchData();
+  // };
+
   return (
     <>
       <AskQuestionHeader></AskQuestionHeader>
@@ -120,7 +170,12 @@ function AskQuestionList() {
             Be specific and imagine you’re asking a question to another person.
           </p>
         </div>
-        <input type={'text'}></input>
+        <input
+          value={title}
+          onChange={handleSetTitle}
+          type={'text'}
+          placeholder={'e.g (excel string regex)'}
+        ></input>
       </AskTitle>
       <TestEditorForm></TestEditorForm>
       <AskTags>
@@ -131,9 +186,14 @@ function AskQuestionList() {
             to see suggestions.
           </p>
         </div>
-        <input type={'text'} placeholder={'e.g (excel string regex)'}></input>
+        <input
+          value={tags}
+          onChange={handleSetTags}
+          type={'text'}
+          placeholder={'e.g (excel string regex)'}
+        ></input>
       </AskTags>
-      <AskSubmitBtn></AskSubmitBtn>
+      <button onClick={handleSubmit}>sdfsdfsdfsdfsdfsd</button>
     </>
   );
 }
