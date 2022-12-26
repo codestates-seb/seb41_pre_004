@@ -36,4 +36,10 @@ public class TagEntity extends Auditable {
     public void questionCountMinus(){
         this.count--;
     }
+    public void questionCountPlus(int num){
+        this.count += num;
+    }
+    public void questionCountMinus(int num){
+        this.count -= num;
+    }
 }

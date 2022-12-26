@@ -32,10 +32,12 @@ public class Question extends Auditable {
 
     @Column(nullable = false)
     private LocalDateTime modifiedAt = LocalDateTime.now();
+    @Column(nullable = false)
     private int score;
 
     //TODO 추가하면 좋을 것
     // 조회수, 댓글 갯수
+    @Column(nullable = false)
     private int viewCount;
 
 
@@ -54,6 +56,12 @@ public class Question extends Auditable {
     }
     public void voteDown() {
         this.score--;
+    }
+    public void voteUp(int num) {
+        this.score += num;
+    }
+    public void voteDown(int num) {
+        this.score -= num;
     }
     public void viewCountUp() {
         this.viewCount++;
