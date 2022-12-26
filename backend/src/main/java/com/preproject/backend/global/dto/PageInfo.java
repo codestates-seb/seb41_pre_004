@@ -5,6 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class SingleResponseDto<T> {
-    private T data;
+public class PageInfo {
+    private int page;
+    private int size;
+    private long totalElements;
+    private int totalPages;
 }

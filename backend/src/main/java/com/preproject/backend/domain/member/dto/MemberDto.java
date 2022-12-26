@@ -2,7 +2,6 @@ package com.preproject.backend.domain.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,34 +11,35 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     public static class Post {
-        @NotBlank(message = "이름은 공백이 아니어야 합니다.")
-        private String name;
-
-        @NotBlank(message = "이메일은 공백이 아니어야 합니다.")
+        @NotBlank
         @Email
         private String email;
 
-        @NotBlank(message = "비밀번호는 공백이 아니어야 합니다.")
+        @NotBlank
         private String password;
-    }
 
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    public static class Patch {
-        private int memberId;
-
-        @NotBlank(message = "이름은 공백이 아니어야 합니다.")
+        @NotBlank
         private String name;
 
-        @NotBlank(message = "비밀번호는 공백이 아니어야 합니다.")
-        private String password;
     }
 
     @Getter
     @AllArgsConstructor
+    public static class Patch {
+        private long memberId;
+
+        @NotBlank
+        private String name;
+
+        public void setMemberId(long memberId) {
+            this.memberId = memberId;
+        }
+    }
+
+    @AllArgsConstructor
+    @Getter
     public static class Response {
-        private int memberId;
+        private long memberId;
         private String name;
         private String email;
         private String password;

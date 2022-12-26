@@ -1,25 +1,10 @@
 package com.preproject.backend.domain.question.service;
 
-import com.preproject.backend.domain.member.entity.Member;
-import com.preproject.backend.domain.member.repository.MemberRepository;
-import com.preproject.backend.domain.question.entity.Question;
-import com.preproject.backend.domain.question.entity.QuestionTag;
-import com.preproject.backend.domain.question.repository.QuestionRepository;
-import com.preproject.backend.domain.tag.entity.TagEntity;
 import com.preproject.backend.domain.tag.repository.TagRepository;
-import com.preproject.backend.domain.tag.service.TagService;
-import com.preproject.backend.global.exception.BusinessLogicException;
-import com.preproject.backend.global.exception.ExceptionCode;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
