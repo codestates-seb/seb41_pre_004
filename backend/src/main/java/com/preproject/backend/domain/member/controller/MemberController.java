@@ -61,7 +61,7 @@ public class MemberController {
                 new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
     }
 
-    // TODO member 전체 조회 - pagenation 추가
+    // member 전체 조회
     @GetMapping
     public ResponseEntity getMembers(@Positive @RequestParam int page,
                                      @Positive @RequestParam int size) {

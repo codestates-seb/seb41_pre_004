@@ -2,6 +2,8 @@ package com.preproject.backend.domain.question.controller;
 
 import com.preproject.backend.domain.answer.entity.Answer;
 import com.preproject.backend.domain.answer.service.AnswerService;
+import com.preproject.backend.domain.member.dto.MemberDto;
+import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.question.dto.QuestionDto;
 import com.preproject.backend.domain.question.entity.Question;
 import com.preproject.backend.domain.question.mapper.QuestionMapper;

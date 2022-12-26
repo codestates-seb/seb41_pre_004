@@ -17,12 +17,6 @@ public class CommentDto {
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
-
-        @NotNull
-        private int memberId;
-
-        @NotNull
-        private int answerId;
     }
 
     @Getter
@@ -34,9 +28,6 @@ public class CommentDto {
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
-
-        @NotNull
-        private int memberId;
     }
 
     @Getter
@@ -44,9 +35,7 @@ public class CommentDto {
     public static class Response {
         private int commentId;
         private String content;
-        private String score;
-        private int memberId;
-        private int answerId;
+        //private String score;
         private LocalDateTime createdAt;
         private LocalDateTime ModifiedAt;
     }

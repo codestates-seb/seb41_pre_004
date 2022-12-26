@@ -27,8 +27,8 @@ public class Answer extends Auditable {
     private String content;
 
     // answer 내 투표 수
-    @Column(nullable = false)
-    private String score;
+//    @Column(nullable = false)
+//    private String score;
 
     // 연관관계 매핑 - 한 member 가 여러개의 answer
     @ManyToOne
@@ -37,7 +37,7 @@ public class Answer extends Auditable {
 
     // 연관관계 매핑 - 한 question 에 여러개의 answer
     @ManyToOne
-    @JoinColumn(name = "QuestionID")
+    @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
     // 연관관계 매핑 - 한 answer 에 여러개의 comment

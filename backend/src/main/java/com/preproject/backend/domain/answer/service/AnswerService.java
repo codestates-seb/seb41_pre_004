@@ -26,23 +26,19 @@ public class AnswerService {
     //private final PasswordEncoder passwordEncoder; // security
 
     // answer 등록
-    public Answer createAnswer(int memberId, int questionId, Answer postAnswer) {
-        //return answerRepository.save(answer); // 그냥 바로 등록
-        Member member = memberService.findVerifiedMember(memberId);
-        //Question question = questionService. // TODO 여기 questionService 검증 로직 나오면 완성하기
-        //Answer createAnswer = Answer.toEntity(post.getContent(), member, question)
-
-        //return answerRepository.save(createAnswer);
-        return null;
+    public Answer createAnswer(Answer answer, int questionId) {
+        //answer.setMember(memberService.getLoginMember()); // TODO memberService.getLoginMember() 완성 후 하기
+        Member member = memberService.findVerifiedMember(answer.getMember().getMemberId()); // member 존재한느지 검증
+        return answerRepository.save(answer);
     }
 
-    // Tanswer 수정
-    public Answer updateAnswer(int memberId, Answer patchAnswer) { // patchAnswer == 수정될 answer
-        Answer findAnswer = findVerifiedAnswer(patchAnswer.getAnswerId());
+    // answer 수정
+    public Answer updateAnswer(int memberId, Answer answer) { // patchAnswer == 수정될 answer
+        Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
 
-        verifyWriter(memberId, patchAnswer.getMember().getMemberId());
+        verifyWriter(memberId, answer.getMember().getMemberId());
 
-        beanUtils.copyNonNullProperties(patchAnswer, findAnswer);
+        beanUtils.copyNonNullProperties(answer, findAnswer);
 
         return answerRepository.save(findAnswer);
     }
@@ -53,9 +49,9 @@ public class AnswerService {
     }
 
     // answer 전체 조회
-    public Page<Answer> findAnswers(int page, int size) {
+    public Page<Answer> findAnswers(int questionId, int page, int size) {
         return answerRepository.findAll(PageRequest.of(page, size,
-                Sort.by("orderId").descending()));
+                Sort.by("answerId").descending()));
     }
 
     // answer 삭제

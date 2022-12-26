@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 @Getter
-//@AllArgsConstructor
 public class MultiResponseDto<T> {
     private List<T> data;
     private PageInfo pageInfo;

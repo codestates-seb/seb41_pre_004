@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,7 +37,6 @@ public class MemberService {
 
     // member 수정
     public Member updateMember(Member member) {
-        verifyExistsEmail2(member.getEmail()); // 먼저 해당 멤버의 이메일이 존재하는지 확인
 
         Member findMember = findVerifiedMember(member.getMemberId()); // 존재한다면 해당 아이디의 멤버 가져와서
 
@@ -55,7 +53,7 @@ public class MemberService {
     // member 전체 조회
     public Page<Member> findMembers(int page, int size) {
         return memberRepository.findAll(
-                PageRequest.of(page, size, Sort.by("member_id").descending())
+                PageRequest.of(page, size, Sort.by("memberId").descending())
         );
     }
 
@@ -68,8 +66,7 @@ public class MemberService {
 
     // member id로 검색
     public Member findVerifiedMember(int memberId) {
-        Optional<Member> optionalMember =
-                memberRepository.findById(memberId);
+        Optional<Member> optionalMember = memberRepository.findById(memberId);
 
         return optionalMember.orElseThrow(() -> {
                     return new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
@@ -91,4 +88,19 @@ public class MemberService {
         if (member.isEmpty())
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
     }
+
+    // Login 한 Member 를 가져오는 로직
+//    public Member getLoginMember() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//
+//        if(authentication == null || authentication.getName() == null || authentication.getName().equals("anonymousUser"))
+//            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
+//
+//        Optional<Member> optionalUser = memberRepository.findByEmail(authentication.getName());
+//        Member member = optionalUser.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+//
+//        System.out.println("memberId : " + member.getMemberId());
+//
+//        return member;
+//    }
 }
