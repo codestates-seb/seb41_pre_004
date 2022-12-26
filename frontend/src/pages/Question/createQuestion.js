@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TestEditorForm from '../../components/AskMarkdown';
 import AskQuestionHeader from '../../components/AskQuestionHeader';
+import AskSubmitBtn from '../../components/SubmitQuestionBtn';
 
 const AskNotice = styled.div`
   background-color: rgb(235, 244, 251);
@@ -132,6 +133,7 @@ function AskQuestionList() {
         </div>
         <input type={'text'} placeholder={'e.g (excel string regex)'}></input>
       </AskTags>
+      <AskSubmitBtn></AskSubmitBtn>
     </>
   );
 }
