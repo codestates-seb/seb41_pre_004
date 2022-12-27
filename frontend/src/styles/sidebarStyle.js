@@ -4,7 +4,6 @@ export const SidebarWrapper = styled.aside`
   flex-shrink: 0;
   width: 300px;
   height: 100%;
-  margin-left: 24px;
   margin-bottom: 15px;
 `;
 

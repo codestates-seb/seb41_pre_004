@@ -1,4 +1,4 @@
-import { HoverButton } from '../../styles/headerStyles';
+import { HoverButton } from '../../styles/headerStyle';
 import { ReactComponent as ListIcon } from '../../assets/icons/listIcon.svg';
 
 const ListButton = () => {

@@ -14,7 +14,7 @@ import {
   NavEtc,
   NavTeams,
   TeamsIcon,
-} from '../../../styles/navbarStyles';
+} from '../../../styles/navbarStyle';
 
 const TabletNav = () => {
   return (
