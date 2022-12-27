@@ -6,6 +6,7 @@ import com.preproject.backend.domain.answer.mapper.AnswerMapper;
 import com.preproject.backend.domain.answer.service.AnswerService;
 import com.preproject.backend.global.dto.MultiResponseDto;
 import com.preproject.backend.global.dto.SingleResponseDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +20,11 @@ import java.util.List;
 @RestController
 //@RequestMapping("/questions/{question-id}/answers")
 @RequestMapping("/answers")
+@RequiredArgsConstructor
 @Validated
 public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
-
-    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
-        this.answerService = answerService;
-        this.mapper = mapper;
-    }
-
-
 
     // answer 등록
 //    @PostMapping

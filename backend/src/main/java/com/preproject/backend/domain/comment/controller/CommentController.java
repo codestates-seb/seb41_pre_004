@@ -8,6 +8,7 @@ import com.preproject.backend.domain.comment.mapper.CommentMapper;
 import com.preproject.backend.domain.comment.service.CommentService;
 import com.preproject.backend.global.dto.MultiResponseDto;
 import com.preproject.backend.global.dto.SingleResponseDto;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.common.reflection.XMember;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -22,15 +23,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/question/{question-id}/answers/{answer-id}/comments")
 //@RequestMapping("/comments")
+@RequiredArgsConstructor
 @Validated
 public class CommentController {
     private final CommentService commentService;
     private final CommentMapper mapper;
-
-    public CommentController(CommentService commentService, CommentMapper mapper) {
-        this.commentService = commentService;
-        this.mapper = mapper;
-    }
 
     // comment 등록
     @PostMapping
