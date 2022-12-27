@@ -101,23 +101,23 @@ public class QuestionService {
 
         // tag의 삭제 -> 갯수 줄이기
         // 새로운 tag 추가 -> Question-Tag 조인 엔티티 생성
-        Set<QuestionTag> questionTagSet = question.getQuestionTags();
-        Set<QuestionTag> tempTagSet = new HashSet<>(); // 제거될 예정인 태그들
-        for(QuestionTag t : questionTagSet){
-            TagEntity tagEntity = t.getTag();
-            if(tagsList.contains(tagEntity.getName())){
-                // 추가되는 태그이거나 제외되는 태그만 확인 할 것이기 때문에
-                // 중복이 되는 태그는 신경쓰지 않도록 한다.
-                tagsList.remove(tagEntity.getName());
-            } else {
-                // 제거가 될 예정인 태그들
-                tagEntity.questionCountMinus();
-                tagRepository.save(tagEntity);
-                tempTagSet.add(t);
-            }
-        }
-        // Set 에서 제거가 될 예정인 태그들을 모두 제거
-        questionTagSet.removeAll(tempTagSet);
+//        Set<QuestionTag> questionTagSet = question.getQuestionTags();
+//        Set<QuestionTag> tempTagSet = new HashSet<>(); // 제거될 예정인 태그들
+//        for(QuestionTag t : questionTagSet){
+//            TagEntity tagEntity = t.getTag();
+//            if(tagsList.contains(tagEntity.getName())){
+//                // 추가되는 태그이거나 제외되는 태그만 확인 할 것이기 때문에
+//                // 중복이 되는 태그는 신경쓰지 않도록 한다.
+//                tagsList.remove(tagEntity.getName());
+//            } else {
+//                // 제거가 될 예정인 태그들
+//                tagEntity.questionCountMinus();
+//                tagRepository.save(tagEntity);
+//                tempTagSet.add(t);
+//            }
+//        }
+//        // Set 에서 제거가 될 예정인 태그들을 모두 제거
+//        questionTagSet.removeAll(tempTagSet);
 
         // 나머지는 추가되는 태그들이니 저장한다.
 //        for(String t : tagsList) {
@@ -146,15 +146,15 @@ public class QuestionService {
 //        Member member = question.getMember();
 //        //TODO member.set질문갯수(member.get질문갯수 - 1) 형태
 //        memberRepository.save(member);
-        takeAwayQuestionTag(question.getQuestionTags());
+//        takeAwayQuestionTag(question.getQuestionTags());
         questionRepository.delete(question);
     }
 
-    private void takeAwayQuestionTag(Set<QuestionTag> questionTagSet) {
-        questionTagSet.stream().forEach(qt -> {
-            TagEntity tagEntity = qt.getTag();
-            tagEntity.questionCountMinus();
-            tagRepository.save(tagEntity);
-        });
-    }
+//    private void takeAwayQuestionTag(Set<QuestionTag> questionTagSet) {
+//        questionTagSet.stream().forEach(qt -> {
+//            TagEntity tagEntity = qt.getTag();
+//            tagEntity.questionCountMinus();
+//            tagRepository.save(tagEntity);
+//        });
+//    }
 }

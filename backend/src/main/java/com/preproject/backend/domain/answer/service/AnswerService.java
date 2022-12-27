@@ -27,8 +27,8 @@ public class AnswerService {
 
     // answer 등록
     public Answer createAnswer(Answer answer) {
-        //answer.setMember(memberService.getLoginMember());
-        Member member = memberService.findVerifiedMember(answer.getMember().getMemberId()); // member 존재한는지 검증
+        answer.setMember(memberService.getLoginMember());
+        //Member member = memberService.findVerifiedMember(answer.getMember().getMemberId()); // member 존재한는지 검증
         return answerRepository.save(answer);
     }
 

@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
+//@Transactional
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -30,7 +30,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils authorityUtils;
 
-    // TODO member 등록 (회원가입) / 보안 적용
+    // member 등록 (회원가입)
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
 
@@ -46,7 +46,7 @@ public class MemberService {
     }
 
     // member 수정
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
+    //@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member) {
         verifyExistsEmail2(member.getEmail()); // 먼저 해당 멤버의 이메일이 존재하는지 확인
 
@@ -78,7 +78,7 @@ public class MemberService {
     }
 
     // member id로 검색
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     public Member findVerifiedMember(long memberId) {
         Optional<Member> optionalMember =
                 memberRepository.findById(memberId);
@@ -107,13 +107,12 @@ public class MemberService {
     // Login 한 Member 를 가져오는 로직
     public Member getLoginMember() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Member memberPrincipal = (Member)authentication.getPrincipal();
 
-        // 여기 "anonymousUser" 부분은 security 코드를 보고 권한이 없는 Member 의 이름이 어떻게 되어있는지 확인 후 수정해야할 것 같습니다 !
-        if(authentication.getName() == null || authentication.getName().equals("anonymousMember"))
+        if(authentication.getName() == null || authentication.getName().equals("anonymousUser"))
             throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
 
-        Optional<Member> optionalMember = memberRepository.findByEmail(memberPrincipal.getName());
+        System.out.println(authentication.getName());
+        Optional<Member> optionalMember = memberRepository.findByEmail(authentication.getName());
         Member member = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         System.out.println("memberId : " + member.getMemberId());

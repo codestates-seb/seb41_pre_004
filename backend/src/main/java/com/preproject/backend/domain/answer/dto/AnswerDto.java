@@ -16,7 +16,7 @@ public class AnswerDto {
     @Getter
     @AllArgsConstructor
     public static class Post {
-        @NotBlank
+        @NotNull
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
     }
@@ -26,7 +26,7 @@ public class AnswerDto {
     @AllArgsConstructor
     public static class Patch {
         private long answerId;
-        @NotBlank
+        @NotNull
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
     }

@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +20,8 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/questions/{question-id}/answers")
-@RequestMapping("/answers")
+@RequestMapping("/questions/{question-id}/answers")
+//@RequestMapping("/answers")
 @RequiredArgsConstructor
 @Validated
 public class AnswerController {
@@ -27,22 +29,11 @@ public class AnswerController {
     private final AnswerMapper mapper;
 
     // answer 등록
-//    @PostMapping
-//    public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
-//                                     @Valid @RequestBody AnswerDto.Post requestBody) {
-//        Answer answer = mapper.answerPostDtoToAnswer(questionId, requestBody);
-//        Answer createAnswer = answerService.createAnswer(answer);
-//        // TODO 여기 questionService 검증 로직 나오면 완성하기
-//
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(mapper.answerToAnswerResponse(createAnswer)), HttpStatus.CREATED);
-//    }
-    // test 용
     @PostMapping
-    public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post requestBody) {
-        Answer answer = mapper.answerPostDtoToAnswer(requestBody);
+    public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
+                                     @Valid @RequestBody AnswerDto.Post requestBody) {
+        Answer answer = mapper.answerPostDtoToAnswer(questionId, requestBody);
         Answer createAnswer = answerService.createAnswer(answer);
-        // TODO 여기 questionService 검증 로직 나오면 완성하기
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.answerToAnswerResponse(createAnswer)), HttpStatus.CREATED);
@@ -50,7 +41,7 @@ public class AnswerController {
 
     // answer 수정
     @PatchMapping("/{answer-id}")
-    public ResponseEntity patchAnswer(@PathVariable("question-id") @Positive long questionId,
+    public ResponseEntity patchAnswer(@PathVariable("question-id")@Positive long questionId,
                                       @PathVariable("answer-id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.Patch requestBody) {
         requestBody.setAnswerId(answerId);
