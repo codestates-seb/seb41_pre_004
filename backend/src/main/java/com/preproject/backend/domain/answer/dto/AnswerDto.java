@@ -1,6 +1,8 @@
 package com.preproject.backend.domain.answer.dto;
 
+import com.preproject.backend.domain.comment.dto.CommentDto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class AnswerDto {
     @Getter
@@ -29,12 +32,16 @@ public class AnswerDto {
     }
 
     @Getter
+    @Builder
     @AllArgsConstructor
     public static class Response {
         private long answerId;
+        private long questionId;
         private String content;
-        private String score;
+        private long voteAnswer;
         private LocalDateTime createdAt;
-        private LocalDateTime ModifiedAt;
+        private LocalDateTime modifiedAt;
+        private List<CommentDto.Response> comments;
+
     }
 }

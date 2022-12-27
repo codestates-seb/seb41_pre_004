@@ -35,28 +35,14 @@ public class MemberController {
     }
 
     // member 등록 (회원가입)
-    // 민우님 코드
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
         Member member = mapper.memberPostToMember(requestBody);
+        Member createMember = memberService.createMember(member);
 
-        Member createdMember = memberService.createMember(member);
-        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createdMember.getMemberId());
-
-        return ResponseEntity.created(location).build();
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(mapper.memberToMemberResponse(createMember)), HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.memberToMemberResponse(createMember)), HttpStatus.CREATED);
     }
-
-    // 현주님 코드
-//    @PostMapping
-//    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
-//        Member member = mapper.memberPostToMember(requestBody);
-//        Member createMember = memberService.createMember(member);
-//
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(mapper.memberToMemberResponse(createMember)), HttpStatus.CREATED);
-//    }
 
     // member 수정
     @PatchMapping("/{member-id}")

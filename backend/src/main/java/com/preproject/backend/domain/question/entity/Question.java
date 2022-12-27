@@ -19,7 +19,7 @@ import java.util.Set;
 public class Question extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer questionId;
+    private long questionId;
 
     @Column(length = 100, nullable = false)
     private String title;

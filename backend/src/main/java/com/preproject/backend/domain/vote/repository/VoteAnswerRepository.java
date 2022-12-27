@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface VoteAnswerRepository extends JpaRepository<VoteAnswer, Integer> {
-    Optional<VoteAnswer> findByAnswerMember(Answer answer, Member member);
+//    Optional<VoteAnswer> findByAnswerMember(Answer answer, Member member);
 }

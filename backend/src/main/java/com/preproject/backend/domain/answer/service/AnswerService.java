@@ -26,9 +26,9 @@ public class AnswerService {
     //private final PasswordEncoder passwordEncoder; // security
 
     // answer 등록
-    public Answer createAnswer(Answer answer, long questionId) {
-        //answer.setMember(memberService.getLoginMember()); // TODO memberService.getLoginMember() 완성 후 하기
-        Member member = memberService.findVerifiedMember(answer.getMember().getMemberId()); // member 존재한느지 검증
+    public Answer createAnswer(Answer answer) {
+        //answer.setMember(memberService.getLoginMember());
+        Member member = memberService.findVerifiedMember(answer.getMember().getMemberId()); // member 존재한는지 검증
         return answerRepository.save(answer);
     }
 

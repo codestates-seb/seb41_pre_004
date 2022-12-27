@@ -1,6 +1,7 @@
 package com.preproject.backend.domain.comment.entity;
 
 import com.preproject.backend.domain.answer.entity.Answer;
+import com.preproject.backend.domain.audit.Auditable;
 import com.preproject.backend.domain.member.entity.Member;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Comment {
+public class Comment extends Auditable {
     // comment 식별자
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

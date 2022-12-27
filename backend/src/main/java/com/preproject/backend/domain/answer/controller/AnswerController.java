@@ -17,8 +17,8 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-@RequestMapping("/questions/{question-id}/answers")
-//@RequestMapping("/answers")
+//@RequestMapping("/questions/{question-id}/answers")
+@RequestMapping("/answers")
 @Validated
 public class AnswerController {
     private final AnswerService answerService;
@@ -29,23 +29,24 @@ public class AnswerController {
         this.mapper = mapper;
     }
 
-    // answer 등록 - 시도 1
+
+
+    // answer 등록
 //    @PostMapping
-//    public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post requestBody) {
-//        Answer answer = mapper.answerPostDtoToAnswer(requestBody);
-//        Answer createAnswer = answerService.createAnswer(answer.getMember().getMemberId(), answer.getQuestion().getQuestionId(), answer);
+//    public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
+//                                     @Valid @RequestBody AnswerDto.Post requestBody) {
+//        Answer answer = mapper.answerPostDtoToAnswer(questionId, requestBody);
+//        Answer createAnswer = answerService.createAnswer(answer);
 //        // TODO 여기 questionService 검증 로직 나오면 완성하기
 //
 //        return new ResponseEntity<>(
 //                new SingleResponseDto<>(mapper.answerToAnswerResponse(createAnswer)), HttpStatus.CREATED);
 //    }
-
-    // answer 등록 - 시도 2
+    // test 용
     @PostMapping
-    public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
-                                     @Valid @RequestBody AnswerDto.Post requestBody) {
+    public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.Post requestBody) {
         Answer answer = mapper.answerPostDtoToAnswer(requestBody);
-        Answer createAnswer = answerService.createAnswer(answer, questionId);
+        Answer createAnswer = answerService.createAnswer(answer);
         // TODO 여기 questionService 검증 로직 나오면 완성하기
 
         return new ResponseEntity<>(

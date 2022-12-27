@@ -19,24 +19,24 @@ import java.util.Optional;
 public class TagService {
     private TagRepository tagRepository;
 
-    public TagEntity tagCreateUpdate(String name){
-        String tagName = name.trim().toLowerCase();
-        Optional<TagEntity> optionalTagEntity = tagRepository.findByName(tagName);
-        if(!optionalTagEntity.isPresent()) {
-            TagEntity tag = new TagEntity();
-            tag.setName(tagName);
-            return tagRepository.save(tag);
-        }
-        TagEntity tag = optionalTagEntity.get();
-        tag.questionCountPlus();
-        return tagRepository.save(tag);
-    }
-
-    public Page<TagEntity> findTags(String tagName, int page, int size, Sort sort) {
-        PageRequest pageRequest = PageRequest.of(page, size, sort);
-        Page<TagEntity> tags = tagRepository.findByNameIncluded(tagName.trim().toLowerCase(), pageRequest);
-
-        return tags;
-    }
+//    public TagEntity tagCreateUpdate(String name){
+//        String tagName = name.trim().toLowerCase();
+//        Optional<TagEntity> optionalTagEntity = tagRepository.findByName(tagName);
+//        if(!optionalTagEntity.isPresent()) {
+//            TagEntity tag = new TagEntity();
+//            tag.setName(tagName);
+//            return tagRepository.save(tag);
+//        }
+//        TagEntity tag = optionalTagEntity.get();
+//        tag.questionCountPlus();
+//        return tagRepository.save(tag);
+//    }
+//
+//    public Page<TagEntity> findTags(String tagName, int page, int size, Sort sort) {
+//        PageRequest pageRequest = PageRequest.of(page, size, sort);
+//        Page<TagEntity> tags = tagRepository.findByNameIncluded(tagName.trim().toLowerCase(), pageRequest);
+//
+//        return tags;
+//    }
 
 }

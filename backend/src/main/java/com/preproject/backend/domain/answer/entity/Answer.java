@@ -4,6 +4,7 @@ import com.preproject.backend.domain.audit.Auditable;
 import com.preproject.backend.domain.comment.entity.Comment;
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.question.entity.Question;
+import com.preproject.backend.domain.vote.entity.VoteAnswer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class Answer extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long answerId;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(nullable = false)
     private String content;
 
     // 연관관계 매핑 - 한 member 가 여러개의 answer
@@ -37,4 +38,7 @@ public class Answer extends Auditable {
     // 연관관계 매핑 - 한 answer 에 여러개의 comment
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
+    private List<VoteAnswer> voteAnswers;
 }

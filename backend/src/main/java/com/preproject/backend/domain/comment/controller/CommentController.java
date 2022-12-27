@@ -8,6 +8,7 @@ import com.preproject.backend.domain.comment.mapper.CommentMapper;
 import com.preproject.backend.domain.comment.service.CommentService;
 import com.preproject.backend.global.dto.MultiResponseDto;
 import com.preproject.backend.global.dto.SingleResponseDto;
+import org.hibernate.annotations.common.reflection.XMember;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
