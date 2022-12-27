@@ -36,10 +36,10 @@ const Logout = () => {
         For Teams
       </MenuButton>
       <Search />
-      <Link to="/login">
+      <Link to="/users/login">
         <LoginButton>Log in</LoginButton>
       </Link>
-      <Link to="/signup">
+      <Link to="/users/signup">
         <SignupButton>Sign up</SignupButton>
       </Link>
     </FlexBlock>

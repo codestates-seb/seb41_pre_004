@@ -23,10 +23,10 @@ const Logout = () => {
         Products
       </ProductsButton>
       <Search />
-      <LoginButton to="/login">
+      <LoginButton to="/users/login">
         <strong>Log in</strong>
       </LoginButton>
-      <SignupButton to="/signup">
+      <SignupButton to="/users/signup">
         <strong>Sign up</strong>
       </SignupButton>
     </FlexBlock>
