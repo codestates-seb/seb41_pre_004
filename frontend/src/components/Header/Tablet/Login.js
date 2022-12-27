@@ -6,17 +6,19 @@ import { ReactComponent as HelpIcon } from '../../../assets/icons/helpIcon.svg';
 import { ReactComponent as SnowIcon } from '../../../assets/icons/snowIcon.svg';
 import Search from '../Search';
 import ListButton from '../ListButton';
+import NavButton from '../NavButton';
 import {
   FlexBlock,
   Logo,
   ProductsButton,
   MyPageButton,
   HoverButton,
-} from '../../../styles/headerStyles';
+} from '../../../styles/headerStyle';
 
 const Login = () => {
   return (
     <FlexBlock>
+      <NavButton isOpen={false} />
       <Link to="/">
         <Logo>
           <img src={desktopLogo} alt="stackoverflow logo" />

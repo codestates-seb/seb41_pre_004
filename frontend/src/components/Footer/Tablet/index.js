@@ -1,7 +1,6 @@
 import { ReactComponent as LogoIcon } from '../../../assets/icons/mobileLogo.svg';
 import {
   TabletWrapper,
-  FlexBox,
   ColumnGap,
   Logo,
   Content,

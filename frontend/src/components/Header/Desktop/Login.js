@@ -12,7 +12,7 @@ import {
   ProductsButton,
   MyPageButton,
   HoverButton,
-} from '../../../styles/headerStyles';
+} from '../../../styles/headerStyle';
 
 const Login = () => {
   return (

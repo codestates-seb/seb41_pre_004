@@ -3,7 +3,7 @@ import {
   SearchBlock,
   PrimaryButton,
   SearchInput,
-} from '../../styles/headerStyles';
+} from '../../styles/headerStyle';
 import { ReactComponent as SearchIcon } from '../../assets/icons/searchIcon.svg';
 
 const Search = () => {

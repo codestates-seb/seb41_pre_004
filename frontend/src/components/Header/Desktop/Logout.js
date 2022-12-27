@@ -8,7 +8,7 @@ import {
   ProductsButton,
   LoginButton,
   SignupButton,
-} from '../../../styles/headerStyles';
+} from '../../../styles/headerStyle';
 
 const Logout = () => {
   return (
