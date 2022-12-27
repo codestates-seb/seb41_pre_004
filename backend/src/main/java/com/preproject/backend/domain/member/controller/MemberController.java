@@ -20,8 +20,6 @@ import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
 
-
-
 @RestController
 @RequestMapping("/members")
 @Validated
@@ -37,6 +35,7 @@ public class MemberController {
     }
 
     // member 등록 (회원가입)
+    // 민우님 코드
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
         Member member = mapper.memberPostToMember(requestBody);
@@ -49,11 +48,20 @@ public class MemberController {
 //                new SingleResponseDto<>(mapper.memberToMemberResponse(createMember)), HttpStatus.CREATED);
     }
 
+    // 현주님 코드
+//    @PostMapping
+//    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
+//        Member member = mapper.memberPostToMember(requestBody);
+//        Member createMember = memberService.createMember(member);
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(mapper.memberToMemberResponse(createMember)), HttpStatus.CREATED);
+//    }
+
     // member 수정
     @PatchMapping("/{member-id}")
-    public ResponseEntity patchMember(
-            @PathVariable("member-id") @Positive long memberId,
-            @Valid @RequestBody MemberDto.Patch requestBody) {
+    public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
+                                      @Valid @RequestBody MemberDto.Patch requestBody) {
 
         requestBody.setMemberId(memberId);
         Member updateMember = memberService.updateMember(mapper.memberPatchToMember(requestBody));
@@ -64,15 +72,14 @@ public class MemberController {
 
     // member 조회
     @GetMapping("/{member-id}")
-    public ResponseEntity getMember(
-            @PathVariable("member-id") @Positive long memberId) {
+    public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId) {
         Member member = memberService.findMember(memberId);
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.memberToMemberResponse(member)), HttpStatus.OK);
     }
 
-    // TODO member 전체 조회 - pagenation 추가
+    // member 전체 조회
     @GetMapping
     public ResponseEntity getMembers(@Positive @RequestParam int page,
                                      @Positive @RequestParam int size) {

@@ -16,34 +16,22 @@ public class AnswerDto {
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
-
-        @NotNull
-        private int memberId;
-
-        @NotNull
-        private int questionId;
     }
 
     @Getter
     @Setter
     @AllArgsConstructor
     public static class Patch {
-        private int answerId;
+        private long answerId;
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
-
-        @NotNull
-        private int memberId;
-
-        @NotNull
-        private int questionId;
     }
 
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private int answerId;
+        private long answerId;
         private String content;
         private String score;
         private LocalDateTime createdAt;

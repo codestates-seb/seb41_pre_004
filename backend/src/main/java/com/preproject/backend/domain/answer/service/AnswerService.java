@@ -26,40 +26,36 @@ public class AnswerService {
     //private final PasswordEncoder passwordEncoder; // security
 
     // answer 등록
-    public Answer createAnswer(int memberId, int questionId, Answer postAnswer) {
-        //return answerRepository.save(answer); // 그냥 바로 등록
-        Member member = memberService.findVerifiedMember(memberId);
-        //Question question = questionService. // TODO 여기 questionService 검증 로직 나오면 완성하기
-        //Answer createAnswer = Answer.toEntity(post.getContent(), member, question)
-
-        //return answerRepository.save(createAnswer);
-        return null;
+    public Answer createAnswer(Answer answer, long questionId) {
+        //answer.setMember(memberService.getLoginMember()); // TODO memberService.getLoginMember() 완성 후 하기
+        Member member = memberService.findVerifiedMember(answer.getMember().getMemberId()); // member 존재한느지 검증
+        return answerRepository.save(answer);
     }
 
-    // Tanswer 수정
-    public Answer updateAnswer(int memberId, Answer patchAnswer) { // patchAnswer == 수정될 answer
-        Answer findAnswer = findVerifiedAnswer(patchAnswer.getAnswerId());
+    // answer 수정
+    public Answer updateAnswer(long memberId, Answer answer) { // patchAnswer == 수정될 answer
+        Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
 
-        verifyWriter(memberId, patchAnswer.getMember().getMemberId());
+        verifyWriter(memberId, answer.getMember().getMemberId());
 
-        beanUtils.copyNonNullProperties(patchAnswer, findAnswer);
+        beanUtils.copyNonNullProperties(answer, findAnswer);
 
         return answerRepository.save(findAnswer);
     }
 
     // answer 조회
-    public Answer findAnswer(int answerId) {
+    public Answer findAnswer(long answerId) {
         return findVerifiedAnswer(answerId);
     }
 
     // answer 전체 조회
-    public Page<Answer> findAnswers(int page, int size) {
+    public Page<Answer> findAnswers(long questionId, int page, int size) {
         return answerRepository.findAll(PageRequest.of(page, size,
-                Sort.by("orderId").descending()));
+                Sort.by("answerId").descending()));
     }
 
     // answer 삭제
-    public void deleteAnswer(int memberId, Answer answer) {
+    public void deleteAnswer(long memberId, Answer answer) {
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
 
         verifyWriter(memberId, answer.getMember().getMemberId());
@@ -67,7 +63,7 @@ public class AnswerService {
         answerRepository.delete(findAnswer);
     }
 
-    public Answer findVerifiedAnswer(int answerId) {
+    public Answer findVerifiedAnswer(long answerId) {
         Optional<Answer> optionalAnswer =
                 answerRepository.findById(answerId);
 
@@ -77,7 +73,7 @@ public class AnswerService {
     }
 
     // 해당 answer 를 쓴 사람과 요청으로 들어오는 member(수정하려는 사람)가 일치하는지 알아보는 로직
-    public void verifyWriter(Integer postMemberId, Integer editMemberId) {
+    public void verifyWriter(Long postMemberId, Long editMemberId) {
         if (!postMemberId.equals(editMemberId)) {
             throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
         }

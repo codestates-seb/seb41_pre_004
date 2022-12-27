@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -17,12 +16,6 @@ public class CommentDto {
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
-
-        @NotNull
-        private int memberId;
-
-        @NotNull
-        private int answerId;
     }
 
     @Getter
@@ -30,23 +23,18 @@ public class CommentDto {
     @Builder
     @AllArgsConstructor
     public static class Patch {
-        private int commentId;
+        private long commentId;
         @NotBlank
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
-
-        @NotNull
-        private int memberId;
     }
 
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private int commentId;
+        private long commentId;
         private String content;
-        private String score;
-        private int memberId;
-        private int answerId;
+        //private String score;
         private LocalDateTime createdAt;
         private LocalDateTime ModifiedAt;
     }

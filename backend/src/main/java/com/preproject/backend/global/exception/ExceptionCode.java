@@ -9,13 +9,7 @@ public enum ExceptionCode {
     COMMENT_NOT_FOUND(404, "Comment not found"),
     QUESTION_NOT_FOUND(404, "Question not found"),
     TAG_NOT_FOUND(404, "Tag not found"),
-    UNAUTHORIZED_MEMBER(403, "Unauthorized member"),
-    COFFEE_NOT_FOUND(404, "Coffee not found"),
-    COFFEE_CODE_EXISTS(409, "Coffee Code exists"),
-    ORDER_NOT_FOUND(404, "Order not found"),
-    CANNOT_CHANGE_ORDER(403, "Order can not change"),
-    NOT_IMPLEMENTATION(501, "Not Implementation"),
-    INVALID_MEMBER_STATUS(400, "Invalid member status");
+    UNAUTHORIZED_MEMBER(403, "Unauthorized member");
 
     @Getter
     private int status;

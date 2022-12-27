@@ -19,12 +19,11 @@ public class Member extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long memberId;
+    private long memberId;
 
     @Column(nullable = false, updatable = false, unique = true)
     private String email;
 
-    // member 비밀번호
     @Column(length = 100, nullable = false)
     private String password;
 
