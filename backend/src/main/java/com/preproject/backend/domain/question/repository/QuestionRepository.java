@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Integer> {
+public interface QuestionRepository extends JpaRepository<Question, Long> {
     Page<Question> findAll(Pageable pageable); // 전체 질문들
 
     // 특정 키워드를 입력해서 검색을 했을 때, 해당 키워드가 주제나 내용에 포함이 되어 있으면 그 목록들을 표시해준다.

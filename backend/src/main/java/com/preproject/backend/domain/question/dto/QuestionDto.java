@@ -39,7 +39,7 @@ public class QuestionDto {
     @Setter
     @AllArgsConstructor
     public static class Response {
-        private int questionId;
+        private long questionId;
         private String title;
         private String content;
         private LocalDateTime createdAt;
@@ -54,6 +54,6 @@ public class QuestionDto {
     @Getter
     @Setter
     public static class ResponseCheck {
-        private int Id;
+        private long Id;
     }
 }

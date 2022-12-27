@@ -19,7 +19,7 @@ import java.util.Set;
 public class TagEntity extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer tagId;
+    private Long tagId;
 
     @Column(unique = true)
     private String name;

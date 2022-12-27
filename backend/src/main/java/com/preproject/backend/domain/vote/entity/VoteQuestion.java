@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class VoteQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int questionVoteId;
+    private long questionVoteId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "QUESTION_ID")
