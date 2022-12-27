@@ -18,13 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @AllArgsConstructor
 public class VoteService {
-    private QuestionService questionService;
-    private AnswerService answerService;
-    private VoteQuestionRepository voteQuestionRepository;
-    private VoteAnswerRepository voteAnswerRepository;
-    // TODO 로그인 관련 변수 입력
-
-//    public VoteDto.Response questionUp(int questionId) {
+//    private QuestionService questionService;
+//    private AnswerService answerService;
+//    private VoteQuestionRepository voteQuestionRepository;
+//    private VoteAnswerRepository voteAnswerRepository;
+//    // TODO 로그인 관련 변수 입력
+//
+//    public VoteDto.Response questionUp(long questionId) {
 //        VoteQuestion voteQuestion = getVoteQuestion(questionId);
 //        if(voteQuestion.getCount() <= -1 ) {
 //            // case 1. 아래 버튼이 눌린 상태
@@ -37,22 +37,22 @@ public class VoteService {
 //        }
 //    }
 //
-//    public VoteDto.Response questionDown(int questionId) {
+//    public VoteDto.Response questionDown(long questionId) {
 //        VoteQuestion voteQuestion = getVoteQuestion(questionId);
 //        // 그 버튼이 이미 눌려 있다면 취소하기
 //    }
 //
-//    public VoteDto.Response answerUp(int answerId) {
+//    public VoteDto.Response answerUp(long answerId) {
 //
 //    }
 //
-//    public VoteDto.Response answerDown(int answerId) {
+//    public VoteDto.Response answerDown(long answerId) {
 //
 //    }
 //
-//    /*
-//    private <T extends (Question | Answer)> void scoreUpDown(T s, int ) {
+//
+//    private <T extends Answer | Question> void scoreUpDown(T s, int ) {
 //
 //    }
-//    */
+
 }

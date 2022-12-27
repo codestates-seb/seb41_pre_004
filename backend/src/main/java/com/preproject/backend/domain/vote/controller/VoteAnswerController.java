@@ -18,7 +18,7 @@ public class VoteAnswerController {
 //    private VoteService voteService;
 //
 //    @PostMapping
-//    public ResponseEntity vote(@PathVariable(name = "answer-id") int answerId,
+//    public ResponseEntity vote(@PathVariable(name = "answer-id") long answerId,
 //                               @Valid @RequestBody VoteDto.Post post) {
 //        VoteDto.Response response;
 //        if(post.getCount() == 1){

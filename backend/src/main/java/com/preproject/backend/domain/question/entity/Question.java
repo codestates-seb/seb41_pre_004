@@ -41,9 +41,9 @@ public class Question extends Auditable {
     private int viewCount;
 
 
-    @ManyToOne(targetEntity = Member.class, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member;
+//    @ManyToOne(targetEntity = Member.class, cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "MEMBER_ID")
+//    private Member member;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private Set<Answer> answers = new HashSet<>();
