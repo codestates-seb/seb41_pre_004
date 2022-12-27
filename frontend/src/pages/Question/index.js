@@ -14,7 +14,7 @@ import {
 } from '../../styles/contentStyle';
 import { Desktop } from '../../components/Responsive';
 
-function AllQuestion() {
+function AllQuestions({ questions }) {
   return (
     <>
       <ContainerWrapper>
@@ -22,26 +22,10 @@ function AllQuestion() {
           <Navbar />
           <Content>
             <ContentBlock>
-              <QuestionHeader></QuestionHeader>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
+              <QuestionHeader />
+              {questions.map((question) => {
+                return <Questionitem question={question} />;
+              })}
             </ContentBlock>
             <Desktop>
               <SideBlock>
@@ -56,4 +40,4 @@ function AllQuestion() {
   );
 }
 
-export default AllQuestion;
+export default AllQuestions;

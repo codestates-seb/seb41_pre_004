@@ -1,7 +1,124 @@
-//질문
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
+
+function Questionitem({ question }) {
+  return (
+    <>
+      <Desktop>
+        <QuestionBox>
+          <QuestionInfo>
+            <QuestionVote>1 votes</QuestionVote>
+            <QuestionAnswer>0 answers</QuestionAnswer>
+            <QuestionAnswer>2 views</QuestionAnswer>
+          </QuestionInfo>
+          <QuestionContent>
+            <Link to={`/questions/${question.id}`}>
+              <QuestionTitle>{question.title}</QuestionTitle>
+            </Link>
+            <QuestionDesc>{question.content}</QuestionDesc>
+            <QuestionTagBox>
+              <QuestionTag>
+                <QuestionTagUl>
+                  {question.tags.map((tag) => {
+                    return <QuestionTaglist>{tag}</QuestionTaglist>;
+                  })}
+                </QuestionTagUl>
+              </QuestionTag>
+
+              <QuestionUserInfo>
+                <UserImage>
+                  <img
+                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
+                    alt=""
+                  />
+                </UserImage>
+                <Username>불4조</Username>
+                <UserScore>1004</UserScore>
+                <AskTime>asked 1 min ago</AskTime>
+              </QuestionUserInfo>
+            </QuestionTagBox>
+          </QuestionContent>
+        </QuestionBox>
+      </Desktop>
+
+      <Tablet>
+        <MobileBox>
+          <MobileInfo>
+            <QuestionVote>1 votes</QuestionVote>
+            <QuestionAnswer>0 answers</QuestionAnswer>
+            <QuestionAnswer>2 views</QuestionAnswer>
+          </MobileInfo>
+          <QuestionContent>
+            <Link to={`/questions/${question.id}`}>
+              <QuestionTitle>{question.title}</QuestionTitle>
+            </Link>
+            <QuestionDesc>{question.content}</QuestionDesc>
+            <QuestionTagBox>
+              <QuestionTag>
+                <QuestionTagUl>
+                  {question.tags.map((tag) => {
+                    return <QuestionTaglist>{tag}</QuestionTaglist>;
+                  })}
+                </QuestionTagUl>
+              </QuestionTag>
+
+              <QuestionUserInfo>
+                <UserImage>
+                  <img
+                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
+                    alt=""
+                  />
+                </UserImage>
+                <Username>불4조</Username>
+                <UserScore>1004</UserScore>
+                <AskTime>asked 1 min ago</AskTime>
+              </QuestionUserInfo>
+            </QuestionTagBox>
+          </QuestionContent>
+        </MobileBox>
+      </Tablet>
+
+      <Mobile>
+        <MobileBox>
+          <MobileInfo>
+            <QuestionVote>1 votes</QuestionVote>
+            <QuestionAnswer>0 answers</QuestionAnswer>
+            <QuestionAnswer>2 views</QuestionAnswer>
+          </MobileInfo>
+          <QuestionContent>
+            <Link to={`/questions/${question.id}`}>
+              <MobileTitle>{question.title}</MobileTitle>
+            </Link>
+            <MobileDesc>{question.content}</MobileDesc>
+            <QuestionTagBox>
+              <QuestionTag>
+                <QuestionTagUl>
+                  {question.tags.map((tag) => {
+                    return <QuestionTaglist>{tag}</QuestionTaglist>;
+                  })}
+                </QuestionTagUl>
+              </QuestionTag>
+
+              <QuestionUserInfo>
+                <UserImage>
+                  <img
+                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
+                    alt=""
+                  />
+                </UserImage>
+                <Username>불4조</Username>
+                <UserScore>1004</UserScore>
+                <AskTime>asked 1 min ago</AskTime>
+              </QuestionUserInfo>
+            </QuestionTagBox>
+          </QuestionContent>
+        </MobileBox>
+      </Mobile>
+    </>
+  );
+}
 
 const QuestionBox = styled.div`
   width: 100%;
@@ -36,13 +153,11 @@ const QuestionAnswer = styled(QuestionVote)`
 `;
 const QuestionContent = styled.div``;
 const QuestionTitle = styled.h1`
-  display: flex;
   padding-right: 24px;
   margin-top: -1px;
   margin-bottom: 5px;
   font-size: 17px;
   color: #0074cc;
-  cursor: pointer;
 
   &:hover {
     opacity: 0.8;
@@ -120,146 +235,5 @@ const QuestionTaglist = styled.li`
   background-color: #e1ecf4;
   border-radius: 3px;
 `;
-function Questionitem() {
-  return (
-    <>
-      <Desktop>
-        <QuestionBox>
-          <QuestionInfo>
-            <QuestionVote>1 votes</QuestionVote>
-            <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
-          </QuestionInfo>
-          <QuestionContent>
-            <QuestionTitle>stackoverflow 클론코딩</QuestionTitle>
-            <QuestionDesc>
-              stackoverflow 클론코딩 stackoverflow 클론코딩 stackoverflow
-              클론코딩 stackoverflow 클론코딩 stackoverflow 클론코딩
-              stackoverflow 클론코딩 stackoverflow 클론코딩 stackoverflow
-              클론코딩 stackoverflow 클론코딩 stackoverflow 클론코딩
-            </QuestionDesc>
-            <QuestionTagBox>
-              <QuestionTag>
-                <QuestionTagUl>
-                  <QuestionTaglist>java</QuestionTaglist>
-                  <QuestionTaglist>react</QuestionTaglist>
-                  <QuestionTaglist>javascript</QuestionTaglist>
-                </QuestionTagUl>
-              </QuestionTag>
-
-              <QuestionUserInfo>
-                <UserImage>
-                  <img
-                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
-                    alt=""
-                  />
-                </UserImage>
-                <Username>불4조</Username>
-                <UserScore>1004</UserScore>
-                <AskTime>asked 1 min ago</AskTime>
-              </QuestionUserInfo>
-            </QuestionTagBox>
-          </QuestionContent>
-        </QuestionBox>
-      </Desktop>
-
-      <Tablet>
-        <MobileBox>
-          <MobileInfo>
-            <QuestionVote>1 votes</QuestionVote>
-            <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
-          </MobileInfo>
-          <QuestionContent>
-            <QuestionTitle>
-              스택오버플로우 클론코딩 어떻게 하나요?
-            </QuestionTitle>
-            <QuestionDesc>
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요?
-            </QuestionDesc>
-            <QuestionTagBox>
-              <QuestionTag>
-                <QuestionTagUl>
-                  <QuestionTaglist>java</QuestionTaglist>
-                  <QuestionTaglist>react</QuestionTaglist>
-                  <QuestionTaglist>javascript</QuestionTaglist>
-                </QuestionTagUl>
-              </QuestionTag>
-
-              <QuestionUserInfo>
-                <UserImage>
-                  <img
-                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
-                    alt=""
-                  />
-                </UserImage>
-                <Username>불4조</Username>
-                <UserScore>1004</UserScore>
-                <AskTime>asked 1 min ago</AskTime>
-              </QuestionUserInfo>
-            </QuestionTagBox>
-          </QuestionContent>
-        </MobileBox>
-      </Tablet>
-
-      <Mobile>
-        <MobileBox>
-          <MobileInfo>
-            <QuestionVote>1 votes</QuestionVote>
-            <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
-          </MobileInfo>
-          <QuestionContent>
-            <MobileTitle>스택오버플로우 클론코딩 어떻게 하나요?</MobileTitle>
-            <MobileDesc>
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요?
-            </MobileDesc>
-            <QuestionTagBox>
-              <QuestionTag>
-                <QuestionTagUl>
-                  <QuestionTaglist>java</QuestionTaglist>
-                  <QuestionTaglist>react</QuestionTaglist>
-                  <QuestionTaglist>javascript</QuestionTaglist>
-                </QuestionTagUl>
-              </QuestionTag>
-
-              <QuestionUserInfo>
-                <UserImage>
-                  <img
-                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
-                    alt=""
-                  />
-                </UserImage>
-                <Username>불4조</Username>
-                <UserScore>1004</UserScore>
-                <AskTime>asked 1 min ago</AskTime>
-              </QuestionUserInfo>
-            </QuestionTagBox>
-          </QuestionContent>
-        </MobileBox>
-      </Mobile>
-    </>
-  );
-}
 
 export default Questionitem;

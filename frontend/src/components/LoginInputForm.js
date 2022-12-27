@@ -5,15 +5,6 @@ import LoginButton from './LoginButtons';
 import { useState } from 'react';
 import axios from 'axios';
 
-const LoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: white;
-`;
-
 const LoginInputForm = () => {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState();
@@ -46,5 +37,14 @@ const LoginInputForm = () => {
     </LoginForm>
   );
 };
+
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+`;
 
 export default LoginInputForm;

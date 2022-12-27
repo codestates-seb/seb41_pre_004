@@ -2,6 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import QuestionHeaderBtn from './QuestionHeaderBtn';
 
+function QuestionHeader() {
+  return (
+    <>
+      <QuestionContainer>
+        <QuestionTitle>All Questions</QuestionTitle>
+        <QuestionHeaderBtn></QuestionHeaderBtn>
+      </QuestionContainer>
+    </>
+  );
+}
+
 const QuestionContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -14,16 +25,5 @@ const QuestionTitle = styled.h1`
   color: #232629;
   font-weight: 700;
 `;
-
-function QuestionHeader() {
-  return (
-    <>
-      <QuestionContainer>
-        <QuestionTitle>All Questions</QuestionTitle>
-        <QuestionHeaderBtn></QuestionHeaderBtn>
-      </QuestionContainer>
-    </>
-  );
-}
 
 export default QuestionHeader;

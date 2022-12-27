@@ -1,11 +1,70 @@
-//회원은 새로운 게시글을 작성할 수 있다. 게시글 작성
-
-import React from 'react';
 import styled from 'styled-components';
 import TestEditorForm from '../../components/AskMarkdown';
 import AskQuestionHeader from '../../components/AskQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
+
+function AskQuestionList() {
+  return (
+    <>
+      <ContainerWrapper>
+        <AskContainer>
+          <AskQuestionHeader></AskQuestionHeader>
+          <AskNotice>
+            <h2>Writing a good question</h2>
+            <p>
+              You’re ready to <LinkSpan>ask</LinkSpan> a{' '}
+              <LinkSpan>programming-related question</LinkSpan> and this form
+              will help guide you through the process.
+              <br />
+              Looking to ask a non-programming question? See{' '}
+              <LinkSpan>the topics here</LinkSpan> to find a relevant site.
+            </p>
+            <h5>Steps</h5>
+            <ol>
+              <li>Summarize your problem in a one-line title.</li>
+              <li>Describe your problem in more detail.</li>
+              <li>Describe what you tried and what you expected to happen.</li>
+              <li>
+                Add “tags” which help surface your question to members of the
+                community.
+              </li>
+              <li>Review your question and post it to the site.</li>
+            </ol>
+          </AskNotice>
+          <AskTitle>
+            <div>
+              <h2>Title</h2>
+              <p>
+                Be specific and imagine you’re asking a question to another
+                person.
+              </p>
+            </div>
+            <input
+              type={'text'}
+              placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+            ></input>
+          </AskTitle>
+          <TestEditorForm />
+          <AskTags>
+            <div>
+              <h2>Tags</h2>
+              <p>
+                Add up to 5 tags describe what your question is about. Start
+                typing to see suggestions.
+              </p>
+            </div>
+            <input
+              type={'text'}
+              placeholder={'e.g (excel string regex)'}
+            ></input>
+          </AskTags>
+        </AskContainer>
+      </ContainerWrapper>
+      <Footer />
+    </>
+  );
+}
 
 const AskNotice = styled.div`
   width: 100%;
@@ -118,67 +177,5 @@ const LinkSpan = styled.span`
 const AskContainer = styled(Container)`
   padding: 0 16px 24px 16px;
 `;
-
-function AskQuestionList() {
-  return (
-    <>
-      <ContainerWrapper>
-        <AskContainer>
-          <AskQuestionHeader></AskQuestionHeader>
-          <AskNotice>
-            <h2>Writing a good question</h2>
-            <p>
-              You’re ready to <LinkSpan>ask</LinkSpan> a{' '}
-              <LinkSpan>programming-related question</LinkSpan> and this form
-              will help guide you through the process.
-              <br />
-              Looking to ask a non-programming question? See{' '}
-              <LinkSpan>the topics here</LinkSpan> to find a relevant site.
-            </p>
-            <h5>Steps</h5>
-            <ol>
-              <li>Summarize your problem in a one-line title.</li>
-              <li>Describe your problem in more detail.</li>
-              <li>Describe what you tried and what you expected to happen.</li>
-              <li>
-                Add “tags” which help surface your question to members of the
-                community.
-              </li>
-              <li>Review your question and post it to the site.</li>
-            </ol>
-          </AskNotice>
-          <AskTitle>
-            <div>
-              <h2>Title</h2>
-              <p>
-                Be specific and imagine you’re asking a question to another
-                person.
-              </p>
-            </div>
-            <input
-              type={'text'}
-              placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
-            ></input>
-          </AskTitle>
-          <TestEditorForm></TestEditorForm>
-          <AskTags>
-            <div>
-              <h2>Tags</h2>
-              <p>
-                Add up to 5 tags describe what your question is about. Start
-                typing to see suggestions.
-              </p>
-            </div>
-            <input
-              type={'text'}
-              placeholder={'e.g (excel string regex)'}
-            ></input>
-          </AskTags>
-        </AskContainer>
-      </ContainerWrapper>
-      <Footer />
-    </>
-  );
-}
 
 export default AskQuestionList;
