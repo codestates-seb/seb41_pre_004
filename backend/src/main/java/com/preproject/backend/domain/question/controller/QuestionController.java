@@ -8,8 +8,10 @@ import com.preproject.backend.domain.question.dto.QuestionDto;
 import com.preproject.backend.domain.question.entity.Question;
 import com.preproject.backend.domain.question.mapper.QuestionMapper;
 import com.preproject.backend.domain.question.service.QuestionService;
+import com.preproject.backend.global.dto.MultiResponseDto;
 import com.preproject.backend.global.dto.SingleResponseDto;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -32,11 +34,17 @@ public class QuestionController {
     //CREATE
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
-        Question question = questionService.createQuestion( questionMapper.questionPostDtoToQuestion(post),
-                post.getTags());
-        QuestionDto.ResponseCheck response = questionMapper.questionToResponseCheck(question);
+//        Question question = questionService.createQuestion( questionMapper.questionPostDtoToQuestion(post),
+//                post.getTags());
+        Question question = questionMapper.questionPostDtoToQuestion(post);
+        Question createdQuestion = questionService.createQuestion(question);
 
-        return new ResponseEntity(response, HttpStatus.CREATED);
+//        QuestionDto.ResponseCheck response = questionMapper.questionToResponseCheck(createdQuestion);
+
+//        QuestionDto.Response response = questionMapper.questionToResponseCheck(createdQuestion);
+//        return new ResponseEntity(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(questionMapper.questionToResponseCheck(createdQuestion)),HttpStatus.OK);
     }
 
     //READ
@@ -46,10 +54,22 @@ public class QuestionController {
         //TODO AnswerService.특정 질문의 Answer들을 GET 하는 매서드 구현 이후 돌아오기
         // List<Answer> answers = answerService.getAnswersFromQuestion(question);
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        //QuestionDto.Response response = questionMapper.;
+        //return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(questionMapper.questionToResponseCheck(question)),HttpStatus.OK);
     }
-    //TODO 전체 질문 목록 read (필터, 페이지네이션, 태그 검색)
-    // 클래스를 따로 만들어서 할 예정
+
+    // 전체 조회
+    @GetMapping
+    public ResponseEntity getQuestions(@Positive @RequestParam int page,
+                                       @Positive @RequestParam int size) {
+        Page<Question> pageQuestions = questionService.readQuestions(page - 1, size);
+        List<Question> questions = pageQuestions.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(questionMapper.questionsToResponses(questions),pageQuestions),HttpStatus.OK);
+    }
 
     //UPDATE
     @PatchMapping("/{question-id}")
@@ -59,8 +79,12 @@ public class QuestionController {
                                                     questionMapper.questionPatchDtoToQuestion(patch),
                                                     patch.getTags());
 
-        QuestionDto.ResponseCheck response = questionMapper.questionToResponseCheck(question);
-        return new ResponseEntity(response, HttpStatus.CREATED);
+//        QuestionDto.ResponseCheck response = questionMapper.questionToResponseCheck(question);
+
+//        QuestionDto.Response response = questionMapper.questionToResponseCheck(question);
+//        return new ResponseEntity(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(questionMapper.questionToResponseCheck(question)),HttpStatus.OK);
     }
 
     //DELETE

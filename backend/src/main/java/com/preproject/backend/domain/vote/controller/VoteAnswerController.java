@@ -15,17 +15,17 @@ import javax.validation.Valid;
 @Validated
 @AllArgsConstructor
 public class VoteAnswerController {
-    private VoteService voteService;
-
-    @PostMapping
-    public ResponseEntity vote(@PathVariable(name = "answer-id") long answerId,
-                               @Valid @RequestBody VoteDto.Post post) {
-        VoteDto.Response response;
-        if(post.getCount() == 1){
-            response = voteService.answerUp(answerId);
-        } else {
-            response = voteService.answerDown(answerId);
-        }
-        return new ResponseEntity(response, HttpStatus.OK);
-    }
+//    private VoteService voteService;
+//
+//    @PostMapping
+//    public ResponseEntity vote(@PathVariable(name = "answer-id") long answerId,
+//                               @Valid @RequestBody VoteDto.Post post) {
+//        VoteDto.Response response;
+//        if(post.getCount() == 1){
+//            response = voteService.answerUp(answerId);
+//        } else {
+//            response = voteService.answerDown(answerId);
+//        }
+//        return new ResponseEntity(response, HttpStatus.OK);
+//    }
 }

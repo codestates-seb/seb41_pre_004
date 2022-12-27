@@ -14,8 +14,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     // 특정 키워드를 입력해서 검색을 했을 때, 해당 키워드가 주제나 내용에 포함이 되어 있으면 그 목록들을 표시해준다.
     // "LIKE" 쿼리문을 활용해서 검색을 할 수 있게 된다.
-    @Query(value = "SELECT Q FROM QUESTION WHERE Q.TITLE LIKE %:keyword% OR Q.CONTEXT LIKE %:keyword%")
-    Page<Question> search(@Param("keyword") String keyword, Pageable pageable);
+//    @Query(value = "SELECT Q FROM QUESTION WHERE Q.TITLE LIKE %:keyword% OR Q.CONTEXT LIKE %:keyword%")
+//    Page<Question> search(@Param("keyword") String keyword, Pageable pageable);
 
     // TODO 태그를 이용해서 질문들 검색
     // tagSearch
