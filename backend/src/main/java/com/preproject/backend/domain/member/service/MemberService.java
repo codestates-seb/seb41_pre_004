@@ -108,13 +108,14 @@ public class MemberService {
     // Login 한 Member 를 가져오는 로직
     public Member getLoginMember() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Member memberPrincipal = (Member)authentication.getPrincipal();
 
         // 여기 "anonymousUser" 부분은 security 코드를 보고 권한이 없는 Member 의 이름이 어떻게 되어있는지 확인 후 수정해야할 것 같습니다 !
         if(authentication == null || authentication.getName() == null || authentication.getName().equals("anonymousMember"))
             throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
 
-        Optional<Member> optionalUser = memberRepository.findByEmail(authentication.getName());
-        Member member = optionalUser.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Optional<Member> optionalMember = memberRepository.findByEmail(memberPrincipal.getName());
+        Member member = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         System.out.println("memberId : " + member.getMemberId());
 
