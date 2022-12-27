@@ -3,31 +3,38 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
 import { EditorState } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 const MyBlock = styled.div`
   .wrapper-class {
-    width: 100%;
-    max-width: 851px;
+    width: 850px;
+    // margin: 0 auto;
     margin-bottom: 4rem;
     margin-top: 30px;
   }
   .editor {
     height: 500px !important;
-    border: 1px solid #e4e6e8 !important;
+    border: 1px solid #f1f1f1 !important;
     padding: 5px !important;
     border-radius: 2px !important;
   }
 `;
 
-const TestEditorForm = () => {
+const TestEditorForm = ({ setContent }) => {
+  // const body = (e) => {
+  //   setValue(e.target.value);
+  // };
+
   // useState로 상태관리하기 초기값은 EditorState.createEmpty()
   // EditorState의 비어있는 ContentState 기본 구성으로 새 개체를 반환 => 이렇게 안하면 상태 값을 나중에 변경할 수 없음.
+  /////////////
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (editorState) => {
     // editorState에 값 설정
     setEditorState(editorState);
   };
+  setContent(editorState.getCurrentContent().getPlainText());
 
   return (
     <MyBlock>
@@ -46,7 +53,7 @@ const TestEditorForm = () => {
           link: { inDropdown: true },
           history: { inDropdown: false },
         }}
-        placeholder=""
+        placeholder="내용을 작성해주세요."
         // 한국어 설정
         localization={{
           locale: 'ko',
