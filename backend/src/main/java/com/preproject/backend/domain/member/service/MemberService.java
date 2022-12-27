@@ -3,7 +3,6 @@ package com.preproject.backend.domain.member.service;
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.repository.MemberRepository;
 import com.preproject.backend.global.auth.utils.CustomAuthorityUtils;
-import com.preproject.backend.global.helper.event.MemberRegistrationApplicationEvent;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
 import com.preproject.backend.global.utils.CustomBeanUtils;
@@ -111,7 +110,7 @@ public class MemberService {
         Member memberPrincipal = (Member)authentication.getPrincipal();
 
         // 여기 "anonymousUser" 부분은 security 코드를 보고 권한이 없는 Member 의 이름이 어떻게 되어있는지 확인 후 수정해야할 것 같습니다 !
-        if(authentication == null || authentication.getName() == null || authentication.getName().equals("anonymousMember"))
+        if(authentication.getName() == null || authentication.getName().equals("anonymousMember"))
             throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
 
         Optional<Member> optionalMember = memberRepository.findByEmail(memberPrincipal.getName());
