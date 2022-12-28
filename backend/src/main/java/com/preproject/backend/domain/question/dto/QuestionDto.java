@@ -54,6 +54,6 @@ public class QuestionDto {
     @Getter
     @Setter
     public static class ResponseCheck {
-        private long Id;
+        private int Id;
     }
 }

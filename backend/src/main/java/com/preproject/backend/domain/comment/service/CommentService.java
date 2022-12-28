@@ -15,9 +15,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
@@ -27,22 +29,28 @@ public class CommentService {
     //private final PasswordEncoder passwordEncoder; // security
 
     // comment 등록
-    public Comment createComment(Comment postComment) {
-        Member member = memberService.findVerifiedMember(postComment.getMember().getMemberId()); // 해당 memberId 를 가진 member 가 쓴 answer 중,
-        Answer answer = answerService.findVerifiedAnswer(postComment.getAnswer().getAnswerId()); // 해당 answerId 를 가진 answer 에 comment 를 달기 위해
-        // 위에서 가져온 애들을 가지고 member, answer 정보를 가진 객체를 하나 만들어서 저장
-        Comment createComment = Comment.toEntity(postComment.getContent(), answer, member);
+    public Comment createComment(Comment comment) {
+        Answer answer = answerService.findVerifiedAnswer(comment.getAnswer().getAnswerId());
 
-        return commentRepository.save(postComment);
+        comment.setMember(memberService.getLoginMember());
+        comment.setAnswer(answer);
+
+        return commentRepository.save(comment);
     }
 
     // comment 수정
-    public Comment updateComment(long memberId, Comment patchComment) { // patchComment == 수정될 내용
-        Comment findComment = findVerifiedComment(patchComment.getCommentId());
+    public Comment updateComment(Comment comment) {
+        Comment findComment = findVerifiedComment(comment.getCommentId());
+//        verifyWriter(memberId, patchComment.getMember().getMemberId());
+//        beanUtils.copyNonNullProperties(patchComment, findComment);
+//        return commentRepository.save(findComment);
+        Member postMember = memberService.findVerifiedMember(findComment.getMember().getMemberId());
 
-        verifyWriter(memberId, patchComment.getMember().getMemberId());
+        if (memberService.getLoginMember().getMemberId() != postMember.getMemberId()) {
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
+        }
 
-        beanUtils.copyNonNullProperties(patchComment, findComment);
+        beanUtils.copyNonNullProperties(comment, findComment);
 
         return commentRepository.save(findComment);
     }
@@ -55,14 +63,17 @@ public class CommentService {
     // comment 전체 조회
     public Page<Comment> findComments(int page, int size) {
         return commentRepository.findAll(PageRequest.of(page, size,
-                Sort.by("orderId").descending()));
+                Sort.by("commentId").descending()));
     }
 
     // comment 삭제
-    public void deleteComment(Comment comment, long memberId) {
-        Comment findComment = findVerifiedComment(comment.getCommentId());
+    public void deleteComment(long commentId) {
+        Comment findComment = findVerifiedComment(commentId);
 
-        verifyWriter(memberId, comment.getMember().getMemberId());
+        Member postMember = memberService.findVerifiedMember(findComment.getMember().getMemberId()); // 작성자
+
+        if(memberService.getLoginMember().getMemberId() != postMember.getMemberId()) // 로그인 유저 != 작성자 이면
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
 
         commentRepository.delete(findComment);
     }
