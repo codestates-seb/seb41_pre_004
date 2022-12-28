@@ -3,6 +3,7 @@ package com.preproject.backend.domain.member.service;
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.repository.MemberRepository;
 import com.preproject.backend.global.auth.utils.CustomAuthorityUtils;
+import com.preproject.backend.global.auth.utils.GetAuthUserUtils;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
 import com.preproject.backend.global.utils.CustomBeanUtils;
@@ -10,19 +11,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-//@Transactional
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
@@ -52,6 +49,9 @@ public class MemberService {
 
         Member findMember = findVerifiedMember(member.getMemberId()); // 존재한다면 해당 아이디의 멤버 가져와서
 
+        if(getLoginMember().getMemberId() != member.getMemberId()) // 로그인 유저 != 작성자 이면
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
+
         beanUtils.copyNonNullProperties(member, findMember); // 수정
 
         return memberRepository.save(findMember);
@@ -74,6 +74,9 @@ public class MemberService {
     public void deleteMember(long memberId) {
         Member findMember = findVerifiedMember(memberId);
 
+        if(getLoginMember().getMemberId() != findMember.getMemberId()) // 로그인 유저 != 작성자 이면
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
+
         memberRepository.delete(findMember);
     }
 
@@ -84,7 +87,7 @@ public class MemberService {
                 memberRepository.findById(memberId);
 
         return optionalMember.orElseThrow(() -> {
-                    return new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
+                    throw  new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
                 });
     }
 
@@ -99,24 +102,14 @@ public class MemberService {
     // member email 이 존재하는지 검증 --> 수정 시, 같은 email 이여야지만 수정이 가능하도록 ( 해당 email 이 없다면 exception 반환 )
     private void verifyExistsEmail2(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
-
         if (member.isEmpty())
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
     }
 
     // Login 한 Member 를 가져오는 로직
     public Member getLoginMember() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if(authentication.getName() == null || authentication.getName().equals("anonymousUser"))
-            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
-
-        System.out.println(authentication.getName());
-        Optional<Member> optionalMember = memberRepository.findByEmail(authentication.getName());
-        Member member = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-
-        System.out.println("memberId : " + member.getMemberId());
-
-        return member;
+        return  memberRepository.findByEmail(GetAuthUserUtils.getAuthUser().getName())
+                .orElseThrow(()
+                        -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
     }
 }

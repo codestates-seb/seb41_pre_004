@@ -34,17 +34,4 @@ public class Comment extends Auditable {
     @ManyToOne
     @JoinColumn(name = "ANSWER_ID")
     private Answer answer;
-
-    // commentService 의 createComment 에서 검증된 memberId/answerId 를 가진 객체를 만들어 저장하기 위한 메서드
-    public static Comment toEntity(String content, Answer answer, Member member) {
-        Comment comment = Comment.builder()
-                .content(content)
-                .member(member)
-                .answer(answer)
-                .build();
-
-        answer.getComments().add(comment);
-
-        return comment;
-    }
 }

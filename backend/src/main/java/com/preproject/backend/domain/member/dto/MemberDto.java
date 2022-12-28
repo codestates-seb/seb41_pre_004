@@ -33,6 +33,10 @@ public class MemberDto {
         @NotNull(message = "이름은 공백이 아니어야 합니다.")
         private String name;
 
+        @NotNull(message = "이메일은 공백이 아니어야 합니다.")
+        @Email
+        private String email;
+
         @NotNull(message = "비밀번호는 공백이 아니어야 합니다.")
         private String password;
     }

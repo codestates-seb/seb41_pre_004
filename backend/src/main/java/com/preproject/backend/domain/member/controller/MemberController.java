@@ -6,9 +6,7 @@ import com.preproject.backend.domain.member.mapper.MemberMapper;
 import com.preproject.backend.domain.member.service.MemberService;
 import com.preproject.backend.global.dto.MultiResponseDto;
 import com.preproject.backend.global.dto.SingleResponseDto;
-import com.preproject.backend.global.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -26,7 +24,6 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 public class MemberController {
-    private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
     private final MemberMapper mapper;
 
@@ -74,8 +71,7 @@ public class MemberController {
 
     // member 삭제
     @DeleteMapping("/{member-id}")
-    public ResponseEntity deleteMember(
-            @PathVariable("member-id") @Positive long memberId) {
+    public ResponseEntity deleteMember(@PathVariable("member-id") @Positive long memberId) {
 
         memberService.deleteMember(memberId);
 

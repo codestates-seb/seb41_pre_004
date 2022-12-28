@@ -1,7 +1,5 @@
 package com.preproject.backend.domain.comment.controller;
 
-import com.preproject.backend.domain.answer.dto.AnswerDto;
-import com.preproject.backend.domain.answer.entity.Answer;
 import com.preproject.backend.domain.comment.dto.CommentDto;
 import com.preproject.backend.domain.comment.entity.Comment;
 import com.preproject.backend.domain.comment.mapper.CommentMapper;
@@ -9,7 +7,6 @@ import com.preproject.backend.domain.comment.service.CommentService;
 import com.preproject.backend.global.dto.MultiResponseDto;
 import com.preproject.backend.global.dto.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.common.reflection.XMember;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +19,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/question/{question-id}/answers/{answer-id}/comments")
-//@RequestMapping("/comments")
 @RequiredArgsConstructor
 @Validated
 public class CommentController {
@@ -31,13 +27,10 @@ public class CommentController {
 
     // comment 등록
     @PostMapping
-    public ResponseEntity postComment(@PathVariable("question-id") @Positive long questionId,
+    public ResponseEntity postComment(//@PathVariable("question-id") @Positive long questionId,
                                       @PathVariable("answer-id") @Positive long answerId,
                                       @Valid @RequestBody CommentDto.Post requestBody) {
-        Comment comment = mapper.commentPostDtoToComment(requestBody);
-        Comment createComment = commentService.createComment(comment);
-        // TODO 여기서 security 가 추가된 후,
-        //  인증된 객체를 가져올 수 있도록 파라미터에 넣고, 거기서 getMemberId() 를 그 인증된 객체에서 가져올 수 있음
+        Comment createComment = commentService.createComment(mapper.commentPostDtoToComment(requestBody, answerId));
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.commentToCommentResponse(createComment)), HttpStatus.CREATED);
@@ -45,14 +38,13 @@ public class CommentController {
 
     // comment 수정
     @PatchMapping("/{comment-id}")
-    public ResponseEntity patchComment(
-            @PathVariable("comment-id") @Positive long commentId,
-            @Valid @RequestBody CommentDto.Patch requestBody) {
+    public ResponseEntity patchComment(@PathVariable("question-id") @Positive long questionId,
+                                       @PathVariable("answer-id") @Positive long answerId,
+                                       @PathVariable("comment-id") @Positive long commentId,
+                                       @Valid @RequestBody CommentDto.Patch requestBody) {
         requestBody.setCommentId(commentId);
         Comment comment = mapper.commentPatchDtoToComment(requestBody);
-        Comment updateComment = commentService.updateComment(comment.getMember().getMemberId(), comment);
-        // TODO 여기서 security 가 추가된 후,
-        //  인증된 객체를 가져올 수 있도록 파라미터에 넣고, 거기서 getMemberId() 를 그 인증된 객체에서 가져올 수 있음
+        Comment updateComment = commentService.updateComment(comment);
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.commentToCommentResponse(updateComment)), HttpStatus.CREATED);
@@ -60,8 +52,9 @@ public class CommentController {
 
     // comment 조회
     @GetMapping("/{comment-id}")
-    public ResponseEntity getComment(
-            @PathVariable("comment-id") @Positive long commentId) {
+    public ResponseEntity getComment(@PathVariable("question-id") @Positive long questionId,
+                                     @PathVariable("answer-id") @Positive long answerId,
+                                     @PathVariable("comment-id") @Positive long commentId) {
         Comment findcomment = commentService.findComment(commentId);
 
         return new ResponseEntity<>(
@@ -70,7 +63,9 @@ public class CommentController {
 
     // comment 전체 조회
     @GetMapping
-    public ResponseEntity getComments(@Positive @RequestParam int page,
+    public ResponseEntity getComments(@PathVariable("question-id") @Positive long questionId,
+                                      @PathVariable("answer-id") @Positive long answerId,
+                                      @Positive @RequestParam int page,
                                       @Positive @RequestParam int size) {
         Page<Comment> pageMembers = commentService.findComments(page - 1, size);
         List<Comment> comments = pageMembers.getContent();
@@ -83,11 +78,10 @@ public class CommentController {
 
     // comment 삭제
     @DeleteMapping("/{comment-id}")
-    public ResponseEntity deleteComment(
-            @PathVariable("comment-id") @Positive long commentId) {
-        //commentService.deleteComment(commentId, 검증된 객체를 가져오고 getMemberId());
-        // TODO 여기서 security 가 추가된 후,
-        //  인증된 객체를 가져올 수 있도록 파라미터에 넣고, 거기서 getMemberId() 를 그 인증된 객체에서 가져올 수 있음
+    public ResponseEntity deleteComment(@PathVariable("question-id") @Positive long questionId,
+                                        @PathVariable("answer-id") @Positive long answerId,
+                                        @PathVariable("comment-id") @Positive long commentId) {
+        commentService.deleteComment(commentId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
