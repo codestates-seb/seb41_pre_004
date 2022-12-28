@@ -121,7 +121,6 @@ const QuestionTaglist = styled.li`
   border-radius: 3px;
 `;
 function Questionitem({ question }) {
-  console.log(question);
   return (
     <>
       <Desktop>
@@ -132,19 +131,14 @@ function Questionitem({ question }) {
             <QuestionAnswer>2 views</QuestionAnswer>
           </QuestionInfo>
           <QuestionContent>
-            <QuestionTitle>{/* {question.title} */}</QuestionTitle>
-            <QuestionDesc>
-              stackoverflow 클론코딩 stackoverflow 클론코딩 stackoverflow
-              클론코딩 stackoverflow 클론코딩 stackoverflow 클론코딩
-              stackoverflow 클론코딩 stackoverflow 클론코딩 stackoverflow
-              클론코딩 stackoverflow 클론코딩 stackoverflow 클론코딩
-            </QuestionDesc>
+            <QuestionTitle>{question.title}</QuestionTitle>
+            <QuestionDesc>{question.content}</QuestionDesc>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  <QuestionTaglist>java</QuestionTaglist>
-                  <QuestionTaglist>react</QuestionTaglist>
-                  <QuestionTaglist>javascript</QuestionTaglist>
+                  {question.tags.map((tag) => {
+                    return <QuestionTaglist>{tag}</QuestionTaglist>;
+                  })}
                 </QuestionTagUl>
               </QuestionTag>
 
@@ -158,6 +152,7 @@ function Questionitem({ question }) {
                 <Username>불4조</Username>
                 <UserScore>1004</UserScore>
                 <AskTime>asked 1 min ago</AskTime>
+                {/* homeData.createdAt // 내장date함수시간에서 creat시간을 빼주고 문자열로 리터럴 문자열 */}
               </QuestionUserInfo>
             </QuestionTagBox>
           </QuestionContent>
@@ -172,28 +167,14 @@ function Questionitem({ question }) {
             <QuestionAnswer>2 views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
-            <QuestionTitle>
-              스택오버플로우 클론코딩 어떻게 하나요?
-            </QuestionTitle>
-            <QuestionDesc>
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요?
-            </QuestionDesc>
+            <QuestionTitle>{question.title}</QuestionTitle>
+            <QuestionDesc>{question.content}</QuestionDesc>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  <QuestionTaglist>java</QuestionTaglist>
-                  <QuestionTaglist>react</QuestionTaglist>
-                  <QuestionTaglist>javascript</QuestionTaglist>
+                  {question.tags.map((tag) => {
+                    return <QuestionTaglist>{tag}</QuestionTaglist>;
+                  })}
                 </QuestionTagUl>
               </QuestionTag>
 
@@ -221,26 +202,14 @@ function Questionitem({ question }) {
             <QuestionAnswer>2 views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
-            <MobileTitle>스택오버플로우 클론코딩 어떻게 하나요?</MobileTitle>
-            <MobileDesc>
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요?
-            </MobileDesc>
+            <QuestionTitle>{question.title}</QuestionTitle>
+            <QuestionDesc>{question.content}</QuestionDesc>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  <QuestionTaglist>java</QuestionTaglist>
-                  <QuestionTaglist>react</QuestionTaglist>
-                  <QuestionTaglist>javascript</QuestionTaglist>
+                  {question.tags.map((tag) => {
+                    return <QuestionTaglist>{tag}</QuestionTaglist>;
+                  })}
                 </QuestionTagUl>
               </QuestionTag>
 
