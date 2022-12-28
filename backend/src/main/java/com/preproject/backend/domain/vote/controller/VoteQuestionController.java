@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/questions/vote")
+@RequestMapping("/questions/{question-id}/vote")
 @Validated
 @AllArgsConstructor
 public class VoteQuestionController {

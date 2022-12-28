@@ -86,7 +86,7 @@ public class QuestionService {
         );
     }
 
-    private Question existQuestion(long questionId){
+    public Question existQuestion(long questionId){
         Optional<Question> question = questionRepository.findById(questionId);
         return question.orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
     }
