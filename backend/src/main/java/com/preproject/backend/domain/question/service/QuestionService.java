@@ -34,21 +34,20 @@ public class QuestionService {
     private QuestionRepository questionRepository;
     private MemberRepository memberRepository;
     private MemberService memberService;
-    private TagRepository tagRepository;
-
-    private TagService tagService;
+//    private TagRepository tagRepository;
+//
+//    private TagService tagService;
 
     // TODO CRUD 순서 맞춰서 작성해볼 것. (진행 중)
 
     //CREATE
 //    public Question createQuestion(Question question, List<String> tags) {
     public Question createQuestion(Question question) {
-//        long memberId = memberService.getLoginMember().getMemberId();
-//        Member member = getMemberFromId(memberId);
-        //Member member = getMemberFromId(question.getMember().getMemberId());
+        long memberId = memberService.getLoginMember().getMemberId();
+        Member member = getMemberFromId(memberId);
         //TODO member 쪽에 질문갯수 관련 변수 추가
         // member.set질문갯수(member.get질문갯수() + 1);
-        //question.setMember(member); // 해당 질문을 누가 올렸는지 연결
+        question.setMember(member); // 해당 질문을 누가 올렸는지 연결
 //        Set<QuestionTag> questionTagSet = tags.stream().map(
 //                t -> {
 //                    QuestionTag questionTag = new QuestionTag();
@@ -71,13 +70,8 @@ public class QuestionService {
     //READ
     public Question readQuestion(long questionId) {
         Question question = existQuestion(questionId); // 해당 Id 값의 질문이 존재하는지 검증
-        //TODO Optional<> 와 member 패키지 활용
-        // Optional<Member> member = ~~ 보안 구현 후 오기
-//        if(member.isPresent()){
-//            //TODO 특정 Question을 볼 수 있는 ViewQuestion 같은 클래스가 필요할 것으로 보임
-//
-//        }
-        return question;
+        question.setViewCount(question.getViewCount() + 1); // 조회수 +1씩 올라간다. (default 0)
+        return questionRepository.save(question);
     }
 
     public Page<Question> readQuestions(int page, int size) {
@@ -92,7 +86,6 @@ public class QuestionService {
     }
 
     //UPDATE
-    // TODO 현재는 태그 제외 글의 title과 content의 수정만 구현
     public Question updateQuestion(long questionId, Question changedQuestion, List<String> tagsList){
         Question question = verifyWriter(questionId); // 현재 사용자가 작성자가 맞는지
         // 해당 글 수정
@@ -130,11 +123,11 @@ public class QuestionService {
     }
 
     private Question verifyWriter(long questionId) {
-//        long memberId = memberService.getLoginMember().getMemberId();
+        long memberId = memberService.getLoginMember().getMemberId();
         Question question = existQuestion(questionId); // 해당 질문이 존재하는지 확인
-//        if(question.getMember().getMemberId() != memberId) {
-//            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
-//        }
+        if(question.getMember().getMemberId() != memberId) {
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
+        }
         return question;
     }
 
@@ -143,9 +136,9 @@ public class QuestionService {
         Question question = verifyWriter(questionId); //현재 사용자가 작성자가 맞는지
         //TODO member 패키지 구현 후 해야 할 것
         // 삭제 성공적일 시, 질문한 사람의 질문 갯수 하나 감소 --> 테이블 명세서에 변수 추가 생각
-//        Member member = question.getMember();
-//        //TODO member.set질문갯수(member.get질문갯수 - 1) 형태
-//        memberRepository.save(member);
+        Member member = question.getMember();
+        //TODO member.set질문갯수(member.get질문갯수 - 1) 형태
+        memberRepository.save(member);
 //        takeAwayQuestionTag(question.getQuestionTags());
         questionRepository.delete(question);
     }
