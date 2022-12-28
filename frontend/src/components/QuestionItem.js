@@ -11,7 +11,6 @@ function Questionitem({ question }) {
           <QuestionInfo>
             <QuestionVote>1 votes</QuestionVote>
             <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
           </QuestionInfo>
           <QuestionContent>
             <Link to={`/questions/${question.id}`}>
@@ -48,7 +47,6 @@ function Questionitem({ question }) {
           <MobileInfo>
             <QuestionVote>1 votes</QuestionVote>
             <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
             <Link to={`/questions/${question.id}`}>
@@ -85,7 +83,6 @@ function Questionitem({ question }) {
           <MobileInfo>
             <QuestionVote>1 votes</QuestionVote>
             <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
             <Link to={`/questions/${question.id}`}>

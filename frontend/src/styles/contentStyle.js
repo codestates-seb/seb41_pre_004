@@ -18,6 +18,12 @@ export const ContainerFlex = styled(Container)`
 export const Content = styled.div`
   display: flex;
 `;
+export const MobileContent = styled(Content)`
+  padding: 24px 16px;
+`;
+export const DesktopContent = styled(Content)`
+  padding: 24px;
+`;
 
 export const ContentBlock = styled.main`
   margin-bottom: 48px;

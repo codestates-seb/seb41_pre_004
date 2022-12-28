@@ -3,9 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import reset from 'styled-reset';
 import Header from './components/Header';
 import Login from './pages/Sign/login';
+import Logout from './pages/Sign/logout';
 import Signup from './pages/Sign/signup';
 import Home from './pages/Question';
-import Ask from './pages/Question/createQuestion';
+import QuestionAsk from './pages/Question/createQuestion';
+import QuestionDetail from './pages/Question/questionDetail';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -48,9 +50,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/questions" element={<Home />} />
-        <Route path="/questions/ask" element={<Ask />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/users/login" element={<Login />} />
+        <Route path="/users/logout" element={<Logout />} />
+        <Route path="/users/signup" element={<Signup />} />
+        <Route path="/questions/ask" element={<QuestionAsk />} />
+        <Route path="/questions/:questionId" element={<QuestionDetail />} />
       </Routes>
     </>
   );

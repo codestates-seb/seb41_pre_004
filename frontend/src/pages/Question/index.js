@@ -14,7 +14,7 @@ import {
 } from '../../styles/contentStyle';
 import { Desktop } from '../../components/Responsive';
 
-function AllQuestions({ questions }) {
+function AllQuestions() {
   return (
     <>
       <ContainerWrapper>
@@ -23,9 +23,6 @@ function AllQuestions({ questions }) {
           <Content>
             <ContentBlock>
               <QuestionHeader />
-              {questions.map((question) => {
-                return <Questionitem question={question} />;
-              })}
             </ContentBlock>
             <Desktop>
               <SideBlock>
