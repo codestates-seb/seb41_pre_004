@@ -1,10 +1,7 @@
 package com.preproject.backend.domain.answer.dto;
 
 import com.preproject.backend.domain.comment.dto.CommentDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -14,21 +11,29 @@ import java.util.List;
 
 public class AnswerDto {
     @Getter
-    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Post {
-        @NotBlank
+        @NotNull
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
+        public Post(String content) {
+            this.content = content;
+        }
     }
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class Patch {
         private long answerId;
-        @NotBlank
+        @NotNull
         @Size(min = 10, message = "10글자 이상 입력하세요.")
         private String content;
+
+        public void setAnswerId(long answerId) {
+            this.answerId = answerId;
+        }
     }
 
     @Getter
@@ -36,7 +41,6 @@ public class AnswerDto {
     @AllArgsConstructor
     public static class Response {
         private long answerId;
-        private long questionId;
         private String content;
         private long voteAnswer;
         private LocalDateTime createdAt;

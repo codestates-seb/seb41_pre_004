@@ -4,6 +4,7 @@ import com.preproject.backend.domain.answer.entity.Answer;
 import com.preproject.backend.domain.answer.repository.AnswerRepository;
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.service.MemberService;
+import com.preproject.backend.domain.question.entity.Question;
 import com.preproject.backend.domain.question.service.QuestionService;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
@@ -14,29 +15,36 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AnswerService {
     private final AnswerRepository answerRepository;
     private final MemberService memberService;
     private final QuestionService questionService;
     private final CustomBeanUtils<Answer> beanUtils;
-    //private final PasswordEncoder passwordEncoder; // security
 
-    // answer 등록
+
     public Answer createAnswer(Answer answer) {
-        //answer.setMember(memberService.getLoginMember());
-        Member member = memberService.findVerifiedMember(answer.getMember().getMemberId()); // member 존재한는지 검증
+        Question question = questionService.existQuestion(answer.getQuestion().getQuestionId());
+
+        answer.setMember(memberService.getLoginMember());
+        answer.setQuestion(question);
+
         return answerRepository.save(answer);
     }
 
     // answer 수정
-    public Answer updateAnswer(long memberId, Answer answer) { // patchAnswer == 수정될 answer
+    public Answer updateAnswer(Answer answer) {
         Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
 
-        verifyWriter(memberId, answer.getMember().getMemberId());
+        Member postMember = memberService.findVerifiedMember(findAnswer.getMember().getMemberId()); // 작성자
+
+        if(memberService.getLoginMember().getMemberId() != postMember.getMemberId()) // 로그인 유저 != 작성자 이면
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
 
         beanUtils.copyNonNullProperties(answer, findAnswer);
 
@@ -55,10 +63,13 @@ public class AnswerService {
     }
 
     // answer 삭제
-    public void deleteAnswer(long memberId, Answer answer) {
-        Answer findAnswer = findVerifiedAnswer(answer.getAnswerId());
+    public void deleteAnswer(long answerId) {
+        Answer findAnswer = findVerifiedAnswer(answerId);
 
-        verifyWriter(memberId, answer.getMember().getMemberId());
+        Member postMember = memberService.findVerifiedMember(findAnswer.getMember().getMemberId()); // 작성자
+
+        if(memberService.getLoginMember().getMemberId() != postMember.getMemberId()) // 로그인 유저 != 작성자 이면
+            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
 
         answerRepository.delete(findAnswer);
     }
@@ -70,12 +81,5 @@ public class AnswerService {
         return optionalAnswer.orElseThrow(() -> {
             return new BusinessLogicException(ExceptionCode.ANSWER_NOT_FOUND);
         });
-    }
-
-    // 해당 answer 를 쓴 사람과 요청으로 들어오는 member(수정하려는 사람)가 일치하는지 알아보는 로직
-    public void verifyWriter(Long postMemberId, Long editMemberId) {
-        if (!postMemberId.equals(editMemberId)) {
-            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
-        }
     }
 }

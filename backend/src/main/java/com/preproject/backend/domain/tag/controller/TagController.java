@@ -25,17 +25,18 @@ import java.util.List;
 @Validated
 @AllArgsConstructor
 public class TagController {
-    private final TagService tagService;
-    private final TagMapper tagMapper;
-    // TODO Question관련 추가
-
+//    private final TagService tagService;
+//    private final TagMapper tagMapper;
+//    // TODO Question관련 추가
+//
 //    @GetMapping
 //    // TODO 입력 변수 확인하기 (페이지네이션 포함)
 //    public ResponseEntity getTags(@RequestParam(name = "tagName") String tagName,
 //            @Positive @RequestParam(name = "page", defaultValue = "1") int page,
 //            @Positive @RequestParam(name = "page", defaultValue = "15") int size) {
 //
-//        Page<TagEntity> pageTag = tagService.findTags(tagName, page-1, size, Sort.by("tagId").descending());
+//        Page<TagEntity> pageTag =
+//                tagService.findTags(tagName, page-1, size, Sort.by("tagId").descending());
 //        List<TagEntity> tags = pageTag.getContent();
 //
 //        return new ResponseEntity<>(

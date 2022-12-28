@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface VoteQuestionRepository extends JpaRepository<VoteQuestion, Integer> {
+public interface VoteQuestionRepository extends JpaRepository<VoteQuestion, Long> {
 //    Optional<VoteQuestion> findByQuestionMember(Question question, Member member);
 }

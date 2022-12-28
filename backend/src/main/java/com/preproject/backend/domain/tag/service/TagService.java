@@ -17,8 +17,8 @@ import java.util.Optional;
 @Slf4j
 @AllArgsConstructor
 public class TagService {
-    private TagRepository tagRepository;
-
+//    private TagRepository tagRepository;
+//
 //    public TagEntity tagCreateUpdate(String name){
 //        String tagName = name.trim().toLowerCase();
 //        Optional<TagEntity> optionalTagEntity = tagRepository.findByName(tagName);
