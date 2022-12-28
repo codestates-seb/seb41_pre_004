@@ -26,7 +26,6 @@ public class CommentService {
     private final MemberService memberService;
     private final AnswerService answerService;
     private final CustomBeanUtils<Comment> beanUtils;
-    //private final PasswordEncoder passwordEncoder; // security
 
     // comment 등록
     public Comment createComment(Comment comment) {
@@ -41,9 +40,7 @@ public class CommentService {
     // comment 수정
     public Comment updateComment(Comment comment) {
         Comment findComment = findVerifiedComment(comment.getCommentId());
-//        verifyWriter(memberId, patchComment.getMember().getMemberId());
-//        beanUtils.copyNonNullProperties(patchComment, findComment);
-//        return commentRepository.save(findComment);
+
         Member postMember = memberService.findVerifiedMember(findComment.getMember().getMemberId());
 
         if (memberService.getLoginMember().getMemberId() != postMember.getMemberId()) {
@@ -86,12 +83,5 @@ public class CommentService {
         return optionalComment.orElseThrow(() -> {
                     return new BusinessLogicException(ExceptionCode.COMMENT_NOT_FOUND);
         });
-    }
-
-    // 해당 comment 를 쓴 사람과 요청으로 들어오는 member(수정하려는 사람)가 일치하는지 알아보는 로직
-    public void verifyWriter(Long postMemberId, Long editMemberId) {
-        if (!postMemberId.equals(editMemberId)) {
-            throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED_MEMBER);
-        }
     }
 }
