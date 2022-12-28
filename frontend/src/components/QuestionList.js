@@ -4,8 +4,8 @@ import Questionitem from './QuestionItem';
 function QuestionList({ homeData }) {
   return (
     <>
-      {homeData.map((data) => {
-        return <Questionitem question={data} key={data.id} />;
+      {homeData.map((el) => {
+        return <Questionitem question={el} key={el.id} />;
       })}
     </>
   );
