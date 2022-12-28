@@ -22,18 +22,25 @@ const LoginInputForm = () => {
     console.log(`loginEmail: ${loginEmail}`);
     console.log(`loginPassword: ${loginPassword}`);
     const reqbody = {
-      id: 13,
-      loginEmail: loginEmail,
-      loginPassword: loginPassword,
+      username: loginEmail,
+      password: loginPassword,
     };
+    /*
+      /auth/login
+        { "username" : “kcd@gmail.com", "password" : "1111" }
+    */
 
     axios
       .post(
-        'https://jsonplaceholder.typicode.com/posts',
+        'https://jsonplaceholder.typicode.com/auth/login',
         JSON.stringify(reqbody),
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log);
+      .then((res) => console.log(res))// 토큰이나 쿠키,세션등 인증정보를 가진채로 로그인된 메인헤더페이지로 리로드
+      .catch((err) => {
+        setLoginEmail('');
+        setLoginPassword('');
+        window.alert('로그인 정보가 일치하지 않습니다!!')
+      });
   };
   return (
     <LoginForm onSubmit={(e) => handleSubmitButton(e)}>
