@@ -1,37 +1,23 @@
-import { useParams } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import arrowUpIcon from '../../assets/icons/arrowUpIcon.png';
+import arrowDownIcon from '../../assets/icons/arrowDownIcon.png';
 import { Mobile, Tablet, Desktop } from '../../components/Responsive';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
+import QuestionDetailUser from '../../components/QuestionDetailUser';
 import {
   ContainerWrapper,
   ContainerFlex,
   MobileContent,
   DesktopContent,
   ContentBlock,
-  SideBlock,
+  DetailSideBlock,
 } from '../../styles/contentStyle';
 
-const questions = [
-  {
-    id: 1,
-    title: 'stackoverflow',
-    content:
-      'clone coding is clone coding is clone coding is clone coding is clone coding is clone coding is clone coding is clone coding is clone coding is clone coding is',
-    tags: ['java', 'javascript'],
-  },
-  {
-    id: 2,
-    title: 'hello world',
-    content:
-      'hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world hello world',
-    tags: ['hello', 'world'],
-  },
-];
-
-const QuestionDetail = () => {
-  const params = useParams();
+const QuestionDetail = ({ loginUsername }) => {
+  const question = useLocation().state;
 
   return (
     <>
@@ -42,24 +28,51 @@ const QuestionDetail = () => {
             <MobileContent>
               <ContentBlock>
                 <DetailHeader>
-                  <DetailTitle>title</DetailTitle>
+                  <DetailTitle>
+                    <TitleSpan>{question.title}</TitleSpan>
+                  </DetailTitle>
                   <ButtonBlock>
                     <HeaderButton>Ask Question</HeaderButton>
                   </ButtonBlock>
                   <DateBlock>
-                    <div>
+                    <AskedBlock>
                       <GraySpan>Asked</GraySpan>
                       <DateSpan>1 min ago</DateSpan>
-                    </div>
-                    <div>
+                    </AskedBlock>
+                    <AskedBlock>
                       <GraySpan>Modified</GraySpan>
                       <DateSpan>1 min ago</DateSpan>
+                    </AskedBlock>
+                    <div>
+                      <GraySpan>Viewed</GraySpan>
+                      <DateSpan>1 times</DateSpan>
                     </div>
                   </DateBlock>
                 </DetailHeader>
                 <Post>
-                  <PostLeft></PostLeft>
-                  <PostRight></PostRight>
+                  <PostLeft>
+                    <VoteButton>
+                      <img src={arrowUpIcon} alt="Vote Up" />
+                    </VoteButton>
+                    <VoteCount>0</VoteCount>
+                    <VoteButton>
+                      <img src={arrowDownIcon} alt="Vote Down" />
+                    </VoteButton>
+                  </PostLeft>
+                  <PostRight>
+                    <PostText>{question.content}</PostText>
+                    <TagBlock>
+                      {question.tags.map((tag, idx) => (
+                        <Tag key={idx}>{tag}</Tag>
+                      ))}
+                    </TagBlock>
+                    <QuestionUser>
+                      <QuestionDetailUser
+                        question={question}
+                        loginUsername={loginUsername}
+                      />
+                    </QuestionUser>
+                  </PostRight>
                 </Post>
               </ContentBlock>
             </MobileContent>
@@ -68,7 +81,53 @@ const QuestionDetail = () => {
           <Tablet>
             <MobileContent>
               <ContentBlock>
-                <DetailTitle>title</DetailTitle>
+                <DetailHeader>
+                  <DetailTitle>
+                    <TabletTitle>{question.title}</TabletTitle>
+                  </DetailTitle>
+                  <ButtonBlock>
+                    <HeaderButton>Ask Question</HeaderButton>
+                  </ButtonBlock>
+                  <DateBlock>
+                    <AskedBlock>
+                      <TabletGraySpan>Asked</TabletGraySpan>
+                      <TabletDateSpan>1 min ago</TabletDateSpan>
+                    </AskedBlock>
+                    <AskedBlock>
+                      <TabletGraySpan>Modified</TabletGraySpan>
+                      <TabletDateSpan>1 min ago</TabletDateSpan>
+                    </AskedBlock>
+                    <div>
+                      <TabletGraySpan>Viewed</TabletGraySpan>
+                      <TabletDateSpan>1 times</TabletDateSpan>
+                    </div>
+                  </DateBlock>
+                </DetailHeader>
+                <Post>
+                  <PostLeft>
+                    <VoteButton>
+                      <img src={arrowUpIcon} alt="Vote Up" />
+                    </VoteButton>
+                    <VoteCount>0</VoteCount>
+                    <VoteButton>
+                      <img src={arrowDownIcon} alt="Vote Down" />
+                    </VoteButton>
+                  </PostLeft>
+                  <PostRight>
+                    <PostText>{question.content}</PostText>
+                    <TagBlock>
+                      {question.tags.map((tag, idx) => (
+                        <Tag key={idx}>{tag}</Tag>
+                      ))}
+                    </TagBlock>
+                    <QuestionUser>
+                      <QuestionDetailUser
+                        question={question}
+                        loginUsername={loginUsername}
+                      />
+                    </QuestionUser>
+                  </PostRight>
+                </Post>
               </ContentBlock>
             </MobileContent>
           </Tablet>
@@ -76,11 +135,59 @@ const QuestionDetail = () => {
           <Desktop>
             <DesktopContent>
               <ContentBlock>
-                <DetailTitle>title</DetailTitle>
+                <DetailHeader>
+                  <DetailTitle>
+                    <TabletTitle>{question.title}</TabletTitle>
+                  </DetailTitle>
+                  <ButtonBlock>
+                    <HeaderButton>Ask Question</HeaderButton>
+                  </ButtonBlock>
+                  <DateBlock>
+                    <AskedBlock>
+                      <TabletGraySpan>Asked</TabletGraySpan>
+                      <TabletDateSpan>1 min ago</TabletDateSpan>
+                    </AskedBlock>
+                    <AskedBlock>
+                      <TabletGraySpan>Modified</TabletGraySpan>
+                      <TabletDateSpan>1 min ago</TabletDateSpan>
+                    </AskedBlock>
+                    <div>
+                      <TabletGraySpan>Viewed</TabletGraySpan>
+                      <TabletDateSpan>1 times</TabletDateSpan>
+                    </div>
+                  </DateBlock>
+                </DetailHeader>
+                <PostSidebar>
+                  <Post>
+                    <PostLeft>
+                      <VoteButton>
+                        <img src={arrowUpIcon} alt="Vote Up" />
+                      </VoteButton>
+                      <VoteCount>0</VoteCount>
+                      <VoteButton>
+                        <img src={arrowDownIcon} alt="Vote Down" />
+                      </VoteButton>
+                    </PostLeft>
+                    <PostRight>
+                      <PostText>{question.content}</PostText>
+                      <TagBlock>
+                        {question.tags.map((tag, idx) => (
+                          <Tag key={idx}>{tag}</Tag>
+                        ))}
+                      </TagBlock>
+                      <QuestionUser>
+                        <QuestionDetailUser
+                          question={question}
+                          loginUsername={loginUsername}
+                        />
+                      </QuestionUser>
+                    </PostRight>
+                  </Post>
+                  <DetailSideBlock>
+                    <Sidebar />
+                  </DetailSideBlock>
+                </PostSidebar>
               </ContentBlock>
-              <SideBlock>
-                <Sidebar />
-              </SideBlock>
             </DesktopContent>
           </Desktop>
         </ContainerFlex>
@@ -90,7 +197,51 @@ const QuestionDetail = () => {
   );
 };
 
+const PostSidebar = styled.div`
+  display: flex;
+`;
+
+const QuestionUser = styled.div`
+  margin: 16px 0;
+`;
+
+const Tag = styled.li`
+  font-size: 12px;
+  color: #39739d;
+  background-color: #e1ecf4;
+  margin: 2px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+`;
+
+const TagBlock = styled.ul`
+  display: flex;
+  margin: 24px 0 12px 0;
+`;
+
+const PostText = styled.p`
+  font-size: 15px;
+  color: #232629;
+`;
+
+const AskedBlock = styled.div`
+  margin-right: 16px;
+`;
+
+const VoteCount = styled.p`
+  margin: 2px;
+  font-size: 20px;
+  color: #6a737c;
+  text-align: center;
+`;
+
+const VoteButton = styled.button`
+  margin: 2px;
+`;
+
 const PostRight = styled.div`
+  flex-grow: 1;
   padding-right: 16px;
 `;
 
@@ -100,6 +251,8 @@ const PostLeft = styled.div`
 
 const Post = styled.div`
   display: flex;
+  flex-grow: 1;
+  border-bottom: 1px solid #e4e6e8;
 `;
 
 const DetailHeader = styled.div`
@@ -111,11 +264,19 @@ const DetailHeader = styled.div`
   border-bottom: 1px solid #e4e6e8;
 `;
 
+const TitleSpan = styled.span`
+  font-size: 23px;
+  color: #3b4045;
+  cursor: pointer;
+`;
+
+const TabletTitle = styled(TitleSpan)`
+  font-size: 27px;
+`;
+
 const DetailTitle = styled.h1`
   order: 2;
   margin-bottom: 8px;
-  font-size: 23px;
-  color: #3b4045;
 `;
 
 const ButtonBlock = styled.div`
@@ -146,8 +307,17 @@ const DateSpan = styled.span`
   color: #232629;
 `;
 
+const TabletDateSpan = styled(DateSpan)`
+  font-size: 13px;
+`;
+
 const GraySpan = styled(DateSpan)`
   margin-right: 2px;
   color: #6a737c;
 `;
+
+const TabletGraySpan = styled(GraySpan)`
+  font-size: 13px;
+`;
+
 export default QuestionDetail;

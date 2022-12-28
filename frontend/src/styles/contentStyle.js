@@ -17,6 +17,7 @@ export const ContainerFlex = styled(Container)`
 
 export const Content = styled.div`
   display: flex;
+  flex-grow: 1;
 `;
 export const MobileContent = styled(Content)`
   padding: 24px 16px;
@@ -26,9 +27,14 @@ export const DesktopContent = styled(Content)`
 `;
 
 export const ContentBlock = styled.main`
+  width: 100%;
   margin-bottom: 48px;
 `;
 
 export const SideBlock = styled.div`
   padding: 24px;
+`;
+
+export const DetailSideBlock = styled(SideBlock)`
+  padding: 0 0 0 24px;
 `;

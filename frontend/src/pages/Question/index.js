@@ -1,7 +1,5 @@
 //전체 질문목록 랜더링
-import React, { useEffect, useState } from 'react';
 import QuestionHeader from '../../components/QuestionHeader';
-import Questionitem from '../../components/QuestionItem';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
@@ -13,23 +11,9 @@ import {
   SideBlock,
 } from '../../styles/contentStyle';
 import { Desktop } from '../../components/Responsive';
-import axios from 'axios';
 import QuestionList from '../../components/QuestionList';
 
-function AllQuestions() {
-  const [homeData, setHomeData] = useState();
-
-  const fetchData = async () => {
-    const res = await axios(`http://localhost:3005/question`);
-    // const data = res;
-    console.log(res.data);
-    setHomeData(res.data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+function AllQuestions({ questions }) {
   return (
     <>
       <ContainerWrapper>
@@ -37,10 +21,8 @@ function AllQuestions() {
           <Navbar />
           <Content>
             <ContentBlock>
-              <QuestionHeader></QuestionHeader>
-              <Questionitem></Questionitem>
-
-              <QuestionList homeData={homeData} />
+              <QuestionHeader />
+              <QuestionList questions={questions} />
             </ContentBlock>
             <Desktop>
               <SideBlock>

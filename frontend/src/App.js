@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { createGlobalStyle } from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 import reset from 'styled-reset';
@@ -15,7 +17,17 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     margin: 0;
-    font-family: 'Noto Sans', sans-serif !important;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  a,
+  input,
+  textarea,
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   a {
@@ -43,18 +55,33 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const [questions, setQuestions] = useState([]);
+  const loginUsername = 'a';
+
+  const fetchData = async () => {
+    const res = await axios.get('http://localhost:3005/question');
+    setQuestions(res.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <GlobalStyle />
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/questions" element={<Home />} />
+        <Route path="/" element={<Home questions={questions} />} />
+        <Route path="/questions" element={<Home questions={questions} />} />
         <Route path="/users/login" element={<Login />} />
         <Route path="/users/logout" element={<Logout />} />
         <Route path="/users/signup" element={<Signup />} />
         <Route path="/questions/ask" element={<QuestionAsk />} />
-        <Route path="/questions/:questionId" element={<QuestionDetail />} />
+        <Route
+          path="/questions/:questionId"
+          element={<QuestionDetail loginUsername={loginUsername} />}
+        />
       </Routes>
     </>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 
@@ -33,7 +34,9 @@ const QuestionVote = styled.div`
 const QuestionAnswer = styled(QuestionVote)`
   color: #6a737c;
 `;
-const QuestionContent = styled.div``;
+const QuestionContent = styled.div`
+  flex-grow: 1;
+`;
 const QuestionTitle = styled.h1`
   padding-right: 24px;
   margin-top: -1px;
@@ -116,9 +119,9 @@ const QuestionTaglist = styled.li`
   color: #39739d;
   background-color: #e1ecf4;
   border-radius: 3px;
+  cursor: pointer;
 `;
 function Questionitem({ question }) {
-  console.log(question);
   return (
     <>
       <Desktop>
@@ -129,13 +132,10 @@ function Questionitem({ question }) {
             <QuestionAnswer>2 views</QuestionAnswer>
           </QuestionInfo>
           <QuestionContent>
-            <QuestionTitle>{/* {question.title} */}</QuestionTitle>
-            <QuestionDesc>
-              stackoverflow 클론코딩 stackoverflow 클론코딩 stackoverflow
-              클론코딩 stackoverflow 클론코딩 stackoverflow 클론코딩
-              stackoverflow 클론코딩 stackoverflow 클론코딩 stackoverflow
-              클론코딩 stackoverflow 클론코딩 stackoverflow 클론코딩
-            </QuestionDesc>
+            <Link to={`/questions/${question.id}`} state={question}>
+              <QuestionTitle>{question.title}</QuestionTitle>
+            </Link>
+            <QuestionDesc>{question.content}</QuestionDesc>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
@@ -169,22 +169,10 @@ function Questionitem({ question }) {
             <QuestionAnswer>2 views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
-            <QuestionTitle>
-              스택오버플로우 클론코딩 어떻게 하나요?
-            </QuestionTitle>
-            <QuestionDesc>
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요?
-            </QuestionDesc>
+            <Link to={`/questions/${question.id}`} state={question}>
+              <QuestionTitle>{question.title}</QuestionTitle>
+            </Link>
+            <QuestionDesc>{question.content}</QuestionDesc>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
@@ -218,20 +206,10 @@ function Questionitem({ question }) {
             <QuestionAnswer>2 views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
-            <MobileTitle>스택오버플로우 클론코딩 어떻게 하나요?</MobileTitle>
-            <MobileDesc>
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
-              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요? 어떻게 하나요?
-              스택오버플로우 클론코딩 어떻게 하나요?
-            </MobileDesc>
+            <Link to={`/questions/${question.id}`} state={question}>
+              <MobileTitle>{question.title}</MobileTitle>
+            </Link>
+            <MobileDesc>{question.content}</MobileDesc>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
