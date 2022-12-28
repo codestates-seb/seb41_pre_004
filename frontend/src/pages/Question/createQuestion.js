@@ -5,6 +5,7 @@ import AskQuestionHeader from '../../components/AskQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const AskNotice = styled.div`
   width: 100%;
@@ -150,7 +151,7 @@ function AskQuestionList() {
     //   }
     // });
     axios
-      .post(`http://localhost:3001/title`, {
+      .post(`http://localhost:3005/question`, {
         title,
         tags,
         content,
@@ -248,7 +249,9 @@ function AskQuestionList() {
               ></input>
             </AskTags>
             <AskBtn>
+              {/* <Link to={'/'}> */}
               <button type="submit">Review your question</button>
+              {/* </Link> */}
             </AskBtn>
           </form>
         </AskContainer>
