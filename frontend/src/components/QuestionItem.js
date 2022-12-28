@@ -120,7 +120,8 @@ const QuestionTaglist = styled.li`
   background-color: #e1ecf4;
   border-radius: 3px;
 `;
-function Questionitem() {
+function Questionitem({ question }) {
+  console.log(question);
   return (
     <>
       <Desktop>
@@ -131,7 +132,7 @@ function Questionitem() {
             <QuestionAnswer>2 views</QuestionAnswer>
           </QuestionInfo>
           <QuestionContent>
-            <QuestionTitle>stackoverflow 클론코딩</QuestionTitle>
+            <QuestionTitle>{/* {question.title} */}</QuestionTitle>
             <QuestionDesc>
               stackoverflow 클론코딩 stackoverflow 클론코딩 stackoverflow
               클론코딩 stackoverflow 클론코딩 stackoverflow 클론코딩
