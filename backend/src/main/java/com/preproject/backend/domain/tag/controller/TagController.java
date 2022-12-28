@@ -4,7 +4,6 @@ import com.preproject.backend.domain.tag.entity.TagEntity;
 import com.preproject.backend.domain.tag.mapper.TagMapper;
 import com.preproject.backend.domain.tag.service.TagService;
 import com.preproject.backend.global.dto.MultiResponseDto;
-import com.preproject.backend.global.page.PageInfo;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Positive;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,21 +23,23 @@ import java.util.List;
 @Validated
 @AllArgsConstructor
 public class TagController {
-//    private final TagService tagService;
-//    private final TagMapper tagMapper;
-//    // TODO Question관련 추가
-//
-//    @GetMapping
-//    // TODO 입력 변수 확인하기 (페이지네이션 포함)
-//    public ResponseEntity getTags(@RequestParam(name = "tagName") String tagName,
-//            @Positive @RequestParam(name = "page", defaultValue = "1") int page,
-//            @Positive @RequestParam(name = "page", defaultValue = "15") int size) {
-//
+    private final TagService tagService;
+    private final TagMapper tagMapper;
+    // TODO Question관련 추가
+
+    @GetMapping
+    // TODO 입력 변수 확인하기 (페이지네이션 포함)
+    public ResponseEntity getTags(@RequestParam(name = "tagName") String tagName,
+            @Positive @RequestParam(name = "page", defaultValue = "1") int page,
+            @Positive @RequestParam(name = "page", defaultValue = "15") int size) {
+
 //        Page<TagEntity> pageTag =
 //                tagService.findTags(tagName, page-1, size, Sort.by("tagId").descending());
-//        List<TagEntity> tags = pageTag.getContent();
-//
-//        return new ResponseEntity<>(
-//                new MultiResponseDto<>(tagMapper.tagToResponse(tags), pageTag), HttpStatus.OK);
-//    }
+        Page<TagEntity> pageTag =
+                tagService.findTags(page -1 , size);
+        List<TagEntity> tags = pageTag.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(tagMapper.tagToResponse(tags), pageTag), HttpStatus.OK);
+    }
 }

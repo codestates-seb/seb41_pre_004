@@ -33,23 +33,20 @@ public class Question extends Auditable {
     @Column(nullable = false)
     private LocalDateTime modifiedAt = LocalDateTime.now();
     @Column(nullable = false)
-    private int score;
+    private int score; // 점수
 
-    //TODO 추가하면 좋을 것
-    // 조회수, 댓글 갯수
     @Column(nullable = false)
-    private int viewCount;
+    private int viewCount;  // 조회수
 
 
-//    @ManyToOne(targetEntity = Member.class, cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "MEMBER_ID")
-//    private Member member;
+    @ManyToOne(targetEntity = Member.class, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private Set<Answer> answers = new HashSet<>();
     @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Set<QuestionTag> questionTags = new HashSet<>();
-    // TODO 질문 투표수, 조회수 연결
 
     public void voteUp() {
         this.score++;

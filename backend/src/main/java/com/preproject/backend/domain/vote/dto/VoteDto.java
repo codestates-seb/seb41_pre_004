@@ -19,7 +19,6 @@ public class VoteDto {
     @AllArgsConstructor
     public static class Response {
         //TODO 여기에 들어갈 거 생각하기
-        private String check;
         private String msg;
     }
 }

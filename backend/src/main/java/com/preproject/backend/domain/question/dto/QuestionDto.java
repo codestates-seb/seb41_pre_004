@@ -47,6 +47,8 @@ public class QuestionDto {
         private int score;
 
         private List<String> tags;
+
+        private int viewCount;
         //TODO 이후 추가할 것
         // 어떤 사용자인지 (member) 답변 list, [조회수, 답변 갯수] --> 테이블 명세서 추가 예정
     }

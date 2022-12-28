@@ -17,8 +17,8 @@ import java.util.Optional;
 @Slf4j
 @AllArgsConstructor
 public class TagService {
-//    private TagRepository tagRepository;
-//
+    private TagRepository tagRepository;
+
 //    public TagEntity tagCreateUpdate(String name){
 //        String tagName = name.trim().toLowerCase();
 //        Optional<TagEntity> optionalTagEntity = tagRepository.findByName(tagName);
@@ -31,12 +31,16 @@ public class TagService {
 //        tag.questionCountPlus();
 //        return tagRepository.save(tag);
 //    }
-//
+
 //    public Page<TagEntity> findTags(String tagName, int page, int size, Sort sort) {
+    public Page<TagEntity> findTags(int page, int size) {
 //        PageRequest pageRequest = PageRequest.of(page, size, sort);
 //        Page<TagEntity> tags = tagRepository.findByNameIncluded(tagName.trim().toLowerCase(), pageRequest);
 //
 //        return tags;
-//    }
+        return tagRepository.findAll(
+                PageRequest.of(page,size,Sort.by("tagId").descending())
+        );
+    }
 
 }

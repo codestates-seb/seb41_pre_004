@@ -39,10 +39,6 @@ public class QuestionController {
         Question question = questionMapper.questionPostDtoToQuestion(post);
         Question createdQuestion = questionService.createQuestion(question);
 
-//        QuestionDto.ResponseCheck response = questionMapper.questionToResponseCheck(createdQuestion);
-
-//        QuestionDto.Response response = questionMapper.questionToResponseCheck(createdQuestion);
-//        return new ResponseEntity(response, HttpStatus.CREATED);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(questionMapper.questionToResponseCheck(createdQuestion)),HttpStatus.OK);
     }
@@ -54,8 +50,6 @@ public class QuestionController {
         //TODO AnswerService.특정 질문의 Answer들을 GET 하는 매서드 구현 이후 돌아오기
         // List<Answer> answers = answerService.getAnswersFromQuestion(question);
 
-        //QuestionDto.Response response = questionMapper.;
-        //return new ResponseEntity(response, HttpStatus.OK);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(questionMapper.questionToResponseCheck(question)),HttpStatus.OK);
     }
@@ -79,10 +73,6 @@ public class QuestionController {
                                                     questionMapper.questionPatchDtoToQuestion(patch),
                                                     patch.getTags());
 
-//        QuestionDto.ResponseCheck response = questionMapper.questionToResponseCheck(question);
-
-//        QuestionDto.Response response = questionMapper.questionToResponseCheck(question);
-//        return new ResponseEntity(response, HttpStatus.CREATED);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(questionMapper.questionToResponseCheck(question)),HttpStatus.OK);
     }
