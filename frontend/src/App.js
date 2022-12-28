@@ -6,6 +6,8 @@ import Login from './pages/Sign/login';
 import Signup from './pages/Sign/signup';
 import Home from './pages/Question';
 import Ask from './pages/Question/createQuestion';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -41,12 +43,25 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const [homeData, setHomeData] = useState([]);
+
+  const fetchData = async () => {
+    const res = await axios.get(`http://localhost:3005/question`);
+    // const data = res;
+    console.log(res.data);
+    setHomeData(res.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <GlobalStyle />
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home homeData={homeData} />} />
         <Route path="/questions" element={<Home />} />
         <Route path="/questions/ask" element={<Ask />} />
         <Route path="/login" element={<Login />} />
