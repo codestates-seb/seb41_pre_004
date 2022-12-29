@@ -6,19 +6,26 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 // CORS 에러 방지를 위함
-@Configuration
+//@Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOriginPatterns("*")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
-                        .allowedHeaders("*");
-                //.allowCredentials(true);
-            }
-        };
-    }
+//    public static final String ALLOWED_METHOD_NAMES = "GET,HEAD,POST,PUT,DELETE,TRACE,OPTIONS,PATCH";
+//
+//    @Override
+//    public void addCorsMappings(final CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedMethods(ALLOWED_METHOD_NAMES.split(","));
+//    }
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurer() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                        .allowedOriginPatterns("*")
+//                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS")
+//                        .allowedHeaders("*");
+//                //.allowCredentials(true);
+//            }
+//        };
+//    }
 }

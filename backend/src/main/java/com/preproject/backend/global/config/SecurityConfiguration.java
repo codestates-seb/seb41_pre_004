@@ -8,6 +8,7 @@ import com.preproject.backend.global.auth.handler.MemberAuthenticationFailureHan
 import com.preproject.backend.global.auth.handler.MemberAuthenticationSuccessHandler;
 import com.preproject.backend.global.auth.jwt.JwtTokenizer;
 import com.preproject.backend.global.auth.utils.CustomAuthorityUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -32,15 +33,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
  */
 @Configuration
 @EnableWebSecurity(debug = true)
+@RequiredArgsConstructor
 public class SecurityConfiguration {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
-
-    public SecurityConfiguration(JwtTokenizer jwtTokenizer,
-                                   CustomAuthorityUtils authorityUtils) {
-        this.jwtTokenizer = jwtTokenizer;
-        this.authorityUtils = authorityUtils;
-    }
+    private final SecurityCorsConfig securityCorsConfig;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -101,6 +98,7 @@ public class SecurityConfiguration {
 
 
             builder
+                    .addFilter(securityCorsConfig.corsFilter())
                 .addFilter(jwtAuthenticationFilter)
                 .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
         }

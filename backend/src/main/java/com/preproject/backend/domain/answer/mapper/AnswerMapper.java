@@ -29,7 +29,7 @@ public interface AnswerMapper {
     Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPatchDto);
     AnswerDto.Response answerToAnswerResponse(Answer answer);
 
-    //    default AnswerDto.Response answerToAnswerResponse(Answer answer) {
+//        default AnswerDto.Response answerToAnswerResponse(Answer answer) {
 //        Member member = answer.getMember();
 //        List<Comment> comments = answer.getComments();
 //
