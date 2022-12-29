@@ -25,22 +25,11 @@ public interface AnswerMapper {
 
         return answer;
     }
-//    default Answer answerPatchDtoToAnswer(long questionId, AnswerDto.Patch answerPatchDto) {
-//        Answer answer = new Answer();
-//        answer.setContent(answerPatchDto.getContent());
-//
-//        Question question = new Question();
-//        question.setQuestionId(questionId);
-//        answer.setQuestion(question);
-//
-//        return answer;
-//    }
 
     Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPatchDto);
     AnswerDto.Response answerToAnswerResponse(Answer answer);
-    List<AnswerDto.Response> answersToAnswersResponses(List<Answer> answers);
 
-//    default AnswerDto.Response answerToAnswerResponseDto(Answer answer) {
+    //    default AnswerDto.Response answerToAnswerResponse(Answer answer) {
 //        Member member = answer.getMember();
 //        List<Comment> comments = answer.getComments();
 //
@@ -56,11 +45,12 @@ public interface AnswerMapper {
 //                .answerId(answer.getAnswerId())
 //                .questionId(answer.getQuestion().getQuestionId())
 //                .content(answer.getContent())
-//                .voteAnswer(answer.getVoteAnswers())
+////                .voteAnswer(answer.getVoteAnswers())
 //                .createdAt(answer.getCreatedAt())
 //                .modifiedAt(answer.getModifiedAt())
 //                .build();
 //    }
 
-    MemberDto.Response memberToMemberResponseDto(Member member);
+    List<AnswerDto.Response> answersToAnswersResponses(List<Answer> answers);
+    //MemberDto.Response memberToMemberResponseDto(Member member);
 }
