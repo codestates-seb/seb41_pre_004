@@ -3,6 +3,36 @@ import logo_github from '../assets/icons/logo_github.svg';
 import logo_google from '../assets/icons/logo_google.svg';
 import logo_facebook from '../assets/icons/logo_facebook.svg';
 
+const LoginButton = ({ type, onClick }) => {
+  if (type === 'google') {
+    return (
+      <GoogleLogin onClick={onClick}>
+        <img src={logo_google} alt="logo_google" />
+        Log in with Google
+      </GoogleLogin>
+    );
+  }
+  if (type === 'github') {
+    return (
+      <GitLogin onClick={onClick}>
+        <img src={logo_github} alt="logo_github" />
+        Log in with GitHub
+      </GitLogin>
+    );
+  }
+  if (type === 'facebook') {
+    return (
+      <FacebookLogin onClick={onClick}>
+        <img src={logo_facebook} alt="logo_facebook" />
+        Log in with Facebook
+      </FacebookLogin>
+    );
+  }
+  if (type === 'login') {
+    return <BlueButton>Log in</BlueButton>;
+  }
+};
+
 const SocialLoginButton = styled.button`
   display: inline-block;
   display: flex;
@@ -72,35 +102,5 @@ const BlueButton = styled.button`
     opacity: 0.8;
   }
 `;
-
-const LoginButton = ({ type, onClick }) => {
-  if (type === 'google') {
-    return (
-      <GoogleLogin onClick={onClick}>
-        <img src={logo_google} alt="logo_google" />
-        Log in with Google
-      </GoogleLogin>
-    );
-  }
-  if (type === 'github') {
-    return (
-      <GitLogin onClick={onClick}>
-        <img src={logo_github} alt="logo_github" />
-        Log in with GitHub
-      </GitLogin>
-    );
-  }
-  if (type === 'facebook') {
-    return (
-      <FacebookLogin onClick={onClick}>
-        <img src={logo_facebook} alt="logo_facebook" />
-        Log in with Facebook
-      </FacebookLogin>
-    );
-  }
-  if (type === 'login') {
-    return <BlueButton>Log in</BlueButton>;
-  }
-};
 
 export default LoginButton;

@@ -1,5 +1,19 @@
 import styled from 'styled-components';
 
+const EmailForm = ({ loginEmail, setLoginEmail }) => {
+  return (
+    <EmailBlock>
+      <EmailLabel htmlFor="emailInput">Email</EmailLabel>
+      <EmailInput
+        id="emailInput"
+        value={loginEmail}
+        onChange={(e) => setLoginEmail(e.target.value)}
+        required
+      />
+    </EmailBlock>
+  );
+};
+
 const EmailBlock = styled.div`
   margin: 6px 0;
   width: 100%;
@@ -35,19 +49,5 @@ const EmailInput = styled.input.attrs({
   box-shadow: none;
   border-radius: 3px;
 `;
-
-const EmailForm = ({ loginEmail, setLoginEmail }) => {
-  return (
-    <EmailBlock>
-      <EmailLabel htmlFor="emailInput">Email</EmailLabel>
-      <EmailInput
-        id="emailInput"
-        value={loginEmail}
-        onChange={(e) => setLoginEmail(e.target.value)}
-        required
-      />
-    </EmailBlock>
-  );
-};
 
 export default EmailForm;

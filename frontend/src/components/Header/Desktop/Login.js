@@ -29,7 +29,7 @@ const Login = () => {
       <Link to="/mypage" aria-label="Go to MyPage">
         <MyPageButton>
           <img
-            src="https://avatars.githubusercontent.com/u/106383277?v=4"
+            src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
             alt="user"
           />
         </MyPageButton>

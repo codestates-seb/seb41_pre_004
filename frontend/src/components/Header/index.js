@@ -2,7 +2,7 @@ import Login from './Login';
 import Logout from './Logout';
 import { HeaderBlock, HeaderContainer } from '../../styles/headerStyle';
 
-const Header = ({ islogin }) => {
+const Header = ({ islogin = true }) => {
   return (
     <HeaderBlock>
       <HeaderContainer>{islogin ? <Login /> : <Logout />}</HeaderContainer>
