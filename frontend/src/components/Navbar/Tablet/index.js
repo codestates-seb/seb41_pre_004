@@ -32,10 +32,12 @@ const TabletNav = () => {
             </NavTitle>
             <ol>
               <li aria-label="Go to Questions page">
-                <NavQuestion selected={true}>
-                  <QuestionIcon className="question" />
-                  <span>Questions</span>
-                </NavQuestion>
+                <Link to="/questions">
+                  <NavQuestion selected={true}>
+                    <QuestionIcon className="question" />
+                    <span>Questions</span>
+                  </NavQuestion>
+                </Link>
               </li>
               <li aria-label="Go to Tags page">
                 <NavPublic>Tags</NavPublic>

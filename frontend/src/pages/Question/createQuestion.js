@@ -5,7 +5,7 @@ import AskQuestionHeader from '../../components/AskQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AskNotice = styled.div`
   width: 100%;
@@ -137,18 +137,14 @@ function AskQuestionList() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    axios
-      .post(`http://localhost:3005/question`, {
-        title,
-        tags: tags.split(' '),
-        content,
-      })
-      .then((res) => {
-        if (res.ok) {
-          alert('post 완료!');
-        }
-      });
+    axios.post(`http://localhost:3005/question`, {
+      title,
+      tags: tags.split(' '),
+      content,
+    });
+
     navigate(`/`);
+    window.location.reload();
   }
   const handleSetTitle = (event) => {
     let e = event.target.value;

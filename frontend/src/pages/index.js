@@ -1,20 +1,18 @@
-//전체 질문목록 랜더링
-import QuestionHeader from '../../components/QuestionHeader';
-import Navbar from '../../components/Navbar';
-import Sidebar from '../../components/Sidebar';
-import Footer from '../../components/Footer';
-
+import QuestionHeader from '../components/QuestionHeader';
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
+import Footer from '../components/Footer';
 import {
   ContainerWrapper,
   ContainerFlex,
   Content,
   ContentBlock,
   SideBlock,
-} from '../../styles/contentStyle';
-import { Desktop } from '../../components/Responsive';
-import QuestionList from '../../components/QuestionList';
+} from '../styles/contentStyle';
+import { Desktop } from '../components/Responsive';
+import HomeList from '../components/HomeList';
 
-function Questions({ homeData }) {
+const Home = ({ homeData }) => {
   return (
     <>
       <ContainerWrapper>
@@ -23,7 +21,7 @@ function Questions({ homeData }) {
           <Content>
             <ContentBlock>
               <QuestionHeader></QuestionHeader>
-              <QuestionList homeData={homeData} />
+              <HomeList homeData={homeData} />
             </ContentBlock>
             <Desktop>
               <SideBlock>
@@ -36,6 +34,6 @@ function Questions({ homeData }) {
       <Footer />
     </>
   );
-}
+};
 
-export default Questions;
+export default Home;

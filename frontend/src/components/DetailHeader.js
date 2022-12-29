@@ -2,6 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import QuestionHeaderBtn from './QuestionHeaderBtn';
 
+function DetailHeader() {
+  return (
+    <>
+      <div>
+        <DetailQTitle>
+          <h1>Question Title</h1>
+          <QuestionHeaderBtn></QuestionHeaderBtn>
+        </DetailQTitle>
+        <DetailSection>
+          <div>
+            <span>Asked</span>
+            <span>3 days ago</span>
+          </div>
+          <div>
+            <span>Modified</span>
+            <span>1 days ago</span>
+          </div>
+          <div>
+            <span>Viwed</span>
+            <span>1times</span>
+          </div>
+        </DetailSection>
+      </div>
+    </>
+  );
+}
+
 const DetailQTitle = styled.header`
   font-size: 27px;
   width: 1060px;
@@ -40,32 +67,5 @@ const DetailSection = styled.section`
     font-weight: inherit;
   }
 `;
-
-function DetailHeader() {
-  return (
-    <>
-      <div>
-        <DetailQTitle>
-          <h1>Question Title</h1>
-          <QuestionHeaderBtn></QuestionHeaderBtn>
-        </DetailQTitle>
-        <DetailSection>
-          <div>
-            <span>Asked</span>
-            <span>3 days ago</span>
-          </div>
-          <div>
-            <span>Modified</span>
-            <span>1 days ago</span>
-          </div>
-          <div>
-            <span>Viwed</span>
-            <span>1times</span>
-          </div>
-        </DetailSection>
-      </div>
-    </>
-  );
-}
 
 export default DetailHeader;
