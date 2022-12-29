@@ -24,7 +24,7 @@ server:
   servlet:
     encoding:
       force-response: true
-  port: 9000
+  port: 8080
 mail:
   address:
     admin: admin@gmail.com
