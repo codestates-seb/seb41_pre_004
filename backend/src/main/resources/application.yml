@@ -1,9 +1,12 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/jpa
+    url: jdbc:h2:mem:test
     username: sa
     password:
+  output:
+    ansi:
+      enabled: always
   jpa:
     hibernate:
       ddl-auto: create # DB 스키마 자동 생성
@@ -24,7 +27,6 @@ server:
   servlet:
     encoding:
       force-response: true
-  port: 8080
 mail:
   address:
     admin: admin@gmail.com
