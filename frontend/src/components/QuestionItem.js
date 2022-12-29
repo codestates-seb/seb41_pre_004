@@ -1,34 +1,72 @@
 //질문
 import React from 'react';
 import styled from 'styled-components';
+import { Mobile, Tablet, Desktop } from './Responsive';
 
 const QuestionBox = styled.div`
+  width: 100%;
+  max-width: 751px;
   display: flex;
-
   padding: 16px;
-  border-bottom: 1px solid gray;
+  border-top: 1px solid #ecebee;
+`;
+const MobileBox = styled(QuestionBox)`
+  flex-direction: column;
 `;
 const QuestionInfo = styled.div`
+  flex-shrink: 0;
   width: 108px;
-  margin-right: 16px;
-  margin-bottom: 4px;
-  font-size: 13px;
-  align-items: flex-end;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   line-height: 17px;
   gap: 6px;
+  padding: 0 16px 4px 0;
 `;
-const QuestionContent = styled.div`
-  display: flex;
-  flex-direction: column;
+const MobileInfo = styled(QuestionInfo)`
+  flex-direction: row;
+  width: auto;
 `;
-const QuestionTitle = styled.div`
+const QuestionVote = styled.div`
+  font-size: 13px;
+  color: #0c0d0e;
+`;
+const QuestionAnswer = styled(QuestionVote)`
+  color: #6a737c;
+`;
+const QuestionContent = styled.div``;
+const QuestionTitle = styled.h1`
   display: flex;
   padding-right: 24px;
-  margin-bottom: 4px;
   margin-top: -1px;
+  margin-bottom: 5px;
+  font-size: 17px;
   color: #0074cc;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+const MobileTitle = styled(QuestionTitle)`
+  font-size: 14px;
+`;
+const QuestionDesc = styled.p`
+  height: 34px;
+  margin: -2px 0 8px 0;
+  font-size: 13px;
+  line-height: 17px;
+  color: #3b4045;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+`;
+const MobileDesc = styled(QuestionDesc)`
+  font-size: 11px;
 `;
 const QuestionTagBox = styled.div`
   display: flex;
@@ -42,6 +80,30 @@ const QuestionTag = styled.div`
 `;
 const QuestionUserInfo = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+`;
+const UserImage = styled.div`
+  width: 16px;
+  height: 16px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+const Username = styled.h2`
+  font-size: 12px;
+  color: #0074cc;
+`;
+const UserScore = styled.span`
+  font-size: 12px;
+  color: #525960;
+`;
+const AskTime = styled.span`
+  font-size: 12px;
+  color: #6a737c;
 `;
 const QuestionTagUl = styled.ul`
   display: flex;
@@ -52,35 +114,150 @@ const QuestionTagUl = styled.ul`
   margin-top: 0px;
 `;
 const QuestionTaglist = styled.li`
-  border: 1px solid black;
+  padding: 4px 6px;
+  font-size: 12px;
+  color: #39739d;
+  background-color: #e1ecf4;
+  border-radius: 3px;
 `;
 function Questionitem() {
   return (
     <>
-      <QuestionBox>
-        <QuestionInfo>
-          <div>0 votes</div>
-          <div>0 answers</div>
-          <div>0 views</div>
-        </QuestionInfo>
-        <QuestionContent>
-          <QuestionTitle>
-            Raise an Event within an Excel-Addin when a Userform is loaded by
-            the Excel Application or other Addin
-          </QuestionTitle>
-          <QuestionTagBox>
-            <QuestionTag>
-              <QuestionTagUl>
-                <QuestionTaglist>java</QuestionTaglist>
-                <QuestionTaglist>react</QuestionTaglist>
-                <QuestionTaglist>javascript</QuestionTaglist>
-              </QuestionTagUl>
-            </QuestionTag>
+      <Desktop>
+        <QuestionBox>
+          <QuestionInfo>
+            <QuestionVote>1 votes</QuestionVote>
+            <QuestionAnswer>0 answers</QuestionAnswer>
+            <QuestionAnswer>2 views</QuestionAnswer>
+          </QuestionInfo>
+          <QuestionContent>
+            <QuestionTitle>stackoverflow 클론코딩</QuestionTitle>
+            <QuestionDesc>
+              stackoverflow 클론코딩 stackoverflow 클론코딩 stackoverflow
+              클론코딩 stackoverflow 클론코딩 stackoverflow 클론코딩
+              stackoverflow 클론코딩 stackoverflow 클론코딩 stackoverflow
+              클론코딩 stackoverflow 클론코딩 stackoverflow 클론코딩
+            </QuestionDesc>
+            <QuestionTagBox>
+              <QuestionTag>
+                <QuestionTagUl>
+                  <QuestionTaglist>java</QuestionTaglist>
+                  <QuestionTaglist>react</QuestionTaglist>
+                  <QuestionTaglist>javascript</QuestionTaglist>
+                </QuestionTagUl>
+              </QuestionTag>
 
-            <QuestionUserInfo>유저 정보와 시간</QuestionUserInfo>
-          </QuestionTagBox>
-        </QuestionContent>
-      </QuestionBox>
+              <QuestionUserInfo>
+                <UserImage>
+                  <img
+                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
+                    alt=""
+                  />
+                </UserImage>
+                <Username>불4조</Username>
+                <UserScore>1004</UserScore>
+                <AskTime>asked 1 min ago</AskTime>
+              </QuestionUserInfo>
+            </QuestionTagBox>
+          </QuestionContent>
+        </QuestionBox>
+      </Desktop>
+
+      <Tablet>
+        <MobileBox>
+          <MobileInfo>
+            <QuestionVote>1 votes</QuestionVote>
+            <QuestionAnswer>0 answers</QuestionAnswer>
+            <QuestionAnswer>2 views</QuestionAnswer>
+          </MobileInfo>
+          <QuestionContent>
+            <QuestionTitle>
+              스택오버플로우 클론코딩 어떻게 하나요?
+            </QuestionTitle>
+            <QuestionDesc>
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요? 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요?
+            </QuestionDesc>
+            <QuestionTagBox>
+              <QuestionTag>
+                <QuestionTagUl>
+                  <QuestionTaglist>java</QuestionTaglist>
+                  <QuestionTaglist>react</QuestionTaglist>
+                  <QuestionTaglist>javascript</QuestionTaglist>
+                </QuestionTagUl>
+              </QuestionTag>
+
+              <QuestionUserInfo>
+                <UserImage>
+                  <img
+                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
+                    alt=""
+                  />
+                </UserImage>
+                <Username>불4조</Username>
+                <UserScore>1004</UserScore>
+                <AskTime>asked 1 min ago</AskTime>
+              </QuestionUserInfo>
+            </QuestionTagBox>
+          </QuestionContent>
+        </MobileBox>
+      </Tablet>
+
+      <Mobile>
+        <MobileBox>
+          <MobileInfo>
+            <QuestionVote>1 votes</QuestionVote>
+            <QuestionAnswer>0 answers</QuestionAnswer>
+            <QuestionAnswer>2 views</QuestionAnswer>
+          </MobileInfo>
+          <QuestionContent>
+            <MobileTitle>스택오버플로우 클론코딩 어떻게 하나요?</MobileTitle>
+            <MobileDesc>
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요? 스택오버플로우 클론코딩
+              어떻게 하나요? 스택오버플로우 클론코딩 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요? 어떻게 하나요?
+              스택오버플로우 클론코딩 어떻게 하나요?
+            </MobileDesc>
+            <QuestionTagBox>
+              <QuestionTag>
+                <QuestionTagUl>
+                  <QuestionTaglist>java</QuestionTaglist>
+                  <QuestionTaglist>react</QuestionTaglist>
+                  <QuestionTaglist>javascript</QuestionTaglist>
+                </QuestionTagUl>
+              </QuestionTag>
+
+              <QuestionUserInfo>
+                <UserImage>
+                  <img
+                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
+                    alt=""
+                  />
+                </UserImage>
+                <Username>불4조</Username>
+                <UserScore>1004</UserScore>
+                <AskTime>asked 1 min ago</AskTime>
+              </QuestionUserInfo>
+            </QuestionTagBox>
+          </QuestionContent>
+        </MobileBox>
+      </Mobile>
     </>
   );
 }

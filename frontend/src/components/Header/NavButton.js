@@ -1,4 +1,4 @@
-import { StyledNavButton } from '../../styles/headerStyles';
+import { StyledNavButton } from '../../styles/headerStyle';
 import { ReactComponent as MenuIcon } from '../../assets/icons/menuIcon.svg';
 import { ReactComponent as CloseIcon } from '../../assets/icons/closeIcon.svg';
 

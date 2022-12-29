@@ -14,7 +14,7 @@ import {
   NavEtc,
   NavTeams,
   TeamsIcon,
-} from '../../../styles/navbarStyles';
+} from '../../../styles/navbarStyle';
 
 const DesktopNav = () => {
   return (
@@ -32,19 +32,27 @@ const DesktopNav = () => {
             </NavTitle>
             <ol>
               <li aria-label="Go to Questions page">
-                <NavQuestion selected={true}>
-                  <QuestionIcon className="question" />
-                  <span>Questions</span>
-                </NavQuestion>
+                <Link to="/questions">
+                  <NavQuestion selected={true}>
+                    <QuestionIcon className="question" />
+                    <span>Questions</span>
+                  </NavQuestion>
+                </Link>
               </li>
               <li aria-label="Go to Tags page">
-                <NavPublic>Tags</NavPublic>
+                <Link to="/tags">
+                  <NavPublic>Tags</NavPublic>
+                </Link>
               </li>
               <li aria-label="Go to Users page">
-                <NavPublic>Users</NavPublic>
+                <Link to="/users">
+                  <NavPublic>Users</NavPublic>
+                </Link>
               </li>
               <li aria-label="Go to Companies">
-                <NavPublic>Companies</NavPublic>
+                <Link to="/jobs/Companies">
+                  <NavPublic>Companies</NavPublic>
+                </Link>
               </li>
             </ol>
           </li>

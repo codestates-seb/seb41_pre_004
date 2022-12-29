@@ -15,7 +15,7 @@ import {
   MobileProductsButton,
   HoverButton,
   MyPageButton,
-} from '../../../styles/headerStyles';
+} from '../../../styles/headerStyle';
 
 const Login = () => {
   return (
