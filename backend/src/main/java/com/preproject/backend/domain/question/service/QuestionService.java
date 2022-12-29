@@ -34,31 +34,38 @@ public class QuestionService {
     private QuestionRepository questionRepository;
     private MemberRepository memberRepository;
     private MemberService memberService;
-//    private TagRepository tagRepository;
-//
-//    private TagService tagService;
+    private TagRepository tagRepository;
+
+    private TagService tagService;
 
     // TODO CRUD 순서 맞춰서 작성해볼 것. (진행 중)
 
     //CREATE
-//    public Question createQuestion(Question question, List<String> tags) {
-    public Question createQuestion(Question question) {
+    public Question createQuestion(Question question, List<String> tags) {
+//    public Question createQuestion(Question question) {
         long memberId = memberService.getLoginMember().getMemberId();
         Member member = getMemberFromId(memberId);
         //TODO member 쪽에 질문갯수 관련 변수 추가
         // member.set질문갯수(member.get질문갯수() + 1);
+
+        // for debugging purposes
+        System.out.println("before line causing error");
+        System.out.println("question: " + question);
+        System.out.println("tags: " + tags);
+        System.out.println("member: " + member);
+
         question.setMember(member); // 해당 질문을 누가 올렸는지 연결
-//        Set<QuestionTag> questionTagSet = tags.stream().map(
-//                t -> {
-//                    QuestionTag questionTag = new QuestionTag();
-//                    questionTag.setQuestion(question);
-//                    questionTag.setTag(tagService.tagCreateUpdate(t));
-//                    // 질문을 올릴때 기존의 태그일 수도 있고 새로 만드는 태그일 수 있으니
-//                    // 아예 Create, Update를 한번에 처리 할 수 있도록 함
-//                    return questionTag;
-//                }
-//        ).collect(Collectors.toSet());
-//        question.setQuestionTags(questionTagSet);
+        Set<QuestionTag> questionTagSet = tags.stream().map(
+                t -> {
+                    QuestionTag questionTag = new QuestionTag();
+                    questionTag.setQuestion(question);
+                    questionTag.setTag(tagService.tagCreateUpdate(t));
+                    // 질문을 올릴때 기존의 태그일 수도 있고 새로 만드는 태그일 수 있으니
+                    // 아예 Create, Update를 한번에 처리 할 수 있도록 함
+                    return questionTag;
+                }
+        ).collect(Collectors.toSet());
+        question.setQuestionTags(questionTagSet);
         return questionRepository.save(question);
     }
 
