@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface VoteQuestionRepository extends JpaRepository<VoteQuestion, Long> {
     //Optional<VoteQuestion> findByQuestionMember(Question question, Member member);
-//    Optional<VoteQuestion> findByQuestion(Question question); // 임시로 사용할 것
+    Optional<VoteQuestion> findByQuestion(Question question); // 임시로 사용할 것
 }

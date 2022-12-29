@@ -30,15 +30,17 @@ public class VoteQuestion {
     private int count;
 
     public void questionCountPlus(){
-        this.count++;
-    }
+        //this.count++;
+        this.count = 1;
+    } // 1
     public void questionCountMinus(){
-        this.count--;
-    }
-    public void questionCountPlus(int num){
-        this.count += num;
-    }
-    public void questionCountMinus(int num){
-        this.count -= num;
-    }
+        //this.count--;
+        this.count = -1;
+    } // -1
+//    public void questionCountPlus(int num){
+//        this.count += num;
+//    }
+//    public void questionCountMinus(int num){
+//        this.count -= num;
+//    }
 }
