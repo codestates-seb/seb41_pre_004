@@ -6,14 +6,14 @@ import { EditorState } from 'draft-js';
 
 const MyBlock = styled.div`
   .wrapper-class {
-    width: 850px;
-    // margin: 0 auto;
+    width: 100%;
+    max-width: 851px;
     margin-bottom: 4rem;
     margin-top: 30px;
   }
   .editor {
     height: 500px !important;
-    border: 1px solid #f1f1f1 !important;
+    border: 1px solid #e4e6e8 !important;
     padding: 5px !important;
     border-radius: 2px !important;
   }
@@ -52,7 +52,7 @@ const TestEditorForm = ({ setContent }) => {
           link: { inDropdown: true },
           history: { inDropdown: false },
         }}
-        placeholder="내용을 작성해주세요."
+        placeholder=""
         // 한국어 설정
         localization={{
           locale: 'ko',

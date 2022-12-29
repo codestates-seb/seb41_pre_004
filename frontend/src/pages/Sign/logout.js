@@ -152,6 +152,10 @@ const Logout = () => {
   const navigate = useNavigate();
 
   const handleButtonCancel = () => {
+<<<<<<< HEAD
+=======
+    window.localStorage.clear(); //세션이나 쿠키에대한 정보를 지움..
+>>>>>>> c386bea1e85085cbefd2259f331d2974fe16d21d
     navigate('/App');
   };
   return (
