@@ -8,68 +8,7 @@ import superuser from '../../assets/icons/superuser.png';
 import stackLogo from '../../assets/icons/stackLogo.png';
 import { useNavigate } from 'react-router-dom';
 
-const Logout = () => {
-  const navigate = useNavigate();
-
-  const handleButtonCancel = () => {
-    navigate(-1);
-  };
-  return (
-    <Page>
-      <LogoutWrapper>
-        <LogoutMessageDiv>
-          Clicking “Log out” will log you out of the following
-          <br /> domains on this device:
-        </LogoutMessageDiv>
-        <LogoutCatalog>
-          <LogoutForm>
-            <RedirectionLogoutDiv>
-              <img src={askubuntu} alt="superuser" />
-              <a href="/">askubuntu.com</a>
-            </RedirectionLogoutDiv>
-            <RedirectionLogoutDiv>
-              <img src={mathover} alt="mathover" />
-              <a href="/">mathoverflow.net</a>
-            </RedirectionLogoutDiv>
-            <RedirectionLogoutDiv>
-              <img src={serverfault} alt="serverfault" />
-              <a href="/">serverfault.com</a>
-            </RedirectionLogoutDiv>
-            <RedirectionLogoutDiv>
-              <img src={stackapp} alt="stackapp" />
-              <a href="/">stackexchange.com</a>
-            </RedirectionLogoutDiv>
-            <RedirectionLogoutDiv>
-              <img src={stackExchange} alt="stackExchange" />
-              <a href="/">stackoverflow.com</a>
-            </RedirectionLogoutDiv>
-            <RedirectionLogoutDiv>
-              <img src={stackLogo} alt="stackLogo" />
-              <a href="/">stackoverflow.com</a>
-            </RedirectionLogoutDiv>
-            <RedirectionLogoutDiv>
-              <img src={superuser} alt="superuser" />
-              <a href="/">superuser.com</a>
-            </RedirectionLogoutDiv>
-          </LogoutForm>
-          <CheckboxWrapper>
-            <input type="checkbox" /> Log out on all devices
-          </CheckboxWrapper>
-          <ButtonWrapper>
-            <LogoutButton>Log out</LogoutButton>
-            <CancelButton onClick={handleButtonCancel}>Cancel</CancelButton>
-          </ButtonWrapper>
-          <LogoutInfomessage>
-            If you’re on a shared computer, remember to
-            <br /> log out of your Open ID provider (Facebook,
-            <br /> Google, Stack Exchange, etc.) as well.
-          </LogoutInfomessage>
-        </LogoutCatalog>
-      </LogoutWrapper>
-    </Page>
-  );
-};
-
+//로그아웃 로컬스토리지 비워주기 엑세스토큰 제거
 const Buttons = styled.button`
   display: inline-block;
   font-size: 13px;
@@ -141,7 +80,6 @@ const CheckboxWrapper = styled.div`
   line-height: 17px;
   margin-bottom: 16px;
 `;
-
 const RedirectionLogoutDiv = styled.div`
   font-size: 18px;
   display: flex;
@@ -171,5 +109,69 @@ const Page = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const Logout = () => {
+  const navigate = useNavigate();
+
+  const handleButtonCancel = () => {
+    window.localStorage.clear(); //세션이나 쿠키에대한 정보를 지움..
+    navigate('/App');
+  };
+
+  return (
+    <Page>
+      <LogoutWrapper>
+        <LogoutMessageDiv>
+          Clicking “Log out” will log you out of the following
+          <br /> domains on this device:
+        </LogoutMessageDiv>
+        <LogoutCatalog>
+          <LogoutForm>
+            <RedirectionLogoutDiv>
+              <img src={askubuntu} alt="superuser" />
+              <a href="/">askubuntu.com</a>
+            </RedirectionLogoutDiv>
+            <RedirectionLogoutDiv>
+              <img src={mathover} alt="mathover" />
+              <a href="/">mathoverflow.net</a>
+            </RedirectionLogoutDiv>
+            <RedirectionLogoutDiv>
+              <img src={serverfault} alt="serverfault" />
+              <a href="/">serverfault.com</a>
+            </RedirectionLogoutDiv>
+            <RedirectionLogoutDiv>
+              <img src={stackapp} alt="stackapp" />
+              <a href="/">stackexchange.com</a>
+            </RedirectionLogoutDiv>
+            <RedirectionLogoutDiv>
+              <img src={stackExchange} alt="stackExchange" />
+              <a href="/">stackoverflow.com</a>
+            </RedirectionLogoutDiv>
+            <RedirectionLogoutDiv>
+              <img src={stackLogo} alt="stackLogo" />
+              <a href="/">stackoverflow.com</a>
+            </RedirectionLogoutDiv>
+            <RedirectionLogoutDiv>
+              <img src={superuser} alt="superuser" />
+              <a href="/">superuser.com</a>
+            </RedirectionLogoutDiv>
+          </LogoutForm>
+          <CheckboxWrapper>
+            <input type="checkbox" /> Log out on all devices
+          </CheckboxWrapper>
+          <ButtonWrapper>
+            <LogoutButton>Log out</LogoutButton>
+            <CancelButton onClick={handleButtonCancel}>Cancel</CancelButton>
+          </ButtonWrapper>
+          <LogoutInfomessage>
+            If you’re on a shared computer, remember to
+            <br /> log out of your Open ID provider (Facebook,
+            <br /> Google, Stack Exchange, etc.) as well.
+          </LogoutInfomessage>
+        </LogoutCatalog>
+      </LogoutWrapper>
+    </Page>
+  );
+};
 
 export default Logout;

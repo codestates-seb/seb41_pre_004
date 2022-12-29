@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 
-function Questionitem({ question }) {
+function Homeitem({ question }) {
   return (
     <>
       <Desktop>
@@ -19,7 +19,6 @@ function Questionitem({ question }) {
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
-            <QuestionDesc>{question.content}</QuestionDesc>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
@@ -59,7 +58,6 @@ function Questionitem({ question }) {
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
-            <QuestionDesc>{question.content}</QuestionDesc>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
@@ -98,7 +96,6 @@ function Questionitem({ question }) {
                 <MobileTitle>{question.title}</MobileTitle>
               </Link>
             </QuestionTitle>
-            <MobileDesc>{question.content}</MobileDesc>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
@@ -177,22 +174,7 @@ const QuestionSpan = styled.span`
 const MobileTitle = styled(QuestionSpan)`
   font-size: 14px;
 `;
-const QuestionDesc = styled.p`
-  margin: -2px 0 8px 0;
-  font-size: 13px;
-  line-height: 17px;
-  color: #3b4045;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-`;
-const MobileDesc = styled(QuestionDesc)`
-  font-size: 11px;
-`;
+
 const QuestionTagBox = styled.div`
   display: flex;
   align-items: center;
@@ -251,4 +233,4 @@ const QuestionTaglist = styled.li`
   }
 `;
 
-export default Questionitem;
+export default Homeitem;

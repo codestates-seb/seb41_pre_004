@@ -2,14 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function QuestionHeaderBtn() {
-  return (
-    <Link to={'/questions/ask'}>
-      <QuestionBtn>Ask Question</QuestionBtn>
-    </Link>
-  );
-}
-
 const QuestionBtn = styled.button`
   padding: 10px;
   border: 1px solid #7fbfff;
@@ -24,5 +16,13 @@ const QuestionBtn = styled.button`
     opacity: 0.8;
   }
 `;
+
+function QuestionHeaderBtn() {
+  return (
+    <Link to={'/questions/ask'}>
+      <QuestionBtn>Ask Question</QuestionBtn>
+    </Link>
+  );
+}
 
 export default QuestionHeaderBtn;

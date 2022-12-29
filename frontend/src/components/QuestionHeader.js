@@ -44,7 +44,6 @@ const TabletContainer = styled(QuestionContainer)`
 const QuestionTitle = styled.h1`
   font-size: 27px;
   color: #232629;
-  font-weight: 700;
 `;
 
 const MobileTitle = styled(QuestionTitle)`

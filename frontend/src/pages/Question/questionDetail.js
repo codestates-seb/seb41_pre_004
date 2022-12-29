@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import arrowUpIcon from '../../assets/icons/arrowUpIcon.png';
 import arrowDownIcon from '../../assets/icons/arrowDownIcon.png';
@@ -32,7 +32,9 @@ const QuestionDetail = ({ loginUsername }) => {
                     <TitleSpan>{question.title}</TitleSpan>
                   </DetailTitle>
                   <ButtonBlock>
-                    <HeaderButton>Ask Question</HeaderButton>
+                    <Link to={'/questions/ask'}>
+                      <HeaderButton>Ask Question</HeaderButton>
+                    </Link>
                   </ButtonBlock>
                   <DateBlock>
                     <AskedBlock>
@@ -62,8 +64,8 @@ const QuestionDetail = ({ loginUsername }) => {
                   <PostRight>
                     <PostText>{question.content}</PostText>
                     <TagBlock>
-                      {question.tags.map((tag, idx) => (
-                        <Tag key={idx}>{tag}</Tag>
+                      {question.tags.map((tag) => (
+                        <Tag key={tag}>{tag}</Tag>
                       ))}
                     </TagBlock>
                     <QuestionUser>
@@ -86,7 +88,9 @@ const QuestionDetail = ({ loginUsername }) => {
                     <TabletTitle>{question.title}</TabletTitle>
                   </DetailTitle>
                   <ButtonBlock>
-                    <HeaderButton>Ask Question</HeaderButton>
+                    <Link to={'/questions/ask'}>
+                      <HeaderButton>Ask Question</HeaderButton>
+                    </Link>
                   </ButtonBlock>
                   <DateBlock>
                     <AskedBlock>
@@ -116,8 +120,8 @@ const QuestionDetail = ({ loginUsername }) => {
                   <PostRight>
                     <PostText>{question.content}</PostText>
                     <TagBlock>
-                      {question.tags.map((tag, idx) => (
-                        <Tag key={idx}>{tag}</Tag>
+                      {question.tags.map((tag) => (
+                        <Tag key={tag}>{tag}</Tag>
                       ))}
                     </TagBlock>
                     <QuestionUser>
@@ -140,7 +144,9 @@ const QuestionDetail = ({ loginUsername }) => {
                     <TabletTitle>{question.title}</TabletTitle>
                   </DetailTitle>
                   <ButtonBlock>
-                    <HeaderButton>Ask Question</HeaderButton>
+                    <Link to={'/questions/ask'}>
+                      <HeaderButton>Ask Question</HeaderButton>
+                    </Link>
                   </ButtonBlock>
                   <DateBlock>
                     <AskedBlock>
@@ -171,8 +177,8 @@ const QuestionDetail = ({ loginUsername }) => {
                     <PostRight>
                       <PostText>{question.content}</PostText>
                       <TagBlock>
-                        {question.tags.map((tag, idx) => (
-                          <Tag key={idx}>{tag}</Tag>
+                        {question.tags.map((tag) => (
+                          <Tag key={tag}>{tag}</Tag>
                         ))}
                       </TagBlock>
                       <QuestionUser>
@@ -213,6 +219,10 @@ const Tag = styled.li`
   padding: 4px 6px;
   border-radius: 3px;
   cursor: pointer;
+
+  &:hover {
+    filter: brightness(95%);
+  }
 `;
 
 const TagBlock = styled.ul`
@@ -221,6 +231,8 @@ const TagBlock = styled.ul`
 `;
 
 const PostText = styled.p`
+  width: 100%;
+  word-break: break-all;
   font-size: 15px;
   color: #232629;
 `;
@@ -243,6 +255,8 @@ const VoteButton = styled.button`
 const PostRight = styled.div`
   flex-grow: 1;
   padding-right: 16px;
+  width: 100%;
+  max-width: 659px;
 `;
 
 const PostLeft = styled.div`

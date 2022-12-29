@@ -7,7 +7,8 @@ import Header from './components/Header';
 import Login from './pages/Sign/login';
 import Logout from './pages/Sign/logout';
 import Signup from './pages/Sign/signup';
-import Home from './pages/Question';
+import Home from './pages';
+import Questions from './pages/Question';
 import QuestionAsk from './pages/Question/createQuestion';
 import QuestionDetail from './pages/Question/questionDetail';
 
@@ -17,6 +18,17 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     margin: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  a,
+  input,
+  textarea,
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   body {
@@ -55,12 +67,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [questions, setQuestions] = useState([]);
+  const [homeData, setHomeData] = useState([]);
   const loginUsername = 'a';
 
   const fetchData = async () => {
     const res = await axios.get('http://localhost:3005/question');
-    setQuestions(res.data);
+    const data = res.data.reverse();
+
+    setHomeData(data);
   };
 
   useEffect(() => {
@@ -72,11 +86,11 @@ function App() {
       <GlobalStyle />
       <Header />
       <Routes>
-        <Route path="/" element={<Home questions={questions} />} />
-        <Route path="/questions" element={<Home questions={questions} />} />
-        <Route path="/users/login" element={<Login />} />
+        <Route path="/" element={<Home homeData={homeData} />} />
+        <Route path="/questions" element={<Questions homeData={homeData} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/users/logout" element={<Logout />} />
-        <Route path="/users/signup" element={<Signup />} />
         <Route path="/questions/ask" element={<QuestionAsk />} />
         <Route
           path="/questions/:questionId"

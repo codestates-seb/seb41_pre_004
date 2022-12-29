@@ -5,6 +5,7 @@ import AskQuestionHeader from '../../components/AskQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AskNotice = styled.div`
   width: 100%;
@@ -131,35 +132,19 @@ function AskQuestionList() {
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
   const [content, setContent] = useState('');
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    // fetch(`http://localhost:3001/title`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     title: title,
-    //     tags: tags,
-    //   }),
-    // }).then((res) => {
-    //   if (res.ok) {
-    //     alert('post 완료!');
-    //   }
-    // });
-    axios
-      .post(`http://localhost:3005/question`, {
-        title,
-        tags,
-        content,
-      })
-      .then((res) => {
-        if (res.ok) {
-          alert('post 완료!');
-        }
-      });
+    axios.post(`http://localhost:3005/question`, {
+      title,
+      tags: tags.split(' '),
+      content,
+    });
+
+    navigate(`/`);
+    window.location.reload();
   }
   const handleSetTitle = (event) => {
     let e = event.target.value;

@@ -102,4 +102,5 @@ const BlueButton = styled.button`
     opacity: 0.8;
   }
 `;
+
 export default LoginButton;

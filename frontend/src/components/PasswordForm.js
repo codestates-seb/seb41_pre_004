@@ -1,22 +1,5 @@
 import styled from 'styled-components';
 
-const PasswordForm = ({ loginPassword, setLoginPassword }) => {
-  return (
-    <PasswordBlock>
-      <LabelBlock>
-        <PasswordLabel htmlFor="passwordInput">Password</PasswordLabel>
-        <PasswordSearch>Forgot password?</PasswordSearch>
-      </LabelBlock>
-      <PasswordInput
-        id="passwordInput"
-        value={loginPassword}
-        onChange={(e) => setLoginPassword(e.target.value)}
-        required
-      />
-    </PasswordBlock>
-  );
-};
-
 const PasswordBlock = styled.div`
   width: 100%;
   margin: 6px 0;
@@ -62,5 +45,22 @@ const PasswordInput = styled.input.attrs({
   border-radius: 3px;
   margin-bottom: 5px;
 `;
+
+const PasswordForm = ({ loginPassword, setLoginPassword }) => {
+  return (
+    <PasswordBlock>
+      <LabelBlock>
+        <PasswordLabel htmlFor="passwordInput">Password</PasswordLabel>
+        <PasswordSearch>Forgot password?</PasswordSearch>
+      </LabelBlock>
+      <PasswordInput
+        id="passwordInput"
+        value={loginPassword}
+        onChange={(e) => setLoginPassword(e.target.value)}
+        required
+      />
+    </PasswordBlock>
+  );
+};
 
 export default PasswordForm;

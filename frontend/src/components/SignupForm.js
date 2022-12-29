@@ -2,69 +2,6 @@ import styled from 'styled-components';
 import SignupButton from './SignupButton';
 import axios from 'axios';
 
-const SignupForm = ({
-  displayName,
-  setDisplayName,
-  signupEmail,
-  setSignupEmail,
-  signupPassword,
-  setSignupPassword,
-}) => {
-  const handleSignupButton = (e) => {
-    e.preventDefault();
-    console.log(
-      `displayName:${displayName},signupEmail:${signupEmail},signupPassword:${signupPassword}`,
-    );
-    const reqbody = {
-      name: displayName,
-      email: signupEmail,
-      password: signupPassword,
-    };
-    axios
-      .post(
-        'https://jsonplaceholder.typicode.com/posts',
-        JSON.stringify(reqbody),
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.log);
-  };
-  return (
-    <Sign onSubmit={(e) => handleSignupButton(e)}>
-      <ContentDiv>
-        <DisplayNameLabel htmlFor="displayNameInput">
-          Display name
-        </DisplayNameLabel>
-        <DisplayNameInput
-          id="displayNameInput"
-          onChange={(e) => setDisplayName(e.target.value)}
-          required
-        />
-      </ContentDiv>
-      <ContentDiv>
-        <EmailLabel>Email</EmailLabel>
-        <EmailInput onChange={(e) => setSignupEmail(e.target.value)} required />
-      </ContentDiv>
-      <ContentDiv>
-        <PasswordLabel>Password</PasswordLabel>
-        <PasswordInput
-          onChange={(e) => setSignupPassword(e.target.value)}
-          required
-        />
-      </ContentDiv>
-      <SignupButton type={'signup'} />
-      <Msgdiv>
-        By clicking “Sign up”, you agree to our
-        <LinkSpan>
-          {' '}
-          terms of
-          <br /> service, privacy policy
-        </LinkSpan>
-        and <LinkSpan>cookie policy</LinkSpan>
-      </Msgdiv>
-    </Sign>
-  );
-};
-
 const DisplayNameInput = styled.input.attrs({
   type: 'text',
 })`
@@ -170,5 +107,66 @@ const ContentDiv = styled.div`
   margin: 6px 0;
   width: 100%;
 `;
+
+const SignupForm = ({
+  displayName,
+  setDisplayName,
+  signupEmail,
+  setSignupEmail,
+  signupPassword,
+  setSignupPassword,
+}) => {
+  const handleSignupButton = (e) => {
+    e.preventDefault();
+
+    console.log(`displayName:${displayName},signupEmail:${signupEmail},`);
+    const reqbody = {
+      email: signupEmail,
+      password: signupPassword,
+      name: displayName,
+    };
+    axios
+      .post('https://jsonplaceholder.typicode.com/members/signup', {
+        data: JSON.stringify(reqbody),
+      })
+      .then((res) => console.log(res))
+      .catch((err) => {});
+  };
+  return (
+    <Sign onSubmit={(e) => handleSignupButton(e)}>
+      <ContentDiv>
+        <DisplayNameLabel htmlFor="displayNameInput">
+          Display name
+        </DisplayNameLabel>
+        <DisplayNameInput
+          id="displayNameInput"
+          onChange={(e) => setDisplayName(e.target.value)}
+          required
+        />
+      </ContentDiv>
+      <ContentDiv>
+        <EmailLabel>Email</EmailLabel>
+        <EmailInput onChange={(e) => setSignupEmail(e.target.value)} required />
+      </ContentDiv>
+      <ContentDiv>
+        <PasswordLabel>Password</PasswordLabel>
+        <PasswordInput
+          onChange={(e) => setSignupPassword(e.target.value)}
+          required
+        />
+      </ContentDiv>
+      <SignupButton type={'signup'} />
+      <Msgdiv>
+        By clicking “Sign up”, you agree to our
+        <LinkSpan>
+          {' '}
+          terms of
+          <br /> service, privacy policy
+        </LinkSpan>
+        and <LinkSpan>cookie policy</LinkSpan>
+      </Msgdiv>
+    </Sign>
+  );
+};
 
 export default SignupForm;
