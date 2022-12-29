@@ -42,7 +42,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .headers().frameOptions().sameOrigin()
+            .headers().frameOptions().disable()
             .and()
             .csrf().disable()
             .cors(withDefaults())
@@ -95,3 +95,4 @@ public class SecurityConfiguration {
         }
     }
 }
+
