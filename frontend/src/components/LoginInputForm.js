@@ -22,6 +22,20 @@ const LoginInputForm = () => {
     console.log(`loginEmail: ${loginEmail}`);
     console.log(`loginPassword: ${loginPassword}`);
     const reqbody = {
+<<<<<<< HEAD
+      id: 13,
+      loginEmail: loginEmail,
+      loginPassword: loginPassword,
+    };
+
+    axios
+      .post(
+        'https://jsonplaceholder.typicode.com/posts',
+        JSON.stringify(reqbody),
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log);
+=======
       username: loginEmail,
       password: loginPassword,
     };
@@ -41,6 +55,7 @@ const LoginInputForm = () => {
         setLoginPassword('');
         window.alert('로그인 정보가 일치하지 않습니다!!')
       });
+>>>>>>> c386bea1e85085cbefd2259f331d2974fe16d21d
   };
   return (
     <LoginForm onSubmit={(e) => handleSubmitButton(e)}>

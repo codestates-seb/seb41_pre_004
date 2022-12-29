@@ -1,10 +1,10 @@
 //전체 질문목록 랜더링
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import QuestionHeader from '../../components/QuestionHeader';
-import Questionitem from '../../components/QuestionItem';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
+
 import {
   ContainerWrapper,
   ContainerFlex,
@@ -13,8 +13,9 @@ import {
   SideBlock,
 } from '../../styles/contentStyle';
 import { Desktop } from '../../components/Responsive';
+import QuestionList from '../../components/QuestionList';
 
-function AllQuestion() {
+function AllQuestion({ homeData }) {
   return (
     <>
       <ContainerWrapper>
@@ -23,25 +24,7 @@ function AllQuestion() {
           <Content>
             <ContentBlock>
               <QuestionHeader></QuestionHeader>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
-              <Questionitem></Questionitem>
+              <QuestionList homeData={homeData} />
             </ContentBlock>
             <Desktop>
               <SideBlock>

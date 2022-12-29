@@ -1,11 +1,11 @@
-//회원은 새로운 게시글을 작성할 수 있다. 게시글 작성
-
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TestEditorForm from '../../components/AskMarkdown';
 import AskQuestionHeader from '../../components/AskQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AskNotice = styled.div`
   width: 100%;
@@ -16,27 +16,22 @@ const AskNotice = styled.div`
   border: 1px solid #a5ceed;
   border-radius: 3px;
   color: #3b4045;
-
   h2 {
     font-size: 21px;
     margin-bottom: 8px;
   }
-
   p {
     margin-bottom: 15px;
     font-size: 15px;
   }
-
   h5 {
     font-size: 15px;
     margin-bottom: 8px;
     font-weight: 700;
   }
-
   ol {
     margin-left: 30px;
   }
-
   li {
     font-size: 13px;
     margin-bottom: 4px;
@@ -51,7 +46,6 @@ const AskTitle = styled.div`
   padding: 24px;
   border: 1px solid #e4e6e8;
   border-radius: 3px;
-
   h2 {
     font-size: 15px;
     font-weight: 700;
@@ -59,14 +53,12 @@ const AskTitle = styled.div`
     color: #0c0d0e;
     padding: 0 2px;
   }
-
   p {
     margin: 2px 0;
     padding: 0 2px;
     font-size: 12px;
     color: #3b4045;
   }
-
   input {
     width: 100%;
     border: 1px solid #dddfe1;
@@ -81,7 +73,6 @@ const AskTags = styled.div`
   padding: 24px;
   border: 1px solid #e4e6e8;
   border-radius: 3px;
-
   h2 {
     font-size: 15px;
     font-weight: 700;
@@ -89,14 +80,12 @@ const AskTags = styled.div`
     color: #0c0d0e;
     padding: 0 2px;
   }
-
   p {
     margin: 2px 0;
     padding: 0 2px;
     font-size: 12px;
     color: #3b4045;
   }
-
   input {
     width: 100%;
     border: 1px solid #dddfe1;
@@ -109,7 +98,6 @@ const AskTags = styled.div`
 const LinkSpan = styled.span`
   color: #0173cc;
   cursor: pointer;
-
   &:hover {
     opacity: 0.8;
   }
@@ -118,8 +106,77 @@ const LinkSpan = styled.span`
 const AskContainer = styled(Container)`
   padding: 0 16px 24px 16px;
 `;
+const AskBtn = styled.button`
+  button {
+    background-color: #0a95ff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 8px;
+    outline: none;
+    padding: 0.8em;
+    position: relative;
+    text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    color: white;
+  }
+`;
 
 function AskQuestionList() {
+  const [title, setTitle] = useState('');
+  const [tags, setTags] = useState('');
+  const [content, setContent] = useState('');
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    axios
+      .post(`http://localhost:3005/question`, {
+        title,
+        tags: tags.split(' '),
+        content,
+      })
+      .then((res) => {
+        if (res.ok) {
+          alert('post 완료!');
+        }
+      });
+    navigate(`/`);
+  }
+  const handleSetTitle = (event) => {
+    let e = event.target.value;
+    setTitle(e);
+  };
+  const handleSetTags = (event) => {
+    let e = event.target.value;
+    setTags(e);
+  };
+
+  // const [ques, setQues] = useState(null);
+
+  // const fetchData = async () => {
+  //   const response = await axios.get(`http://localhost:3001/title`);
+  //   setQues(response.data);
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const title = e.target.title.value;
+  //   const tags = e.target.tags.value;
+  //   axios.post(`http://localhost:3001/title`, { title, tags });
+  //   fetchData();
+  // };
   return (
     <>
       <ContainerWrapper>
@@ -147,33 +204,44 @@ function AskQuestionList() {
               <li>Review your question and post it to the site.</li>
             </ol>
           </AskNotice>
-          <AskTitle>
-            <div>
-              <h2>Title</h2>
-              <p>
-                Be specific and imagine you’re asking a question to another
-                person.
-              </p>
-            </div>
-            <input
-              type={'text'}
-              placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
-            ></input>
-          </AskTitle>
-          <TestEditorForm></TestEditorForm>
-          <AskTags>
-            <div>
-              <h2>Tags</h2>
-              <p>
-                Add up to 5 tags describe what your question is about. Start
-                typing to see suggestions.
-              </p>
-            </div>
-            <input
-              type={'text'}
-              placeholder={'e.g (excel string regex)'}
-            ></input>
-          </AskTags>
+          <form onSubmit={handleSubmit}>
+            <AskTitle>
+              <div>
+                <h2>Title</h2>
+                <p>
+                  Be specific and imagine you’re asking a question to another
+                  person.
+                </p>
+              </div>
+              <input
+                value={title}
+                onChange={handleSetTitle}
+                type={'text'}
+                placeholder={'e.g (excel string regex)'}
+              ></input>
+            </AskTitle>
+            <TestEditorForm setContent={setContent} />
+            <AskTags>
+              <div>
+                <h2>Tags</h2>
+                <p>
+                  Add up to 5 tags describe what your question is about. Start
+                  typing to see suggestions.
+                </p>
+              </div>
+              <input
+                value={tags}
+                onChange={handleSetTags}
+                type={'text'}
+                placeholder={'e.g (excel string regex)'}
+              ></input>
+            </AskTags>
+            <AskBtn>
+              {/* <Link to={'/'}> */}
+              <button type="submit">Review your question</button>
+              {/* </Link> */}
+            </AskBtn>
+          </form>
         </AskContainer>
       </ContainerWrapper>
       <Footer />
