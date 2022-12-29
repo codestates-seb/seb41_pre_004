@@ -3,6 +3,36 @@ import logo_github from '../assets/icons/logo_github.svg';
 import logo_google from '../assets/icons/logo_google.svg';
 import logo_facebook from '../assets/icons/logo_facebook.svg';
 
+const SignupButton = ({ type }) => {
+  if (type === 'google') {
+    return (
+      <GoogleSignup>
+        <img src={logo_google} alt="logo_google" />
+        Sign up with Google
+      </GoogleSignup>
+    );
+  }
+  if (type === 'github') {
+    return (
+      <GitSignup>
+        <img src={logo_github} alt="logo_github" />
+        Sign up with GitHub
+      </GitSignup>
+    );
+  }
+  if (type === 'facebook') {
+    return (
+      <FacebookSignup>
+        <img src={logo_facebook} alt="logo_facebook" />
+        Sign up with Facebook
+      </FacebookSignup>
+    );
+  }
+  if (type === 'signup') {
+    return <BlueButton>Sign up</BlueButton>;
+  }
+};
+
 const SocialSignUpButton = styled.button`
   display: inline-block;
   display: flex;
@@ -68,35 +98,5 @@ const BlueButton = styled.button`
     opacity: 0.8;
   }
 `;
-
-const SignupButton = ({ type }) => {
-  if (type === 'google') {
-    return (
-      <GoogleSignup>
-        <img src={logo_google} alt="logo_google" />
-        Sign up with Google
-      </GoogleSignup>
-    );
-  }
-  if (type === 'github') {
-    return (
-      <GitSignup>
-        <img src={logo_github} alt="logo_github" />
-        Sign up with GitHub
-      </GitSignup>
-    );
-  }
-  if (type === 'facebook') {
-    return (
-      <FacebookSignup>
-        <img src={logo_facebook} alt="logo_facebook" />
-        Sign up with Facebook
-      </FacebookSignup>
-    );
-  }
-  if (type === 'signup') {
-    return <BlueButton>Sign up</BlueButton>;
-  }
-};
 
 export default SignupButton;

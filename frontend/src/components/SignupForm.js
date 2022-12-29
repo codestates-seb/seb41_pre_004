@@ -118,44 +118,19 @@ const SignupForm = ({
 }) => {
   const handleSignupButton = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    console.log(
-      `displayName:${displayName},signupEmail:${signupEmail},signupPassword:${signupPassword}`,
-    );
-=======
-    
-    console.log(
-      `displayName:${displayName},signupEmail:${signupEmail},`);
->>>>>>> c386bea1e85085cbefd2259f331d2974fe16d21d
+
+    console.log(`displayName:${displayName},signupEmail:${signupEmail},`);
     const reqbody = {
       email: signupEmail,
       password: signupPassword,
-<<<<<<< HEAD
-    };
-    axios
-      .post(
-        'https://jsonplaceholder.typicode.com/posts',
-        JSON.stringify(reqbody),
-      )
-      .then((res) => console.log(res))
-      .catch((err) => console.log);
-=======
       name: displayName,
-
     };
     axios
-      .post(
-        'https://jsonplaceholder.typicode.com/members/signup',
-        {data: JSON.stringify(reqbody)} 
-      )
+      .post('https://jsonplaceholder.typicode.com/members/signup', {
+        data: JSON.stringify(reqbody),
+      })
       .then((res) => console.log(res))
-      .catch((err) => {
-      
-
-
-
-      });
->>>>>>> c386bea1e85085cbefd2259f331d2974fe16d21d
+      .catch((err) => {});
   };
   return (
     <Sign onSubmit={(e) => handleSignupButton(e)}>
