@@ -59,6 +59,7 @@ public interface AnswerMapper {
         }
         long answerId;
         long questionId;
+        String currEmail;
         String content;
 //        long voteAnswer; // TODO voteAnswer 기본 구현 이후
         LocalDateTime createdAt;
@@ -66,15 +67,16 @@ public interface AnswerMapper {
 
         answerId = answer.getAnswerId();
         questionId = answer.getQuestion().getQuestionId();
+        currEmail = answer.getMember().getEmail();
         content = answer.getContent();
         createdAt = answer.getCreatedAt();
         modifiedAt = answer.getModifiedAt();
 
         List<CommentDto.Response> comments = answer.getComments().stream()
-                .map(comment -> new CommentDto.Response(comment.getCommentId(), comment.getContent(), comment.getCreatedAt(), comment.getModifiedAt()))
+                .map(comment -> new CommentDto.Response(comment.getCommentId(), comment.getAnswer().getAnswerId(), comment.getMember().getEmail(), comment.getContent(), comment.getCreatedAt(), comment.getModifiedAt()))
                 .collect(Collectors.toList());
 
-        AnswerDto.Response response = new AnswerDto.Response(answerId,questionId,content,createdAt,modifiedAt,comments);
+        AnswerDto.Response response = new AnswerDto.Response(answerId,questionId,currEmail,content,createdAt,modifiedAt,comments);
 
         return response;
     }

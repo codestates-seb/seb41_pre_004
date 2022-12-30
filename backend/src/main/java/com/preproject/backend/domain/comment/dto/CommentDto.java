@@ -35,9 +35,10 @@ public class CommentDto {
     @AllArgsConstructor
     public static class Response {
         private long commentId;
+        private long answerId;
+        private String currEmail;
         private String content;
-        //private String score;
         private LocalDateTime createdAt;
-        private LocalDateTime ModifiedAt;
+        private LocalDateTime modifiedAt;
     }
 }
