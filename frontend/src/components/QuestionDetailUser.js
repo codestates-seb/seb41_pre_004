@@ -3,10 +3,10 @@ import { Mobile, Tablet, Desktop } from './Responsive';
 import handshakeIcon from '../assets/icons/handshakeIcon.svg';
 import { Link } from 'react-router-dom';
 
-const QuestionDetailUser = ({ question, loginUsername }) => {
+const QuestionDetailUser = ({ question, loginUserEmail }) => {
   return (
     <>
-      {question.author === loginUsername ? (
+      {true ? (
         <LoginBlock>
           <ButtonBlock>
             <Mobile>
