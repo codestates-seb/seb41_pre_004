@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
@@ -7,19 +7,29 @@ import { EditorState } from 'draft-js';
 const MyBlock = styled.div`
   .wrapper-class {
     width: 100%;
-    max-width: 851px;
-    margin-bottom: 4rem;
-    margin-top: 30px;
+    max-width: 662px;
+    border: 1px solid #e4e6e8;
+    border-radius: 3px;
+    word-break: break-all;
   }
+
+  .toolbar-class {
+    margin-bottom: 0;
+  }
+
   .editor {
-    height: 500px !important;
-    border: 1px solid #e4e6e8 !important;
-    padding: 5px !important;
-    border-radius: 2px !important;
+    height: 100%;
+    height: 209px;
+    overflow: auto;
+    padding: 10px;
+  }
+
+  .public-DraftStyleDefault-block {
+    margin: 0;
   }
 `;
 
-const TestEditorForm = ({ setContent }) => {
+const TextEditor = ({ content, setContent }) => {
   // const body = (e) => {
   //   setValue(e.target.value);
   // };
@@ -28,20 +38,12 @@ const TestEditorForm = ({ setContent }) => {
   // EditorState의 비어있는 ContentState 기본 구성으로 새 개체를 반환 => 이렇게 안하면 상태 값을 나중에 변경할 수 없음.
   /////////////
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
   const onEditorStateChange = (editorState) => {
     // editorState에 값 설정
     setEditorState(editorState);
   };
-<<<<<<< HEAD
-  useEffect(() => {
-    setContent(editorState.getCurrentContent().getPlainText());
-  }, [setContent, editorState]);
-=======
-
-  useEffect(() => {
-    setContent(editorState.getCurrentContent().getPlainText());
-  }, [editorState, setContent]);
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
+  setContent(editorState.getCurrentContent().getPlainText());
 
   return (
     <MyBlock>
@@ -74,4 +76,4 @@ const TestEditorForm = ({ setContent }) => {
   );
 };
 
-export default TestEditorForm;
+export default TextEditor;

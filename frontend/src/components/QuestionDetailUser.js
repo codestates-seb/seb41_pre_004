@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 import handshakeIcon from '../assets/icons/handshakeIcon.svg';
+<<<<<<< HEAD
+=======
+import { Link } from 'react-router-dom';
+>>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
 
 const QuestionDetailUser = ({ question, loginUsername }) => {
   return (
@@ -9,6 +13,7 @@ const QuestionDetailUser = ({ question, loginUsername }) => {
         <LoginBlock>
           <ButtonBlock>
             <Mobile>
+<<<<<<< HEAD
               <DetailButton>Edit</DetailButton>
               <DetailButton>Delete</DetailButton>
             </Mobile>
@@ -18,6 +23,25 @@ const QuestionDetailUser = ({ question, loginUsername }) => {
             </Tablet>
             <Desktop>
               <TabletDetailButton>Edit</TabletDetailButton>
+=======
+              <Link to={`/questions/edit/${question.id}`} state={question}>
+                <DetailButton>Edit</DetailButton>
+              </Link>
+              <DetailButton>Delete</DetailButton>
+            </Mobile>
+
+            <Tablet>
+              <Link to={`/questions/edit/${question.id}`} state={question}>
+                <TabletDetailButton>Edit</TabletDetailButton>
+              </Link>
+              <TabletDetailButton>Delete</TabletDetailButton>
+            </Tablet>
+
+            <Desktop>
+              <Link to={`/questions/edit/${question.id}`} state={question}>
+                <TabletDetailButton>Edit</TabletDetailButton>
+              </Link>
+>>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
               <TabletDetailButton>Delete</TabletDetailButton>
             </Desktop>
           </ButtonBlock>

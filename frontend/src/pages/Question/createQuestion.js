@@ -5,7 +5,11 @@ import AskQuestionHeader from '../../components/AskQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
 import axios from 'axios';
+<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
+=======
+import { json, useNavigate } from 'react-router-dom';
+>>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
 
 const AskNotice = styled.div`
   width: 100%;
@@ -137,6 +141,7 @@ function AskQuestionList() {
   function handleSubmit(e) {
     e.preventDefault();
 
+<<<<<<< HEAD
     // axios.post(`http://localhost:3005/question`, {
     // axios.post(
     //   `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions`,
@@ -165,6 +170,35 @@ function AskQuestionList() {
       .catch(console.log);
     navigate(`/`);
     window.location.reload();
+=======
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sInVzZXJuYW1lIjoia2ltQGdtYWlsLmNvbSIsInN1YiI6ImtpbUBnbWFpbC5jb20iLCJpYXQiOjE2NzIzMzI4NjEsImV4cCI6MTY3MjMzNjQ2MX0.nY6EmpQ0FXfGjpKOzMFZ7wAd19b2q3rexM8k-hyOm8KpYZrEjDHClITO0hesp5zpHqXLQndleF4nRp0dAAx_tg`
+      }
+    };
+
+    let data = JSON.stringify({
+      title: title,
+      content: content
+    });
+
+    axios
+      .post(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions`,
+        data,
+        header
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // navigate(`/`);
+    // window.location.reload();
+>>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
   }
 
   const handleSetTitle = (event) => {
@@ -176,6 +210,7 @@ function AskQuestionList() {
     setTags(e);
   };
 
+<<<<<<< HEAD
   // const [ques, setQues] = useState(null);
 
   // const fetchData = async () => {
@@ -209,6 +244,8 @@ function AskQuestionList() {
   // axios.post(url, { headers }, bodyParameters);
 
   //
+=======
+>>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
   return (
     <>
       <ContainerWrapper>
@@ -269,9 +306,7 @@ function AskQuestionList() {
               ></input>
             </AskTags>
             <AskBtn>
-              {/* <Link to={'/'}> */}
               <button type="submit">Review your question</button>
-              {/* </Link> */}
             </AskBtn>
           </form>
         </AskContainer>
