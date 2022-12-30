@@ -103,7 +103,7 @@ const Login = () => {
         </FormWrapper>
         <RedirectionDiv1>
           Don't have an account?{' '}
-          <RedirectionLink to="/signup">Sign up</RedirectionLink>
+          <RedirectionLink to="../users/signup">Sign up</RedirectionLink>
           <RedirectionDiv2>
             Are you an empolyer?{' '}
             <a href="/">

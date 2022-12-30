@@ -20,7 +20,6 @@ const AskNotice = styled.div`
     font-size: 21px;
     margin-bottom: 8px;
   }
-
   p {
     margin-bottom: 15px;
     font-size: 15px;
@@ -96,8 +95,18 @@ const AskTags = styled.div`
   }
 `;
 
+const LinkSpan = styled.span`
+  color: #0173cc;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
 
-const AskBtn = styled.button`
+const AskContainer = styled(Container)`
+  padding: 0 16px 24px 16px;
+`;
+const AskBtn = styled.div`
   button {
     background-color: #0a95ff;
     border: 1px solid transparent;
@@ -119,19 +128,6 @@ const AskBtn = styled.button`
   }
 `;
 
-const LinkSpan = styled.span`
-  color: #0173cc;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const AskContainer = styled(Container)`
-  padding: 0 16px 24px 16px;
-`;
-
 function AskQuestionList() {
   const [title, setTitle] = useState('');
   const [tags, setTags] = useState('');
@@ -141,15 +137,41 @@ function AskQuestionList() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    axios.post(`http://localhost:3005/question`, {
-      title,
-      tags: tags.split(' '),
-      content,
-    });
+    // axios.post(`http://localhost:3005/question`, {
+    // axios.post(
+    //   `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions`,
+    //   {
+    //     title,
+    // tags: tags.split(' '),
+    //       content,
+    //     },
+    //   );
 
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+        //`Bearer ${token}`
+      },
+    };
+
+    // const bodyParameters = {
+    //   title,
+    //   content,
+    // };
+    console.log(config)
+    axios
+      .post('/questions', 
+      {     
+        title,
+        tags: tags.split(' '),
+        content, 
+      }, config, { withCredentials: true })
+      .then(console.log)
+      .catch(console.log);
     navigate(`/`);
     window.location.reload();
   }
+
   const handleSetTitle = (event) => {
     let e = event.target.value;
     setTitle(e);
@@ -177,6 +199,21 @@ function AskQuestionList() {
   //   axios.post(`http://localhost:3001/title`, { title, tags });
   //   fetchData();
   // };
+
+  // const headers = {
+  //   'Content-Type': 'application/json',
+  //   Authorization: apiKey,
+  // };
+  // const bodyParameters = {
+  //   title,
+  //   content,
+  // };
+  // const url =
+  //   "'http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions'";
+
+  // axios.post(url, { headers }, bodyParameters);
+
+  //
   return (
     <>
       <ContainerWrapper>
