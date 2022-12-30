@@ -14,7 +14,7 @@ import {
   HoverButton,
 } from '../../../styles/headerStyle';
 
-const Login = () => {
+const Login = ({homeData}) => {
   return (
     <FlexBlock>
       <Link to="/">
@@ -25,7 +25,7 @@ const Login = () => {
       <ProductsButton type="button" aria-label="Open the Products modal">
         Products
       </ProductsButton>
-      <Search />
+      <Search homeData={homeData}/>
       <Link to="/mypage" aria-label="Go to MyPage">
         <MyPageButton>
           <img

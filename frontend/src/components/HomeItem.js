@@ -185,10 +185,14 @@ const QuestionTag = styled.div`
 const QuestionUserInfo = styled.div`
   display: flex;
 <<<<<<< HEAD
+<<<<<<< HEAD
   justify-content: center;
 =======
   justify-content: end;
 >>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
+=======
+  justify-content: end;
+>>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
   align-items: center;
   gap: 4px;
 `;
