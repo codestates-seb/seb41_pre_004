@@ -3,19 +3,19 @@ import MobileLogin from './Mobile/Login';
 import TabletLogin from './Tablet/Login';
 import DesktopLogin from './Desktop/Login';
 
-const Login = ({homeData}) => {
+const Login = () => {
   return (
     <>
       <Mobile>
-        <MobileLogin homeData={homeData}/>
+        <MobileLogin />
       </Mobile>
 
       <Tablet>
-        <TabletLogin homeData={homeData}/>
+        <TabletLogin />
       </Tablet>
 
       <Desktop>
-        <DesktopLogin homeData={homeData}/>
+        <DesktopLogin />
       </Desktop>
     </>
   );

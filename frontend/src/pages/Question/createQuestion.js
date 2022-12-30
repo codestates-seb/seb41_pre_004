@@ -136,17 +136,20 @@ function AskQuestionList() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    const token = localStorage.getItem('token');
+    const parse  = JSON.parse(token);
+    console.log(parse.authorization)
     const header = {
       headers: {
         'Content-Type': `application/json`,
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sInVzZXJuYW1lIjoia2ltQGdtYWlsLmNvbSIsInN1YiI6ImtpbUBnbWFpbC5jb20iLCJpYXQiOjE2NzIzMzI4NjEsImV4cCI6MTY3MjMzNjQ2MX0.nY6EmpQ0FXfGjpKOzMFZ7wAd19b2q3rexM8k-hyOm8KpYZrEjDHClITO0hesp5zpHqXLQndleF4nRp0dAAx_tg`
+        authorization: parse.authorization
       }
     };
 
     let data = JSON.stringify({
       title: title,
-      content: content
+      content: content,
+      tags: tags.split(' '),
     });
 
     axios

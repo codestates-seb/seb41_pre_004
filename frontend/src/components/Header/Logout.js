@@ -3,19 +3,19 @@ import MobileLogout from './Mobile/Logout';
 import TabletLogout from './Tablet/Logout';
 import DesktopLogout from './Desktop/Logout';
 
-const Logout = ({homeData}) => {
+const Logout = () => {
   return (
     <>
       <Mobile>
-        <MobileLogout homeData={homeData}/>
+        <MobileLogout />
       </Mobile>
 
       <Tablet>
-        <TabletLogout homeData={homeData}/>
+        <TabletLogout />
       </Tablet>
 
       <Desktop>
-        <DesktopLogout homeData={homeData}/>
+        <DesktopLogout />
       </Desktop>
     </>
   );

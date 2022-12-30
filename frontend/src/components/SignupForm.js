@@ -119,27 +119,28 @@ const SignupForm = ({
   const handleSignupButton = (e) => {
     e.preventDefault();
 
-    console.log(`displayName:${displayName},signupEmail:${signupEmail},`);
+    console.log(`email:${signupEmail},password:${signupPassword},name:${displayName}`);
+
     const reqbody = {
       email: signupEmail,
       password: signupPassword,
       name: displayName,
     };
     const headers = {
-      'Content-Type': `application/json`,
+      "Content-Type": "application/json",
+      authorization: ''  
     }
+    console.log({headers})
     
     axios
-      .post('http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/members/signup',JSON.stringify(reqbody),headers)
+      .post('http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/members/signup',JSON.stringify(reqbody),{headers})
       .then((res) => {
         console.log(res)
-        // if(res.token){
-        //   localStorage.setItem()
-        // }
+
 
       })
       .catch((err) => {
-        window.alert('failed')
+        console.log(err)
 
       });
   };
