@@ -7,6 +7,9 @@ import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
 import QuestionDetailUser from '../../components/QuestionDetailUser';
+import AnsMarkdown from '../../components/AnswerMarkdown';
+import AnswerItem from '../../components/AnswerItem';
+
 import {
   ContainerWrapper,
   ContainerFlex,
@@ -15,9 +18,11 @@ import {
   ContentBlock,
   DetailSideBlock,
 } from '../../styles/contentStyle';
+import { useState } from 'react';
 
 const QuestionDetail = ({ loginUsername }) => {
   const question = useLocation().state;
+  const [answer, setAnswer] = useState('');
 
   return (
     <>
@@ -193,8 +198,15 @@ const QuestionDetail = ({ loginUsername }) => {
                     <Sidebar />
                   </DetailSideBlock>
                 </PostSidebar>
-
                 {/* 작성 */}
+                <AnswerItem></AnswerItem>
+                <Answer>Your Answer</Answer>
+                <form>
+                  <AnsMarkdown setAnswer={setAnswer} />
+                  <AnswerBtn>
+                    <button type="submit">Post your Answer</button>
+                  </AnswerBtn>
+                </form>
               </ContentBlock>
             </DesktopContent>
           </Desktop>
@@ -204,6 +216,32 @@ const QuestionDetail = ({ loginUsername }) => {
     </>
   );
 };
+
+const AnswerBtn = styled.div`
+  button {
+    background-color: #0a95ff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 8px;
+    outline: none;
+    padding: 0.8em;
+    position: relative;
+    text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    color: white;
+  }
+`;
+
+const Answer = styled.h2`
+  font-size: 20px;
+`;
 
 const PostSidebar = styled.div`
   display: flex;
