@@ -30,26 +30,6 @@ const GlobalStyle = createGlobalStyle`
   textarea,
   button {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
-  }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-  a,
-  input,
-  textarea,
-  button {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-<<<<<<< HEAD
-=======
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
-=======
->>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
   }
 
   a {
