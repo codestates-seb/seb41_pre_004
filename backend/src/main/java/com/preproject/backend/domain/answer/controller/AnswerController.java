@@ -18,7 +18,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-@RequestMapping("/questions/{question-id}/answers")
+@RequestMapping("/")
 @RequiredArgsConstructor
 @Validated
 public class AnswerController {
@@ -26,7 +26,7 @@ public class AnswerController {
     private final AnswerMapper mapper;
 
     // answer 등록
-    @PostMapping
+    @PostMapping("questions/{question-id}/answers")
     public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
                                      @Valid @RequestBody AnswerDto.Post requestBody) {
         Answer createAnswer = answerService.createAnswer(mapper.answerPostDtoToAnswer(questionId, requestBody));
@@ -35,9 +35,8 @@ public class AnswerController {
     }
 
     // answer 수정
-    @PatchMapping("/{answer-id}")
-    public ResponseEntity patchAnswer(@PathVariable("question-id")@Positive long questionId,
-                                      @PathVariable("answer-id") @Positive long answerId,
+    @PatchMapping("answers/{answer-id}")
+    public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.Patch requestBody) {
         requestBody.setAnswerId(answerId);
         Answer updateAnswer = answerService.updateAnswer(mapper.answerPatchDtoToAnswer(requestBody));
@@ -46,10 +45,9 @@ public class AnswerController {
                 new SingleResponseDto<>(mapper.answerToAnswerResponse(updateAnswer)), HttpStatus.CREATED);
     }
 
-    // answer 조회
-    @GetMapping("/{answer-id}")
-    public ResponseEntity getAnswer(@PathVariable("question-id") @Positive long questionId,
-                                    @PathVariable("answer-id") @Positive long answerId) {
+    // answer 조회 - 필요 X
+    @GetMapping("answers/{answer-id}")
+    public ResponseEntity getAnswer(@PathVariable("answer-id") @Positive long answerId) {
         Answer answer = answerService.findAnswer(answerId);
 
         return new ResponseEntity<>(
@@ -57,22 +55,19 @@ public class AnswerController {
     }
 
     // answer 전체 조회
-    @GetMapping
-    public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId,
-                                     @Positive @RequestParam int page,
-                                     @Positive @RequestParam int size) {
-        Page<Answer> pageAnswer = answerService.findAnswers(questionId,page - 1, size);
+    @GetMapping("answers")
+    public ResponseEntity getAnswers(@Positive @RequestParam int page,
+                                        @Positive @RequestParam int size) {
+        Page<Answer> pageAnswer = answerService.findAnswers(page - 1, size);
         List<Answer> answers = pageAnswer.getContent();
 
         return new ResponseEntity<>(
                 new MultiResponseDto<>(mapper.answersToAnswersResponses(answers), pageAnswer), HttpStatus.OK);
     }
-    // TODO 해당 answer 를 쓴 member 의 Id 로 작성했던 answer 들을 전체 조회하는 로직
 
     // answer 삭제
-    @DeleteMapping("/{answer-id}")
-    public ResponseEntity deleteAnswer(@PathVariable("question-id") @Positive long questionId,
-                                       @PathVariable("answer-id") @Positive long answerId) {
+    @DeleteMapping("answers/{answer-id}")
+    public ResponseEntity deleteAnswer(@PathVariable("answer-id") @Positive long answerId) {
         answerService.deleteAnswer(answerId);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
