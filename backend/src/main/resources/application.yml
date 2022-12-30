@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test
-    username: sa
-    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://pre-database-1.cguixlvnvxu0.ap-northeast-2.rds.amazonaws.com:3306/pre41?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 54255425
   output:
     ansi:
       enabled: always
@@ -33,5 +33,7 @@ mail:
 
 jwt:
   key: "c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK"
-  access-token-expiration-minutes: 60
+  access-token-expiration-minutes: 40
   refresh-token-expiration-minutes: 420
+config:
+  domain: http://pre41-deploy-test.s3-website.ap-northeast-2.amazonaws.com/
