@@ -12,7 +12,6 @@ import Questions from './pages/Question';
 import QuestionAsk from './pages/Question/createQuestion';
 import QuestionDetail from './pages/Question/questionDetail';
 import QuestionEdit from './pages/Question/questionEdit';
-import AnswerEdit from './pages/AnswerEdit';
 import { useSelector } from 'react-redux';
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -92,7 +91,6 @@ function App() {
           element={<QuestionDetail loginUserEmail={loginUserEmail}/>}
         />
         <Route path="/questions/edit/:questionId" element={<QuestionEdit />} />
-        <Route path="/answeredit" element={<AnswerEdit loginUsername={localStorage.getItem('loginUsername')}/>} />
         <Route
           path="*"
           element={<div style={{ marginTop: '53px' }}>404</div>}

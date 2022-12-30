@@ -16,7 +16,7 @@ import {
   DetailSideBlock,
 } from '../../styles/contentStyle';
 
-const QuestionDetail = ({ loginUsername }) => {
+const QuestionDetail = ({ loginUserEmail }) => {
   const question = useLocation().state;
 
   return (
@@ -71,7 +71,7 @@ const QuestionDetail = ({ loginUsername }) => {
                     <QuestionUser>
                       <QuestionDetailUser
                         question={question}
-                        loginUsername={loginUsername}
+                        loginUserEmail={loginUserEmail}
                       />
                     </QuestionUser>
                   </PostRight>
@@ -127,7 +127,7 @@ const QuestionDetail = ({ loginUsername }) => {
                     <QuestionUser>
                       <QuestionDetailUser
                         question={question}
-                        loginUsername={loginUsername}
+                        loginUserEmail={loginUserEmail}
                       />
                     </QuestionUser>
                   </PostRight>
@@ -184,7 +184,7 @@ const QuestionDetail = ({ loginUsername }) => {
                       <QuestionUser>
                         <QuestionDetailUser
                           question={question}
-                          loginUsername={loginUsername}
+                          loginUserEmail={loginUserEmail}
                         />
                       </QuestionUser>
                     </PostRight>
