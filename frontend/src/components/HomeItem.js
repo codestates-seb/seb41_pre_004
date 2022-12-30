@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 
 function Homeitem({ question }) {
+  console.log(question);
+
   return (
     <>
       <Desktop>
@@ -15,16 +17,16 @@ function Homeitem({ question }) {
           </QuestionInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.id}`} state={question}>
+              <Link to={`/questions/${question.questionId}`} state={question}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-                  })}
+                  {/* {question.tags.map((tag, idx) => {
+                    return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
+                  })} */}
                 </QuestionTagUl>
               </QuestionTag>
 
@@ -54,16 +56,16 @@ function Homeitem({ question }) {
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.id}`} state={question}>
+              <Link to={`/questions/${question.questionId}`} state={question}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-                  })}
+                  {/* {question.tags.map((tag, idx) => {
+                    return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
+                  })} */}
                 </QuestionTagUl>
               </QuestionTag>
 
@@ -92,16 +94,16 @@ function Homeitem({ question }) {
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.id}`} state={question}>
+              <Link to={`/questions/${question.questionId}`} state={question}>
                 <MobileTitle>{question.title}</MobileTitle>
               </Link>
             </QuestionTitle>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-                  })}
+                  {/* {question.tags.map((tag, idx) => {
+                    return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
+                  })} */}
                 </QuestionTagUl>
               </QuestionTag>
             </QuestionTagBox>
@@ -175,19 +177,14 @@ const MobileTitle = styled(QuestionSpan)`
   font-size: 14px;
 `;
 
-const QuestionTagBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
+const QuestionTagBox = styled.div``;
 const QuestionTag = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 const QuestionUserInfo = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   gap: 4px;
 `;

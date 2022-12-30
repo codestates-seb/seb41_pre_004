@@ -82,6 +82,7 @@ const RedirectionDiv2 = styled.div`
     }
   }
 `;
+
 const Login = () => {
   const handleButtonClick = () => {
     console.log('action');

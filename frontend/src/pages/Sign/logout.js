@@ -73,15 +73,6 @@ const LogoutInfomessage = styled.div`
   margin-top: 47px;
   color: #6a737c;
 `;
-// const CatalogWrapper = styled.div`
-//   width: 276px;
-//   height: 28px;
-//   font-size: 15px;
-//   line-height: 20px;
-//   text-align: left;
-//   letter-spacing: normal;
-//   color: #0074cc;
-// `;
 
 const CheckboxWrapper = styled.div`
   font-size: 13px;

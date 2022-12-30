@@ -119,10 +119,10 @@ const SignupForm = ({
   const handleSignupButton = (e) => {
     e.preventDefault();
 
-    console.log(`displayName:${displayName},signupEmail:${signupEmail},password:${signupPassword}`);
+    console.log(`displayName:${displayName},signupEmail:${signupEmail},`);
     const reqbody = {
       email: signupEmail,
-      password: String(signupPassword),
+      password: signupPassword,
       name: displayName,
     };
     const headers = {
