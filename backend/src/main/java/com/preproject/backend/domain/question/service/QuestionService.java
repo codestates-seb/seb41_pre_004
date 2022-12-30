@@ -99,33 +99,26 @@ public class QuestionService {
         question.setTitle(changedQuestion.getTitle());
         question.setContent(changedQuestion.getContent());
 
-        // tag의 삭제 -> 갯수 줄이기
-        // 새로운 tag 추가 -> Question-Tag 조인 엔티티 생성
-//        Set<QuestionTag> questionTagSet = question.getQuestionTags();
-//        Set<QuestionTag> tempTagSet = new HashSet<>(); // 제거될 예정인 태그들
-//        for(QuestionTag t : questionTagSet){
-//            TagEntity tagEntity = t.getTag();
-//            if(tagsList.contains(tagEntity.getName())){
-//                // 추가되는 태그이거나 제외되는 태그만 확인 할 것이기 때문에
-//                // 중복이 되는 태그는 신경쓰지 않도록 한다.
-//                tagsList.remove(tagEntity.getName());
+//        Set<QuestionTag> questionTags = question.getQuestionTags();
+//        Set<QuestionTag> tmp = new HashSet<>();
+//        for(QuestionTag questionTag: questionTags){
+//            TagEntity tag = questionTag.getTag();
+//            if(!tagsList.contains(tag.getName())){
+//                tmp.add(questionTag);
 //            } else {
-//                // 제거가 될 예정인 태그들
-//                tagEntity.questionCountMinus();
-//                tagRepository.save(tagEntity);
-//                tempTagSet.add(t);
+//                tagsList.remove(tag.getName());
 //            }
 //        }
-//        // Set 에서 제거가 될 예정인 태그들을 모두 제거
-//        questionTagSet.removeAll(tempTagSet);
-
-        // 나머지는 추가되는 태그들이니 저장한다.
-//        for(String t : tagsList) {
+//
+//        questionTags.removeAll(tmp);
+//
+//        for(String tagName : tagsList) {
 //            QuestionTag questionTag = new QuestionTag();
 //            questionTag.setQuestion(question);
-//            questionTag.setTag(tagService.tagCreateUpdate(t)); // 해당 부분에 추가되는 태그의 count + 1이 구현되어 있음!
-//            questionTagSet.add(questionTag);
+//            questionTag.setTag(tagService.tagCreateUpdate(tagName));
+//            questionTags.add(questionTag);
 //        }
+
         return questionRepository.save(question);
     }
 

@@ -2,6 +2,8 @@ package com.preproject.backend.domain.question.mapper;
 
 import com.preproject.backend.domain.question.dto.QuestionDto;
 import com.preproject.backend.domain.question.entity.Question;
+import com.preproject.backend.domain.question.entity.QuestionTag;
+import com.preproject.backend.domain.tag.entity.TagEntity;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -39,6 +41,7 @@ public class CustomQuestionMapper implements QuestionMapper {
         LocalDateTime modifiedAt = null;
         int score = 0;
         int viewCount = 0;
+        String currentUserEmail;
 
         questionId = question.getQuestionId();
         title = question.getTitle();
@@ -47,18 +50,33 @@ public class CustomQuestionMapper implements QuestionMapper {
         modifiedAt = question.getModifiedAt();
         score = question.getScore();
         viewCount = question.getViewCount();
+        currentUserEmail = question.getMember().getEmail();
+
+//        //debugging purposes
+//        question.getQuestionTags().forEach(qt -> System.out.println("tag name: " + qt.getTag().getName()));
 
         List<String> tags = question.getQuestionTags().stream()
-                .map(tag -> tag.getTag().getName())
+                .map(QuestionTag::getTag)
+                .map(TagEntity::getName)
+                .distinct()
                 .collect(Collectors.toList());
 
-        QuestionDto.Response response = new QuestionDto.Response( questionId, title, content, createdAt, modifiedAt, score, tags, viewCount );
+        QuestionDto.Response response =
+                new QuestionDto.Response(
+                        questionId, title, content, createdAt, modifiedAt, score, tags, viewCount, currentUserEmail );
 
         return response;
     }
     @Override
     public List<QuestionDto.Response> questionsToResponses(List<Question> questions) {
-        return questionMapper.questionsToResponses(questions);
+
+        List<QuestionDto.Response> responses = questions.stream()
+                .map(this::questionToResponseCheck)
+                .collect(Collectors.toList());
+
+        System.out.println("responses: " + responses);
+
+        return responses;
     }
 }
 

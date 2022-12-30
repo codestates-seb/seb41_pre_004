@@ -43,22 +43,14 @@ public class QuestionController {
 //        Question question = questionMapper.questionPostDtoToQuestion(post);
         Question createdQuestion = questionService.createQuestion(question, post.getTags());
 
-        //for debugging purposes
+
         QuestionDto.Response responseDto = customQuestionMapper.questionToResponseCheck(createdQuestion);
-        System.out.println(responseDto.getQuestionId());
-        System.out.println(responseDto.getTitle());
-        System.out.println(responseDto.getContent());
-        System.out.println(responseDto.getCreatedAt());
-        System.out.println(responseDto.getModifiedAt());
-        System.out.println(responseDto.getScore());
-        System.out.println(responseDto.getTags());
-        System.out.println(responseDto.getViewCount());
         SingleResponseDto<QuestionDto.Response> response = new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(createdQuestion));
-        System.out.println("디버깅 중입니다.");
+
 //        for (QuestionTag tag : createdQuestion.getQuestionTags()) {
 //            System.out.println(tag.getTag().getName());
 //        }
-        System.out.println(response.getData().getTags());
+
         return new ResponseEntity<>(response,HttpStatus.OK);
 //        return new ResponseEntity<>(
 //                new SingleResponseDto<>(questionMapper.questionToResponseCheck(createdQuestion)),HttpStatus.OK);
