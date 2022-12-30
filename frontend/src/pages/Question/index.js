@@ -13,7 +13,7 @@ import {
 import { Desktop } from '../../components/Responsive';
 import QuestionList from '../../components/QuestionList';
 
-function Questions({ homeData }) {
+function Questions({ questions }) {
   return (
     <>
       <ContainerWrapper>
@@ -21,8 +21,8 @@ function Questions({ homeData }) {
           <Navbar />
           <Content>
             <ContentBlock>
-              <QuestionHeader></QuestionHeader>
-              <QuestionList homeData={homeData} />
+              <QuestionHeader tab={'All Questions'} />
+              <QuestionList questions={questions} />
             </ContentBlock>
             <Desktop>
               <SideBlock>

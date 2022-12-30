@@ -3,26 +3,26 @@ import styled from 'styled-components';
 import QuestionHeaderBtn from './QuestionHeaderBtn';
 import { Mobile, Tablet, Desktop } from './Responsive';
 
-function QuestionHeader() {
+function QuestionHeader({ tab }) {
   return (
     <>
       <Mobile>
         <TabletContainer>
-          <MobileTitle>All Questions</MobileTitle>
+          <MobileTitle>{tab}</MobileTitle>
           <QuestionHeaderBtn></QuestionHeaderBtn>
         </TabletContainer>
       </Mobile>
 
       <Tablet>
         <TabletContainer>
-          <QuestionTitle>All Questions</QuestionTitle>
+          <QuestionTitle>{tab}</QuestionTitle>
           <QuestionHeaderBtn></QuestionHeaderBtn>
         </TabletContainer>
       </Tablet>
 
       <Desktop>
         <QuestionContainer>
-          <QuestionTitle>All Questions</QuestionTitle>
+          <QuestionTitle>{tab}</QuestionTitle>
           <QuestionHeaderBtn></QuestionHeaderBtn>
         </QuestionContainer>
       </Desktop>

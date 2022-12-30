@@ -35,17 +35,18 @@ const LoginInputForm = () => {
         setLoginPassword('');
         window.alert('로그인 정보가 일치하지 않습니다!!');
       });
-    return (
-      <LoginForm onSubmit={(e) => handleSubmitButton(e)}>
-        <EmailForm loginEmail={loginEmail} setLoginEmail={setLoginEmail} />
-        <PasswordForm
-          loginPassword={loginPassword}
-          setLoginPassword={setLoginPassword}
-        />
-        <LoginButton type={'login'} />
-      </LoginForm>
-    );
   };
+
+  return (
+    <LoginForm onSubmit={(e) => handleSubmitButton(e)}>
+      <EmailForm loginEmail={loginEmail} setLoginEmail={setLoginEmail} />
+      <PasswordForm
+        loginPassword={loginPassword}
+        setLoginPassword={setLoginPassword}
+      />
+      <LoginButton type={'login'} />
+    </LoginForm>
+  );
 };
 
 const LoginForm = styled.form`
