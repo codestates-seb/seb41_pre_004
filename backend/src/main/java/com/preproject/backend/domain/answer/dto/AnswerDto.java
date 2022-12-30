@@ -46,6 +46,5 @@ public class AnswerDto {
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
         private List<CommentDto.Response> comments;
-
     }
 }
