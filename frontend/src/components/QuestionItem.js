@@ -23,15 +23,9 @@ function Questionitem({ question }) {
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-<<<<<<< HEAD
-                  {/* {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-                  })} */}
-=======
                   {question.tags.map((tag, idx) => {
                     return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
                   })}
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
                 </QuestionTagUl>
               </QuestionTag>
 
@@ -69,15 +63,9 @@ function Questionitem({ question }) {
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-<<<<<<< HEAD
-                  {/* {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-                  })} */}
-=======
                   {question.tags.map((tag, idx) => {
                     return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
                   })}
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
                 </QuestionTagUl>
               </QuestionTag>
 
@@ -114,15 +102,9 @@ function Questionitem({ question }) {
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-<<<<<<< HEAD
-                  {/* {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-                  })} */}
-=======
                   {question.tags.map((tag, idx) => {
                     return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
                   })}
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
                 </QuestionTagUl>
               </QuestionTag>
             </QuestionTagBox>

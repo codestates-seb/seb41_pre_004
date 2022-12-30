@@ -119,37 +119,17 @@ const SignupForm = ({
   const handleSignupButton = (e) => {
     e.preventDefault();
 
-<<<<<<< HEAD
-    console.log(
-      `displayName:${displayName},signupEmail:${signupEmail},signupPassword:${signupPassword}`,
-    );
-
-    console.log(`displayName:${displayName},signupEmail:${signupEmail},`);
-
-    console.log(`displayName:${displayName},signupEmail:${signupEmail},`);
-
-    const reqbody = {
-      email: signupEmail,
-      password: signupPassword,
-    };
-
-=======
     console.log(`displayName:${displayName},signupEmail:${signupEmail},`);
     const reqbody = {
       email: signupEmail,
       password: signupPassword,
       name: displayName,
     };
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
     axios
       .post('https://jsonplaceholder.typicode.com/members/signup', {
         data: JSON.stringify(reqbody),
       })
       .then((res) => console.log(res))
-<<<<<<< HEAD
-
-=======
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
       .catch((err) => {});
   };
   return (

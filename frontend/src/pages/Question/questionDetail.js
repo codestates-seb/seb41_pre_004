@@ -64,13 +64,8 @@ const QuestionDetail = ({ loginUsername }) => {
                   <PostRight>
                     <PostText>{question.content}</PostText>
                     <TagBlock>
-<<<<<<< HEAD
-                      {/* {question.tags.map((tag) => (
-                        <Tag key={tag}>{tag}</Tag>
-=======
                       {/* {question.tags.map((tag, idx) => (
                         <Tag key={idx}>{tag}</Tag>
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
                       ))} */}
                     </TagBlock>
                     <QuestionUser>
@@ -125,13 +120,8 @@ const QuestionDetail = ({ loginUsername }) => {
                   <PostRight>
                     <PostText>{question.content}</PostText>
                     <TagBlock>
-<<<<<<< HEAD
-                      {/* {question.tags.map((tag) => (
-                        <Tag key={tag}>{tag}</Tag>
-=======
                       {/* {question.tags.map((tag, idx) => (
                         <Tag key={idx}>{tag}</Tag>
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
                       ))} */}
                     </TagBlock>
                     <QuestionUser>
@@ -187,13 +177,8 @@ const QuestionDetail = ({ loginUsername }) => {
                     <PostRight>
                       <PostText>{question.content}</PostText>
                       <TagBlock>
-<<<<<<< HEAD
-                        {/* {question.tags.map((tag) => (
-                          <Tag key={tag}>{tag}</Tag>
-=======
                         {/* {question.tags.map((tag, idx) => (
                           <Tag key={idx}>{tag}</Tag>
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
                         ))} */}
                       </TagBlock>
                       <QuestionUser>

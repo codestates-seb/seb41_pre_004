@@ -3,42 +3,26 @@ import styled from 'styled-components';
 import QuestionHeaderBtn from './QuestionHeaderBtn';
 import { Mobile, Tablet, Desktop } from './Responsive';
 
-<<<<<<< HEAD
-function QuestionHeader() {
-=======
 function QuestionHeader({ tab }) {
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
   return (
     <>
       <Mobile>
         <TabletContainer>
-<<<<<<< HEAD
-          <MobileTitle>All Questions</MobileTitle>
-=======
           <MobileTitle>{tab}</MobileTitle>
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
           <QuestionHeaderBtn></QuestionHeaderBtn>
         </TabletContainer>
       </Mobile>
 
       <Tablet>
         <TabletContainer>
-<<<<<<< HEAD
-          <QuestionTitle>All Questions</QuestionTitle>
-=======
           <QuestionTitle>{tab}</QuestionTitle>
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
           <QuestionHeaderBtn></QuestionHeaderBtn>
         </TabletContainer>
       </Tablet>
 
       <Desktop>
         <QuestionContainer>
-<<<<<<< HEAD
-          <QuestionTitle>All Questions</QuestionTitle>
-=======
           <QuestionTitle>{tab}</QuestionTitle>
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
           <QuestionHeaderBtn></QuestionHeaderBtn>
         </QuestionContainer>
       </Desktop>

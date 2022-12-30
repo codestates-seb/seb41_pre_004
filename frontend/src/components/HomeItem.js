@@ -4,11 +4,8 @@ import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 
 function Homeitem({ question }) {
-<<<<<<< HEAD
-=======
   console.log(question);
 
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
   return (
     <>
       <Desktop>
@@ -27,13 +24,8 @@ function Homeitem({ question }) {
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-<<<<<<< HEAD
-                  {/* {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-=======
                   {/* {question.tags.map((tag, idx) => {
                     return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
                   })} */}
                 </QuestionTagUl>
               </QuestionTag>
@@ -71,13 +63,8 @@ function Homeitem({ question }) {
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-<<<<<<< HEAD
-                  {/* {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-=======
                   {/* {question.tags.map((tag, idx) => {
                     return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
                   })} */}
                 </QuestionTagUl>
               </QuestionTag>
@@ -114,13 +101,8 @@ function Homeitem({ question }) {
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-<<<<<<< HEAD
-                  {/* {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-=======
                   {/* {question.tags.map((tag, idx) => {
                     return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
                   })} */}
                 </QuestionTagUl>
               </QuestionTag>
@@ -195,16 +177,7 @@ const MobileTitle = styled(QuestionSpan)`
   font-size: 14px;
 `;
 
-<<<<<<< HEAD
-const QuestionTagBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
-=======
 const QuestionTagBox = styled.div``;
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
 const QuestionTag = styled.div`
   display: flex;
   flex-wrap: wrap;

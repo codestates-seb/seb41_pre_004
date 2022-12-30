@@ -32,16 +32,10 @@ const TestEditorForm = ({ setContent }) => {
     // editorState에 값 설정
     setEditorState(editorState);
   };
-<<<<<<< HEAD
-  useEffect(() => {
-    setContent(editorState.getCurrentContent().getPlainText());
-  }, [setContent, editorState]);
-=======
 
   useEffect(() => {
     setContent(editorState.getCurrentContent().getPlainText());
   }, [editorState, setContent]);
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
 
   return (
     <MyBlock>

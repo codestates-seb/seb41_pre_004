@@ -3,10 +3,6 @@ import QuestionHeader from '../../components/QuestionHeader';
 import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
-<<<<<<< HEAD
-
-=======
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
 import {
   ContainerWrapper,
   ContainerFlex,
@@ -17,11 +13,7 @@ import {
 import { Desktop } from '../../components/Responsive';
 import QuestionList from '../../components/QuestionList';
 
-<<<<<<< HEAD
-function Questions({ homeData }) {
-=======
 function Questions({ questions }) {
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
   return (
     <>
       <ContainerWrapper>
@@ -29,13 +21,8 @@ function Questions({ questions }) {
           <Navbar />
           <Content>
             <ContentBlock>
-<<<<<<< HEAD
-              <QuestionHeader></QuestionHeader>
-              <QuestionList homeData={homeData} />
-=======
               <QuestionHeader tab={'All Questions'} />
               <QuestionList questions={questions} />
->>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
             </ContentBlock>
             <Desktop>
               <SideBlock>
