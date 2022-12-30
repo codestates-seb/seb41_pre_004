@@ -184,7 +184,7 @@ const QuestionTag = styled.div`
 `;
 const QuestionUserInfo = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   gap: 4px;
 `;
