@@ -5,7 +5,7 @@ import AskQuestionHeader from '../../components/AskQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 
 const AskNotice = styled.div`
   width: 100%;
@@ -106,7 +106,7 @@ const LinkSpan = styled.span`
 const AskContainer = styled(Container)`
   padding: 0 16px 24px 16px;
 `;
-const AskBtn = styled.button`
+const AskBtn = styled.div`
   button {
     background-color: #0a95ff;
     border: 1px solid transparent;
@@ -136,16 +136,56 @@ function AskQuestionList() {
 
   function handleSubmit(e) {
     e.preventDefault();
+<<<<<<< HEAD
 
-    axios.post(`http://localhost:3005/question`, {
-      title,
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        Authorization: localStorage.getItem('token'),
+      },
+=======
+    const token = localStorage.getItem('token');
+    const parse  = JSON.parse(token);
+    console.log(parse.authorization)
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        authorization: parse.authorization
+      }
+>>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
+    };
+
+    let data = JSON.stringify({
+      title: title,
+      content: content,
+<<<<<<< HEAD
+=======
       tags: tags.split(' '),
-      content,
+>>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
     });
 
+    axios
+      .post(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions`,
+        data,
+        header,
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+<<<<<<< HEAD
     navigate(`/`);
     window.location.reload();
+=======
+    // navigate(`/`);
+    // window.location.reload();
+>>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
   }
+
   const handleSetTitle = (event) => {
     let e = event.target.value;
     setTitle(e);
@@ -155,24 +195,6 @@ function AskQuestionList() {
     setTags(e);
   };
 
-  // const [ques, setQues] = useState(null);
-
-  // const fetchData = async () => {
-  //   const response = await axios.get(`http://localhost:3001/title`);
-  //   setQues(response.data);
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const title = e.target.title.value;
-  //   const tags = e.target.tags.value;
-  //   axios.post(`http://localhost:3001/title`, { title, tags });
-  //   fetchData();
-  // };
   return (
     <>
       <ContainerWrapper>
@@ -233,9 +255,7 @@ function AskQuestionList() {
               ></input>
             </AskTags>
             <AskBtn>
-              {/* <Link to={'/'}> */}
               <button type="submit">Review your question</button>
-              {/* </Link> */}
             </AskBtn>
           </form>
         </AskContainer>

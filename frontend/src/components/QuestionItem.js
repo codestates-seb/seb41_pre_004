@@ -15,7 +15,7 @@ function Questionitem({ question }) {
           </QuestionInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.id}`} state={question}>
+              <Link to={`/questions/${question.questionId}`} state={question}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
@@ -23,8 +23,8 @@ function Questionitem({ question }) {
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
+                  {question.tags.map((tag, idx) => {
+                    return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
                   })}
                 </QuestionTagUl>
               </QuestionTag>
@@ -55,7 +55,7 @@ function Questionitem({ question }) {
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.id}`} state={question}>
+              <Link to={`/questions/${question.questionId}`} state={question}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
@@ -63,8 +63,8 @@ function Questionitem({ question }) {
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
+                  {question.tags.map((tag, idx) => {
+                    return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
                   })}
                 </QuestionTagUl>
               </QuestionTag>
@@ -94,7 +94,7 @@ function Questionitem({ question }) {
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.id}`} state={question}>
+              <Link to={`/questions/${question.questionId}`} state={question}>
                 <MobileTitle>{question.title}</MobileTitle>
               </Link>
             </QuestionTitle>
@@ -102,8 +102,8 @@ function Questionitem({ question }) {
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  {question.tags.map((tag) => {
-                    return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
+                  {question.tags.map((tag, idx) => {
+                    return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
                   })}
                 </QuestionTagUl>
               </QuestionTag>
@@ -129,7 +129,6 @@ function Questionitem({ question }) {
 
 const QuestionBox = styled.div`
   width: 100%;
-  max-width: 751px;
   display: flex;
   padding: 16px;
   border-top: 1px solid #ecebee;

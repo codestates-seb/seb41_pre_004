@@ -11,6 +11,7 @@ import Home from './pages';
 import Questions from './pages/Question';
 import QuestionAsk from './pages/Question/createQuestion';
 import QuestionDetail from './pages/Question/questionDetail';
+import QuestionEdit from './pages/Question/questionEdit';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -29,6 +30,10 @@ const GlobalStyle = createGlobalStyle`
   textarea,
   button {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
   }
 
   body {
@@ -40,6 +45,11 @@ const GlobalStyle = createGlobalStyle`
   textarea,
   button {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+<<<<<<< HEAD
+=======
+>>>>>>> 3fc5466e3f833869c19ac071b2ff4aa8f5a6a16c
+=======
+>>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
   }
 
   a {
@@ -67,14 +77,16 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [homeData, setHomeData] = useState([]);
+  const [questions, setQuestions] = useState([]);
   const loginUsername = 'a';
 
   const fetchData = async () => {
-    const res = await axios.get('http://localhost:3005/question');
-    const data = res.data.reverse();
-
-    setHomeData(data);
+    await axios
+      .get(
+        'http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions?page=1&size=10',
+      )
+      .then((res) => setQuestions(res.data.data))
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
@@ -86,15 +98,23 @@ function App() {
       <GlobalStyle />
       <Header />
       <Routes>
-        <Route path="/" element={<Home homeData={homeData} />} />
-        <Route path="/questions" element={<Questions homeData={homeData} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Home questions={questions} />} />
+        <Route
+          path="/questions"
+          element={<Questions questions={questions} />}
+        />
+        <Route path="/users/login" element={<Login />} />
+        <Route path="/users/signup" element={<Signup />} />
         <Route path="/users/logout" element={<Logout />} />
         <Route path="/questions/ask" element={<QuestionAsk />} />
         <Route
           path="/questions/:questionId"
           element={<QuestionDetail loginUsername={loginUsername} />}
+        />
+        <Route path="/questions/edit/:questionId" element={<QuestionEdit />} />
+        <Route
+          path="*"
+          element={<div style={{ marginTop: '53px' }}>404</div>}
         />
       </Routes>
     </>

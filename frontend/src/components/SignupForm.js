@@ -119,18 +119,33 @@ const SignupForm = ({
   const handleSignupButton = (e) => {
     e.preventDefault();
 
-    console.log(`displayName:${displayName},signupEmail:${signupEmail},`);
+    console.log(
+      `email:${signupEmail},password:${signupPassword},name:${displayName}`,
+    );
+
     const reqbody = {
       email: signupEmail,
       password: signupPassword,
       name: displayName,
     };
+    const headers = {
+      'Content-Type': 'application/json',
+      authorization: '',
+    };
+    console.log({ headers });
+
     axios
-      .post('https://jsonplaceholder.typicode.com/members/signup', {
-        data: JSON.stringify(reqbody),
+      .post(
+        'http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/members/signup',
+        JSON.stringify(reqbody),
+        { headers },
+      )
+      .then((res) => {
+        console.log(res);
       })
-      .then((res) => console.log(res))
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <Sign onSubmit={(e) => handleSignupButton(e)}>

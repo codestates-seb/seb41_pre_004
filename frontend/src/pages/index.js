@@ -12,7 +12,7 @@ import {
 import { Desktop } from '../components/Responsive';
 import HomeList from '../components/HomeList';
 
-const Home = ({ homeData }) => {
+const Home = ({ questions }) => {
   return (
     <>
       <ContainerWrapper>
@@ -20,8 +20,8 @@ const Home = ({ homeData }) => {
           <Navbar />
           <Content>
             <ContentBlock>
-              <QuestionHeader></QuestionHeader>
-              <HomeList homeData={homeData} />
+              <QuestionHeader tab={'Top Questions'} />
+              <HomeList questions={questions} />
             </ContentBlock>
             <Desktop>
               <SideBlock>

@@ -1,11 +1,11 @@
 import React from 'react';
 import Homeitem from './HomeItem';
 
-function HomeList({ homeData }) {
+function HomeList({ questions }) {
   return (
     <>
-      {homeData.map((el) => {
-        return <Homeitem question={el} key={el.id} />;
+      {questions.map((question) => {
+        return <Homeitem question={question} key={question.questionId} />;
       })}
     </>
   );

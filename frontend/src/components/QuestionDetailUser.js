@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 import handshakeIcon from '../assets/icons/handshakeIcon.svg';
+import { Link } from 'react-router-dom';
 
 const QuestionDetailUser = ({ question, loginUsername }) => {
   return (
@@ -9,15 +10,23 @@ const QuestionDetailUser = ({ question, loginUsername }) => {
         <LoginBlock>
           <ButtonBlock>
             <Mobile>
-              <DetailButton>Edit</DetailButton>
+              <Link to={`/questions/edit/${question.id}`} state={question}>
+                <DetailButton>Edit</DetailButton>
+              </Link>
               <DetailButton>Delete</DetailButton>
             </Mobile>
+
             <Tablet>
-              <TabletDetailButton>Edit</TabletDetailButton>
+              <Link to={`/questions/edit/${question.id}`} state={question}>
+                <TabletDetailButton>Edit</TabletDetailButton>
+              </Link>
               <TabletDetailButton>Delete</TabletDetailButton>
             </Tablet>
+
             <Desktop>
-              <TabletDetailButton>Edit</TabletDetailButton>
+              <Link to={`/questions/edit/${question.id}`} state={question}>
+                <TabletDetailButton>Edit</TabletDetailButton>
+              </Link>
               <TabletDetailButton>Delete</TabletDetailButton>
             </Desktop>
           </ButtonBlock>
