@@ -136,9 +136,11 @@ function AskQuestionList() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     const token = localStorage.getItem('token');
     const parse = JSON.parse(token);
     console.log(parse.authorization);
+
     const header = {
       headers: {
         'Content-Type': `application/json`,

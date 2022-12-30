@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import SignupButton from './SignupButton';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const DisplayNameInput = styled.input.attrs({
   type: 'text',
@@ -116,6 +117,8 @@ const SignupForm = ({
   signupPassword,
   setSignupPassword,
 }) => {
+  const navigate = useNavigate();
+
   const handleSignupButton = (e) => {
     e.preventDefault();
 
@@ -146,6 +149,8 @@ const SignupForm = ({
       .catch((err) => {
         console.log(err);
       });
+    navigate('/');
+    window.location.reload();
   };
   return (
     <Sign onSubmit={(e) => handleSignupButton(e)}>

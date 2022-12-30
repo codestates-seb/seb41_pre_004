@@ -18,10 +18,7 @@ const LoginInputForm = () => {
       username: loginEmail,
       password: loginPassword,
     };
-    /*
-      /auth/login
-        { "username" : “kcd@gmail.com", "password" : "1111" }
-    */
+
     const headers = {
       'Content-Type': 'application/json',
     };
