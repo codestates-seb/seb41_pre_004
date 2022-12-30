@@ -16,9 +16,9 @@ import {
 } from '../styles/contentStyle';
 import { useState } from 'react';
 
-const AnswerItem = ({ loginUsername }) => {
+const AnswerItem = ({ loginUsername, answers }) => {
+  console.log(answers);
   const question = useLocation().state;
-  const [answer, setAnswer] = useState('');
 
   return (
     <>
@@ -92,7 +92,10 @@ const AnswerItem = ({ loginUsername }) => {
                 </VoteButton>
               </PostLeft>
               <AnswerRight>
-                <PostText>{question.content}</PostText>
+                <PostText>
+                  {answers.content}
+                  {/* ㅇㄴㄹㅇ */}
+                </PostText>
 
                 <QuestionUser>
                   <QuestionDetailUser

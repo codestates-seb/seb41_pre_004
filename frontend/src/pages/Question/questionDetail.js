@@ -9,6 +9,7 @@ import Footer from '../../components/Footer';
 import QuestionDetailUser from '../../components/QuestionDetailUser';
 import AnsMarkdown from '../../components/AnswerMarkdown';
 import AnswerItem from '../../components/AnswerItem';
+import axios from 'axios';
 
 import {
   ContainerWrapper,
@@ -18,11 +19,58 @@ import {
   ContentBlock,
   DetailSideBlock,
 } from '../../styles/contentStyle';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const QuestionDetail = ({ loginUserEmail }) => {
   const question = useLocation().state;
   const [answer, setAnswer] = useState('');
+  const [answers, setAnswers] = useState('');
+
+  const fetchData = async () => {
+    await axios
+      .get(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers?page=1&size=10`,
+      )
+      .then((res) => setAnswers(res.data.data))
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    const parse = JSON.parse(token);
+    console.log(parse.authorization);
+
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        authorization: parse.authorization,
+      },
+    };
+
+    let data = JSON.stringify({
+      content: answer,
+    });
+
+    axios
+      .post(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers`,
+        data,
+        header,
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // window.location.reload();
+  }
 
   return (
     <>
@@ -196,9 +244,9 @@ const QuestionDetail = ({ loginUserEmail }) => {
                       </PostRight>
                     </PostQuestion>
                     <PostAnswer>
-                      <AnswerItem />
+                      <AnswerItem answers={answers} setAnswer={setAnswer} />
                       <Answer>Your Answer</Answer>
-                      <form>
+                      <form onSubmit={handleSubmit}>
                         <AnsMarkdown setAnswer={setAnswer} />
                         <AnswerBtn>
                           <button type="submit">Post your Answer</button>
