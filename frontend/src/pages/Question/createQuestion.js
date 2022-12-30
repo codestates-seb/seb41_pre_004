@@ -136,32 +136,22 @@ function AskQuestionList() {
 
   function handleSubmit(e) {
     e.preventDefault();
-<<<<<<< HEAD
+
+    const token = localStorage.getItem('token');
+    const parse = JSON.parse(token);
+    console.log(parse.authorization);
 
     const header = {
       headers: {
         'Content-Type': `application/json`,
-        Authorization: localStorage.getItem('token'),
+        authorization: parse.authorization,
       },
-=======
-    const token = localStorage.getItem('token');
-    const parse  = JSON.parse(token);
-    console.log(parse.authorization)
-    const header = {
-      headers: {
-        'Content-Type': `application/json`,
-        authorization: parse.authorization
-      }
->>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
     };
 
     let data = JSON.stringify({
       title: title,
       content: content,
-<<<<<<< HEAD
-=======
       tags: tags.split(' '),
->>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
     });
 
     axios
@@ -177,13 +167,8 @@ function AskQuestionList() {
         console.log(error);
       });
 
-<<<<<<< HEAD
     navigate(`/`);
     window.location.reload();
-=======
-    // navigate(`/`);
-    // window.location.reload();
->>>>>>> 682a352c6f9186a8b87cdc5f51bffe66d9565815
   }
 
   const handleSetTitle = (event) => {
