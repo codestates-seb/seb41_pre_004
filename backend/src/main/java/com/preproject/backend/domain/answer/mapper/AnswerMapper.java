@@ -10,8 +10,10 @@ import com.preproject.backend.domain.question.entity.Question;
 import lombok.Builder;
 import org.mapstruct.Mapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
@@ -25,42 +27,60 @@ public interface AnswerMapper {
 
         return answer;
     }
-//    default Answer answerPatchDtoToAnswer(long questionId, AnswerDto.Patch answerPatchDto) {
-//        Answer answer = new Answer();
-//        answer.setContent(answerPatchDto.getContent());
-//
-//        Question question = new Question();
-//        question.setQuestionId(questionId);
-//        answer.setQuestion(question);
-//
-//        return answer;
-//    }
 
     Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPatchDto);
-    AnswerDto.Response answerToAnswerResponse(Answer answer);
-    List<AnswerDto.Response> answersToAnswersResponses(List<Answer> answers);
+    //AnswerDto.Response answerToAnswerResponse(Answer answer);
 
-//    default AnswerDto.Response answerToAnswerResponseDto(Answer answer) {
-//        Member member = answer.getMember();
-//        List<Comment> comments = answer.getComments();
+//        default AnswerDto.Response answerToAnswerResponse(Answer answer) {
+//            Member member = answer.getMember();
+//            List<Comment> comments = answer.getComments();
 //
-//        List<CommentDto.Response> commentResponse
-//                = comments.stream().map(comment ->
-//                        new CommentDto.Response(comment.getCommentId(),
-//                                comment.getContent(),
-//                                comment.getCreatedAt(),
-//                                comment.getModifiedAt()))
-//                .collect(Collectors.toList());
+//            List<CommentDto.Response> commentResponse
+//                    = comments.stream().map(comment ->
+//                            new CommentDto.Response(comment.getCommentId(),
+//                                    comment.getContent(),
+//                                    comment.getCreatedAt(),
+//                                    comment.getModifiedAt()))
+//                    .collect(Collectors.toList());
 //
-//        return AnswerDto.Response.builder()
-//                .answerId(answer.getAnswerId())
-//                .questionId(answer.getQuestion().getQuestionId())
-//                .content(answer.getContent())
-//                .voteAnswer(answer.getVoteAnswers())
-//                .createdAt(answer.getCreatedAt())
-//                .modifiedAt(answer.getModifiedAt())
-//                .build();
+//            return AnswerDto.Response.builder()
+//                    .answerId(answer.getAnswerId())
+//                    .questionId(answer.getQuestion().getQuestionId())
+//                    .content(answer.getContent())
+////                .voteAnswer(answer.getVoteAnswers())
+//                    .createdAt(answer.getCreatedAt())
+//                    .modifiedAt(answer.getModifiedAt())
+//                    .build();
 //    }
 
-    MemberDto.Response memberToMemberResponseDto(Member member);
+    default AnswerDto.Response answerToAnswerResponse(Answer answer) {
+        if (answer == null) {
+            return null;
+        }
+        long answerId;
+        long questionId;
+        String currEmail;
+        String content;
+//        long voteAnswer; // TODO voteAnswer 기본 구현 이후
+        LocalDateTime createdAt;
+        LocalDateTime modifiedAt;
+
+        answerId = answer.getAnswerId();
+        questionId = answer.getQuestion().getQuestionId();
+        currEmail = answer.getMember().getEmail();
+        content = answer.getContent();
+        createdAt = answer.getCreatedAt();
+        modifiedAt = answer.getModifiedAt();
+
+        List<CommentDto.Response> comments = answer.getComments().stream()
+                .map(comment -> new CommentDto.Response(comment.getCommentId(), comment.getAnswer().getAnswerId(), comment.getMember().getEmail(), comment.getContent(), comment.getCreatedAt(), comment.getModifiedAt()))
+                .collect(Collectors.toList());
+
+        AnswerDto.Response response = new AnswerDto.Response(answerId,questionId,currEmail,content,createdAt,modifiedAt,comments);
+
+        return response;
+    }
+
+    List<AnswerDto.Response> answersToAnswersResponses(List<Answer> answers);
+    //MemberDto.Response memberToMemberResponseDto(Member member);
 }

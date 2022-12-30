@@ -1,1 +1,0 @@
-//top question, all questions 에서 클릭된 조건으로 게시글을 랜더링한다.  최근/조회수/추천수

@@ -39,6 +39,7 @@ public class Answer extends Auditable {
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
-    private List<VoteAnswer> voteAnswers;
+    // TODO voteAnswer 기본 구현 이후 다시
+//    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
+//    private List<VoteAnswer> voteAnswers;
 }

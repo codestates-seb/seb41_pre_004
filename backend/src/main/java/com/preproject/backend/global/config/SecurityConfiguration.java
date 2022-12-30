@@ -8,6 +8,7 @@ import com.preproject.backend.global.auth.handler.MemberAuthenticationFailureHan
 import com.preproject.backend.global.auth.handler.MemberAuthenticationSuccessHandler;
 import com.preproject.backend.global.auth.jwt.JwtTokenizer;
 import com.preproject.backend.global.auth.utils.CustomAuthorityUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,33 +23,26 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-/**
- * authenticationEntryPoint와 accessDeniedHandler 추가
- */
 @Configuration
 @EnableWebSecurity(debug = true)
+@RequiredArgsConstructor
 public class SecurityConfiguration {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
 
-    public SecurityConfiguration(JwtTokenizer jwtTokenizer,
-                                   CustomAuthorityUtils authorityUtils) {
-        this.jwtTokenizer = jwtTokenizer;
-        this.authorityUtils = authorityUtils;
-    }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .headers().frameOptions().sameOrigin()
+            .headers().frameOptions().disable()
             .and()
             .csrf().disable()
-            .cors(withDefaults())
+            .cors().and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .formLogin().disable()
@@ -76,17 +70,6 @@ public class SecurityConfiguration {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
-
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
@@ -99,10 +82,10 @@ public class SecurityConfiguration {
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
 
-
             builder
                 .addFilter(jwtAuthenticationFilter)
                 .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
         }
     }
 }
+

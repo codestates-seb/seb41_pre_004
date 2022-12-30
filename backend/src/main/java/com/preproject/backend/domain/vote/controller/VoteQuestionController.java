@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/questions/vote")
+@RequestMapping("/questions/{question-id}/vote")
 @Validated
 @AllArgsConstructor
 public class VoteQuestionController {
-//    private VoteService voteService;
-//
-//    @PostMapping
-//    public ResponseEntity vote(@PathVariable(name = "question-id") long questionId,
-//                               @Valid @RequestBody VoteDto.Post post) {
-//        VoteDto.Response response;
-//        if (post.getCount() == 1) {
-//            response = voteService.questionUp(questionId);
-//        } else {
-//            response = voteService.questionDown(questionId);
-//        }
-//        return new ResponseEntity(response, HttpStatus.OK);
-//    }
+    private VoteService voteService;
+
+    @PostMapping
+    public ResponseEntity vote(@PathVariable(name = "question-id") long questionId,
+                               @Valid @RequestBody VoteDto.Post post) {
+        VoteDto.Response response;
+        if (post.getCount() == 1) {
+            response = voteService.questionUp(questionId);
+        } else {
+            response = voteService.questionDown(questionId);
+        }
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
 }
