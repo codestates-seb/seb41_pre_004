@@ -193,6 +193,8 @@ const QuestionDetail = ({ loginUsername }) => {
                     <Sidebar />
                   </DetailSideBlock>
                 </PostSidebar>
+
+                {/* 작성 */}
               </ContentBlock>
             </DesktopContent>
           </Desktop>

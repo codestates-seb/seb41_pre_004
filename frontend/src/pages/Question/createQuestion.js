@@ -146,6 +146,20 @@ function AskQuestionList() {
       }
     };
 
+<<<<<<< HEAD
+=======
+    const token = localStorage.getItem('token');
+    const parse = JSON.parse(token);
+    console.log(parse.authorization);
+
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        authorization: parse.authorization,
+      },
+    };
+
+>>>>>>> 3fc3a8dead292b4f7b3698b4452e2ab80765b90e
     let data = JSON.stringify({
       title: title,
       content: content,
@@ -156,7 +170,11 @@ function AskQuestionList() {
       .post(
         `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions`,
         data,
+<<<<<<< HEAD
         header
+=======
+        header,
+>>>>>>> 3fc3a8dead292b4f7b3698b4452e2ab80765b90e
       )
       .then(function (response) {
         console.log(response);
@@ -165,8 +183,13 @@ function AskQuestionList() {
         console.log(error);
       });
 
+<<<<<<< HEAD
     // navigate(`/`);
     // window.location.reload();
+=======
+    navigate(`/`);
+    window.location.reload();
+>>>>>>> 3fc3a8dead292b4f7b3698b4452e2ab80765b90e
   }
 
   const handleSetTitle = (event) => {

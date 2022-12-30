@@ -15,37 +15,27 @@ const LoginInputForm = () => {
     console.log(`loginEmail: ${loginEmail}`);
     console.log(`loginPassword: ${loginPassword}`);
     const reqbody = {
-
-      username: loginEmail,
-      password: loginPassword,
+      id: 13,
+      loginEmail: loginEmail,
+      loginPassword: loginPassword,
     };
     /*
       /auth/login
         { "username" : “kcd@gmail.com", "password" : "1111" }
     */
-    const headers = {
-      'Content-Type': 'application/json',
-    }
 
     axios
       .post(
-        'http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/auth/login',
-        JSON.stringify(reqbody),headers
+        'https://jsonplaceholder.typicode.com/auth/login',
+        JSON.stringify(reqbody),
       )
-      .then((res) =>{
-        window.alert('로그인 성공!!');
-        localStorage.setItem('token', JSON.stringify(res.headers));
-        navigate('../../')
-        
-
-      }) // 토큰이나 쿠키,세션등 인증정보를 가진채로 로그인된 메인헤더페이지로 리로드
+      .then((res) => console.log(res)) // 토큰이나 쿠키,세션등 인증정보를 가진채로 로그인된 메인헤더페이지로 리로드
       .catch((err) => {
         setLoginEmail('');
         setLoginPassword('');
         window.alert('로그인 정보가 일치하지 않습니다!!');
       });
-    }
-      
+
     return (
       <LoginForm onSubmit={(e) => handleSubmitButton(e)}>
         <EmailForm loginEmail={loginEmail} setLoginEmail={setLoginEmail} />
@@ -57,9 +47,7 @@ const LoginInputForm = () => {
       </LoginForm>
     );
   };
-
-
-
+};
 
 const LoginForm = styled.form`
   display: flex;

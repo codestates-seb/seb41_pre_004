@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import SignupButton from './SignupButton';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const DisplayNameInput = styled.input.attrs({
   type: 'text',
@@ -116,10 +117,14 @@ const SignupForm = ({
   signupPassword,
   setSignupPassword,
 }) => {
+  const navigate = useNavigate();
+
   const handleSignupButton = (e) => {
     e.preventDefault();
 
-    console.log(`email:${signupEmail},password:${signupPassword},name:${displayName}`);
+    console.log(
+      `email:${signupEmail},password:${signupPassword},name:${displayName}`,
+    );
 
     const reqbody = {
       email: signupEmail,
@@ -127,22 +132,25 @@ const SignupForm = ({
       name: displayName,
     };
     const headers = {
-      "Content-Type": "application/json",
-      authorization: ''  
-    }
-    console.log({headers})
-    
+      'Content-Type': 'application/json',
+      authorization: '',
+    };
+    console.log({ headers });
+
     axios
-      .post('http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/members/signup',JSON.stringify(reqbody),{headers})
+      .post(
+        'http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/members/signup',
+        JSON.stringify(reqbody),
+        { headers },
+      )
       .then((res) => {
-        console.log(res)
-
-
+        console.log(res);
       })
       .catch((err) => {
-        console.log(err)
-
+        console.log(err);
       });
+    navigate('/');
+    window.location.reload();
   };
   return (
     <Sign onSubmit={(e) => handleSignupButton(e)}>
