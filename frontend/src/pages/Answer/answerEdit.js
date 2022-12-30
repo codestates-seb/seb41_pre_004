@@ -5,7 +5,7 @@ import AskQuestionHeader from '../../components/AskQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
 import axios from 'axios';
-import { json, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AskNotice = styled.div`
   width: 100%;
@@ -137,13 +137,13 @@ function AskQuestionList() {
   function handleSubmit(e) {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    const parse  = JSON.parse(token);
-    console.log(parse.authorization)
+    const parse = JSON.parse(token);
+    console.log(parse.authorization);
     const header = {
       headers: {
         'Content-Type': `application/json`,
-        authorization: parse.authorization
-      }
+        authorization: parse.authorization,
+      },
     };
 
     let data = JSON.stringify({
@@ -156,7 +156,7 @@ function AskQuestionList() {
       .post(
         `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions`,
         data,
-        header
+        header,
       )
       .then(function (response) {
         console.log(response);

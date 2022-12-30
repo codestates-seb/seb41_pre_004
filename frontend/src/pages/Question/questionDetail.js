@@ -116,7 +116,9 @@ const QuestionDetail = ({ loginUserEmail }) => {
                       </VoteButton>
                     </PostLeft>
                     <TabletRight>
-                      <PostText>{question.content}</PostText>
+                      <PostText
+                        dangerouslySetInnerHTML={{ __html: question.content }}
+                      />
                       <TagBlock>
                         {/* {question.tags.map((tag, idx) => (
                         <Tag key={idx}>{tag}</Tag>
@@ -192,7 +194,9 @@ const QuestionDetail = ({ loginUserEmail }) => {
                       </VoteButton>
                     </PostLeft>
                     <TabletRight>
-                      <PostText>{question.content}</PostText>
+                      <PostText
+                        dangerouslySetInnerHTML={{ __html: question.content }}
+                      />
                       <TagBlock>
                         {/* {question.tags.map((tag, idx) => (
                         <Tag key={idx}>{tag}</Tag>
@@ -269,7 +273,9 @@ const QuestionDetail = ({ loginUserEmail }) => {
                         </VoteButton>
                       </PostLeft>
                       <PostRight>
-                        <PostText>{question.content}</PostText>
+                        <PostText
+                          dangerouslySetInnerHTML={{ __html: question.content }}
+                        />
                         <TagBlock>
                           {/* {question.tags.map((tag, idx) => (
                           <Tag key={idx}>{tag}</Tag>
