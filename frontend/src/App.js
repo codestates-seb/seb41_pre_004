@@ -12,24 +12,14 @@ import Questions from './pages/Question';
 import QuestionAsk from './pages/Question/createQuestion';
 import QuestionDetail from './pages/Question/questionDetail';
 import QuestionEdit from './pages/Question/questionEdit';
-
+import AnswerEdit from './pages/AnswerEdit';
+import { useSelector } from 'react-redux';
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
   * {
     box-sizing: border-box;
     margin: 0;
-  }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-  a,
-  input,
-  textarea,
-  button {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   body {
@@ -69,8 +59,7 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [questions, setQuestions] = useState([]);
-  const loginUsername = 'a';
-
+  const loginUserEmail = useSelector(state=>state.email);
   const fetchData = async () => {
     await axios
       .get(
@@ -100,9 +89,10 @@ function App() {
         <Route path="/questions/ask" element={<QuestionAsk />} />
         <Route
           path="/questions/:questionId"
-          element={<QuestionDetail loginUsername={loginUsername} />}
+          element={<QuestionDetail loginUserEmail={loginUserEmail}/>}
         />
         <Route path="/questions/edit/:questionId" element={<QuestionEdit />} />
+        <Route path="/answeredit" element={<AnswerEdit loginUsername={localStorage.getItem('loginUsername')}/>} />
         <Route
           path="*"
           element={<div style={{ marginTop: '53px' }}>404</div>}

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import SignupButton from './SignupButton';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const DisplayNameInput = styled.input.attrs({
   type: 'text',
@@ -116,10 +117,10 @@ const SignupForm = ({
   signupPassword,
   setSignupPassword,
 }) => {
+  const navigate = useNavigate();
   const handleSignupButton = (e) => {
     e.preventDefault();
 
-    console.log(`email:${signupEmail},password:${signupPassword},name:${displayName}`);
 
     const reqbody = {
       email: signupEmail,
@@ -135,8 +136,8 @@ const SignupForm = ({
     axios
       .post('http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/members/signup',JSON.stringify(reqbody),{headers})
       .then((res) => {
-        console.log(res)
-
+        window.alert('회원가입 성공 !');
+        navigate('../users/login');
 
       })
       .catch((err) => {
