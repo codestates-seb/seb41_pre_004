@@ -20,7 +20,7 @@ import {
 } from '../../styles/contentStyle';
 import { useState } from 'react';
 
-const QuestionDetail = ({ loginUsername }) => {
+const QuestionDetail = ({ loginUserEmail }) => {
   const question = useLocation().state;
   const [answer, setAnswer] = useState('');
 
@@ -76,7 +76,7 @@ const QuestionDetail = ({ loginUsername }) => {
                     <QuestionUser>
                       <QuestionDetailUser
                         question={question}
-                        loginUsername={loginUsername}
+                        loginUserEmail={loginUserEmail}
                       />
                     </QuestionUser>
                   </PostRight>
@@ -132,7 +132,7 @@ const QuestionDetail = ({ loginUsername }) => {
                     <QuestionUser>
                       <QuestionDetailUser
                         question={question}
-                        loginUsername={loginUsername}
+                        loginUserEmail={loginUserEmail}
                       />
                     </QuestionUser>
                   </PostRight>
@@ -189,7 +189,7 @@ const QuestionDetail = ({ loginUsername }) => {
                       <QuestionUser>
                         <QuestionDetailUser
                           question={question}
-                          loginUsername={loginUsername}
+                          loginUserEmail={loginUserEmail}
                         />
                       </QuestionUser>
                     </PostRight>

@@ -22,7 +22,7 @@ const AnswerItem = ({ loginUsername }) => {
 
   return (
     <>
-      <ContainerFlex>
+      <AnswerContainer>
         <Mobile>
           <MobileContent>
             <ContentBlock>
@@ -106,10 +106,16 @@ const AnswerItem = ({ loginUsername }) => {
             </ContentBlock>
           </DesktopContent>
         </Desktop>
-      </ContainerFlex>
+      </AnswerContainer>
     </>
   );
 };
+
+const AnswerContainer = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 709px;
+`;
 
 const AnswerBlock = styled.div`
   display: flex;
