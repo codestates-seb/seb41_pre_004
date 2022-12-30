@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
-import { EditorState } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 const MyBlock = styled.div`
   .wrapper-class {
@@ -32,9 +33,13 @@ const AnsMarkdown = ({ setAnswer }) => {
     setEditorState(editorState);
   };
 
+  const editorToHtml = draftToHtml(
+    convertToRaw(editorState.getCurrentContent()),
+  );
+
   useEffect(() => {
-    setAnswer(editorState.getCurrentContent().getPlainText());
-  }, [editorState, setAnswer]);
+    setAnswer(editorToHtml);
+  }, [editorState, editorToHtml, setAnswer]);
 
   return (
     <MyBlock>

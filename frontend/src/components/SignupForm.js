@@ -145,8 +145,6 @@ const SignupForm = ({
       .catch((err) => {
         console.log(err);
       });
-    navigate('/');
-    window.location.reload();
   };
   return (
     <Sign onSubmit={(e) => handleSignupButton(e)}>

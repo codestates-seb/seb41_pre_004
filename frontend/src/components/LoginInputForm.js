@@ -5,18 +5,16 @@ import LoginButton from './LoginButtons';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 const LoginInputForm = () => {
   const [loginEmail, setLoginEmail] = useState('');
-  const [loginPassword, setLoginPassword] = useState();
+  const [loginPassword, setLoginPassword] = useState('');
   const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
 
   const handleSubmitButton = (e) => {
     e.preventDefault();
-    console.log(`loginEmail: ${loginEmail}`);
-    console.log(`loginPassword: ${loginPassword}`);
+
     const reqbody = {
       username: loginEmail,
       password: loginPassword,

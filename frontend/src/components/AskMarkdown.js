@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
-import { EditorState } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 const MyBlock = styled.div`
   .wrapper-class {
@@ -33,9 +34,13 @@ const TestEditorForm = ({ setContent }) => {
     setEditorState(editorState);
   };
 
+  const editorToHtml = draftToHtml(
+    convertToRaw(editorState.getCurrentContent()),
+  );
+
   useEffect(() => {
-    setContent(editorState.getCurrentContent().getPlainText());
-  }, [editorState, setContent]);
+    setContent(editorToHtml);
+  }, [editorState, editorToHtml, setContent]);
 
   return (
     <MyBlock>

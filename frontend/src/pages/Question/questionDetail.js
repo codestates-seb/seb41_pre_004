@@ -24,7 +24,7 @@ import { useEffect, useState } from 'react';
 const QuestionDetail = ({ loginUserEmail }) => {
   const question = useLocation().state;
   const [answer, setAnswer] = useState('');
-  const [answers, setAnswers] = useState('');
+  const [answers, setAnswers] = useState([]);
 
   const fetchData = async () => {
     await axios
@@ -37,13 +37,13 @@ const QuestionDetail = ({ loginUserEmail }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setAnswer]);
 
   function handleSubmit(e) {
     e.preventDefault();
     const token = localStorage.getItem('token');
     const parse = JSON.parse(token);
-    console.log(parse.authorization);
 
     const header = {
       headers: {
@@ -105,29 +105,49 @@ const QuestionDetail = ({ loginUserEmail }) => {
                   </DateBlock>
                 </DetailHeader>
                 <Post>
-                  <PostLeft>
-                    <VoteButton>
-                      <img src={arrowUpIcon} alt="Vote Up" />
-                    </VoteButton>
-                    <VoteCount>0</VoteCount>
-                    <VoteButton>
-                      <img src={arrowDownIcon} alt="Vote Down" />
-                    </VoteButton>
-                  </PostLeft>
-                  <PostRight>
-                    <PostText>{question.content}</PostText>
-                    <TagBlock>
-                      {/* {question.tags.map((tag, idx) => (
+                  <PostQuestion>
+                    <PostLeft>
+                      <VoteButton>
+                        <img src={arrowUpIcon} alt="Vote Up" />
+                      </VoteButton>
+                      <VoteCount>0</VoteCount>
+                      <VoteButton>
+                        <img src={arrowDownIcon} alt="Vote Down" />
+                      </VoteButton>
+                    </PostLeft>
+                    <TabletRight>
+                      <PostText>{question.content}</PostText>
+                      <TagBlock>
+                        {/* {question.tags.map((tag, idx) => (
                         <Tag key={idx}>{tag}</Tag>
                       ))} */}
-                    </TagBlock>
-                    <QuestionUser>
-                      <QuestionDetailUser
-                        question={question}
-                        loginUserEmail={loginUserEmail}
-                      />
-                    </QuestionUser>
-                  </PostRight>
+                      </TagBlock>
+                      <QuestionUser>
+                        <QuestionDetailUser
+                          question={question}
+                          loginUserEmail={loginUserEmail}
+                        />
+                      </QuestionUser>
+                    </TabletRight>
+                  </PostQuestion>
+                  <PostAnswer>
+                    {answers.map((el, idx) => {
+                      return (
+                        <AnswerItem
+                          key={idx}
+                          answer={el}
+                          setAnswer={setAnswer}
+                        />
+                      );
+                    })}
+                    <Answer>Your Answer</Answer>
+                    <form onSubmit={handleSubmit}>
+                      <AnsMarkdown setAnswer={setAnswer} />
+                      <AnswerBtn>
+                        <button type="submit">Post your Answer</button>
+                      </AnswerBtn>
+                    </form>
+                  </PostAnswer>
                 </Post>
               </ContentBlock>
             </MobileContent>
@@ -161,29 +181,49 @@ const QuestionDetail = ({ loginUserEmail }) => {
                   </DateBlock>
                 </DetailHeader>
                 <Post>
-                  <PostLeft>
-                    <VoteButton>
-                      <img src={arrowUpIcon} alt="Vote Up" />
-                    </VoteButton>
-                    <VoteCount>0</VoteCount>
-                    <VoteButton>
-                      <img src={arrowDownIcon} alt="Vote Down" />
-                    </VoteButton>
-                  </PostLeft>
-                  <PostRight>
-                    <PostText>{question.content}</PostText>
-                    <TagBlock>
-                      {/* {question.tags.map((tag, idx) => (
+                  <PostQuestion>
+                    <PostLeft>
+                      <VoteButton>
+                        <img src={arrowUpIcon} alt="Vote Up" />
+                      </VoteButton>
+                      <VoteCount>0</VoteCount>
+                      <VoteButton>
+                        <img src={arrowDownIcon} alt="Vote Down" />
+                      </VoteButton>
+                    </PostLeft>
+                    <TabletRight>
+                      <PostText>{question.content}</PostText>
+                      <TagBlock>
+                        {/* {question.tags.map((tag, idx) => (
                         <Tag key={idx}>{tag}</Tag>
                       ))} */}
-                    </TagBlock>
-                    <QuestionUser>
-                      <QuestionDetailUser
-                        question={question}
-                        loginUserEmail={loginUserEmail}
-                      />
-                    </QuestionUser>
-                  </PostRight>
+                      </TagBlock>
+                      <QuestionUser>
+                        <QuestionDetailUser
+                          question={question}
+                          loginUserEmail={loginUserEmail}
+                        />
+                      </QuestionUser>
+                    </TabletRight>
+                  </PostQuestion>
+                  <PostAnswer>
+                    {answers.map((el, idx) => {
+                      return (
+                        <AnswerItem
+                          key={idx}
+                          answer={el}
+                          setAnswer={setAnswer}
+                        />
+                      );
+                    })}
+                    <Answer>Your Answer</Answer>
+                    <form onSubmit={handleSubmit}>
+                      <AnsMarkdown setAnswer={setAnswer} />
+                      <AnswerBtn>
+                        <button type="submit">Post your Answer</button>
+                      </AnswerBtn>
+                    </form>
+                  </PostAnswer>
                 </Post>
               </ContentBlock>
             </MobileContent>
@@ -244,7 +284,15 @@ const QuestionDetail = ({ loginUserEmail }) => {
                       </PostRight>
                     </PostQuestion>
                     <PostAnswer>
-                      <AnswerItem answers={answers} setAnswer={setAnswer} />
+                      {answers.map((el, idx) => {
+                        return (
+                          <AnswerItem
+                            key={idx}
+                            answer={el}
+                            setAnswer={setAnswer}
+                          />
+                        );
+                      })}
                       <Answer>Your Answer</Answer>
                       <form onSubmit={handleSubmit}>
                         <AnsMarkdown setAnswer={setAnswer} />
@@ -353,6 +401,10 @@ const PostQuestion = styled.div`
 const PostRight = styled.div`
   flex-grow: 1;
   padding-right: 16px;
+`;
+
+const TabletRight = styled(PostRight)`
+  padding-right: 0;
 `;
 
 const PostLeft = styled.div`
