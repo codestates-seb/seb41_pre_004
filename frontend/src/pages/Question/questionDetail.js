@@ -64,9 +64,9 @@ const QuestionDetail = ({ loginUsername }) => {
                   <PostRight>
                     <PostText>{question.content}</PostText>
                     <TagBlock>
-                      {question.tags.map((tag) => (
+                      {/* {question.tags.map((tag) => (
                         <Tag key={tag}>{tag}</Tag>
-                      ))}
+                      ))} */}
                     </TagBlock>
                     <QuestionUser>
                       <QuestionDetailUser
@@ -120,9 +120,9 @@ const QuestionDetail = ({ loginUsername }) => {
                   <PostRight>
                     <PostText>{question.content}</PostText>
                     <TagBlock>
-                      {question.tags.map((tag) => (
+                      {/* {question.tags.map((tag) => (
                         <Tag key={tag}>{tag}</Tag>
-                      ))}
+                      ))} */}
                     </TagBlock>
                     <QuestionUser>
                       <QuestionDetailUser
@@ -177,9 +177,9 @@ const QuestionDetail = ({ loginUsername }) => {
                     <PostRight>
                       <PostText>{question.content}</PostText>
                       <TagBlock>
-                        {question.tags.map((tag) => (
+                        {/* {question.tags.map((tag) => (
                           <Tag key={tag}>{tag}</Tag>
-                        ))}
+                        ))} */}
                       </TagBlock>
                       <QuestionUser>
                         <QuestionDetailUser

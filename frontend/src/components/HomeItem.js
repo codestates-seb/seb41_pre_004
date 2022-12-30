@@ -15,16 +15,16 @@ function Homeitem({ question }) {
           </QuestionInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.id}`} state={question}>
+              <Link to={`/questions/${question.questionId}`} state={question}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  {question.tags.map((tag) => {
+                  {/* {question.tags.map((tag) => {
                     return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-                  })}
+                  })} */}
                 </QuestionTagUl>
               </QuestionTag>
 
@@ -54,16 +54,16 @@ function Homeitem({ question }) {
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.id}`} state={question}>
+              <Link to={`/questions/${question.questionId}`} state={question}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  {question.tags.map((tag) => {
+                  {/* {question.tags.map((tag) => {
                     return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-                  })}
+                  })} */}
                 </QuestionTagUl>
               </QuestionTag>
 
@@ -92,16 +92,16 @@ function Homeitem({ question }) {
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.id}`} state={question}>
+              <Link to={`/questions/${question.questionId}`} state={question}>
                 <MobileTitle>{question.title}</MobileTitle>
               </Link>
             </QuestionTitle>
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
-                  {question.tags.map((tag) => {
+                  {/* {question.tags.map((tag) => {
                     return <QuestionTaglist key={tag}>{tag}</QuestionTaglist>;
-                  })}
+                  })} */}
                 </QuestionTagUl>
               </QuestionTag>
             </QuestionTagBox>

@@ -71,9 +71,10 @@ function App() {
   const loginUsername = 'a';
 
   const fetchData = async () => {
-    const res = await axios.get('http://localhost:3005/question');
-    const data = res.data.reverse();
-
+    // const res = await axios.get('http://localhost:3005/question');
+    const res = await axios.get('/questions?page=1&size=10');
+    console.log(res.data.data);
+    const data = await res.data.data;
     setHomeData(data);
   };
 
@@ -88,8 +89,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home homeData={homeData} />} />
         <Route path="/questions" element={<Questions homeData={homeData} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/users/login" element={<Login />} />
+        <Route path="/users/signup" element={<Signup />} />
         <Route path="/users/logout" element={<Logout />} />
         <Route path="/questions/ask" element={<QuestionAsk />} />
         <Route

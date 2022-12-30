@@ -5,7 +5,7 @@ function QuestionList({ homeData }) {
   return (
     <>
       {homeData.map((el) => {
-        return <Questionitem question={el} key={el.id} />;
+        return <Questionitem question={el} key={el.questionId} />;
       })}
     </>
   );

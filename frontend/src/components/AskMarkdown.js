@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
@@ -32,7 +32,9 @@ const TestEditorForm = ({ setContent }) => {
     // editorState에 값 설정
     setEditorState(editorState);
   };
-  setContent(editorState.getCurrentContent().getPlainText());
+  useEffect(() => {
+    setContent(editorState.getCurrentContent().getPlainText());
+  }, [setContent, editorState]);
 
   return (
     <MyBlock>

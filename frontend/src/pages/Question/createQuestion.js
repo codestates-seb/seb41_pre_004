@@ -106,7 +106,7 @@ const LinkSpan = styled.span`
 const AskContainer = styled(Container)`
   padding: 0 16px 24px 16px;
 `;
-const AskBtn = styled.button`
+const AskBtn = styled.div`
   button {
     background-color: #0a95ff;
     border: 1px solid transparent;
@@ -137,15 +137,36 @@ function AskQuestionList() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    axios.post(`http://localhost:3005/question`, {
-      title,
-      tags: tags.split(' '),
-      content,
-    });
+    // axios.post(`http://localhost:3005/question`, {
+    // axios.post(
+    //   `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions`,
+    //   {
+    //     title,
+    // tags: tags.split(' '),
+    //       content,
+    //     },
+    //   );
 
+    const config = {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sInVzZXJuYW1lIjoiY2hsd25zZ2hAbmF2ZXIuY29tIiwic3ViIjoiY2hsd25zZ2hAbmF2ZXIuY29tIiwiaWF0IjoxNjcyMzIzNjA1LCJleHAiOjE2NzIzMjcyMDV9.PCziSSf1LKzKxpZUx01KgMwpXnaQiAzUYiKWYAPonxgeBwV0_xRai-hOPcO7mA9FYwaAbMliMD6i37Gf4PfQyg`,
+        //`Bearer ${token}`
+      },
+    };
+
+    // const bodyParameters = {
+    //   title,
+    //   content,
+    // };
+
+    axios
+      .post('/questions', { title, content }, config, { withCredentials: true })
+      .then(console.log)
+      .catch(console.log);
     navigate(`/`);
     window.location.reload();
   }
+
   const handleSetTitle = (event) => {
     let e = event.target.value;
     setTitle(e);
@@ -173,6 +194,21 @@ function AskQuestionList() {
   //   axios.post(`http://localhost:3001/title`, { title, tags });
   //   fetchData();
   // };
+
+  // const headers = {
+  //   'Content-Type': 'application/json',
+  //   Authorization: apiKey,
+  // };
+  // const bodyParameters = {
+  //   title,
+  //   content,
+  // };
+  // const url =
+  //   "'http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions'";
+
+  // axios.post(url, { headers }, bodyParameters);
+
+  //
   return (
     <>
       <ContainerWrapper>
