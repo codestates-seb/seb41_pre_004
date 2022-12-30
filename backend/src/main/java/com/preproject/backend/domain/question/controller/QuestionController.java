@@ -43,6 +43,7 @@ public class QuestionController {
 //        Question question = questionMapper.questionPostDtoToQuestion(post);
         Question createdQuestion = questionService.createQuestion(question, post.getTags());
 
+
         QuestionDto.Response responseDto = customQuestionMapper.questionToResponseCheck(createdQuestion);
         SingleResponseDto<QuestionDto.Response> response = new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(createdQuestion));
 

@@ -41,6 +41,7 @@ public class CustomQuestionMapper implements QuestionMapper {
         LocalDateTime modifiedAt = null;
         int score = 0;
         int viewCount = 0;
+        String currentUserEmail;
 
         questionId = question.getQuestionId();
         title = question.getTitle();
@@ -49,9 +50,10 @@ public class CustomQuestionMapper implements QuestionMapper {
         modifiedAt = question.getModifiedAt();
         score = question.getScore();
         viewCount = question.getViewCount();
+        currentUserEmail = question.getMember().getEmail();
 
-        // debugging purposes
-        question.getQuestionTags().forEach(qt -> System.out.println("tag name: " + qt.getTag().getName()));
+//        //debugging purposes
+//        question.getQuestionTags().forEach(qt -> System.out.println("tag name: " + qt.getTag().getName()));
 
         List<String> tags = question.getQuestionTags().stream()
                 .map(QuestionTag::getTag)
@@ -59,7 +61,9 @@ public class CustomQuestionMapper implements QuestionMapper {
                 .distinct()
                 .collect(Collectors.toList());
 
-        QuestionDto.Response response = new QuestionDto.Response( questionId, title, content, createdAt, modifiedAt, score, tags, viewCount );
+        QuestionDto.Response response =
+                new QuestionDto.Response(
+                        questionId, title, content, createdAt, modifiedAt, score, tags, viewCount, currentUserEmail );
 
         return response;
     }

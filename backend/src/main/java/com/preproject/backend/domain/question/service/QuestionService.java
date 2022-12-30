@@ -99,45 +99,25 @@ public class QuestionService {
         question.setTitle(changedQuestion.getTitle());
         question.setContent(changedQuestion.getContent());
 
-        // tag의 삭제 -> 갯수 줄이기
-        // 새로운 tag 추가 -> Question-Tag 조인 엔티티 생성
-        Set<QuestionTag> tagsToAdd = tagsList.stream()
-                .map(tagName -> {
-                    QuestionTag questionTag = new QuestionTag();
-                    TagEntity tagEntity = tagService.tagCreateUpdate(tagName);
-                    questionTag.setTag(tagEntity);
-                    questionTag.setQuestion(question);
-                    return questionTag;
-                })
-                .collect(Collectors.toSet());
-        Set<QuestionTag> tagsToRemove = new HashSet<>();
-
-        // Find tags to remove and add
-        for (QuestionTag questionTag : question.getQuestionTags()) {
-            String tagName = questionTag.getTag().getName();
-            if (!tagsList.contains(tagName)) {
-                // Tag should be removed
-                tagsToRemove.add(questionTag);
-            } else {
-                // Tag should be kept
-                tagsList.remove(tagName);
-            }
-        }
-
-        // Add remaining tags
-        for (String tagName : tagsList) {
-            TagEntity tagEntity = tagService.tagCreateUpdate(tagName);
-            QuestionTag questionTag = new QuestionTag();
-            questionTag.setTag(tagEntity);
-            questionTag.setQuestion(question);
-            tagsToAdd.add(questionTag);
-        }
-
-        // Remove tags
-        question.getQuestionTags().removeAll(tagsToRemove);
-
-        // Add tags
-        question.getQuestionTags().addAll(tagsToAdd);
+//        Set<QuestionTag> questionTags = question.getQuestionTags();
+//        Set<QuestionTag> tmp = new HashSet<>();
+//        for(QuestionTag questionTag: questionTags){
+//            TagEntity tag = questionTag.getTag();
+//            if(!tagsList.contains(tag.getName())){
+//                tmp.add(questionTag);
+//            } else {
+//                tagsList.remove(tag.getName());
+//            }
+//        }
+//
+//        questionTags.removeAll(tmp);
+//
+//        for(String tagName : tagsList) {
+//            QuestionTag questionTag = new QuestionTag();
+//            questionTag.setQuestion(question);
+//            questionTag.setTag(tagService.tagCreateUpdate(tagName));
+//            questionTags.add(questionTag);
+//        }
 
         return questionRepository.save(question);
     }
