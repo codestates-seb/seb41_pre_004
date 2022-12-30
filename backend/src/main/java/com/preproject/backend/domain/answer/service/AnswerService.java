@@ -2,6 +2,8 @@ package com.preproject.backend.domain.answer.service;
 
 import com.preproject.backend.domain.answer.entity.Answer;
 import com.preproject.backend.domain.answer.repository.AnswerRepository;
+import com.preproject.backend.domain.comment.entity.Comment;
+import com.preproject.backend.domain.comment.service.CommentService;
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.service.MemberService;
 import com.preproject.backend.domain.question.entity.Question;

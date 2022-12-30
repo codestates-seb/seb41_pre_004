@@ -29,9 +29,6 @@ import java.util.Arrays;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-/**
- * authenticationEntryPoint와 accessDeniedHandler 추가
- */
 @Configuration
 @EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
@@ -73,9 +70,6 @@ public class SecurityConfiguration {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-
-
-
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
@@ -87,7 +81,6 @@ public class SecurityConfiguration {
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
-
 
             builder
                 .addFilter(jwtAuthenticationFilter)

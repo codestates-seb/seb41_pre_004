@@ -54,15 +54,15 @@ public class AnswerDto {
 //        public Response(long answerId, long questionId, String content, LocalDateTime createdAt, LocalDateTime modifiedAt, List<CommentDto.Response> comments) {
 //
 //        }
-        public static Response of(Answer answer, List<CommentDto.Response> comments) {
-            return Response.builder()
-                    .answerId(answer.getAnswerId())
-                    .questionId(answer.getQuestion().getQuestionId())
-                    .content(answer.getContent())
-                    .createdAt(answer.getCreatedAt())
-                    .modifiedAt(answer.getModifiedAt())
-                    .comments(comments)
-                    .build();
-        }
+//        public static Response of(Answer answer, List<CommentDto.Response> comments) {
+//            return Response.builder()
+//                    .answerId(answer.getAnswerId())
+//                    .questionId(answer.getQuestion().getQuestionId())
+//                    .content(answer.getContent())
+//                    .createdAt(answer.getCreatedAt())
+//                    .modifiedAt(answer.getModifiedAt())
+//                    .comments(comments)
+//                    .build();
+//        }
     }
 }
