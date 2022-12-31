@@ -11,7 +11,7 @@ export const MobileNavbar = styled.div`
   left: 0;
   width: 240px;
   padding-top: 24px;
-  margin-bottom: 8px;
+  padding-bottom: 8px;
   border-right: 1px solid #d7d9dd;
   border-bottom: 1px solid #d7d9dd;
   background-color: #ffffff;

@@ -4,12 +4,15 @@ import {
   NavMenuButton,
   NavCancleButton,
 } from '../../styles/headerStyle';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const NavButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useSelector((state) => state.menuOpen);
+  const dispatch = useDispatch();
 
   const onToggle = () => {
-    setIsOpen(!isOpen);
+    dispatch({ type: 'TOGGLEMENU', value: isOpen });
   };
 
   return (

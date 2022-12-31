@@ -60,6 +60,7 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   const [questions, setQuestions] = useState([]);
   const loginUserEmail = useSelector((state) => state.email);
+
   const fetchData = async () => {
     await axios
       .get(

@@ -14,8 +14,11 @@ import {
   NavTeams,
   TeamsIcon,
 } from '../../../styles/navbarStyle';
+import { useSelector } from 'react-redux';
 
-const MobileNav = ({ isOpen = false }) => {
+const MobileNav = () => {
+  const isOpen = useSelector((state) => state.menuOpen);
+
   return (
     <>
       {isOpen ? (

@@ -15,7 +15,7 @@ const EmailReducer = (state = initialstate, action) => {
     case 'TOGGLEMENU':
       return {
         ...initialstate,
-        menuOpen: action.value,
+        menuOpen: !action.value,
       };
     default:
       return state;
