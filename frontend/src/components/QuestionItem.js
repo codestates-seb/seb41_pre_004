@@ -119,6 +119,7 @@ const MobileBox = styled(QuestionBox)`
   flex-direction: column;
 `;
 const QuestionInfo = styled.div`
+  width: 108px;
   flex-wrap: wrap;
   display: flex;
   flex-direction: column;
@@ -127,9 +128,10 @@ const QuestionInfo = styled.div`
   gap: 6px;
   margin: 0 16px 4px 0;
 `;
-const MobileInfo = styled(QuestionInfo)`
-  flex-direction: row;
-  align-items: center;
+const MobileInfo = styled.div`
+  display: flex;
+  gap: 6px;
+  margin: 0 16px 4px 0;
 `;
 const QuestionVote = styled.div`
   font-size: 13px;

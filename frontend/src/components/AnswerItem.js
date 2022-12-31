@@ -23,9 +23,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
               </VoteButton>
             </PostLeft>
             <AnswerRight>
-              <PostText
-                dangerouslySetInnerHTML={{ __html: question.content }}
-              />
+              <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
                 <QuestionDetailUser
                   question={question}
@@ -48,9 +46,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
               </VoteButton>
             </PostLeft>
             <AnswerRight>
-              <PostText
-                dangerouslySetInnerHTML={{ __html: question.content }}
-              />
+              <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
                 <QuestionDetailUser
                   question={question}
@@ -73,9 +69,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
               </VoteButton>
             </PostLeft>
             <AnswerRight>
-              <PostText
-                dangerouslySetInnerHTML={{ __html: question.content }}
-              />
+              <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
                 <QuestionDetailUser
                   question={question}

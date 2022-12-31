@@ -26,19 +26,19 @@ const QuestionDetail = ({ loginUserEmail }) => {
   const [answer, setAnswer] = useState('');
   const [answers, setAnswers] = useState([]);
 
-  // const fetchData = async () => {
-  //   await axios
-  //     .get(
-  //       `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
-  //     )
-  //     .then((res) => setAnswers(res.data.data.content))
-  //     .catch((error) => console.log(error));
-  // };
+  const fetchData = async () => {
+    await axios
+      .get(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
+      )
+      .then((res) => setAnswers(res.data.data.answers))
+      .catch((error) => console.log(error));
+  };
 
-  // useEffect(() => {
-  //   fetchData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [setAnswer]);
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setAnswer]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -56,18 +56,18 @@ const QuestionDetail = ({ loginUserEmail }) => {
       content: answer,
     });
 
-    // axios
-    //   .post(
-    //     `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers`,
-    //     data,
-    //     header,
-    //   )
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .post(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers`,
+        data,
+        header,
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     // window.location.reload();
   }

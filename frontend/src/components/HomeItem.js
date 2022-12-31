@@ -117,14 +117,15 @@ const QuestionInfo = styled.div`
   flex-direction: column;
   align-items: flex-end;
   line-height: 17px;
+  gap: 6px;
   margin: 0 16px 4px 0;
 `;
-const MobileInfo = styled(QuestionInfo)`
-  flex-direction: row;
-  align-items: center;
+const MobileInfo = styled.div`
+  display: flex;
+  gap: 6px;
+  margin: 0 16px 4px 0;
 `;
 const QuestionVote = styled.div`
-  /* margin-right: 28px; */
   font-size: 13px;
   color: #0c0d0e;
 `;
@@ -135,6 +136,7 @@ const QuestionContent = styled.div`
   flex-grow: 1;
 `;
 const QuestionTitle = styled.h1`
+  height: 40px;
   margin-bottom: 20px;
 `;
 
