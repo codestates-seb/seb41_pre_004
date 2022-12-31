@@ -8,19 +8,18 @@ import draftToHtml from 'draftjs-to-html';
 const MyBlock = styled.div`
   .wrapper-class {
     width: 100%;
-    max-width: 851px;
     margin-bottom: 4rem;
     margin-top: 30px;
   }
   .editor {
-    height: 500px !important;
+    height: 200px !important;
     border: 1px solid #e4e6e8 !important;
     padding: 5px !important;
     border-radius: 2px !important;
   }
 `;
 
-const TestEditorForm = ({ setContent }) => {
+const AnsMarkdown = ({ setAnswer }) => {
   // const body = (e) => {
   //   setValue(e.target.value);
   // };
@@ -39,8 +38,8 @@ const TestEditorForm = ({ setContent }) => {
   );
 
   useEffect(() => {
-    setContent(editorToHtml);
-  }, [editorState, editorToHtml, setContent]);
+    setAnswer(editorToHtml);
+  }, [editorState, editorToHtml, setAnswer]);
 
   return (
     <MyBlock>
@@ -73,4 +72,4 @@ const TestEditorForm = ({ setContent }) => {
   );
 };
 
-export default TestEditorForm;
+export default AnsMarkdown;

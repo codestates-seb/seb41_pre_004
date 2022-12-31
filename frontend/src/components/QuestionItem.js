@@ -19,7 +19,9 @@ function Questionitem({ question }) {
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
-            <QuestionDesc>{question.content}</QuestionDesc>
+            <QuestionDesc
+              dangerouslySetInnerHTML={{ __html: question.content }}
+            />
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
@@ -59,7 +61,9 @@ function Questionitem({ question }) {
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
-            <QuestionDesc>{question.content}</QuestionDesc>
+            <QuestionDesc
+              dangerouslySetInnerHTML={{ __html: question.content }}
+            />
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>
@@ -98,7 +102,9 @@ function Questionitem({ question }) {
                 <MobileTitle>{question.title}</MobileTitle>
               </Link>
             </QuestionTitle>
-            <MobileDesc>{question.content}</MobileDesc>
+            <MobileDesc
+              dangerouslySetInnerHTML={{ __html: question.content }}
+            />
             <QuestionTagBox>
               <QuestionTag>
                 <QuestionTagUl>

@@ -121,28 +121,29 @@ const SignupForm = ({
   const handleSignupButton = (e) => {
     e.preventDefault();
 
-
     const reqbody = {
       email: signupEmail,
       password: signupPassword,
       name: displayName,
     };
     const headers = {
-      "Content-Type": "application/json",
-      authorization: ''  
-    }
-    console.log({headers})
-    
+      'Content-Type': 'application/json',
+      authorization: '',
+    };
+    console.log({ headers });
+
     axios
-      .post('http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/members/signup',JSON.stringify(reqbody),{headers})
+      .post(
+        'http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/members/signup',
+        JSON.stringify(reqbody),
+        { headers },
+      )
       .then((res) => {
         window.alert('회원가입 성공 !');
         navigate('../users/login');
-
       })
       .catch((err) => {
-        console.log(err)
-
+        console.log(err);
       });
   };
   return (

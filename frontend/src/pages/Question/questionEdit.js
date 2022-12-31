@@ -65,6 +65,13 @@ const QuestionEdit = () => {
                       setContent={setContent}
                     />
                   </Body>
+                  <ButtonBlock>
+                    <EditButton type="submit">Save edits</EditButton>
+
+                    <CancleButton onClick={() => navigate(-1)}>
+                      Cancle
+                    </CancleButton>
+                  </ButtonBlock>
                 </form>
               </ContentBlock>
             </MobileContent>
@@ -87,6 +94,37 @@ const QuestionEdit = () => {
     </>
   );
 };
+
+const CancleButton = styled.p`
+  font-size: 13px;
+  color: #0074cc;
+  margin: 0 4px;
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f9ff;
+  }
+`;
+
+const EditButton = styled.button`
+  margin: 0 4px;
+  padding: 10px;
+  font-size: 13px;
+  color: #ffffff;
+  background-color: #0a95ff;
+  border-radius: 3px;
+
+  &:hover {
+    filter: brightness(95%);
+  }
+`;
+
+const ButtonBlock = styled.div`
+  display: flex;
+  padding: 12px 0 16px 0;
+`;
 
 const Body = styled.div`
   margin-bottom: 8px;

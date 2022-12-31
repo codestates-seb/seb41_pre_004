@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 
 function Homeitem({ question }) {
-  console.log(question);
-
   return (
     <>
       <Desktop>

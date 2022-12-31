@@ -10,21 +10,30 @@ const QuestionDetailUser = ({ question, loginUserEmail }) => {
         <LoginBlock>
           <ButtonBlock>
             <Mobile>
-              <Link to={`/questions/edit/${question.id}`} state={question}>
+              <Link
+                to={`/questions/edit/${question.questionId}`}
+                state={question}
+              >
                 <DetailButton>Edit</DetailButton>
               </Link>
               <DetailButton>Delete</DetailButton>
             </Mobile>
 
             <Tablet>
-              <Link to={`/questions/edit/${question.id}`} state={question}>
+              <Link
+                to={`/questions/edit/${question.questionId}`}
+                state={question}
+              >
                 <TabletDetailButton>Edit</TabletDetailButton>
               </Link>
               <TabletDetailButton>Delete</TabletDetailButton>
             </Tablet>
 
             <Desktop>
-              <Link to={`/questions/edit/${question.id}`} state={question}>
+              <Link
+                to={`/questions/edit/${question.questionId}`}
+                state={question}
+              >
                 <TabletDetailButton>Edit</TabletDetailButton>
               </Link>
               <TabletDetailButton>Delete</TabletDetailButton>

@@ -59,7 +59,7 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [questions, setQuestions] = useState([]);
-  const loginUserEmail = useSelector(state=>state.email);
+  const loginUserEmail = useSelector((state) => state.email);
   const fetchData = async () => {
     await axios
       .get(
@@ -89,7 +89,7 @@ function App() {
         <Route path="/questions/ask" element={<QuestionAsk />} />
         <Route
           path="/questions/:questionId"
-          element={<QuestionDetail loginUserEmail={loginUserEmail}/>}
+          element={<QuestionDetail loginUserEmail={loginUserEmail} />}
         />
         <Route path="/questions/edit/:questionId" element={<QuestionEdit />} />
         <Route path="/answeredit" element={<EditAnswer />} />

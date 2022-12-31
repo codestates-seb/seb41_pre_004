@@ -7,6 +7,10 @@ import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
 import QuestionDetailUser from '../../components/QuestionDetailUser';
+import AnsMarkdown from '../../components/AnswerMarkdown';
+import AnswerItem from '../../components/AnswerItem';
+import axios from 'axios';
+
 import {
   ContainerWrapper,
   ContainerFlex,
@@ -15,9 +19,58 @@ import {
   ContentBlock,
   DetailSideBlock,
 } from '../../styles/contentStyle';
+import { useEffect, useState } from 'react';
 
 const QuestionDetail = ({ loginUserEmail }) => {
   const question = useLocation().state;
+  const [answer, setAnswer] = useState('');
+  const [answers, setAnswers] = useState([]);
+
+  const fetchData = async () => {
+    await axios
+      .get(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers?page=1&size=10`,
+      )
+      .then((res) => setAnswers(res.data.data))
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setAnswer]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    const parse = JSON.parse(token);
+
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        authorization: parse.authorization,
+      },
+    };
+
+    let data = JSON.stringify({
+      content: answer,
+    });
+
+    axios
+      .post(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers`,
+        data,
+        header,
+      )
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // window.location.reload();
+  }
 
   return (
     <>
@@ -52,29 +105,51 @@ const QuestionDetail = ({ loginUserEmail }) => {
                   </DateBlock>
                 </DetailHeader>
                 <Post>
-                  <PostLeft>
-                    <VoteButton>
-                      <img src={arrowUpIcon} alt="Vote Up" />
-                    </VoteButton>
-                    <VoteCount>0</VoteCount>
-                    <VoteButton>
-                      <img src={arrowDownIcon} alt="Vote Down" />
-                    </VoteButton>
-                  </PostLeft>
-                  <PostRight>
-                    <PostText>{question.content}</PostText>
-                    <TagBlock>
-                      {/* {question.tags.map((tag, idx) => (
+                  <PostQuestion>
+                    <PostLeft>
+                      <VoteButton>
+                        <img src={arrowUpIcon} alt="Vote Up" />
+                      </VoteButton>
+                      <VoteCount>0</VoteCount>
+                      <VoteButton>
+                        <img src={arrowDownIcon} alt="Vote Down" />
+                      </VoteButton>
+                    </PostLeft>
+                    <TabletRight>
+                      <PostText
+                        dangerouslySetInnerHTML={{ __html: question.content }}
+                      />
+                      <TagBlock>
+                        {/* {question.tags.map((tag, idx) => (
                         <Tag key={idx}>{tag}</Tag>
                       ))} */}
-                    </TagBlock>
-                    <QuestionUser>
-                      <QuestionDetailUser
-                        question={question}
-                        loginUserEmail={loginUserEmail}
-                      />
-                    </QuestionUser>
-                  </PostRight>
+                      </TagBlock>
+                      <QuestionUser>
+                        <QuestionDetailUser
+                          question={question}
+                          loginUserEmail={loginUserEmail}
+                        />
+                      </QuestionUser>
+                    </TabletRight>
+                  </PostQuestion>
+                  <PostAnswer>
+                    {answers.map((el, idx) => {
+                      return (
+                        <AnswerItem
+                          key={idx}
+                          answer={el}
+                          setAnswer={setAnswer}
+                        />
+                      );
+                    })}
+                    <Answer>Your Answer</Answer>
+                    <form onSubmit={handleSubmit}>
+                      <AnsMarkdown setAnswer={setAnswer} />
+                      <AnswerBtn>
+                        <button type="submit">Post your Answer</button>
+                      </AnswerBtn>
+                    </form>
+                  </PostAnswer>
                 </Post>
               </ContentBlock>
             </MobileContent>
@@ -108,29 +183,51 @@ const QuestionDetail = ({ loginUserEmail }) => {
                   </DateBlock>
                 </DetailHeader>
                 <Post>
-                  <PostLeft>
-                    <VoteButton>
-                      <img src={arrowUpIcon} alt="Vote Up" />
-                    </VoteButton>
-                    <VoteCount>0</VoteCount>
-                    <VoteButton>
-                      <img src={arrowDownIcon} alt="Vote Down" />
-                    </VoteButton>
-                  </PostLeft>
-                  <PostRight>
-                    <PostText>{question.content}</PostText>
-                    <TagBlock>
-                      {/* {question.tags.map((tag, idx) => (
+                  <PostQuestion>
+                    <PostLeft>
+                      <VoteButton>
+                        <img src={arrowUpIcon} alt="Vote Up" />
+                      </VoteButton>
+                      <VoteCount>0</VoteCount>
+                      <VoteButton>
+                        <img src={arrowDownIcon} alt="Vote Down" />
+                      </VoteButton>
+                    </PostLeft>
+                    <TabletRight>
+                      <PostText
+                        dangerouslySetInnerHTML={{ __html: question.content }}
+                      />
+                      <TagBlock>
+                        {/* {question.tags.map((tag, idx) => (
                         <Tag key={idx}>{tag}</Tag>
                       ))} */}
-                    </TagBlock>
-                    <QuestionUser>
-                      <QuestionDetailUser
-                        question={question}
-                        loginUserEmail={loginUserEmail}
-                      />
-                    </QuestionUser>
-                  </PostRight>
+                      </TagBlock>
+                      <QuestionUser>
+                        <QuestionDetailUser
+                          question={question}
+                          loginUserEmail={loginUserEmail}
+                        />
+                      </QuestionUser>
+                    </TabletRight>
+                  </PostQuestion>
+                  <PostAnswer>
+                    {answers.map((el, idx) => {
+                      return (
+                        <AnswerItem
+                          key={idx}
+                          answer={el}
+                          setAnswer={setAnswer}
+                        />
+                      );
+                    })}
+                    <Answer>Your Answer</Answer>
+                    <form onSubmit={handleSubmit}>
+                      <AnsMarkdown setAnswer={setAnswer} />
+                      <AnswerBtn>
+                        <button type="submit">Post your Answer</button>
+                      </AnswerBtn>
+                    </form>
+                  </PostAnswer>
                 </Post>
               </ContentBlock>
             </MobileContent>
@@ -165,29 +262,51 @@ const QuestionDetail = ({ loginUserEmail }) => {
                 </DetailHeader>
                 <PostSidebar>
                   <Post>
-                    <PostLeft>
-                      <VoteButton>
-                        <img src={arrowUpIcon} alt="Vote Up" />
-                      </VoteButton>
-                      <VoteCount>0</VoteCount>
-                      <VoteButton>
-                        <img src={arrowDownIcon} alt="Vote Down" />
-                      </VoteButton>
-                    </PostLeft>
-                    <PostRight>
-                      <PostText>{question.content}</PostText>
-                      <TagBlock>
-                        {/* {question.tags.map((tag, idx) => (
+                    <PostQuestion>
+                      <PostLeft>
+                        <VoteButton>
+                          <img src={arrowUpIcon} alt="Vote Up" />
+                        </VoteButton>
+                        <VoteCount>0</VoteCount>
+                        <VoteButton>
+                          <img src={arrowDownIcon} alt="Vote Down" />
+                        </VoteButton>
+                      </PostLeft>
+                      <PostRight>
+                        <PostText
+                          dangerouslySetInnerHTML={{ __html: question.content }}
+                        />
+                        <TagBlock>
+                          {/* {question.tags.map((tag, idx) => (
                           <Tag key={idx}>{tag}</Tag>
                         ))} */}
-                      </TagBlock>
-                      <QuestionUser>
-                        <QuestionDetailUser
-                          question={question}
-                          loginUserEmail={loginUserEmail}
-                        />
-                      </QuestionUser>
-                    </PostRight>
+                        </TagBlock>
+                        <QuestionUser>
+                          <QuestionDetailUser
+                            question={question}
+                            loginUserEmail={loginUserEmail}
+                          />
+                        </QuestionUser>
+                      </PostRight>
+                    </PostQuestion>
+                    <PostAnswer>
+                      {answers.map((el, idx) => {
+                        return (
+                          <AnswerItem
+                            key={idx}
+                            answer={el}
+                            setAnswer={setAnswer}
+                          />
+                        );
+                      })}
+                      <Answer>Your Answer</Answer>
+                      <form onSubmit={handleSubmit}>
+                        <AnsMarkdown setAnswer={setAnswer} />
+                        <AnswerBtn>
+                          <button type="submit">Post your Answer</button>
+                        </AnswerBtn>
+                      </form>
+                    </PostAnswer>
                   </Post>
                   <DetailSideBlock>
                     <Sidebar />
@@ -202,6 +321,34 @@ const QuestionDetail = ({ loginUserEmail }) => {
     </>
   );
 };
+
+const PostAnswer = styled.div``;
+
+const AnswerBtn = styled.div`
+  button {
+    background-color: #0a95ff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 8px;
+    outline: none;
+    padding: 0.8em;
+    position: relative;
+    text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    color: white;
+  }
+`;
+
+const Answer = styled.h2`
+  font-size: 20px;
+`;
 
 const PostSidebar = styled.div`
   display: flex;
@@ -252,11 +399,18 @@ const VoteButton = styled.button`
   margin: 2px;
 `;
 
+const PostQuestion = styled.div`
+  display: flex;
+  border-bottom: 1px solid #e4e6e8;
+`;
+
 const PostRight = styled.div`
   flex-grow: 1;
   padding-right: 16px;
-  width: 100%;
-  max-width: 659px;
+`;
+
+const TabletRight = styled(PostRight)`
+  padding-right: 0;
 `;
 
 const PostLeft = styled.div`
@@ -264,9 +418,9 @@ const PostLeft = styled.div`
 `;
 
 const Post = styled.div`
-  display: flex;
   flex-grow: 1;
-  border-bottom: 1px solid #e4e6e8;
+  width: 100%;
+  max-width: 727px;
 `;
 
 const DetailHeader = styled.div`
