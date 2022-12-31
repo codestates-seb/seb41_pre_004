@@ -111,7 +111,6 @@ function AskQuestionList() {
 
     const token = localStorage.getItem('token');
     const parse = JSON.parse(token);
-    console.log(parse.authorization);
 
     const header = {
       headers: {

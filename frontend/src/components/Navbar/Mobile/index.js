@@ -14,17 +14,23 @@ import {
   NavTeams,
   TeamsIcon,
 } from '../../../styles/navbarStyle';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 const MobileNav = () => {
   const isOpen = useSelector((state) => state.menuOpen);
+  const dispatch = useDispatch();
+
+  const onToggle = () => {
+    dispatch({ type: 'TOGGLEMENU', value: isOpen });
+  };
 
   return (
     <>
       {isOpen ? (
         <MobileNavbar>
           <ol>
-            <li aria-label="Go to Home page">
+            <li aria-label="Go to Home page" onClick={onToggle}>
               <Link to="/">
                 <NavPrimary className="home">Home</NavPrimary>
               </Link>
@@ -35,7 +41,7 @@ const MobileNav = () => {
               </NavTitle>
               <ol>
                 <li aria-label="Go to Questions page">
-                  <Link to="/questions">
+                  <Link to="/questions" onClick={onToggle}>
                     <NavQuestion selected={true}>
                       <QuestionIcon className="question" />
                       <span>Questions</span>

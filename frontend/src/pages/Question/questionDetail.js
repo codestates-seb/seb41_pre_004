@@ -38,7 +38,7 @@ const QuestionDetail = ({ loginUserEmail }) => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setAnswer]);
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -69,7 +69,7 @@ const QuestionDetail = ({ loginUserEmail }) => {
         console.log(error);
       });
 
-    // window.location.reload();
+    window.location.reload();
   }
 
   return (
