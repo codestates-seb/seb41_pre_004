@@ -1,5 +1,6 @@
 package com.preproject.backend.domain.question.dto;
 
+import com.preproject.backend.domain.answer.dto.AnswerDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,6 +51,8 @@ public class QuestionDto {
 
         private int viewCount;
         private String currentUserEmail;
+
+        private List<AnswerDto.Response> answers;
         //TODO 이후 추가할 것
         // 어떤 사용자인지 (member) 답변 list, [조회수, 답변 갯수] --> 테이블 명세서 추가 예정
     }
