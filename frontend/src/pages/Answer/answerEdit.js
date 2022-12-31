@@ -5,8 +5,7 @@ import AnswerQuestionHeader from '../../components/AnswerQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import { useLocation, useNavigate,useParams } from 'react-router-dom';
 const AskNotice = styled.div`
   width: 100%;
   max-width: 851px;
@@ -133,12 +132,14 @@ function EditAnswer() {
   const [content, setContent] = useState('');
   const navigate = useNavigate();
   const Previoustext='안녕하세요';
+  const question = useLocation().state;
+  const answer = useParams()
+  console.log(question,answer)
   function handleSubmit(e) {
     e.preventDefault();
-    window.alert(content)
     const token = localStorage.getItem('token');
     const parse = JSON.parse(token);
-    console.log(parse.authorization);
+
     const header = {
       headers: {
         'Content-Type': `application/json`,
@@ -147,14 +148,12 @@ function EditAnswer() {
     };
 
     let data = JSON.stringify({
-
-      content: content,
-      tags: tags.split(' '),
+      content: answer,
     });
 
     axios
       .patch(
-        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080//questions/{question-id}/answers/{answer-id}`,
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers/${answer}`,
         data,
         header,
       )
@@ -165,10 +164,8 @@ function EditAnswer() {
         console.log(error);
       });
 
-    navigate(`/`);
     window.location.reload();
   }
-
 
   const handleSetTags = (event) => {
     let e = event.target.value;
