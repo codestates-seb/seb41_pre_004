@@ -23,9 +23,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
               </VoteButton>
             </PostLeft>
             <AnswerRight>
-              <PostText
-                dangerouslySetInnerHTML={{ __html: question.content }}
-              />
+              <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
                 <QuestionDetailUser
                   question={question}
@@ -48,9 +46,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
               </VoteButton>
             </PostLeft>
             <AnswerRight>
-              <PostText
-                dangerouslySetInnerHTML={{ __html: question.content }}
-              />
+              <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
                 <QuestionDetailUser
                   question={question}
@@ -73,9 +69,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
               </VoteButton>
             </PostLeft>
             <AnswerRight>
-              <PostText
-                dangerouslySetInnerHTML={{ __html: question.content }}
-              />
+              <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
                 <QuestionDetailUser
                   question={question}
@@ -113,27 +107,9 @@ const QuestionUser = styled.div`
   margin: 16px 0;
 `;
 
-const Tag = styled.li`
-  font-size: 12px;
-  color: #39739d;
-  background-color: #e1ecf4;
-  margin: 2px;
-  padding: 4px 6px;
-  border-radius: 3px;
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(95%);
-  }
-`;
-
-const TagBlock = styled.ul`
-  display: flex;
-  margin: 24px 0 12px 0;
-`;
-
 const PostText = styled.p`
   width: 100%;
+  min-height: 100px;
   word-break: break-all;
   font-size: 15px;
   color: #232629;

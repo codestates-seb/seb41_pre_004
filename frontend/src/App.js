@@ -13,7 +13,6 @@ import QuestionAsk from './pages/Question/createQuestion';
 import QuestionDetail from './pages/Question/questionDetail';
 import QuestionEdit from './pages/Question/questionEdit';
 import { useSelector } from 'react-redux';
-import EditAnswer from './pages/Answer/answerEdit';
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
@@ -60,6 +59,7 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   const [questions, setQuestions] = useState([]);
   const loginUserEmail = useSelector((state) => state.email);
+
   const fetchData = async () => {
     await axios
       .get(
@@ -92,7 +92,6 @@ function App() {
           element={<QuestionDetail loginUserEmail={loginUserEmail} />}
         />
         <Route path="/questions/edit/:questionId" element={<QuestionEdit />} />
-        <Route path="/answeredit" element={<EditAnswer />} />
         <Route
           path="*"
           element={<div style={{ marginTop: '53px' }}>404</div>}

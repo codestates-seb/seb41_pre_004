@@ -18,7 +18,6 @@ import {
 const Login = () => {
   return (
     <FlexBlock>
-      <NavButton isOpen={false} />
       <Link to="/">
         <Logo>
           <img src={desktopLogo} alt="stackoverflow logo" />

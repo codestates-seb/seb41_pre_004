@@ -7,9 +7,6 @@ import {
 import { ReactComponent as SearchIcon } from '../../assets/icons/searchIcon.svg';
 
 const Search = () => {
-
-  
-
   return (
     <>
       <Mobile>
