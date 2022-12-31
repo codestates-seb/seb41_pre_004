@@ -29,30 +29,6 @@ public interface AnswerMapper {
     }
 
     Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPatchDto);
-    //AnswerDto.Response answerToAnswerResponse(Answer answer);
-
-//        default AnswerDto.Response answerToAnswerResponse(Answer answer) {
-//            Member member = answer.getMember();
-//            List<Comment> comments = answer.getComments();
-//
-//            List<CommentDto.Response> commentResponse
-//                    = comments.stream().map(comment ->
-//                            new CommentDto.Response(comment.getCommentId(),
-//                                    comment.getContent(),
-//                                    comment.getCreatedAt(),
-//                                    comment.getModifiedAt()))
-//                    .collect(Collectors.toList());
-//
-//            return AnswerDto.Response.builder()
-//                    .answerId(answer.getAnswerId())
-//                    .questionId(answer.getQuestion().getQuestionId())
-//                    .content(answer.getContent())
-////                .voteAnswer(answer.getVoteAnswers())
-//                    .createdAt(answer.getCreatedAt())
-//                    .modifiedAt(answer.getModifiedAt())
-//                    .build();
-//    }
-
     default AnswerDto.Response answerToAnswerResponse(Answer answer) {
         if (answer == null) {
             return null;
@@ -81,6 +57,12 @@ public interface AnswerMapper {
         return response;
     }
 
-    List<AnswerDto.Response> answersToAnswersResponses(List<Answer> answers);
-    //MemberDto.Response memberToMemberResponseDto(Member member);
+    default List<AnswerDto.Response> answersToAnswersResponses(List<Answer> answers){
+
+        List<AnswerDto.Response> responses = answers.stream()
+                .map(this::answerToAnswerResponse)
+                .collect(Collectors.toList());
+
+        return responses;
+    }
 }

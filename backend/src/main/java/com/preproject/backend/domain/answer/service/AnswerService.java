@@ -2,8 +2,6 @@ package com.preproject.backend.domain.answer.service;
 
 import com.preproject.backend.domain.answer.entity.Answer;
 import com.preproject.backend.domain.answer.repository.AnswerRepository;
-import com.preproject.backend.domain.comment.entity.Comment;
-import com.preproject.backend.domain.comment.service.CommentService;
 import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.service.MemberService;
 import com.preproject.backend.domain.question.entity.Question;
@@ -53,13 +51,14 @@ public class AnswerService {
         return answerRepository.save(findAnswer);
     }
 
-    // answer 조회
+    // answer 조회 - 필요 X
     public Answer findAnswer(long answerId) {
         return findVerifiedAnswer(answerId);
     }
 
+
     // answer 전체 조회
-    public Page<Answer> findAnswers(long questionId, int page, int size) {
+    public Page<Answer> findAnswers(int page, int size) {
         return answerRepository.findAll(PageRequest.of(page, size,
                 Sort.by("answerId").descending()));
     }

@@ -1,5 +1,7 @@
 package com.preproject.backend.domain.question.mapper;
 
+import com.preproject.backend.domain.answer.dto.AnswerDto;
+import com.preproject.backend.domain.comment.dto.CommentDto;
 import com.preproject.backend.domain.question.dto.QuestionDto;
 import com.preproject.backend.domain.question.entity.Question;
 import com.preproject.backend.domain.question.entity.QuestionTag;
@@ -61,9 +63,33 @@ public class CustomQuestionMapper implements QuestionMapper {
                 .distinct()
                 .collect(Collectors.toList());
 
+        List<AnswerDto.Response> answers = question.getAnswers().stream()
+                .map(answer -> {
+                    List<CommentDto.Response> comments = answer.getComments().stream()
+                            .map(comment -> new CommentDto.Response(
+                                    comment.getCommentId(),
+                                    comment.getAnswer().getAnswerId(),
+                                    comment.getMember().getEmail(),
+                                    comment.getContent(),
+                                    comment.getCreatedAt(),
+                                    comment.getModifiedAt()
+                            ))
+                            .collect(Collectors.toList());
+                    return new AnswerDto.Response(
+                            answer.getAnswerId(),
+                            answer.getQuestion().getQuestionId(),
+                            answer.getMember().getEmail(),
+                            answer.getContent(),
+                            answer.getCreatedAt(),
+                            answer.getModifiedAt(),
+                            comments
+                    );
+                })
+                .collect(Collectors.toList());
+
         QuestionDto.Response response =
                 new QuestionDto.Response(
-                        questionId, title, content, createdAt, modifiedAt, score, tags, viewCount, currentUserEmail );
+                        questionId, title, content, createdAt, modifiedAt, score, tags, viewCount, currentUserEmail, answers );
 
         return response;
     }
