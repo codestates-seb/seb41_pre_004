@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TestEditorForm from '../../components/AskMarkdown';
-import AskQuestionHeader from '../../components/AskQuestionHeader';
+import AnswerEditorForm from '../../components/AnswerEditMarkdown';
+import AnswerQuestionHeader from '../../components/AnswerQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
 import axios from 'axios';
@@ -128,14 +128,14 @@ const AskBtn = styled.div`
   }
 `;
 
-function AskQuestionList() {
-  const [title, setTitle] = useState('');
+function EditAnswer() {
   const [tags, setTags] = useState('');
   const [content, setContent] = useState('');
   const navigate = useNavigate();
-
+  const Previoustext='안녕하세요';
   function handleSubmit(e) {
     e.preventDefault();
+    window.alert(content)
     const token = localStorage.getItem('token');
     const parse  = JSON.parse(token);
     console.log(parse.authorization)
@@ -147,14 +147,14 @@ function AskQuestionList() {
     };
 
     let data = JSON.stringify({
-      title: title,
+
       content: content,
       tags: tags.split(' '),
     });
 
     axios
-      .post(
-        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions`,
+      .patch(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080//questions/{question-id}/answers/{answer-id}`,
         data,
         header
       )
@@ -165,14 +165,11 @@ function AskQuestionList() {
         console.log(error);
       });
 
-    // navigate(`/`);
-    // window.location.reload();
+    navigate(`/`);
+    window.location.reload();
   }
 
-  const handleSetTitle = (event) => {
-    let e = event.target.value;
-    setTitle(e);
-  };
+
   const handleSetTags = (event) => {
     let e = event.target.value;
     setTags(e);
@@ -182,25 +179,11 @@ function AskQuestionList() {
     <>
       <ContainerWrapper>
         <AskContainer>
-          <AskQuestionHeader></AskQuestionHeader>
+          <AnswerQuestionHeader></AnswerQuestionHeader>
 
           <form onSubmit={handleSubmit}>
-            <AskTitle>
-              <div>
-                <h2>Title</h2>
-                <p>
-                  Be specific and imagine you’re asking a question to another
-                  person.
-                </p>
-              </div>
-              <input
-                value={title}
-                onChange={handleSetTitle}
-                type={'text'}
-                placeholder={'e.g (excel string regex)'}
-              ></input>
-            </AskTitle>
-            <TestEditorForm setContent={setContent} />
+
+            <AnswerEditorForm setContent={setContent}  Previoustext={Previoustext}/>
             <AskTags>
               <div>
                 <h2>Tags</h2>
@@ -227,4 +210,4 @@ function AskQuestionList() {
   );
 }
 
-export default AskQuestionList;
+export default EditAnswer;
