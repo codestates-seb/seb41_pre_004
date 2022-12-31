@@ -83,9 +83,13 @@ const TabletNav = () => {
               <h2>Collectives</h2>
               <InfoIcon />
             </NavTitle>
-            <NavEtc>
+            <NavEtc selected={activeTab === 5}>
               <CollectiveIcon />
-              <Link to="/collectives" className="collective">
+              <Link
+                to="/collectives"
+                className="collective"
+                onClick={() => dispatch({ type: 'ACTIVETAB', value: 5 })}
+              >
                 Explore Collectives
               </Link>
             </NavEtc>

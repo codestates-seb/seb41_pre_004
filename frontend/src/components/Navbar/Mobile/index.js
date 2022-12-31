@@ -57,7 +57,7 @@ const MobileNav = () => {
                     </NavQuestion>
                   </Link>
                 </li>
-                <li aria-label="Go to Tags page">
+                <li aria-label="Go to Tags page" onClick={onToggle}>
                   <Link
                     to="/tags"
                     onClick={() => dispatch({ type: 'ACTIVETAB', value: 2 })}
@@ -65,7 +65,7 @@ const MobileNav = () => {
                     <NavPublic selected={activeTab === 2}>Tags</NavPublic>
                   </Link>
                 </li>
-                <li aria-label="Go to Users page">
+                <li aria-label="Go to Users page" onClick={onToggle}>
                   <Link
                     to="/users"
                     onClick={() => dispatch({ type: 'ACTIVETAB', value: 3 })}
@@ -73,7 +73,7 @@ const MobileNav = () => {
                     <NavPublic selected={activeTab === 3}>Users</NavPublic>
                   </Link>
                 </li>
-                <li aria-label="Go to Companies">
+                <li aria-label="Go to Companies" onClick={onToggle}>
                   <Link
                     to="/jobs/Companies"
                     onClick={() => dispatch({ type: 'ACTIVETAB', value: 4 })}
@@ -88,9 +88,13 @@ const MobileNav = () => {
                 <h2>Collectives</h2>
                 <InfoIcon />
               </NavTitle>
-              <NavEtc>
+              <NavEtc onClick={onToggle} selected={activeTab === 5}>
                 <CollectiveIcon />
-                <Link to="/collectives" className="collective">
+                <Link
+                  to="/collectives"
+                  className="collective"
+                  onClick={() => dispatch({ type: 'ACTIVETAB', value: 5 })}
+                >
                   Explore Collectives
                 </Link>
               </NavEtc>
