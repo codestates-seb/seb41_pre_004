@@ -22,12 +22,12 @@ const Logout = () => {
         Products
       </ProductsButton>
       <Search />
-      <LoginButton to="/users/login">
-        <strong>Log in</strong>
-      </LoginButton>
-      <SignupButton to="/users/signup">
-        <strong>Sign up</strong>
-      </SignupButton>
+      <Link to="/users/login">
+        <LoginButton>Log in</LoginButton>
+      </Link>
+      <Link to="/users/signup">
+        <SignupButton>Sign up</SignupButton>
+      </Link>
     </FlexBlock>
   );
 };
