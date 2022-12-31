@@ -10,23 +10,26 @@ const QuestionDetailUser = ({ question, loginUserEmail }) => {
   function handleDelete(e) {
     e.preventDefault();
 
-    const token = localStorage.getItem('token');
-    const parse = JSON.parse(token);
+    if (window.confirm('Delete this question?')) {
+      const token = localStorage.getItem('token');
+      const parse = JSON.parse(token);
 
-    const header = {
-      headers: {
-        'Content-Type': `application/json`,
-        authorization: parse.authorization,
-      },
-    };
+      const header = {
+        headers: {
+          'Content-Type': `application/json`,
+          authorization: parse.authorization,
+        },
+      };
 
-    axios.delete(
-      `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
-      header,
-    );
+      axios.delete(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
+        header,
+      );
 
-    navigate('/questions');
-    window.location.reload();
+      navigate('/questions');
+      window.location.reload();
+    } else {
+    }
   }
 
   return (
