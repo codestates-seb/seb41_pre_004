@@ -122,6 +122,7 @@ function AskQuestionList() {
     let data = JSON.stringify({
       title: title,
       content: content,
+      tags: [' '],
     });
 
     axios

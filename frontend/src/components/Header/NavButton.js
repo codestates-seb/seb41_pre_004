@@ -17,20 +17,12 @@ const NavButton = () => {
   return (
     <>
       {isOpen ? (
-        <StyledNavBlock>
-          <NavCancleButton
-            onClick={onToggle}
-            type="button"
-            aria-label="Close the TabMenu"
-          />
+        <StyledNavBlock onClick={onToggle}>
+          <NavCancleButton type="button" aria-label="Close the TabMenu" />
         </StyledNavBlock>
       ) : (
-        <StyledNavBlock>
-          <NavMenuButton
-            onClick={onToggle}
-            type="button"
-            aria-label="Open the TabMenu"
-          />
+        <StyledNavBlock onClick={onToggle}>
+          <NavMenuButton type="button" aria-label="Open the TabMenu" />
         </StyledNavBlock>
       )}
     </>

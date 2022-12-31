@@ -3,25 +3,25 @@ import { createStore } from 'redux';
 const initialstate = {
   email: '',
   menuOpen: false,
-  navTab: 1,
+  activeTab: 0,
 };
 
 const EmailReducer = (state = initialstate, action) => {
   switch (action.type) {
     case 'SETEMAIL':
       return {
-        ...initialstate,
+        ...state,
         email: action.value,
       };
     case 'TOGGLEMENU':
       return {
-        ...initialstate,
+        ...state,
         menuOpen: !action.value,
       };
-    case 'SELECTTAB':
+    case 'ACTIVETAB':
       return {
-        ...initialstate,
-        navTab: action.value,
+        ...state,
+        activeTab: action.value,
       };
     default:
       return state;
