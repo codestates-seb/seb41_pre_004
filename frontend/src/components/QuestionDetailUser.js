@@ -1,9 +1,34 @@
 import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 import handshakeIcon from '../assets/icons/handshakeIcon.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const QuestionDetailUser = ({ question, loginUserEmail }) => {
+  const navigate = useNavigate();
+
+  function handleDelete(e) {
+    e.preventDefault();
+
+    const token = localStorage.getItem('token');
+    const parse = JSON.parse(token);
+
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        authorization: parse.authorization,
+      },
+    };
+
+    axios.delete(
+      `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
+      header,
+    );
+
+    navigate('/questions');
+    window.location.reload();
+  }
+
   return (
     <>
       {true ? (
@@ -16,7 +41,9 @@ const QuestionDetailUser = ({ question, loginUserEmail }) => {
               >
                 <DetailButton>Edit</DetailButton>
               </Link>
-              <DetailButton>Delete</DetailButton>
+              <form onSubmit={handleDelete}>
+                <DetailButton>Delete</DetailButton>
+              </form>
             </Mobile>
 
             <Tablet>
@@ -26,7 +53,9 @@ const QuestionDetailUser = ({ question, loginUserEmail }) => {
               >
                 <TabletDetailButton>Edit</TabletDetailButton>
               </Link>
-              <TabletDetailButton>Delete</TabletDetailButton>
+              <form onSubmit={handleDelete}>
+                <TabletDetailButton type="submit">Delete</TabletDetailButton>
+              </form>
             </Tablet>
 
             <Desktop>
@@ -36,7 +65,9 @@ const QuestionDetailUser = ({ question, loginUserEmail }) => {
               >
                 <TabletDetailButton>Edit</TabletDetailButton>
               </Link>
-              <TabletDetailButton>Delete</TabletDetailButton>
+              <form onSubmit={handleDelete}>
+                <TabletDetailButton type="submit">Delete</TabletDetailButton>
+              </form>
             </Desktop>
           </ButtonBlock>
           <UserBlock>

@@ -10,7 +10,6 @@ import QuestionDetailUser from '../../components/QuestionDetailUser';
 import AnsMarkdown from '../../components/AnswerMarkdown';
 import AnswerItem from '../../components/AnswerItem';
 import axios from 'axios';
-
 import {
   ContainerWrapper,
   ContainerFlex,
@@ -23,6 +22,7 @@ import { useEffect, useState } from 'react';
 
 const QuestionDetail = ({ loginUserEmail }) => {
   const question = useLocation().state;
+
   const [answer, setAnswer] = useState('');
   const [answers, setAnswers] = useState([]);
 
