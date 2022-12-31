@@ -26,19 +26,19 @@ const QuestionDetail = ({ loginUserEmail }) => {
   const [answer, setAnswer] = useState('');
   const [answers, setAnswers] = useState([]);
 
-  const fetchData = async () => {
-    await axios
-      .get(
-        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers?page=1&size=10`,
-      )
-      .then((res) => setAnswers(res.data.data))
-      .catch((error) => console.log(error));
-  };
+  // const fetchData = async () => {
+  //   await axios
+  //     .get(
+  //       `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
+  //     )
+  //     .then((res) => setAnswers(res.data.data.content))
+  //     .catch((error) => console.log(error));
+  // };
 
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setAnswer]);
+  // useEffect(() => {
+  //   fetchData();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [setAnswer]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -56,18 +56,18 @@ const QuestionDetail = ({ loginUserEmail }) => {
       content: answer,
     });
 
-    axios
-      .post(
-        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers`,
-        data,
-        header,
-      )
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .post(
+    //     `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers`,
+    //     data,
+    //     header,
+    //   )
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
     // window.location.reload();
   }
@@ -98,10 +98,10 @@ const QuestionDetail = ({ loginUserEmail }) => {
                       <GraySpan>Modified</GraySpan>
                       <DateSpan>1 min ago</DateSpan>
                     </AskedBlock>
-                    <div>
+                    <AskedBlock>
                       <GraySpan>Viewed</GraySpan>
                       <DateSpan>1 times</DateSpan>
-                    </div>
+                    </AskedBlock>
                   </DateBlock>
                 </DetailHeader>
                 <Post>
@@ -119,11 +119,6 @@ const QuestionDetail = ({ loginUserEmail }) => {
                       <PostText
                         dangerouslySetInnerHTML={{ __html: question.content }}
                       />
-                      <TagBlock>
-                        {/* {question.tags.map((tag, idx) => (
-                        <Tag key={idx}>{tag}</Tag>
-                      ))} */}
-                      </TagBlock>
                       <QuestionUser>
                         <QuestionDetailUser
                           question={question}
@@ -176,10 +171,10 @@ const QuestionDetail = ({ loginUserEmail }) => {
                       <TabletGraySpan>Modified</TabletGraySpan>
                       <TabletDateSpan>1 min ago</TabletDateSpan>
                     </AskedBlock>
-                    <div>
+                    <AskedBlock>
                       <TabletGraySpan>Viewed</TabletGraySpan>
                       <TabletDateSpan>1 times</TabletDateSpan>
-                    </div>
+                    </AskedBlock>
                   </DateBlock>
                 </DetailHeader>
                 <Post>
@@ -197,11 +192,6 @@ const QuestionDetail = ({ loginUserEmail }) => {
                       <PostText
                         dangerouslySetInnerHTML={{ __html: question.content }}
                       />
-                      <TagBlock>
-                        {/* {question.tags.map((tag, idx) => (
-                        <Tag key={idx}>{tag}</Tag>
-                      ))} */}
-                      </TagBlock>
                       <QuestionUser>
                         <QuestionDetailUser
                           question={question}
@@ -254,10 +244,10 @@ const QuestionDetail = ({ loginUserEmail }) => {
                       <TabletGraySpan>Modified</TabletGraySpan>
                       <TabletDateSpan>1 min ago</TabletDateSpan>
                     </AskedBlock>
-                    <div>
+                    <AskedBlock>
                       <TabletGraySpan>Viewed</TabletGraySpan>
                       <TabletDateSpan>1 times</TabletDateSpan>
-                    </div>
+                    </AskedBlock>
                   </DateBlock>
                 </DetailHeader>
                 <PostSidebar>
@@ -276,11 +266,6 @@ const QuestionDetail = ({ loginUserEmail }) => {
                         <PostText
                           dangerouslySetInnerHTML={{ __html: question.content }}
                         />
-                        <TagBlock>
-                          {/* {question.tags.map((tag, idx) => (
-                          <Tag key={idx}>{tag}</Tag>
-                        ))} */}
-                        </TagBlock>
                         <QuestionUser>
                           <QuestionDetailUser
                             question={question}
@@ -358,27 +343,10 @@ const QuestionUser = styled.div`
   margin: 16px 0;
 `;
 
-const Tag = styled.li`
-  font-size: 12px;
-  color: #39739d;
-  background-color: #e1ecf4;
-  margin: 2px;
-  padding: 4px 6px;
-  border-radius: 3px;
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(95%);
-  }
-`;
-
-const TagBlock = styled.ul`
-  display: flex;
-  margin: 24px 0 12px 0;
-`;
-
 const PostText = styled.p`
   width: 100%;
+  min-height: 150px;
+  padding-top: 10px;
   word-break: break-all;
   font-size: 15px;
   color: #232629;
@@ -468,6 +436,7 @@ const DateBlock = styled.div`
   order: 3;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const DateSpan = styled.span`

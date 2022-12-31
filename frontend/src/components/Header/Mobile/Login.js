@@ -21,7 +21,7 @@ const Login = () => {
   return (
     <MobileFlexBlock>
       <LeftBlock>
-        <NavButton isOpen={false} />
+        <NavButton />
         <Link to="/">
           <MobileLogo>
             <img src={mobileLogo} alt="stackoverflow logo" />

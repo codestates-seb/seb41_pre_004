@@ -5,6 +5,18 @@ export const NavbarWrapper = styled.nav`
   border-right: 1px solid #d7d9dd;
 `;
 
+export const MobileNavbar = styled.div`
+  position: fixed;
+  top: 53px;
+  left: 0;
+  width: 240px;
+  padding-top: 24px;
+  margin-bottom: 8px;
+  border-right: 1px solid #d7d9dd;
+  border-bottom: 1px solid #d7d9dd;
+  background-color: #ffffff;
+`;
+
 export const NavbarBlock = styled.div`
   position: sticky;
   top: 53px;
@@ -83,6 +95,7 @@ export const NavPublic = styled(NavPrimary)`
 `;
 
 export const NavQuestion = styled(NavPrimary)`
+  width: 100%;
   padding: 8px 6px 8px 6px;
 
   svg {

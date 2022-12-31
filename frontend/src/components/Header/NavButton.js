@@ -1,18 +1,35 @@
-import { StyledNavButton } from '../../styles/headerStyle';
-import { ReactComponent as MenuIcon } from '../../assets/icons/menuIcon.svg';
-import { ReactComponent as CloseIcon } from '../../assets/icons/closeIcon.svg';
+import { useState } from 'react';
+import {
+  StyledNavBlock,
+  NavMenuButton,
+  NavCancleButton,
+} from '../../styles/headerStyle';
 
-const NavButton = ({ isOpen }) => {
+const NavButton = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       {isOpen ? (
-        <StyledNavButton type="button" aria-label="Close the TabMenu">
-          <CloseIcon />
-        </StyledNavButton>
+        <StyledNavBlock>
+          <NavCancleButton
+            onClick={onToggle}
+            type="button"
+            aria-label="Close the TabMenu"
+          />
+        </StyledNavBlock>
       ) : (
-        <StyledNavButton type="button" aria-label="Open the TabMenu">
-          <MenuIcon />
-        </StyledNavButton>
+        <StyledNavBlock>
+          <NavMenuButton
+            onClick={onToggle}
+            type="button"
+            aria-label="Open the TabMenu"
+          />
+        </StyledNavBlock>
       )}
     </>
   );
