@@ -130,7 +130,6 @@ const SignupForm = ({
       'Content-Type': 'application/json',
       authorization: '',
     };
-    console.log({ headers });
 
     axios
       .post(

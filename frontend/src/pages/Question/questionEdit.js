@@ -4,12 +4,14 @@ import { Mobile, Tablet, Desktop } from '../../components/Responsive';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import TextEditor from '../../components/EditMarkdown';
+import Sidebar from '../../components/Sidebar';
 import {
   ContainerWrapper,
   ContainerFlex,
   MobileContent,
   DesktopContent,
   ContentBlock,
+  DetailSideBlock,
 } from '../../styles/contentStyle';
 import { useState } from 'react';
 import axios from 'axios';
@@ -120,28 +122,33 @@ const QuestionEdit = () => {
           <Desktop>
             <DesktopContent>
               <ContentBlock>
-                <form onSubmit={handleUpdate}>
-                  <Title>
-                    <TabletLabel>Title</TabletLabel>
-                    <TitleInput
-                      value={question.title}
-                      onChange={handleUpdateTitle}
-                    />
-                  </Title>
-                  <Body>
-                    <TabletLabel>Body</TabletLabel>
-                    <TextEditor
-                      content={question.content}
-                      setContent={setContent}
-                    />
-                  </Body>
-                  <ButtonBlock>
-                    <EditButton type="submit">Save edits</EditButton>
-                    <CancleButton onClick={() => navigate(-1)}>
-                      Cancle
-                    </CancleButton>
-                  </ButtonBlock>
-                </form>
+                <formSidebar>
+                  <form onSubmit={handleUpdate}>
+                    <Title>
+                      <TabletLabel>Title</TabletLabel>
+                      <TitleInput
+                        value={question.title}
+                        onChange={handleUpdateTitle}
+                      />
+                    </Title>
+                    <Body>
+                      <TabletLabel>Body</TabletLabel>
+                      <TextEditor
+                        content={question.content}
+                        setContent={setContent}
+                      />
+                    </Body>
+                    <ButtonBlock>
+                      <EditButton type="submit">Save edits</EditButton>
+                      <CancleButton onClick={() => navigate(-1)}>
+                        Cancle
+                      </CancleButton>
+                    </ButtonBlock>
+                  </form>
+                  <DetailSideBlock>
+                    <Sidebar />
+                  </DetailSideBlock>
+                </formSidebar>
               </ContentBlock>
             </DesktopContent>
           </Desktop>
@@ -151,6 +158,10 @@ const QuestionEdit = () => {
     </>
   );
 };
+
+const formSidebar = styled.div`
+  display: flex;
+`;
 
 const CancleButton = styled.p`
   font-size: 13px;
