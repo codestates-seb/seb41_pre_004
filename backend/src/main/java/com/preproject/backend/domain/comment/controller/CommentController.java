@@ -50,10 +50,10 @@ public class CommentController {
 //    // comment 조회 - 필요 X
 //    @GetMapping("comments/{comment-id}")
 //    public ResponseEntity getComment(@PathVariable("comment-id") @Positive long commentId) {
-//        Comment findcomment = commentService.findComment(commentId);
+//        Comment findComment = commentService.findComment(commentId);
 //
 //        return new ResponseEntity<>(
-//                new SingleResponseDto<>(mapper.commentToCommentResponse(findcomment)),HttpStatus.OK);
+//                new SingleResponseDto<>(mapper.commentToCommentResponse(findComment)),HttpStatus.OK);
 //    }
 
     // comment 전체 조회
