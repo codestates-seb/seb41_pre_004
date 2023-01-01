@@ -36,7 +36,8 @@ public class CommentDto {
     public static class Response {
         private long commentId;
         private long answerId;
-        private String username;
+        private String userName;
+        private String userEmail;
         private String content;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;

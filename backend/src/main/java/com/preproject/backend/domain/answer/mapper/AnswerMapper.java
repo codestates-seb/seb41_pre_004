@@ -35,7 +35,8 @@ public interface AnswerMapper {
         }
         long answerId;
         long questionId;
-        String username;
+        String userName;
+        String userEmail;
         String content;
 //        long voteAnswer; // TODO voteAnswer 기본 구현 이후
         LocalDateTime createdAt;
@@ -43,16 +44,18 @@ public interface AnswerMapper {
 
         answerId = answer.getAnswerId();
         questionId = answer.getQuestion().getQuestionId();
-        username = answer.getMember().getName();
+        userName = answer.getMember().getName();
+        userEmail = answer.getMember().getEmail();
         content = answer.getContent();
         createdAt = answer.getCreatedAt();
         modifiedAt = answer.getModifiedAt();
 
         List<CommentDto.Response> comments = answer.getComments().stream()
-                .map(comment -> new CommentDto.Response(comment.getCommentId(), comment.getAnswer().getAnswerId(), comment.getMember().getName(), comment.getContent(), comment.getCreatedAt(), comment.getModifiedAt()))
+                .map(comment -> new CommentDto.Response(comment.getCommentId(), comment.getAnswer().getAnswerId(), comment.getMember().getName(),
+                        comment.getMember().getEmail(), comment.getContent(), comment.getCreatedAt(), comment.getModifiedAt()))
                 .collect(Collectors.toList());
 
-        AnswerDto.Response response = new AnswerDto.Response(answerId,questionId,username,content,createdAt,modifiedAt,comments);
+        AnswerDto.Response response = new AnswerDto.Response(answerId,questionId,userName,userEmail,content,createdAt,modifiedAt,comments);
 
         return response;
     }
