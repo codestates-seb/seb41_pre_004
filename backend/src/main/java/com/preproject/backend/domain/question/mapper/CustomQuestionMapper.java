@@ -73,8 +73,8 @@ public class CustomQuestionMapper implements QuestionMapper {
                             .map(comment -> new CommentDto.Response(
                                     comment.getCommentId(),
                                     comment.getAnswer().getAnswerId(),
-                                    comment.getMember().getEmail(),
                                     comment.getMember().getName(),
+                                    comment.getMember().getEmail(),
                                     comment.getContent(),
                                     comment.getCreatedAt(),
                                     comment.getModifiedAt()
@@ -84,8 +84,8 @@ public class CustomQuestionMapper implements QuestionMapper {
                     return new AnswerDto.Response(
                             answer.getAnswerId(),
                             answer.getQuestion().getQuestionId(),
-                            answer.getMember().getEmail(),
                             answer.getMember().getName(),
+                            answer.getMember().getEmail(),
                             answer.getContent(),
                             answer.getCreatedAt(),
                             answer.getModifiedAt(),
