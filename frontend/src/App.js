@@ -12,6 +12,7 @@ import Questions from './pages/Question';
 import QuestionAsk from './pages/Question/createQuestion';
 import QuestionDetail from './pages/Question/questionDetail';
 import QuestionEdit from './pages/Question/questionEdit';
+import AnswerEdit from './pages/Answer/answerEdit';
 import Error404 from './pages/error404';
 import MyPage from './pages/MyPage';
 import { useSelector } from 'react-redux';
@@ -95,6 +96,10 @@ function App() {
           element={<QuestionDetail loginUserEmail={loginUserEmail} />}
         />
         <Route path="/questions/edit/:questionId" element={<QuestionEdit />} />
+        <Route
+          path="/questions/:questionId/edit/:answerId"
+          element={<AnswerEdit />}
+        />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="*" element={<Error404 />} />
       </Routes>

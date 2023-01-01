@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 
 const initialstate = {
-  username: '',
+  useremail: '',
   menuOpen: false,
   activeTab: null,
 };
@@ -11,7 +11,7 @@ const EmailReducer = (state = initialstate, action) => {
     case 'SETEMAIL':
       return {
         ...state,
-        username: action.value,
+        useremail: action.value,
       };
     case 'TOGGLEMENU':
       return {

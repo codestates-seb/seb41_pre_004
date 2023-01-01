@@ -125,6 +125,7 @@ const QuestionDetail = () => {
                     </TabletRight>
                   </PostQuestion>
                   <PostAnswer>
+                    <AnswerCount>1 Answers</AnswerCount>
                     <AnswerList
                       question={question}
                       answers={question.answers}
@@ -190,11 +191,12 @@ const QuestionDetail = () => {
                     </TabletRight>
                   </PostQuestion>
                   <PostAnswer>
+                    <TabletCount>1 Answers</TabletCount>
                     <AnswerList
                       question={question}
                       answers={question.answers}
                     />
-                    <Answer>Your Answer</Answer>
+                    <TabletAnswer>Your Answer</TabletAnswer>
                     <form onSubmit={handleSubmit}>
                       <AnsMarkdown setAnswer={setAnswer} />
                       <AnswerBtn>
@@ -256,11 +258,12 @@ const QuestionDetail = () => {
                       </PostRight>
                     </PostQuestion>
                     <PostAnswer>
+                      <TabletCount>1 Answers</TabletCount>
                       <AnswerList
                         question={question}
                         answers={question.answers}
                       />
-                      <Answer>Your Answer</Answer>
+                      <TabletAnswer>Your Answer</TabletAnswer>
                       <form onSubmit={handleSubmit}>
                         <AnsMarkdown setAnswer={setAnswer} />
                         <AnswerBtn>
@@ -282,6 +285,16 @@ const QuestionDetail = () => {
     </>
   );
 };
+
+const AnswerCount = styled.div`
+  padding: 16px 0;
+  font-size: 16px;
+  color: #232629;
+`;
+
+const TabletCount = styled(AnswerCount)`
+  font-size: 19px;
+`;
 
 const PostAnswer = styled.div``;
 
@@ -308,7 +321,14 @@ const AnswerBtn = styled.div`
 `;
 
 const Answer = styled.h2`
-  font-size: 20px;
+  padding: 16px 0;
+  font-size: 16px;
+  color: #232629;
+  border-top: 1px solid #e4e6e8;
+`;
+
+const TabletAnswer = styled(Answer)`
+  font-size: 19px;
 `;
 
 const PostSidebar = styled.div`
@@ -345,7 +365,6 @@ const VoteButton = styled.button`
 
 const PostQuestion = styled.div`
   display: flex;
-  border-bottom: 1px solid #e4e6e8;
 `;
 
 const PostRight = styled.div`

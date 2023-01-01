@@ -9,9 +9,9 @@ function Homeitem({ question }) {
       <Desktop>
         <QuestionBox>
           <QuestionInfo>
-            <QuestionVote>1 votes</QuestionVote>
-            <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
+            <QuestionVote>{question.score} votes</QuestionVote>
+            <QuestionAnswer>{question.answers.length} answers</QuestionAnswer>
+            <QuestionAnswer>{question.viewCount} views</QuestionAnswer>
           </QuestionInfo>
           <QuestionContent>
             <QuestionTitle>
@@ -27,8 +27,7 @@ function Homeitem({ question }) {
                     alt=""
                   />
                 </UserImage>
-                <Username>불4조</Username>
-                <UserScore>1004</UserScore>
+                <Username>{question.userName}</Username>
                 <AskTime>asked 1 min ago</AskTime>
                 {/* homeData.createdAt // 내장date함수시간에서 creat시간을 빼주고 문자열로 리터럴 문자열 */}
               </QuestionUserInfo>
@@ -40,9 +39,9 @@ function Homeitem({ question }) {
       <Tablet>
         <MobileBox>
           <MobileInfo>
-            <QuestionVote>1 votes</QuestionVote>
-            <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
+            <QuestionVote>{question.score} votes</QuestionVote>
+            <QuestionAnswer>{question.answers.length} answers</QuestionAnswer>
+            <QuestionAnswer>{question.viewCount} views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
@@ -58,8 +57,7 @@ function Homeitem({ question }) {
                     alt=""
                   />
                 </UserImage>
-                <Username>불4조</Username>
-                <UserScore>1004</UserScore>
+                <Username>{question.userName}</Username>
                 <AskTime>asked 1 min ago</AskTime>
               </QuestionUserInfo>
             </QuestionUserBox>
@@ -70,9 +68,9 @@ function Homeitem({ question }) {
       <Mobile>
         <MobileBox>
           <MobileInfo>
-            <QuestionVote>1 votes</QuestionVote>
-            <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
+            <QuestionVote>{question.score} votes</QuestionVote>
+            <QuestionAnswer>{question.answers.length} answers</QuestionAnswer>
+            <QuestionAnswer>{question.viewCount} views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
@@ -88,8 +86,7 @@ function Homeitem({ question }) {
                     alt=""
                   />
                 </UserImage>
-                <Username>불4조</Username>
-                <UserScore>1004</UserScore>
+                <Username>{question.userName}</Username>
                 <AskTime>asked 1 min ago</AskTime>
               </QuestionUserInfo>
             </QuestionUserBox>
