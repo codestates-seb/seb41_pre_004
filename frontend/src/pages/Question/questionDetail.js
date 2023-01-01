@@ -72,6 +72,8 @@ const QuestionDetail = ({ loginUserEmail }) => {
     window.location.reload();
   }
 
+  console.log(question.answers);
+
   return (
     <>
       <ContainerWrapper>
