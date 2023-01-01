@@ -1,6 +1,7 @@
 package com.preproject.backend.domain.question.mapper;
 
 import com.preproject.backend.domain.answer.dto.AnswerDto;
+import com.preproject.backend.domain.answer.entity.Answer;
 import com.preproject.backend.domain.comment.dto.CommentDto;
 import com.preproject.backend.domain.question.dto.QuestionDto;
 import com.preproject.backend.domain.question.entity.Question;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,6 +79,7 @@ public class CustomQuestionMapper implements QuestionMapper {
                                     comment.getCreatedAt(),
                                     comment.getModifiedAt()
                             ))
+                            .sorted(Comparator.comparing(a -> a.getCommentId()))
                             .collect(Collectors.toList());
                     return new AnswerDto.Response(
                             answer.getAnswerId(),
@@ -89,6 +92,7 @@ public class CustomQuestionMapper implements QuestionMapper {
                             comments
                     );
                 })
+                .sorted(Comparator.comparing(a -> a.getAnswerId()))
                 .collect(Collectors.toList());
 
         QuestionDto.Response response =
