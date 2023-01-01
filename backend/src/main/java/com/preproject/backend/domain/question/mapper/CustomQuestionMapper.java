@@ -43,7 +43,8 @@ public class CustomQuestionMapper implements QuestionMapper {
         LocalDateTime modifiedAt = null;
         int score = 0;
         int viewCount = 0;
-        String currentUserEmail;
+//        String currentUserEmail;
+        String username;
 
         questionId = question.getQuestionId();
         title = question.getTitle();
@@ -52,7 +53,8 @@ public class CustomQuestionMapper implements QuestionMapper {
         modifiedAt = question.getModifiedAt();
         score = question.getScore();
         viewCount = question.getViewCount();
-        currentUserEmail = question.getMember().getEmail();
+//        currentUserEmail = question.getMember().getEmail();
+        username = question.getMember().getName();
 
 //        //debugging purposes
 //        question.getQuestionTags().forEach(qt -> System.out.println("tag name: " + qt.getTag().getName()));
@@ -69,7 +71,8 @@ public class CustomQuestionMapper implements QuestionMapper {
                             .map(comment -> new CommentDto.Response(
                                     comment.getCommentId(),
                                     comment.getAnswer().getAnswerId(),
-                                    comment.getMember().getEmail(),
+//                                    comment.getMember().getEmail(),
+                                    comment.getMember().getName(),
                                     comment.getContent(),
                                     comment.getCreatedAt(),
                                     comment.getModifiedAt()
@@ -78,7 +81,8 @@ public class CustomQuestionMapper implements QuestionMapper {
                     return new AnswerDto.Response(
                             answer.getAnswerId(),
                             answer.getQuestion().getQuestionId(),
-                            answer.getMember().getEmail(),
+//                            answer.getMember().getEmail(),
+                            answer.getMember().getName(),
                             answer.getContent(),
                             answer.getCreatedAt(),
                             answer.getModifiedAt(),
@@ -89,7 +93,7 @@ public class CustomQuestionMapper implements QuestionMapper {
 
         QuestionDto.Response response =
                 new QuestionDto.Response(
-                        questionId, title, content, createdAt, modifiedAt, score, tags, viewCount, currentUserEmail, answers );
+                        questionId, title, content, createdAt, modifiedAt, score, tags, viewCount, username, answers );
 
         return response;
     }

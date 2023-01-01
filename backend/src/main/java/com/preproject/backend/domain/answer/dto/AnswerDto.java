@@ -44,7 +44,7 @@ public class AnswerDto {
     public static class Response {
         private long answerId;
         private long questionId;
-        private String currEmail;
+        private String username;
         private String content;
 //        private long voteAnswer; // TODO voteAnswer 기본 구현 이후
         private LocalDateTime createdAt;

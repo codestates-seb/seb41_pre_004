@@ -50,7 +50,8 @@ public class QuestionDto {
         private List<String> tags;
 
         private int viewCount;
-        private String currentUserEmail;
+//        private String currentUserEmail;
+        private String username;
 
         private List<AnswerDto.Response> answers;
         //TODO 이후 추가할 것

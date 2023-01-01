@@ -32,19 +32,19 @@ public interface CommentMapper {
         }
         long commentId;
         long answerId;
-        String currEmail;
+        String username;
         String content;
         LocalDateTime createdAt;
         LocalDateTime modifiedAt;
 
         commentId = comment.getCommentId();
         answerId = comment.getAnswer().getAnswerId();
-        currEmail = comment.getMember().getEmail();
+        username = comment.getMember().getName();
         content = comment.getContent();
         createdAt = comment.getCreatedAt();
         modifiedAt = comment.getModifiedAt();
 
-        CommentDto.Response response = new CommentDto.Response(commentId,answerId,currEmail,content,createdAt,modifiedAt);
+        CommentDto.Response response = new CommentDto.Response(commentId,answerId,username,content,createdAt,modifiedAt);
 
         return response;
     }

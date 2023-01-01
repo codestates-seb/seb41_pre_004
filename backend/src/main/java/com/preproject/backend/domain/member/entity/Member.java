@@ -34,7 +34,7 @@ public class Member extends Auditable {
     // 연관관계 매핑 - 한 member 가 여러개의 answer
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false, unique = true)
     private String name;
 
     @ElementCollection(fetch = FetchType.EAGER)
