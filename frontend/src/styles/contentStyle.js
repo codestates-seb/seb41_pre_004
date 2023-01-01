@@ -28,6 +28,7 @@ export const DesktopContent = styled(Content)`
 
 export const ContentBlock = styled.main`
   width: 100%;
+  min-height: 500px;
   margin-bottom: 48px;
 `;
 
