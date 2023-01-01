@@ -122,7 +122,6 @@ function AskQuestionList() {
     let data = JSON.stringify({
       title: title,
       content: content,
-      tags: [' '],
     });
 
     axios
@@ -142,9 +141,8 @@ function AskQuestionList() {
     window.location.reload();
   }
 
-  const handleSetTitle = (event) => {
-    let e = event.target.value;
-    setTitle(e);
+  const handleSetTitle = (e) => {
+    setTitle(e.target.value);
   };
 
   return (

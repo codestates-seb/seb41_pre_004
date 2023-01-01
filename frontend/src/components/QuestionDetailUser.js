@@ -1,30 +1,35 @@
 import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 import handshakeIcon from '../assets/icons/handshakeIcon.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const QuestionDetailUser = ({ question, loginUserEmail }) => {
+const QuestionDetailUser = ({ question }) => {
+  const questionId = useParams().questionId;
   const navigate = useNavigate();
 
   function handleDelete(e) {
     e.preventDefault();
 
+    const token = localStorage.getItem('token');
+    const parse = JSON.parse(token);
+
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        authorization: parse.authorization,
+      },
+    };
+
     if (window.confirm('Delete this question?')) {
-      const token = localStorage.getItem('token');
-      const parse = JSON.parse(token);
-
-      const header = {
-        headers: {
-          'Content-Type': `application/json`,
-          authorization: parse.authorization,
-        },
-      };
-
-      axios.delete(
-        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
-        header,
-      );
+      axios
+        .delete(
+          `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+          header,
+        )
+        .catch((error) => {
+          console.log(error);
+        });
 
       navigate('/questions');
       window.location.reload();
@@ -38,39 +43,39 @@ const QuestionDetailUser = ({ question, loginUserEmail }) => {
         <LoginBlock>
           <ButtonBlock>
             <Mobile>
-              <Link
-                to={`/questions/edit/${question.questionId}`}
-                state={question}
-              >
-                <DetailButton>Edit</DetailButton>
-              </Link>
-              <form onSubmit={handleDelete}>
-                <DetailButton>Delete</DetailButton>
-              </form>
+              <UDBlock>
+                <Link to={`/questions/edit/${question.questionId}`}>
+                  <DetailButton>Edit</DetailButton>
+                </Link>
+                <form onSubmit={handleDelete}>
+                  <DetailButton>Delete</DetailButton>
+                </form>
+              </UDBlock>
             </Mobile>
 
             <Tablet>
-              <Link
-                to={`/questions/edit/${question.questionId}`}
-                state={question}
-              >
-                <TabletDetailButton>Edit</TabletDetailButton>
-              </Link>
-              <form onSubmit={handleDelete}>
-                <TabletDetailButton type="submit">Delete</TabletDetailButton>
-              </form>
+              <UDBlock>
+                <Link to={`/questions/edit/${question.questionId}`}>
+                  <TabletDetailButton>Edit</TabletDetailButton>
+                </Link>
+                <form onSubmit={handleDelete}>
+                  <TabletDetailButton type="submit">Delete</TabletDetailButton>
+                </form>
+              </UDBlock>
             </Tablet>
 
             <Desktop>
-              <Link
-                to={`/questions/edit/${question.questionId}`}
-                state={question}
-              >
-                <TabletDetailButton>Edit</TabletDetailButton>
-              </Link>
-              <form onSubmit={handleDelete}>
-                <TabletDetailButton type="submit">Delete</TabletDetailButton>
-              </form>
+              <UDBlock>
+                <Link
+                  to={`/questions/edit/${question.questionId}`}
+                  state={question}
+                >
+                  <TabletDetailButton>Edit</TabletDetailButton>
+                </Link>
+                <form onSubmit={handleDelete}>
+                  <TabletDetailButton type="submit">Delete</TabletDetailButton>
+                </form>
+              </UDBlock>
             </Desktop>
           </ButtonBlock>
           <UserBlock>
@@ -88,7 +93,7 @@ const QuestionDetailUser = ({ question, loginUserEmail }) => {
                     />
                   </UserImage>
                   <UserWrapper>
-                    <Username>{question.author}</Username>
+                    <Username>{question.username}</Username>
                   </UserWrapper>
                 </User>
               </AskUpBlock>
@@ -116,7 +121,7 @@ const QuestionDetailUser = ({ question, loginUserEmail }) => {
                     />
                   </UserImage>
                   <UserWrapper>
-                    <Username>{question.author}</Username>
+                    <Username>{question.username}</Username>
                   </UserWrapper>
                 </User>
               </AskUpBlock>
@@ -131,6 +136,10 @@ const QuestionDetailUser = ({ question, loginUserEmail }) => {
     </>
   );
 };
+
+const UDBlock = styled.div`
+  display: flex;
+`;
 
 const EtcSpan = styled.span`
   font-size: 11px;

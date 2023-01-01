@@ -31,7 +31,7 @@ const LoginInputForm = () => {
         headers,
       )
       .then((res) => {
-        window.alert(`${loginEmail}이메일로 로그인 하셨습니다.`);
+        window.alert(`${loginEmail}님 로그인`);
         localStorage.setItem('token', JSON.stringify(res.headers));
         dispatch({ type: 'SETEMAIL', value: `${loginEmail}` });
         navigate('../../');

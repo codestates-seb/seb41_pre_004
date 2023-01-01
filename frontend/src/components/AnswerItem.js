@@ -1,13 +1,10 @@
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import arrowUpIcon from '../assets/icons/arrowUpIcon.png';
 import arrowDownIcon from '../assets/icons/arrowDownIcon.png';
 import { Mobile, Tablet, Desktop } from '../components/Responsive';
 import QuestionDetailUser from '../components/QuestionDetailUser';
 
-const AnswerItem = ({ loginUsername, answer }) => {
-  const question = useLocation().state;
-
+const AnswerItem = ({ question, answer }) => {
   return (
     <>
       <AnswerContainer>
@@ -25,10 +22,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
             <AnswerRight>
               <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
-                <QuestionDetailUser
-                  question={question}
-                  loginUsername={loginUsername}
-                />
+                <QuestionDetailUser question={question} />
               </QuestionUser>
             </AnswerRight>
           </TabletBlock>
@@ -48,10 +42,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
             <AnswerRight>
               <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
-                <QuestionDetailUser
-                  question={question}
-                  loginUsername={loginUsername}
-                />
+                <QuestionDetailUser question={question} />
               </QuestionUser>
             </AnswerRight>
           </TabletBlock>
@@ -71,10 +62,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
             <AnswerRight>
               <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
-                <QuestionDetailUser
-                  question={question}
-                  loginUsername={loginUsername}
-                />
+                <QuestionDetailUser question={question} />
               </QuestionUser>
             </AnswerRight>
           </AnswerBlock>

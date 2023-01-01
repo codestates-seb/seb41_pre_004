@@ -15,7 +15,7 @@ function Questionitem({ question }) {
           </QuestionInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.questionId}`} state={question}>
+              <Link to={`/questions/${question.questionId}`}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
@@ -49,7 +49,7 @@ function Questionitem({ question }) {
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.questionId}`} state={question}>
+              <Link to={`/questions/${question.questionId}`}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
@@ -82,7 +82,7 @@ function Questionitem({ question }) {
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.questionId}`} state={question}>
+              <Link to={`/questions/${question.questionId}`}>
                 <MobileTitle>{question.title}</MobileTitle>
               </Link>
             </QuestionTitle>

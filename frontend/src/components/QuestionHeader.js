@@ -34,7 +34,7 @@ const QuestionContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32px 0 12px 24px;
+  padding: 24px 0 12px 24px;
 `;
 
 const TabletContainer = styled(QuestionContainer)`

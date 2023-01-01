@@ -1,10 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from '../../components/Responsive';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import TextEditor from '../../components/EditMarkdown';
-import Sidebar from '../../components/Sidebar';
+import EditSidebar from '../../components/EditSidebar';
 import {
   ContainerWrapper,
   ContainerFlex,
@@ -13,15 +13,35 @@ import {
   ContentBlock,
   DetailSideBlock,
 } from '../../styles/contentStyle';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 
 const QuestionEdit = () => {
-  const question = useLocation().state;
+  const questionId = useParams().questionId;
   const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+  const GetQuestion = async () => {
+    await axios
+      .get(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+      )
+      .then((res) => {
+        return res.data.data;
+      })
+      .then((data) => {
+        setTitle(data.title);
+        setContent(data.content);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    GetQuestion();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleUpdate(e) {
     e.preventDefault();
@@ -39,22 +59,25 @@ const QuestionEdit = () => {
     let data = JSON.stringify({
       title: title,
       content: content,
-      tags: [' '],
     });
 
     axios.patch(
-      `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
+      `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
       data,
       header,
     );
 
-    navigate(-1);
+    navigate(`/questions/${questionId}`);
     window.location.reload();
   }
 
   const handleUpdateTitle = (e) => {
     setTitle(e.target.value);
   };
+
+  const checkUndefined = useCallback(() => {
+    return title !== '' && content !== '';
+  }, [title, content]);
 
   return (
     <>
@@ -67,17 +90,13 @@ const QuestionEdit = () => {
                 <form onSubmit={handleUpdate}>
                   <Title>
                     <TitleLabel>Title</TitleLabel>
-                    <TitleInput
-                      value={question.title}
-                      onChange={handleUpdateTitle}
-                    />
+                    <TitleInput value={title} onChange={handleUpdateTitle} />
                   </Title>
                   <Body>
                     <TitleLabel>Body</TitleLabel>
-                    <TextEditor
-                      content={question.content}
-                      setContent={setContent}
-                    />
+                    {checkUndefined() && (
+                      <TextEditor content={content} setContent={setContent} />
+                    )}
                   </Body>
                   <ButtonBlock>
                     <EditButton type="submit">Save edits</EditButton>
@@ -96,17 +115,13 @@ const QuestionEdit = () => {
                 <form onSubmit={handleUpdate}>
                   <Title>
                     <TabletLabel>Title</TabletLabel>
-                    <TitleInput
-                      value={question.title}
-                      onChange={handleUpdateTitle}
-                    />
+                    <TitleInput value={title} onChange={handleUpdateTitle} />
                   </Title>
                   <Body>
                     <TabletLabel>Body</TabletLabel>
-                    <TextEditor
-                      content={question.content}
-                      setContent={setContent}
-                    />
+                    {checkUndefined() && (
+                      <TextEditor content={content} setContent={setContent} />
+                    )}
                   </Body>
                   <ButtonBlock>
                     <EditButton type="submit">Save edits</EditButton>
@@ -122,21 +137,17 @@ const QuestionEdit = () => {
           <Desktop>
             <DesktopContent>
               <ContentBlock>
-                <formSidebar>
+                <ContentSidebar>
                   <form onSubmit={handleUpdate}>
                     <Title>
                       <TabletLabel>Title</TabletLabel>
-                      <TitleInput
-                        value={question.title}
-                        onChange={handleUpdateTitle}
-                      />
+                      <TitleInput value={title} onChange={handleUpdateTitle} />
                     </Title>
                     <Body>
                       <TabletLabel>Body</TabletLabel>
-                      <TextEditor
-                        content={question.content}
-                        setContent={setContent}
-                      />
+                      {checkUndefined() && (
+                        <TextEditor content={content} setContent={setContent} />
+                      )}
                     </Body>
                     <ButtonBlock>
                       <EditButton type="submit">Save edits</EditButton>
@@ -146,9 +157,9 @@ const QuestionEdit = () => {
                     </ButtonBlock>
                   </form>
                   <DetailSideBlock>
-                    <Sidebar />
+                    <EditSidebar />
                   </DetailSideBlock>
-                </formSidebar>
+                </ContentSidebar>
               </ContentBlock>
             </DesktopContent>
           </Desktop>
@@ -159,7 +170,7 @@ const QuestionEdit = () => {
   );
 };
 
-const formSidebar = styled.div`
+const ContentSidebar = styled.div`
   display: flex;
 `;
 
