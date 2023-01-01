@@ -35,25 +35,39 @@ public class QuestionController {
     private final AnswerService answerService;
 
 
-    //CREATE
+    //CREATE - tag 포함
+//    @PostMapping
+//    public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
+//        Question question = questionService.createQuestion( customQuestionMapper.questionPostDtoToQuestion(post),
+//                post.getTags());
+////        Question question = questionMapper.questionPostDtoToQuestion(post);
+//        Question createdQuestion = questionService.createQuestion(question, post.getTags());
+//
+//
+//        QuestionDto.Response responseDto = customQuestionMapper.questionToResponseCheck(createdQuestion);
+//        SingleResponseDto<QuestionDto.Response> response = new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(createdQuestion));
+//
+////        for (QuestionTag tag : createdQuestion.getQuestionTags()) {
+////            System.out.println(tag.getTag().getName());
+////        }
+//
+//        return new ResponseEntity<>(response,HttpStatus.OK);
+////        return new ResponseEntity<>(
+////                new SingleResponseDto<>(questionMapper.questionToResponseCheck(createdQuestion)),HttpStatus.OK);
+//    }
+
+    //CREATE - tag 미포함
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
-        Question question = questionService.createQuestion( customQuestionMapper.questionPostDtoToQuestion(post),
-                post.getTags());
+        Question question = questionService.createQuestion( customQuestionMapper.questionPostDtoToQuestion(post));
 //        Question question = questionMapper.questionPostDtoToQuestion(post);
-        Question createdQuestion = questionService.createQuestion(question, post.getTags());
+        Question createdQuestion = questionService.createQuestion(question);
 
 
         QuestionDto.Response responseDto = customQuestionMapper.questionToResponseCheck(createdQuestion);
         SingleResponseDto<QuestionDto.Response> response = new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(createdQuestion));
 
-//        for (QuestionTag tag : createdQuestion.getQuestionTags()) {
-//            System.out.println(tag.getTag().getName());
-//        }
-
-        return new ResponseEntity<>(response,HttpStatus.OK);
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(questionMapper.questionToResponseCheck(createdQuestion)),HttpStatus.OK);
+        return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
     //READ
@@ -78,13 +92,24 @@ public class QuestionController {
                 new MultiResponseDto<>(customQuestionMapper.questionsToResponses(questions),pageQuestions),HttpStatus.OK);
     }
 
-    //UPDATE
+    //UPDATE - tag 포함
+//    @PatchMapping("/{question-id}")
+//    public ResponseEntity patchQuestion(@Positive @PathVariable("question-id") long questionId,
+//                                        @Valid @RequestBody QuestionDto.Patch patch) {
+//        Question question = questionService.updateQuestion( questionId,
+//                customQuestionMapper.questionPatchDtoToQuestion(patch),
+//                patch.getTags());
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(question)),HttpStatus.OK);
+//    }
+
+    //UPDATE - tag 미포함
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@Positive @PathVariable("question-id") long questionId,
                                         @Valid @RequestBody QuestionDto.Patch patch) {
         Question question = questionService.updateQuestion( questionId,
-                customQuestionMapper.questionPatchDtoToQuestion(patch),
-                patch.getTags());
+                customQuestionMapper.questionPatchDtoToQuestion(patch));
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(question)),HttpStatus.OK);

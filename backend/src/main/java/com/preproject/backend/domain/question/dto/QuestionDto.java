@@ -20,7 +20,7 @@ public class QuestionDto {
         @NotBlank(message = "내용을 입력해주세요.")
         private String content;
 
-        private List<String> tags;
+//        private List<String> tags;
     }
 
     @Getter
@@ -33,7 +33,7 @@ public class QuestionDto {
         @NotBlank(message = "내용을 입력해주세요.")
         private String content;
 
-        private List<String> tags;
+//        private List<String> tags;
     }
 
     @Getter

@@ -40,8 +40,37 @@ public class QuestionService {
 
     // TODO CRUD 순서 맞춰서 작성해볼 것. (진행 중)
 
-    //CREATE
-    public Question createQuestion(Question question, List<String> tags) {
+    //CREATE - tag 포함
+//    public Question createQuestion(Question question, List<String> tags) {
+////    public Question createQuestion(Question question) {
+//        long memberId = memberService.getLoginMember().getMemberId();
+//        Member member = getMemberFromId(memberId);
+//        //TODO member 쪽에 질문갯수 관련 변수 추가
+//        // member.set질문갯수(member.get질문갯수() + 1);
+//
+//        // for debugging purposes
+//        System.out.println("before line causing error");
+//        System.out.println("question: " + question);
+//        System.out.println("tags: " + tags);
+//        System.out.println("member: " + member);
+//
+//        question.setMember(member); // 해당 질문을 누가 올렸는지 연결
+//        Set<QuestionTag> questionTagSet = tags.stream().map(
+//                t -> {
+//                    QuestionTag questionTag = new QuestionTag();
+//                    questionTag.setQuestion(question);
+//                    questionTag.setTag(tagService.tagCreateUpdate(t));
+//                    // 질문을 올릴때 기존의 태그일 수도 있고 새로 만드는 태그일 수 있으니
+//                    // 아예 Create, Update를 한번에 처리 할 수 있도록 함
+//                    return questionTag;
+//                }
+//        ).collect(Collectors.toSet());
+//        question.setQuestionTags(questionTagSet);
+//        return questionRepository.save(question);
+//    }
+
+    //CREATE - tag 미포함
+    public Question createQuestion(Question question) {
 //    public Question createQuestion(Question question) {
         long memberId = memberService.getLoginMember().getMemberId();
         Member member = getMemberFromId(memberId);
@@ -51,21 +80,9 @@ public class QuestionService {
         // for debugging purposes
         System.out.println("before line causing error");
         System.out.println("question: " + question);
-        System.out.println("tags: " + tags);
         System.out.println("member: " + member);
 
         question.setMember(member); // 해당 질문을 누가 올렸는지 연결
-        Set<QuestionTag> questionTagSet = tags.stream().map(
-                t -> {
-                    QuestionTag questionTag = new QuestionTag();
-                    questionTag.setQuestion(question);
-                    questionTag.setTag(tagService.tagCreateUpdate(t));
-                    // 질문을 올릴때 기존의 태그일 수도 있고 새로 만드는 태그일 수 있으니
-                    // 아예 Create, Update를 한번에 처리 할 수 있도록 함
-                    return questionTag;
-                }
-        ).collect(Collectors.toSet());
-        question.setQuestionTags(questionTagSet);
         return questionRepository.save(question);
     }
 
@@ -92,32 +109,42 @@ public class QuestionService {
         return question.orElseThrow(() -> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
     }
 
-    //UPDATE
-    public Question updateQuestion(long questionId, Question changedQuestion, List<String> tagsList){
+    //UPDATE - tag 포함
+//    public Question updateQuestion(long questionId, Question changedQuestion, List<String> tagsList){
+//        Question question = verifyWriter(questionId); // 현재 사용자가 작성자가 맞는지
+//        // 해당 글 수정
+//        question.setTitle(changedQuestion.getTitle());
+//        question.setContent(changedQuestion.getContent());
+//
+////        Set<QuestionTag> questionTags = question.getQuestionTags();
+////        Set<QuestionTag> tmp = new HashSet<>();
+////        for(QuestionTag questionTag: questionTags){
+////            TagEntity tag = questionTag.getTag();
+////            if(!tagsList.contains(tag.getName())){
+////                tmp.add(questionTag);
+////            } else {
+////                tagsList.remove(tag.getName());
+////            }
+////        }
+////
+////        questionTags.removeAll(tmp);
+////
+////        for(String tagName : tagsList) {
+////            QuestionTag questionTag = new QuestionTag();
+////            questionTag.setQuestion(question);
+////            questionTag.setTag(tagService.tagCreateUpdate(tagName));
+////            questionTags.add(questionTag);
+////        }
+//
+//        return questionRepository.save(question);
+//    }
+
+    //UPDATE - tag 미포함
+    public Question updateQuestion(long questionId, Question changedQuestion){
         Question question = verifyWriter(questionId); // 현재 사용자가 작성자가 맞는지
         // 해당 글 수정
         question.setTitle(changedQuestion.getTitle());
         question.setContent(changedQuestion.getContent());
-
-//        Set<QuestionTag> questionTags = question.getQuestionTags();
-//        Set<QuestionTag> tmp = new HashSet<>();
-//        for(QuestionTag questionTag: questionTags){
-//            TagEntity tag = questionTag.getTag();
-//            if(!tagsList.contains(tag.getName())){
-//                tmp.add(questionTag);
-//            } else {
-//                tagsList.remove(tag.getName());
-//            }
-//        }
-//
-//        questionTags.removeAll(tmp);
-//
-//        for(String tagName : tagsList) {
-//            QuestionTag questionTag = new QuestionTag();
-//            questionTag.setQuestion(question);
-//            questionTag.setTag(tagService.tagCreateUpdate(tagName));
-//            questionTags.add(questionTag);
-//        }
 
         return questionRepository.save(question);
     }
