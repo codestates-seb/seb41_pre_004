@@ -47,7 +47,7 @@ public class QuestionDto {
         private LocalDateTime modifiedAt;
         private int score;
 
-        private List<String> tags;
+//        private List<String> tags;
 
         private int viewCount;
 //        private String currentUserEmail;

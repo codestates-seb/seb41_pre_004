@@ -59,11 +59,11 @@ public class CustomQuestionMapper implements QuestionMapper {
 //        //debugging purposes
 //        question.getQuestionTags().forEach(qt -> System.out.println("tag name: " + qt.getTag().getName()));
 
-        List<String> tags = question.getQuestionTags().stream()
-                .map(QuestionTag::getTag)
-                .map(TagEntity::getName)
-                .distinct()
-                .collect(Collectors.toList());
+//        List<String> tags = question.getQuestionTags().stream()
+//                .map(QuestionTag::getTag)
+//                .map(TagEntity::getName)
+//                .distinct()
+//                .collect(Collectors.toList());
 
         List<AnswerDto.Response> answers = question.getAnswers().stream()
                 .map(answer -> {
@@ -93,7 +93,7 @@ public class CustomQuestionMapper implements QuestionMapper {
 
         QuestionDto.Response response =
                 new QuestionDto.Response(
-                        questionId, title, content, createdAt, modifiedAt, score, tags, viewCount, username, answers );
+                        questionId, title, content, createdAt, modifiedAt, score, viewCount, username, answers );
 
         return response;
     }
