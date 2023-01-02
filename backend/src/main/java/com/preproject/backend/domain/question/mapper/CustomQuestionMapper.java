@@ -1,12 +1,9 @@
 package com.preproject.backend.domain.question.mapper;
 
 import com.preproject.backend.domain.answer.dto.AnswerDto;
-import com.preproject.backend.domain.answer.entity.Answer;
 import com.preproject.backend.domain.comment.dto.CommentDto;
 import com.preproject.backend.domain.question.dto.QuestionDto;
 import com.preproject.backend.domain.question.entity.Question;
-import com.preproject.backend.domain.question.entity.QuestionTag;
-import com.preproject.backend.domain.tag.entity.TagEntity;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -57,15 +54,6 @@ public class CustomQuestionMapper implements QuestionMapper {
         viewCount = question.getViewCount();
         userName = question.getMember().getName();
         userEmail = question.getMember().getEmail();
-
-//        //debugging purposes
-//        question.getQuestionTags().forEach(qt -> System.out.println("tag name: " + qt.getTag().getName()));
-
-//        List<String> tags = question.getQuestionTags().stream()
-//                .map(QuestionTag::getTag)
-//                .map(TagEntity::getName)
-//                .distinct()
-//                .collect(Collectors.toList());
 
         List<AnswerDto.Response> answers = question.getAnswers().stream()
                 .map(answer -> {

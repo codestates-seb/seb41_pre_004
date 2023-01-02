@@ -10,21 +10,5 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface TagMapper {
-//    default TagDto.Response tagToResponse(PageInfo pageInfo, List<TagEntity> tags){
-//        TagDto.Response response = new TagDto.Response();
-//
-//        response.setPageInfo(pageInfo);
-//        List<TagDto.Information> listInfo = tags.stream().map(
-//                t -> {
-//                    TagDto.Information information = new TagDto.Information();
-//                    information.setName(t.getName());
-//                    information.setCount(t.getCount());
-//                    return information;
-//                }
-//        ).collect(Collectors.toList());
-//        response.setTags(listInfo);
-//
-//        return response;
-//    }
     List<TagDto.Response> tagToResponse(List<TagEntity> tags);
 }
