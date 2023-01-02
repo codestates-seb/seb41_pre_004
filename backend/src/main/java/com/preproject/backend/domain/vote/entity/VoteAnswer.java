@@ -28,17 +28,4 @@ public class VoteAnswer {
     private Member member;
 
     private int count;
-
-    public void answerCountPlus(){
-        this.count++;
-    }
-    public void answerCountMinus(){
-        this.count--;
-    }
-    public void answerCountPlus(int num){
-        this.count += num;
-    }
-    public void answerCountMinus(int num){
-        this.count -= num;
-    }
 }

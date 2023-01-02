@@ -48,19 +48,10 @@ public class Question extends Auditable {
     @OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Set<QuestionTag> questionTags = new HashSet<>();
 
-    public void voteUp() {
-        this.score++;
-    }
-    public void voteDown() {
-        this.score--;
-    }
     public void voteUp(int num) {
         this.score += num;
     }
     public void voteDown(int num) {
         this.score -= num;
-    }
-    public void viewCountUp() {
-        this.viewCount++;
     }
 }

@@ -28,12 +28,11 @@ public class QuestionController {
     //CREATE
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
-        Question question = questionService.createQuestion( customQuestionMapper.questionPostDtoToQuestion(post));
+        Question question = questionService.createQuestion(customQuestionMapper.questionPostDtoToQuestion(post));
         Question createdQuestion = questionService.createQuestion(question);
 
-
         QuestionDto.Response responseDto = customQuestionMapper.questionToResponseCheck(createdQuestion);
-        SingleResponseDto<QuestionDto.Response> response = new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(createdQuestion));
+        SingleResponseDto<QuestionDto.Response> response = new SingleResponseDto<>(responseDto);
 
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
@@ -44,7 +43,8 @@ public class QuestionController {
         Question question = questionService.readQuestion(questionId);
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(question)),HttpStatus.OK);
+                new SingleResponseDto<>(
+                        customQuestionMapper.questionToResponseCheck(question)),HttpStatus.OK);
     }
 
     // 전체 조회
@@ -55,18 +55,20 @@ public class QuestionController {
         List<Question> questions = pageQuestions.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(customQuestionMapper.questionsToResponses(questions),pageQuestions),HttpStatus.OK);
+                new MultiResponseDto<>(
+                        customQuestionMapper.questionsToResponses(questions),pageQuestions),HttpStatus.OK);
     }
 
     //UPDATE
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@Positive @PathVariable("question-id") long questionId,
                                         @Valid @RequestBody QuestionDto.Patch patch) {
-        Question question = questionService.updateQuestion( questionId,
-                customQuestionMapper.questionPatchDtoToQuestion(patch));
+        Question question = questionService.updateQuestion(
+                questionId,customQuestionMapper.questionPatchDtoToQuestion(patch));
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(question)),HttpStatus.OK);
+                new SingleResponseDto<>(
+                        customQuestionMapper.questionToResponseCheck(question)),HttpStatus.OK);
     }
 
     //DELETE
