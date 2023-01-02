@@ -1,16 +1,9 @@
 package com.preproject.backend.domain.question.controller;
 
-import com.preproject.backend.domain.answer.entity.Answer;
-import com.preproject.backend.domain.answer.service.AnswerService;
-import com.preproject.backend.domain.member.dto.MemberDto;
-import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.question.dto.QuestionDto;
 import com.preproject.backend.domain.question.entity.Question;
-import com.preproject.backend.domain.question.entity.QuestionTag;
 import com.preproject.backend.domain.question.mapper.CustomQuestionMapper;
-import com.preproject.backend.domain.question.mapper.QuestionMapper;
 import com.preproject.backend.domain.question.service.QuestionService;
-import com.preproject.backend.domain.tag.entity.TagEntity;
 import com.preproject.backend.global.dto.MultiResponseDto;
 import com.preproject.backend.global.dto.SingleResponseDto;
 import lombok.AllArgsConstructor;
@@ -30,37 +23,12 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionController {
     private final QuestionService questionService;
-//    private final QuestionMapper questionMapper;
     private final CustomQuestionMapper customQuestionMapper;
-    private final AnswerService answerService;
 
-
-    //CREATE - tag 포함
-//    @PostMapping
-//    public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
-//        Question question = questionService.createQuestion( customQuestionMapper.questionPostDtoToQuestion(post),
-//                post.getTags());
-////        Question question = questionMapper.questionPostDtoToQuestion(post);
-//        Question createdQuestion = questionService.createQuestion(question, post.getTags());
-//
-//
-//        QuestionDto.Response responseDto = customQuestionMapper.questionToResponseCheck(createdQuestion);
-//        SingleResponseDto<QuestionDto.Response> response = new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(createdQuestion));
-//
-////        for (QuestionTag tag : createdQuestion.getQuestionTags()) {
-////            System.out.println(tag.getTag().getName());
-////        }
-//
-//        return new ResponseEntity<>(response,HttpStatus.OK);
-////        return new ResponseEntity<>(
-////                new SingleResponseDto<>(questionMapper.questionToResponseCheck(createdQuestion)),HttpStatus.OK);
-//    }
-
-    //CREATE - tag 미포함
+    //CREATE
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
         Question question = questionService.createQuestion( customQuestionMapper.questionPostDtoToQuestion(post));
-//        Question question = questionMapper.questionPostDtoToQuestion(post);
         Question createdQuestion = questionService.createQuestion(question);
 
 
@@ -74,8 +42,6 @@ public class QuestionController {
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@Positive @PathVariable("question-id") long questionId) {
         Question question = questionService.readQuestion(questionId);
-        //TODO AnswerService.특정 질문의 Answer들을 GET 하는 매서드 구현 이후 돌아오기
-        // List<Answer> answers = answerService.getAnswersFromQuestion(question);
 
         return new ResponseEntity<>(
                 new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(question)),HttpStatus.OK);
@@ -92,19 +58,7 @@ public class QuestionController {
                 new MultiResponseDto<>(customQuestionMapper.questionsToResponses(questions),pageQuestions),HttpStatus.OK);
     }
 
-    //UPDATE - tag 포함
-//    @PatchMapping("/{question-id}")
-//    public ResponseEntity patchQuestion(@Positive @PathVariable("question-id") long questionId,
-//                                        @Valid @RequestBody QuestionDto.Patch patch) {
-//        Question question = questionService.updateQuestion( questionId,
-//                customQuestionMapper.questionPatchDtoToQuestion(patch),
-//                patch.getTags());
-//
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(customQuestionMapper.questionToResponseCheck(question)),HttpStatus.OK);
-//    }
-
-    //UPDATE - tag 미포함
+    //UPDATE
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@Positive @PathVariable("question-id") long questionId,
                                         @Valid @RequestBody QuestionDto.Patch patch) {
