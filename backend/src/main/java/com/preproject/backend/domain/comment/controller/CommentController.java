@@ -47,15 +47,6 @@ public class CommentController {
                 new SingleResponseDto<>(mapper.commentToCommentResponse(updateComment)), HttpStatus.CREATED);
     }
 
-//    // comment 조회 - 필요 X
-//    @GetMapping("comments/{comment-id}")
-//    public ResponseEntity getComment(@PathVariable("comment-id") @Positive long commentId) {
-//        Comment findComment = commentService.findComment(commentId);
-//
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(mapper.commentToCommentResponse(findComment)),HttpStatus.OK);
-//    }
-
     // comment 전체 조회
     @GetMapping("comments")
     public ResponseEntity getComments(@Positive @RequestParam int page,

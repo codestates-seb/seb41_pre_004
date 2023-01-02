@@ -1,10 +1,8 @@
 package com.preproject.backend.domain.answer.dto;
 
-import com.preproject.backend.domain.answer.entity.Answer;
 import com.preproject.backend.domain.comment.dto.CommentDto;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -51,20 +49,5 @@ public class AnswerDto {
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
         private List<CommentDto.Response> comments;
-
-//        @Builder
-//        public Response(long answerId, long questionId, String content, LocalDateTime createdAt, LocalDateTime modifiedAt, List<CommentDto.Response> comments) {
-//
-//        }
-//        public static Response of(Answer answer, List<CommentDto.Response> comments) {
-//            return Response.builder()
-//                    .answerId(answer.getAnswerId())
-//                    .questionId(answer.getQuestion().getQuestionId())
-//                    .content(answer.getContent())
-//                    .createdAt(answer.getCreatedAt())
-//                    .modifiedAt(answer.getModifiedAt())
-//                    .comments(comments)
-//                    .build();
-//        }
     }
 }
