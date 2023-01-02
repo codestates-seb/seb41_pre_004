@@ -17,12 +17,6 @@ spring:
     open-in-view: true
   profiles:
     include: database
-logging:
-  level:
-    org:
-      springframework:
-        orm:
-          jpa: DEBUG
 server:
   servlet:
     encoding:
