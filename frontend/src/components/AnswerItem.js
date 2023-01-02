@@ -1,13 +1,10 @@
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import arrowUpIcon from '../assets/icons/arrowUpIcon.png';
 import arrowDownIcon from '../assets/icons/arrowDownIcon.png';
 import { Mobile, Tablet, Desktop } from '../components/Responsive';
-import QuestionDetailUser from '../components/QuestionDetailUser';
+import AnswerDetailUser from '../components/AnswerDetailUser';
 
-const AnswerItem = ({ loginUsername, answer }) => {
-  const question = useLocation().state;
-
+const AnswerItem = ({ answer }) => {
   return (
     <>
       <AnswerContainer>
@@ -25,10 +22,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
             <AnswerRight>
               <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
-                <QuestionDetailUser
-                  question={question}
-                  loginUsername={loginUsername}
-                />
+                <AnswerDetailUser answer={answer} />
               </QuestionUser>
             </AnswerRight>
           </TabletBlock>
@@ -48,10 +42,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
             <AnswerRight>
               <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
-                <QuestionDetailUser
-                  question={question}
-                  loginUsername={loginUsername}
-                />
+                <AnswerDetailUser answer={answer} />
               </QuestionUser>
             </AnswerRight>
           </TabletBlock>
@@ -71,10 +62,7 @@ const AnswerItem = ({ loginUsername, answer }) => {
             <AnswerRight>
               <PostText dangerouslySetInnerHTML={{ __html: answer.content }} />
               <QuestionUser>
-                <QuestionDetailUser
-                  question={question}
-                  loginUsername={loginUsername}
-                />
+                <AnswerDetailUser answer={answer} />
               </QuestionUser>
             </AnswerRight>
           </AnswerBlock>
@@ -92,7 +80,7 @@ const AnswerBlock = styled.div`
   width: 100%;
   display: flex;
   padding: 16px 16px 0 0;
-  border-bottom: 1px solid #e4e6e8;
+  border-top: 1px solid #e4e6e8;
 `;
 
 const TabletBlock = styled(AnswerBlock)`
@@ -110,6 +98,7 @@ const QuestionUser = styled.div`
 const PostText = styled.p`
   width: 100%;
   min-height: 100px;
+  padding-top: 10px;
   word-break: break-all;
   font-size: 15px;
   color: #232629;

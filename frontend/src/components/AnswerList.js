@@ -1,12 +1,13 @@
 import React from 'react';
-import Questionitem from './QuestionItem';
+import Answeritem from './AnswerItem';
 
-function AnswerList({ questions }) {
+function AnswerList({ question }) {
   return (
     <>
-      {questions.map((question) => {
-        return <Questionitem question={question} key={question.questionId} />;
-      })}
+      {question.answers &&
+        question.answers.map((answer, idx) => {
+          return <Answeritem key={idx} answer={answer} question={question} />;
+        })}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import arrowUpIcon from '../../assets/icons/arrowUpIcon.png';
 import arrowDownIcon from '../../assets/icons/arrowDownIcon.png';
@@ -8,7 +8,7 @@ import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
 import QuestionDetailUser from '../../components/QuestionDetailUser';
 import AnsMarkdown from '../../components/AnswerMarkdown';
-import AnswerItem from '../../components/AnswerItem';
+import AnswerList from '../../components/AnswerList';
 import axios from 'axios';
 import {
   ContainerWrapper,
@@ -20,18 +20,18 @@ import {
 } from '../../styles/contentStyle';
 import { useEffect, useState } from 'react';
 
-const QuestionDetail = ({ loginUserEmail }) => {
-  const question = useLocation().state;
+const QuestionDetail = () => {
+  const questionId = useParams().questionId;
 
+  const [question, setQuestion] = useState({});
   const [answer, setAnswer] = useState('');
-  const [answers, setAnswers] = useState([]);
 
   const fetchData = async () => {
     await axios
       .get(
-        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
       )
-      .then((res) => setAnswers(res.data.data.answers))
+      .then((res) => setQuestion(res.data.data))
       .catch((error) => console.log(error));
   };
 
@@ -122,23 +122,16 @@ const QuestionDetail = ({ loginUserEmail }) => {
                         dangerouslySetInnerHTML={{ __html: question.content }}
                       />
                       <QuestionUser>
-                        <QuestionDetailUser
-                          question={question}
-                          loginUserEmail={loginUserEmail}
-                        />
+                        <QuestionDetailUser question={question} />
                       </QuestionUser>
                     </TabletRight>
                   </PostQuestion>
                   <PostAnswer>
-                    {answers.map((el, idx) => {
-                      return (
-                        <AnswerItem
-                          key={idx}
-                          answer={el}
-                          setAnswer={setAnswer}
-                        />
-                      );
-                    })}
+                    <AnswerCount>1 Answers</AnswerCount>
+                    <AnswerList
+                      question={question}
+                      answers={question.answers}
+                    />
                     <Answer>Your Answer</Answer>
                     <form onSubmit={handleSubmit}>
                       <AnsMarkdown setAnswer={setAnswer} />
@@ -195,24 +188,17 @@ const QuestionDetail = ({ loginUserEmail }) => {
                         dangerouslySetInnerHTML={{ __html: question.content }}
                       />
                       <QuestionUser>
-                        <QuestionDetailUser
-                          question={question}
-                          loginUserEmail={loginUserEmail}
-                        />
+                        <QuestionDetailUser question={question} />
                       </QuestionUser>
                     </TabletRight>
                   </PostQuestion>
                   <PostAnswer>
-                    {answers.map((el, idx) => {
-                      return (
-                        <AnswerItem
-                          key={idx}
-                          answer={el}
-                          setAnswer={setAnswer}
-                        />
-                      );
-                    })}
-                    <Answer>Your Answer</Answer>
+                    <TabletCount>1 Answers</TabletCount>
+                    <AnswerList
+                      question={question}
+                      answers={question.answers}
+                    />
+                    <TabletAnswer>Your Answer</TabletAnswer>
                     <form onSubmit={handleSubmit}>
                       <AnsMarkdown setAnswer={setAnswer} />
                       <AnswerBtn>
@@ -269,24 +255,17 @@ const QuestionDetail = ({ loginUserEmail }) => {
                           dangerouslySetInnerHTML={{ __html: question.content }}
                         />
                         <QuestionUser>
-                          <QuestionDetailUser
-                            question={question}
-                            loginUserEmail={loginUserEmail}
-                          />
+                          <QuestionDetailUser question={question} />
                         </QuestionUser>
                       </PostRight>
                     </PostQuestion>
                     <PostAnswer>
-                      {answers.map((el, idx) => {
-                        return (
-                          <AnswerItem
-                            key={idx}
-                            answer={el}
-                            setAnswer={setAnswer}
-                          />
-                        );
-                      })}
-                      <Answer>Your Answer</Answer>
+                      <TabletCount>1 Answers</TabletCount>
+                      <AnswerList
+                        question={question}
+                        answers={question.answers}
+                      />
+                      <TabletAnswer>Your Answer</TabletAnswer>
                       <form onSubmit={handleSubmit}>
                         <AnsMarkdown setAnswer={setAnswer} />
                         <AnswerBtn>
@@ -308,6 +287,16 @@ const QuestionDetail = ({ loginUserEmail }) => {
     </>
   );
 };
+
+const AnswerCount = styled.div`
+  padding: 16px 0;
+  font-size: 16px;
+  color: #232629;
+`;
+
+const TabletCount = styled(AnswerCount)`
+  font-size: 19px;
+`;
 
 const PostAnswer = styled.div``;
 
@@ -334,7 +323,14 @@ const AnswerBtn = styled.div`
 `;
 
 const Answer = styled.h2`
-  font-size: 20px;
+  padding: 16px 0;
+  font-size: 16px;
+  color: #232629;
+  border-top: 1px solid #e4e6e8;
+`;
+
+const TabletAnswer = styled(Answer)`
+  font-size: 19px;
 `;
 
 const PostSidebar = styled.div`
@@ -371,7 +367,6 @@ const VoteButton = styled.button`
 
 const PostQuestion = styled.div`
   display: flex;
-  border-bottom: 1px solid #e4e6e8;
 `;
 
 const PostRight = styled.div`

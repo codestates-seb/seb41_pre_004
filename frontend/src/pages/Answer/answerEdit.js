@@ -1,144 +1,53 @@
-import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import TestEditorForm from '../../components/AskMarkdown';
-import AskQuestionHeader from '../../components/AskQuestionHeader';
+import { Mobile, Tablet, Desktop } from '../../components/Responsive';
+import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { ContainerWrapper, Container } from '../../styles/contentStyle';
+import TextEditor from '../../components/EditMarkdown';
+import EditSidebar from '../../components/EditSidebar';
+import {
+  ContainerWrapper,
+  ContainerFlex,
+  MobileContent,
+  DesktopContent,
+  ContentBlock,
+  DetailSideBlock,
+} from '../../styles/contentStyle';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
-const AskNotice = styled.div`
-  width: 100%;
-  max-width: 851px;
-  background-color: #ecf5fb;
-  margin-top: 16px;
-  padding: 24px;
-  border: 1px solid #a5ceed;
-  border-radius: 3px;
-  color: #3b4045;
-  h2 {
-    font-size: 21px;
-    margin-bottom: 8px;
-  }
-  p {
-    margin-bottom: 15px;
-    font-size: 15px;
-  }
-  h5 {
-    font-size: 15px;
-    margin-bottom: 8px;
-    font-weight: 700;
-  }
-  ol {
-    margin-left: 30px;
-  }
-  li {
-    font-size: 13px;
-    margin-bottom: 4px;
-    list-style: disc;
-  }
-`;
-
-const AskTitle = styled.div`
-  width: 100%;
-  max-width: 851px;
-  margin-top: 16px;
-  padding: 24px;
-  border: 1px solid #e4e6e8;
-  border-radius: 3px;
-  h2 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #0c0d0e;
-    padding: 0 2px;
-  }
-  p {
-    margin: 2px 0;
-    padding: 0 2px;
-    font-size: 12px;
-    color: #3b4045;
-  }
-  input {
-    width: 100%;
-    border: 1px solid #dddfe1;
-    border-radius: 3px;
-    padding: 7px 9px;
-    margin: 2px 0;
-  }
-`;
-const AskTags = styled.div`
-  width: 100%;
-  max-width: 851px;
-  padding: 24px;
-  border: 1px solid #e4e6e8;
-  border-radius: 3px;
-  h2 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #0c0d0e;
-    padding: 0 2px;
-  }
-  p {
-    margin: 2px 0;
-    padding: 0 2px;
-    font-size: 12px;
-    color: #3b4045;
-  }
-  input {
-    width: 100%;
-    border: 1px solid #dddfe1;
-    border-radius: 3px;
-    padding: 7px 9px;
-    margin: 2px 0;
-  }
-`;
-
-const LinkSpan = styled.span`
-  color: #0173cc;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const AskContainer = styled(Container)`
-  padding: 0 16px 24px 16px;
-`;
-const AskBtn = styled.div`
-  button {
-    background-color: #0a95ff;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 400;
-    margin-top: 8px;
-    outline: none;
-    padding: 0.8em;
-    position: relative;
-    text-align: center;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
-    color: white;
-  }
-`;
-
-function AskQuestionList() {
-  const [title, setTitle] = useState('');
-  const [tags, setTags] = useState('');
-  const [content, setContent] = useState('');
+const AnswerEdit = () => {
+  const questionId = useParams().questionId;
+  const answerId = useParams().answerId;
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  const [content, setContent] = useState('');
+
+  const GetAnswer = async () => {
+    await axios
+      .get(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}`,
+      )
+      .then((res) => {
+        return res.data.data;
+      })
+      .then((data) => {
+        setContent(data.content);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    GetAnswer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function handleUpdate(e) {
     e.preventDefault();
+
     const token = localStorage.getItem('token');
     const parse = JSON.parse(token);
-    console.log(parse.authorization);
+
     const header = {
       headers: {
         'Content-Type': `application/json`,
@@ -147,84 +56,153 @@ function AskQuestionList() {
     };
 
     let data = JSON.stringify({
-      title: title,
+      answer_id: answerId,
       content: content,
-      tags: tags.split(' '),
     });
 
-    axios
-      .post(
-        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions`,
-        data,
-        header,
-      )
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    axios.patch(
+      `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}`,
+      data,
+      header,
+    );
 
-    // navigate(`/`);
-    // window.location.reload();
+    navigate(`/questions/${questionId}`);
+    window.location.reload();
   }
 
-  const handleSetTitle = (event) => {
-    let e = event.target.value;
-    setTitle(e);
-  };
-  const handleSetTags = (event) => {
-    let e = event.target.value;
-    setTags(e);
-  };
+  const checkUndefined = useCallback(() => {
+    return content !== '';
+  }, [content]);
 
   return (
     <>
       <ContainerWrapper>
-        <AskContainer>
-          <AskQuestionHeader></AskQuestionHeader>
+        <ContainerFlex>
+          <Navbar />
+          <Mobile>
+            <MobileContent>
+              <ContentBlock>
+                <form onSubmit={handleUpdate}>
+                  <Body>
+                    <TitleLabel>Body</TitleLabel>
+                    {checkUndefined() && (
+                      <TextEditor content={content} setContent={setContent} />
+                    )}
+                  </Body>
+                  <ButtonBlock>
+                    <EditButton type="submit">Save edits</EditButton>
+                    <CancleButton onClick={() => navigate(-1)}>
+                      Cancle
+                    </CancleButton>
+                  </ButtonBlock>
+                </form>
+              </ContentBlock>
+            </MobileContent>
+          </Mobile>
 
-          <form onSubmit={handleSubmit}>
-            <AskTitle>
-              <div>
-                <h2>Title</h2>
-                <p>
-                  Be specific and imagine you’re asking a question to another
-                  person.
-                </p>
-              </div>
-              <input
-                value={title}
-                onChange={handleSetTitle}
-                type={'text'}
-                placeholder={'e.g (excel string regex)'}
-              ></input>
-            </AskTitle>
-            <TestEditorForm setContent={setContent} />
-            <AskTags>
-              <div>
-                <h2>Tags</h2>
-                <p>
-                  Add up to 5 tags describe what your question is about. Start
-                  typing to see suggestions.
-                </p>
-              </div>
-              <input
-                value={tags}
-                onChange={handleSetTags}
-                type={'text'}
-                placeholder={'e.g (excel string regex)'}
-              ></input>
-            </AskTags>
-            <AskBtn>
-              <button type="submit">Review your question</button>
-            </AskBtn>
-          </form>
-        </AskContainer>
+          <Tablet>
+            <MobileContent>
+              <ContentBlock>
+                <form onSubmit={handleUpdate}>
+                  <Body>
+                    <TabletLabel>Body</TabletLabel>
+                    {checkUndefined() && (
+                      <TextEditor content={content} setContent={setContent} />
+                    )}
+                  </Body>
+                  <ButtonBlock>
+                    <EditButton type="submit">Save edits</EditButton>
+                    <CancleButton onClick={() => navigate(-1)}>
+                      Cancle
+                    </CancleButton>
+                  </ButtonBlock>
+                </form>
+              </ContentBlock>
+            </MobileContent>
+          </Tablet>
+
+          <Desktop>
+            <DesktopContent>
+              <ContentBlock>
+                <ContentSidebar>
+                  <form onSubmit={handleUpdate}>
+                    <Body>
+                      <TabletLabel>Body</TabletLabel>
+                      {checkUndefined() && (
+                        <TextEditor content={content} setContent={setContent} />
+                      )}
+                    </Body>
+                    <ButtonBlock>
+                      <EditButton type="submit">Save edits</EditButton>
+                      <CancleButton onClick={() => navigate(-1)}>
+                        Cancle
+                      </CancleButton>
+                    </ButtonBlock>
+                  </form>
+                  <DetailSideBlock>
+                    <EditSidebar />
+                  </DetailSideBlock>
+                </ContentSidebar>
+              </ContentBlock>
+            </DesktopContent>
+          </Desktop>
+        </ContainerFlex>
       </ContainerWrapper>
       <Footer />
     </>
   );
-}
+};
 
-export default AskQuestionList;
+const ContentSidebar = styled.div`
+  display: flex;
+`;
+
+const CancleButton = styled.p`
+  font-size: 13px;
+  color: #0074cc;
+  margin: 0 4px;
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f0f9ff;
+  }
+`;
+
+const EditButton = styled.button`
+  margin: 0 4px;
+  padding: 10px;
+  font-size: 13px;
+  color: #ffffff;
+  background-color: #0a95ff;
+  border-radius: 3px;
+
+  &:hover {
+    filter: brightness(95%);
+  }
+`;
+
+const ButtonBlock = styled.div`
+  display: flex;
+  padding: 12px 0 16px 0;
+`;
+
+const Body = styled.div`
+  margin-bottom: 8px;
+`;
+
+const TitleLabel = styled.label`
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0c0d0e;
+  margin-bottom: 4px;
+  padding: 0 2px;
+`;
+
+const TabletLabel = styled(TitleLabel)`
+  font-size: 15px;
+`;
+
+export default AnswerEdit;

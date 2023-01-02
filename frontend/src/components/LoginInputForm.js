@@ -6,29 +6,32 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
 const LoginInputForm = () => {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch();
 
   const handleSubmitButton = (e) => {
     e.preventDefault();
 
-    const reqbody = {
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+      },
+    };
+
+    const reqbody = JSON.stringify({
       username: loginEmail,
       password: loginPassword,
-    };
-    const headers = {
-      'Content-Type': 'application/json',
-    };
+    });
 
     axios
       .post(
         'http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/auth/login',
-        JSON.stringify(reqbody),
-        headers,
+        reqbody,
+        header,
       )
       .then((res) => {
         window.alert(`${loginEmail}이메일로 로그인 하셨습니다.`);
