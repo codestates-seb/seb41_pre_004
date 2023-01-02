@@ -16,29 +16,28 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 
-const QuestionEdit = () => {
+const AnswerEdit = () => {
   const questionId = useParams().questionId;
+  const answerId = useParams().answerId;
   const navigate = useNavigate();
 
-  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  const GetQuestion = async () => {
+  const GetAnswer = async () => {
     await axios
       .get(
-        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}`,
       )
       .then((res) => {
         return res.data.data;
       })
       .then((data) => {
-        setTitle(data.title);
         setContent(data.content);
       });
   };
 
   useEffect(() => {
-    GetQuestion();
+    GetAnswer();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -56,13 +55,13 @@ const QuestionEdit = () => {
     };
 
     let data = JSON.stringify({
-      title: title,
+      answer_id: answerId,
       content: content,
     });
 
     axios
       .patch(
-        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}`,
         data,
         header,
       )
@@ -74,13 +73,9 @@ const QuestionEdit = () => {
     window.location.reload();
   }
 
-  const handleUpdateTitle = (e) => {
-    setTitle(e.target.value);
-  };
-
   const checkUndefined = useCallback(() => {
-    return title !== '' && content !== '';
-  }, [title, content]);
+    return content !== '';
+  }, [content]);
 
   return (
     <>
@@ -91,10 +86,6 @@ const QuestionEdit = () => {
             <MobileContent>
               <ContentBlock>
                 <form onSubmit={handleUpdate}>
-                  <Title>
-                    <TitleLabel>Title</TitleLabel>
-                    <TitleInput value={title} onChange={handleUpdateTitle} />
-                  </Title>
                   <Body>
                     <TitleLabel>Body</TitleLabel>
                     {checkUndefined() && (
@@ -116,10 +107,6 @@ const QuestionEdit = () => {
             <MobileContent>
               <ContentBlock>
                 <form onSubmit={handleUpdate}>
-                  <Title>
-                    <TabletLabel>Title</TabletLabel>
-                    <TitleInput value={title} onChange={handleUpdateTitle} />
-                  </Title>
                   <Body>
                     <TabletLabel>Body</TabletLabel>
                     {checkUndefined() && (
@@ -142,10 +129,6 @@ const QuestionEdit = () => {
               <ContentBlock>
                 <ContentSidebar>
                   <form onSubmit={handleUpdate}>
-                    <Title>
-                      <TabletLabel>Title</TabletLabel>
-                      <TitleInput value={title} onChange={handleUpdateTitle} />
-                    </Title>
                     <Body>
                       <TabletLabel>Body</TabletLabel>
                       {checkUndefined() && (
@@ -212,15 +195,6 @@ const Body = styled.div`
   margin-bottom: 8px;
 `;
 
-const TitleInput = styled.input`
-  display: block;
-  width: 100%;
-  padding: 7px 9px;
-  border: 1px solid #dddfe1;
-  border-radius: 3px;
-  color: #0c0d0e;
-`;
-
 const TitleLabel = styled.label`
   display: block;
   font-size: 13px;
@@ -234,8 +208,4 @@ const TabletLabel = styled(TitleLabel)`
   font-size: 15px;
 `;
 
-const Title = styled.div`
-  padding-bottom: 15px;
-`;
-
-export default QuestionEdit;
+export default AnswerEdit;

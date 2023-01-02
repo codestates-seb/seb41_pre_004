@@ -5,6 +5,18 @@ export const NavbarWrapper = styled.nav`
   border-right: 1px solid #d7d9dd;
 `;
 
+export const MobileNavbar = styled.div`
+  position: fixed;
+  top: 53px;
+  left: 0;
+  width: 240px;
+  padding-top: 24px;
+  padding-bottom: 8px;
+  border-right: 1px solid #d7d9dd;
+  border-bottom: 1px solid #d7d9dd;
+  background-color: #ffffff;
+`;
+
 export const NavbarBlock = styled.div`
   position: sticky;
   top: 53px;
@@ -35,7 +47,7 @@ export const NavTitle = styled.div`
 export const NavPrimary = styled.div`
   display: flex;
   align-items: center;
-  width: 164px;
+  width: 100%;
   height: 34px;
   padding: 4px 4px 4px 8px;
   font-size: 13px;
@@ -79,10 +91,12 @@ export const NavPrimary = styled.div`
 `;
 
 export const NavPublic = styled(NavPrimary)`
+  width: 100%;
   padding-left: 30px;
 `;
 
 export const NavQuestion = styled(NavPrimary)`
+  width: 100%;
   padding: 8px 6px 8px 6px;
 
   svg {

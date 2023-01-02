@@ -4,32 +4,22 @@ import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from './Responsive';
 
 function Homeitem({ question }) {
-  console.log(question);
-
   return (
     <>
       <Desktop>
         <QuestionBox>
           <QuestionInfo>
-            <QuestionVote>1 votes</QuestionVote>
-            <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
+            <QuestionVote>{question.score} votes</QuestionVote>
+            <QuestionAnswer>{question.answers.length} answers</QuestionAnswer>
+            <QuestionAnswer>{question.viewCount} views</QuestionAnswer>
           </QuestionInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.questionId}`} state={question}>
+              <Link to={`/questions/${question.questionId}`}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
-            <QuestionTagBox>
-              <QuestionTag>
-                <QuestionTagUl>
-                  {/* {question.tags.map((tag, idx) => {
-                    return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
-                  })} */}
-                </QuestionTagUl>
-              </QuestionTag>
-
+            <QuestionUserBox>
               <QuestionUserInfo>
                 <UserImage>
                   <img
@@ -37,12 +27,9 @@ function Homeitem({ question }) {
                     alt=""
                   />
                 </UserImage>
-                <Username>불4조</Username>
-                <UserScore>1004</UserScore>
-                <AskTime>asked 1 min ago</AskTime>
-                {/* homeData.createdAt // 내장date함수시간에서 creat시간을 빼주고 문자열로 리터럴 문자열 */}
+                <Username>{question.userName}</Username>
               </QuestionUserInfo>
-            </QuestionTagBox>
+            </QuestionUserBox>
           </QuestionContent>
         </QuestionBox>
       </Desktop>
@@ -50,25 +37,17 @@ function Homeitem({ question }) {
       <Tablet>
         <MobileBox>
           <MobileInfo>
-            <QuestionVote>1 votes</QuestionVote>
-            <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
+            <QuestionVote>{question.score} votes</QuestionVote>
+            <QuestionAnswer>{question.answers.length} answers</QuestionAnswer>
+            <QuestionAnswer>{question.viewCount} views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.questionId}`} state={question}>
+              <Link to={`/questions/${question.questionId}`}>
                 <QuestionSpan>{question.title}</QuestionSpan>
               </Link>
             </QuestionTitle>
-            <QuestionTagBox>
-              <QuestionTag>
-                <QuestionTagUl>
-                  {/* {question.tags.map((tag, idx) => {
-                    return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
-                  })} */}
-                </QuestionTagUl>
-              </QuestionTag>
-
+            <QuestionUserBox>
               <QuestionUserInfo>
                 <UserImage>
                   <img
@@ -76,11 +55,9 @@ function Homeitem({ question }) {
                     alt=""
                   />
                 </UserImage>
-                <Username>불4조</Username>
-                <UserScore>1004</UserScore>
-                <AskTime>asked 1 min ago</AskTime>
+                <Username>{question.userName}</Username>
               </QuestionUserInfo>
-            </QuestionTagBox>
+            </QuestionUserBox>
           </QuestionContent>
         </MobileBox>
       </Tablet>
@@ -88,37 +65,27 @@ function Homeitem({ question }) {
       <Mobile>
         <MobileBox>
           <MobileInfo>
-            <QuestionVote>1 votes</QuestionVote>
-            <QuestionAnswer>0 answers</QuestionAnswer>
-            <QuestionAnswer>2 views</QuestionAnswer>
+            <QuestionVote>{question.score} votes</QuestionVote>
+            <QuestionAnswer>{question.answers.length} answers</QuestionAnswer>
+            <QuestionAnswer>{question.viewCount} views</QuestionAnswer>
           </MobileInfo>
           <QuestionContent>
             <QuestionTitle>
-              <Link to={`/questions/${question.questionId}`} state={question}>
+              <Link to={`/questions/${question.questionId}`}>
                 <MobileTitle>{question.title}</MobileTitle>
               </Link>
             </QuestionTitle>
-            <QuestionTagBox>
-              <QuestionTag>
-                <QuestionTagUl>
-                  {/* {question.tags.map((tag, idx) => {
-                    return <QuestionTaglist key={idx}>{tag}</QuestionTaglist>;
-                  })} */}
-                </QuestionTagUl>
-              </QuestionTag>
-            </QuestionTagBox>
-
-            <QuestionUserInfo>
-              <UserImage>
-                <img
-                  src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
-                  alt=""
-                />
-              </UserImage>
-              <Username>불4조</Username>
-              <UserScore>1004</UserScore>
-              <AskTime>asked 1 min ago</AskTime>
-            </QuestionUserInfo>
+            <QuestionUserBox>
+              <QuestionUserInfo>
+                <UserImage>
+                  <img
+                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
+                    alt=""
+                  />
+                </UserImage>
+                <Username>{question.userName}</Username>
+              </QuestionUserInfo>
+            </QuestionUserBox>
           </QuestionContent>
         </MobileBox>
       </Mobile>
@@ -137,18 +104,19 @@ const MobileBox = styled(QuestionBox)`
   flex-direction: column;
 `;
 const QuestionInfo = styled.div`
-  flex-shrink: 0;
   width: 108px;
+  flex-wrap: wrap;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   line-height: 17px;
   gap: 6px;
-  padding: 0 16px 4px 0;
+  margin: 0 16px 4px 0;
 `;
-const MobileInfo = styled(QuestionInfo)`
-  flex-direction: row;
-  width: auto;
+const MobileInfo = styled.div`
+  display: flex;
+  gap: 6px;
+  margin: 0 16px 4px 0;
 `;
 const QuestionVote = styled.div`
   font-size: 13px;
@@ -161,7 +129,8 @@ const QuestionContent = styled.div`
   flex-grow: 1;
 `;
 const QuestionTitle = styled.h1`
-  margin-bottom: 5px;
+  height: 40px;
+  margin-bottom: 20px;
 `;
 
 const QuestionSpan = styled.span`
@@ -177,11 +146,13 @@ const MobileTitle = styled(QuestionSpan)`
   font-size: 14px;
 `;
 
-const QuestionTagBox = styled.div``;
-const QuestionTag = styled.div`
+const QuestionUserBox = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: end;
   flex-wrap: wrap;
 `;
+
 const QuestionUserInfo = styled.div`
   display: flex;
   justify-content: end;
@@ -200,34 +171,6 @@ const UserImage = styled.div`
 const Username = styled.h2`
   font-size: 12px;
   color: #0074cc;
-`;
-const UserScore = styled.span`
-  font-size: 12px;
-  color: #525960;
-`;
-const AskTime = styled.span`
-  font-size: 12px;
-  color: #6a737c;
-`;
-const QuestionTagUl = styled.ul`
-  display: flex;
-  gap: 8px;
-  list-style: none;
-  padding-left: 0px;
-  margin-bottom: 13px;
-  margin-top: 0px;
-`;
-const QuestionTaglist = styled.li`
-  padding: 4px 6px;
-  font-size: 12px;
-  color: #39739d;
-  background-color: #e1ecf4;
-  border-radius: 3px;
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(95%);
-  }
 `;
 
 export default Homeitem;

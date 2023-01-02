@@ -118,13 +118,8 @@ const SignupForm = ({
   setSignupPassword,
 }) => {
   const navigate = useNavigate();
-
   const handleSignupButton = (e) => {
     e.preventDefault();
-
-    console.log(
-      `email:${signupEmail},password:${signupPassword},name:${displayName}`,
-    );
 
     const reqbody = {
       email: signupEmail,
@@ -135,7 +130,6 @@ const SignupForm = ({
       'Content-Type': 'application/json',
       authorization: '',
     };
-    console.log({ headers });
 
     axios
       .post(
@@ -144,13 +138,12 @@ const SignupForm = ({
         { headers },
       )
       .then((res) => {
-        console.log(res);
+        window.alert('회원가입 성공 !');
+        navigate('../users/login');
       })
       .catch((err) => {
         console.log(err);
       });
-    navigate('/');
-    window.location.reload();
   };
   return (
     <Sign onSubmit={(e) => handleSignupButton(e)}>

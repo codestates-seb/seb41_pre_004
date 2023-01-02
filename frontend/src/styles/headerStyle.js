@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components';
+import menuIcon from '../assets/icons/menuIcon.svg';
+import closeIcon from '../assets/icons/closeIcon.svg';
 
 export const HeaderBlock = styled.header`
   position: fixed;
@@ -21,6 +23,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const FlexBlock = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
 `;
@@ -128,6 +131,7 @@ export const LogButton = styled.strong`
   font-size: 13px;
   font-weight: bold;
   border-radius: 3px;
+  cursor: pointer;
 `;
 
 export const LoginButton = styled(LogButton)`
@@ -184,18 +188,37 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const StyledNavButton = styled.button`
+export const StyledNavBlock = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
   height: 48px;
-  padding: 0 16px;
-  transition: background-color 0.5s;
-
-  svg {
-    fill: #525960;
-  }
+  transition: all 0.5s;
+  cursor: pointer;
 
   &:hover {
     background-color: #e3e6e8;
   }
+`;
+
+export const StyledNavButton = styled.button`
+  width: 16px;
+  height: 16px;
+`;
+
+export const NavMenuButton = styled(StyledNavButton)`
+  background-image: url(${menuIcon});
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+`;
+
+export const NavCancleButton = styled(StyledNavButton)`
+  background-image: url(${closeIcon});
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
 `;
 
 export const PrimaryButton = styled.button`

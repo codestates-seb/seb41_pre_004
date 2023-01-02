@@ -114,8 +114,9 @@ const Logout = () => {
   const navigate = useNavigate();
 
   const handleButtonCancel = () => {
-    window.localStorage.clear(); //세션이나 쿠키에대한 정보를 지움..
-    navigate('/App');
+    window.localStorage.clear(); 
+    navigate('../../');
+    window.location.reload()
   };
 
   return (
@@ -160,8 +161,8 @@ const Logout = () => {
             <input type="checkbox" /> Log out on all devices
           </CheckboxWrapper>
           <ButtonWrapper>
-            <LogoutButton>Log out</LogoutButton>
-            <CancelButton onClick={handleButtonCancel}>Cancel</CancelButton>
+            <LogoutButton onClick={handleButtonCancel}>Log out</LogoutButton>
+            <CancelButton>Cancel</CancelButton>
           </ButtonWrapper>
           <LogoutInfomessage>
             If you’re on a shared computer, remember to

@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import mobileLogo from '../../../assets/icons/mobileLogo.svg';
 import { ReactComponent as InboxIcon } from '../../../assets/icons/inboxIcon.svg';
 import { ReactComponent as TrophyIcon } from '../../../assets/icons/trophyIcon.svg';
@@ -18,10 +20,17 @@ import {
 } from '../../../styles/headerStyle';
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.menuOpen);
+
+  const onToggle = () => {
+    dispatch({ type: 'TOGGLEMENU', value: isOpen });
+  };
+
   return (
     <MobileFlexBlock>
       <LeftBlock>
-        <NavButton isOpen={false} />
+        <NavButton />
         <Link to="/">
           <MobileLogo>
             <img src={mobileLogo} alt="stackoverflow logo" />
@@ -37,8 +46,12 @@ const Login = () => {
 
       <RightBlock>
         <Search />
-        <Link to="/mypage" aria-label="Go to MyPage">
-          <MyPageButton>
+        <Link
+          to="/mypage"
+          aria-label="Go to MyPage"
+          onClick={() => dispatch({ type: 'ACTIVETAB', value: null })}
+        >
+          <MyPageButton onClick={onToggle}>
             <img
               src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
               alt="user"

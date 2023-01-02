@@ -5,7 +5,7 @@ import AskQuestionHeader from '../../components/AskQuestionHeader';
 import Footer from '../../components/Footer';
 import { ContainerWrapper, Container } from '../../styles/contentStyle';
 import axios from 'axios';
-import { json, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AskNotice = styled.div`
   width: 100%;
@@ -67,33 +67,6 @@ const AskTitle = styled.div`
     margin: 2px 0;
   }
 `;
-const AskTags = styled.div`
-  width: 100%;
-  max-width: 851px;
-  padding: 24px;
-  border: 1px solid #e4e6e8;
-  border-radius: 3px;
-  h2 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #0c0d0e;
-    padding: 0 2px;
-  }
-  p {
-    margin: 2px 0;
-    padding: 0 2px;
-    font-size: 12px;
-    color: #3b4045;
-  }
-  input {
-    width: 100%;
-    border: 1px solid #dddfe1;
-    border-radius: 3px;
-    padding: 7px 9px;
-    margin: 2px 0;
-  }
-`;
 
 const LinkSpan = styled.span`
   color: #0173cc;
@@ -130,7 +103,6 @@ const AskBtn = styled.div`
 
 function AskQuestionList() {
   const [title, setTitle] = useState('');
-  const [tags, setTags] = useState('');
   const [content, setContent] = useState('');
   const navigate = useNavigate();
 
@@ -139,7 +111,6 @@ function AskQuestionList() {
 
     const token = localStorage.getItem('token');
     const parse = JSON.parse(token);
-    console.log(parse.authorization);
 
     const header = {
       headers: {
@@ -151,7 +122,6 @@ function AskQuestionList() {
     let data = JSON.stringify({
       title: title,
       content: content,
-      tags: tags.split(' '),
     });
 
     axios
@@ -160,24 +130,16 @@ function AskQuestionList() {
         data,
         header,
       )
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
-        console.log(error);
+        alert('로그인 후 이용바랍니다.');
       });
 
     navigate(`/`);
     window.location.reload();
   }
 
-  const handleSetTitle = (event) => {
-    let e = event.target.value;
-    setTitle(e);
-  };
-  const handleSetTags = (event) => {
-    let e = event.target.value;
-    setTags(e);
+  const handleSetTitle = (e) => {
+    setTitle(e.target.value);
   };
 
   return (
@@ -224,21 +186,6 @@ function AskQuestionList() {
               ></input>
             </AskTitle>
             <TestEditorForm setContent={setContent} />
-            <AskTags>
-              <div>
-                <h2>Tags</h2>
-                <p>
-                  Add up to 5 tags describe what your question is about. Start
-                  typing to see suggestions.
-                </p>
-              </div>
-              <input
-                value={tags}
-                onChange={handleSetTags}
-                type={'text'}
-                placeholder={'e.g (excel string regex)'}
-              ></input>
-            </AskTags>
             <AskBtn>
               <button type="submit">Review your question</button>
             </AskBtn>

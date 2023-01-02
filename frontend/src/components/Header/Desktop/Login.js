@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import desktopLogo from '../../../assets/icons/desktopLogo.svg';
 import { ReactComponent as InboxIcon } from '../../../assets/icons/inboxIcon.svg';
 import { ReactComponent as TrophyIcon } from '../../../assets/icons/trophyIcon.svg';
@@ -14,7 +15,9 @@ import {
   HoverButton,
 } from '../../../styles/headerStyle';
 
-const Login = ({homeData}) => {
+const Login = () => {
+  const dispatch = useDispatch();
+
   return (
     <FlexBlock>
       <Link to="/">
@@ -25,8 +28,12 @@ const Login = ({homeData}) => {
       <ProductsButton type="button" aria-label="Open the Products modal">
         Products
       </ProductsButton>
-      <Search homeData={homeData}/>
-      <Link to="/mypage" aria-label="Go to MyPage">
+      <Search />
+      <Link
+        to="/mypage"
+        aria-label="Go to MyPage"
+        onClick={() => dispatch({ type: 'ACTIVETAB', value: null })}
+      >
         <MyPageButton>
           <img
             src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"

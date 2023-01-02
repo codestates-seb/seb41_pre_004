@@ -12,6 +12,10 @@ import Questions from './pages/Question';
 import QuestionAsk from './pages/Question/createQuestion';
 import QuestionDetail from './pages/Question/questionDetail';
 import QuestionEdit from './pages/Question/questionEdit';
+import AnswerEdit from './pages/Answer/answerEdit';
+import Error404 from './pages/error404';
+import MyPage from './pages/MyPage';
+import { useSelector } from 'react-redux';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -58,7 +62,7 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [questions, setQuestions] = useState([]);
-  const loginUsername = 'a';
+  const loginUserEmail = useSelector((state) => state.username);
 
   const fetchData = async () => {
     await axios
@@ -89,13 +93,15 @@ function App() {
         <Route path="/questions/ask" element={<QuestionAsk />} />
         <Route
           path="/questions/:questionId"
-          element={<QuestionDetail loginUsername={loginUsername} />}
+          element={<QuestionDetail loginUserEmail={loginUserEmail} />}
         />
         <Route path="/questions/edit/:questionId" element={<QuestionEdit />} />
         <Route
-          path="*"
-          element={<div style={{ marginTop: '53px' }}>404</div>}
+          path="/questions/:questionId/edit/:answerId"
+          element={<AnswerEdit />}
         />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </>
   );

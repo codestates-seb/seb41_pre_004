@@ -2,40 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
-import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
 
 const MyBlock = styled.div`
   .wrapper-class {
     width: 100%;
-    max-width: 662px;
-    border: 1px solid #e4e6e8;
-    border-radius: 3px;
-    word-break: break-all;
+    margin-bottom: 4rem;
+    margin-top: 30px;
   }
-
-  .toolbar-class {
-    margin-bottom: 0;
-  }
-
   .editor {
-    height: 100%;
-    height: 209px;
-    overflow: auto;
-    padding: 10px;
-  }
-
-  .public-DraftStyleDefault-block {
-    margin: 0;
+    height: 200px !important;
+    border: 1px solid #e4e6e8 !important;
+    padding: 5px !important;
+    border-radius: 2px !important;
   }
 `;
 
-const TextEditor = ({ content, setContent }) => {
+const AnsMarkdown = ({ setAnswer }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (editorState) => {
-    // editorState에 값 설정
     setEditorState(editorState);
   };
 
@@ -44,24 +31,8 @@ const TextEditor = ({ content, setContent }) => {
   );
 
   useEffect(() => {
-    setContent(editorToHtml);
-  }, [editorState, editorToHtml, setContent]);
-
-  useEffect(() => {
-    const blocksFromHtml = htmlToDraft(content);
-
-    if (blocksFromHtml) {
-      const { contentBlocks, entityMap } = blocksFromHtml;
-      const contentState = ContentState.createFromBlockArray(
-        contentBlocks,
-        entityMap,
-      );
-
-      const editorState = EditorState.createWithContent(contentState);
-      setEditorState(editorState);
-    }
-    // eslint-disable-next-line
-  }, []);
+    setAnswer(editorToHtml);
+  }, [editorState, editorToHtml, setAnswer]);
 
   return (
     <MyBlock>
@@ -86,4 +57,4 @@ const TextEditor = ({ content, setContent }) => {
   );
 };
 
-export default TextEditor;
+export default AnsMarkdown;

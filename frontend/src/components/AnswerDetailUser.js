@@ -3,7 +3,7 @@ import { Mobile, Tablet, Desktop } from './Responsive';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const QuestionDetailUser = ({ question }) => {
+const AnswerDetailUser = ({ answer }) => {
   const questionId = useParams().questionId;
   const navigate = useNavigate();
 
@@ -23,14 +23,14 @@ const QuestionDetailUser = ({ question }) => {
     if (window.confirm('Delete this question?')) {
       axios
         .delete(
-          `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+          `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/answers/${answer.answerId}`,
           header,
         )
         .catch((error) => {
           alert('권한이 없습니다.');
         });
 
-      navigate('/questions');
+      navigate(`/questions/${questionId}`);
       window.location.reload();
     } else {
     }
@@ -42,7 +42,7 @@ const QuestionDetailUser = ({ question }) => {
         <ButtonBlock>
           <Mobile>
             <UDBlock>
-              <Link to={`/questions/edit/${question.questionId}`}>
+              <Link to={`/questions/${questionId}/edit/${answer.answerId}`}>
                 <DetailButton>Edit</DetailButton>
               </Link>
               <form onSubmit={handleDelete}>
@@ -53,7 +53,7 @@ const QuestionDetailUser = ({ question }) => {
 
           <Tablet>
             <UDBlock>
-              <Link to={`/questions/edit/${question.questionId}`}>
+              <Link to={`/questions/${questionId}/edit/${answer.answerId}`}>
                 <TabletDetailButton>Edit</TabletDetailButton>
               </Link>
               <form onSubmit={handleDelete}>
@@ -64,7 +64,7 @@ const QuestionDetailUser = ({ question }) => {
 
           <Desktop>
             <UDBlock>
-              <Link to={`/questions/edit/${question.questionId}`}>
+              <Link to={`/questions/${questionId}/edit/${answer.answerId}`}>
                 <TabletDetailButton>Edit</TabletDetailButton>
               </Link>
               <form onSubmit={handleDelete}>
@@ -88,7 +88,7 @@ const QuestionDetailUser = ({ question }) => {
                   />
                 </UserImage>
                 <UserWrapper>
-                  <Username>{question.userName}</Username>
+                  <Username>{answer.userName}</Username>
                 </UserWrapper>
               </User>
             </AskUpBlock>
@@ -186,4 +186,9 @@ const LoginBlock = styled.div`
   justify-content: space-between;
 `;
 
-export default QuestionDetailUser;
+const LogoutBlock = styled.div`
+  display: flex;
+  justify-content: end;
+`;
+
+export default AnswerDetailUser;

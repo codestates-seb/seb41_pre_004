@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import arrowUpIcon from '../../assets/icons/arrowUpIcon.png';
 import arrowDownIcon from '../../assets/icons/arrowDownIcon.png';
@@ -7,6 +7,9 @@ import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 import Footer from '../../components/Footer';
 import QuestionDetailUser from '../../components/QuestionDetailUser';
+import AnsMarkdown from '../../components/AnswerMarkdown';
+import AnswerList from '../../components/AnswerList';
+import axios from 'axios';
 import {
   ContainerWrapper,
   ContainerFlex,
@@ -15,9 +18,56 @@ import {
   ContentBlock,
   DetailSideBlock,
 } from '../../styles/contentStyle';
+import { useEffect, useState } from 'react';
 
-const QuestionDetail = ({ loginUsername }) => {
-  const question = useLocation().state;
+const QuestionDetail = () => {
+  const questionId = useParams().questionId;
+
+  const [question, setQuestion] = useState({});
+  const [answer, setAnswer] = useState('');
+
+  const fetchData = async () => {
+    await axios
+      .get(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+      )
+      .then((res) => setQuestion(res.data.data))
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    const parse = JSON.parse(token);
+
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        authorization: parse.authorization,
+      },
+    };
+
+    let data = JSON.stringify({
+      content: answer,
+    });
+
+    axios
+      .post(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}/answers`,
+        data,
+        header,
+      )
+      .catch(function (error) {
+        alert('로그인 후 이용바랍니다.');
+      });
+
+    window.location.reload();
+  }
 
   return (
     <>
@@ -45,36 +95,46 @@ const QuestionDetail = ({ loginUsername }) => {
                       <GraySpan>Modified</GraySpan>
                       <DateSpan>1 min ago</DateSpan>
                     </AskedBlock>
-                    <div>
+                    <AskedBlock>
                       <GraySpan>Viewed</GraySpan>
                       <DateSpan>1 times</DateSpan>
-                    </div>
+                    </AskedBlock>
                   </DateBlock>
                 </DetailHeader>
                 <Post>
-                  <PostLeft>
-                    <VoteButton>
-                      <img src={arrowUpIcon} alt="Vote Up" />
-                    </VoteButton>
-                    <VoteCount>0</VoteCount>
-                    <VoteButton>
-                      <img src={arrowDownIcon} alt="Vote Down" />
-                    </VoteButton>
-                  </PostLeft>
-                  <PostRight>
-                    <PostText>{question.content}</PostText>
-                    <TagBlock>
-                      {/* {question.tags.map((tag, idx) => (
-                        <Tag key={idx}>{tag}</Tag>
-                      ))} */}
-                    </TagBlock>
-                    <QuestionUser>
-                      <QuestionDetailUser
-                        question={question}
-                        loginUsername={loginUsername}
+                  <PostQuestion>
+                    <PostLeft>
+                      <VoteButton>
+                        <img src={arrowUpIcon} alt="Vote Up" />
+                      </VoteButton>
+                      <VoteCount>0</VoteCount>
+                      <VoteButton>
+                        <img src={arrowDownIcon} alt="Vote Down" />
+                      </VoteButton>
+                    </PostLeft>
+                    <TabletRight>
+                      <PostText
+                        dangerouslySetInnerHTML={{ __html: question.content }}
                       />
-                    </QuestionUser>
-                  </PostRight>
+                      <QuestionUser>
+                        <QuestionDetailUser question={question} />
+                      </QuestionUser>
+                    </TabletRight>
+                  </PostQuestion>
+                  <PostAnswer>
+                    <AnswerCount>1 Answers</AnswerCount>
+                    <AnswerList
+                      question={question}
+                      answers={question.answers}
+                    />
+                    <Answer>Your Answer</Answer>
+                    <form onSubmit={handleSubmit}>
+                      <AnsMarkdown setAnswer={setAnswer} />
+                      <AnswerBtn>
+                        <button type="submit">Post your Answer</button>
+                      </AnswerBtn>
+                    </form>
+                  </PostAnswer>
                 </Post>
               </ContentBlock>
             </MobileContent>
@@ -101,36 +161,46 @@ const QuestionDetail = ({ loginUsername }) => {
                       <TabletGraySpan>Modified</TabletGraySpan>
                       <TabletDateSpan>1 min ago</TabletDateSpan>
                     </AskedBlock>
-                    <div>
+                    <AskedBlock>
                       <TabletGraySpan>Viewed</TabletGraySpan>
                       <TabletDateSpan>1 times</TabletDateSpan>
-                    </div>
+                    </AskedBlock>
                   </DateBlock>
                 </DetailHeader>
                 <Post>
-                  <PostLeft>
-                    <VoteButton>
-                      <img src={arrowUpIcon} alt="Vote Up" />
-                    </VoteButton>
-                    <VoteCount>0</VoteCount>
-                    <VoteButton>
-                      <img src={arrowDownIcon} alt="Vote Down" />
-                    </VoteButton>
-                  </PostLeft>
-                  <PostRight>
-                    <PostText>{question.content}</PostText>
-                    <TagBlock>
-                      {/* {question.tags.map((tag, idx) => (
-                        <Tag key={idx}>{tag}</Tag>
-                      ))} */}
-                    </TagBlock>
-                    <QuestionUser>
-                      <QuestionDetailUser
-                        question={question}
-                        loginUsername={loginUsername}
+                  <PostQuestion>
+                    <PostLeft>
+                      <VoteButton>
+                        <img src={arrowUpIcon} alt="Vote Up" />
+                      </VoteButton>
+                      <VoteCount>0</VoteCount>
+                      <VoteButton>
+                        <img src={arrowDownIcon} alt="Vote Down" />
+                      </VoteButton>
+                    </PostLeft>
+                    <TabletRight>
+                      <PostText
+                        dangerouslySetInnerHTML={{ __html: question.content }}
                       />
-                    </QuestionUser>
-                  </PostRight>
+                      <QuestionUser>
+                        <QuestionDetailUser question={question} />
+                      </QuestionUser>
+                    </TabletRight>
+                  </PostQuestion>
+                  <PostAnswer>
+                    <TabletCount>1 Answers</TabletCount>
+                    <AnswerList
+                      question={question}
+                      answers={question.answers}
+                    />
+                    <TabletAnswer>Your Answer</TabletAnswer>
+                    <form onSubmit={handleSubmit}>
+                      <AnsMarkdown setAnswer={setAnswer} />
+                      <AnswerBtn>
+                        <button type="submit">Post your Answer</button>
+                      </AnswerBtn>
+                    </form>
+                  </PostAnswer>
                 </Post>
               </ContentBlock>
             </MobileContent>
@@ -157,44 +227,52 @@ const QuestionDetail = ({ loginUsername }) => {
                       <TabletGraySpan>Modified</TabletGraySpan>
                       <TabletDateSpan>1 min ago</TabletDateSpan>
                     </AskedBlock>
-                    <div>
+                    <AskedBlock>
                       <TabletGraySpan>Viewed</TabletGraySpan>
                       <TabletDateSpan>1 times</TabletDateSpan>
-                    </div>
+                    </AskedBlock>
                   </DateBlock>
                 </DetailHeader>
                 <PostSidebar>
                   <Post>
-                    <PostLeft>
-                      <VoteButton>
-                        <img src={arrowUpIcon} alt="Vote Up" />
-                      </VoteButton>
-                      <VoteCount>0</VoteCount>
-                      <VoteButton>
-                        <img src={arrowDownIcon} alt="Vote Down" />
-                      </VoteButton>
-                    </PostLeft>
-                    <PostRight>
-                      <PostText>{question.content}</PostText>
-                      <TagBlock>
-                        {/* {question.tags.map((tag, idx) => (
-                          <Tag key={idx}>{tag}</Tag>
-                        ))} */}
-                      </TagBlock>
-                      <QuestionUser>
-                        <QuestionDetailUser
-                          question={question}
-                          loginUsername={loginUsername}
+                    <PostQuestion>
+                      <PostLeft>
+                        <VoteButton>
+                          <img src={arrowUpIcon} alt="Vote Up" />
+                        </VoteButton>
+                        <VoteCount>0</VoteCount>
+                        <VoteButton>
+                          <img src={arrowDownIcon} alt="Vote Down" />
+                        </VoteButton>
+                      </PostLeft>
+                      <PostRight>
+                        <PostText
+                          dangerouslySetInnerHTML={{ __html: question.content }}
                         />
-                      </QuestionUser>
-                    </PostRight>
+                        <QuestionUser>
+                          <QuestionDetailUser question={question} />
+                        </QuestionUser>
+                      </PostRight>
+                    </PostQuestion>
+                    <PostAnswer>
+                      <TabletCount>1 Answers</TabletCount>
+                      <AnswerList
+                        question={question}
+                        answers={question.answers}
+                      />
+                      <TabletAnswer>Your Answer</TabletAnswer>
+                      <form onSubmit={handleSubmit}>
+                        <AnsMarkdown setAnswer={setAnswer} />
+                        <AnswerBtn>
+                          <button type="submit">Post your Answer</button>
+                        </AnswerBtn>
+                      </form>
+                    </PostAnswer>
                   </Post>
                   <DetailSideBlock>
                     <Sidebar />
                   </DetailSideBlock>
                 </PostSidebar>
-
-                {/* 작성 */}
               </ContentBlock>
             </DesktopContent>
           </Desktop>
@@ -205,6 +283,51 @@ const QuestionDetail = ({ loginUsername }) => {
   );
 };
 
+const AnswerCount = styled.div`
+  padding: 16px 0;
+  font-size: 16px;
+  color: #232629;
+`;
+
+const TabletCount = styled(AnswerCount)`
+  font-size: 19px;
+`;
+
+const PostAnswer = styled.div``;
+
+const AnswerBtn = styled.div`
+  button {
+    background-color: #0a95ff;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 8px;
+    outline: none;
+    padding: 0.8em;
+    position: relative;
+    text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    color: white;
+  }
+`;
+
+const Answer = styled.h2`
+  padding: 16px 0;
+  font-size: 16px;
+  color: #232629;
+  border-top: 1px solid #e4e6e8;
+`;
+
+const TabletAnswer = styled(Answer)`
+  font-size: 19px;
+`;
+
 const PostSidebar = styled.div`
   display: flex;
 `;
@@ -213,27 +336,10 @@ const QuestionUser = styled.div`
   margin: 16px 0;
 `;
 
-const Tag = styled.li`
-  font-size: 12px;
-  color: #39739d;
-  background-color: #e1ecf4;
-  margin: 2px;
-  padding: 4px 6px;
-  border-radius: 3px;
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(95%);
-  }
-`;
-
-const TagBlock = styled.ul`
-  display: flex;
-  margin: 24px 0 12px 0;
-`;
-
 const PostText = styled.p`
   width: 100%;
+  min-height: 150px;
+  padding-top: 10px;
   word-break: break-all;
   font-size: 15px;
   color: #232629;
@@ -254,11 +360,17 @@ const VoteButton = styled.button`
   margin: 2px;
 `;
 
+const PostQuestion = styled.div`
+  display: flex;
+`;
+
 const PostRight = styled.div`
   flex-grow: 1;
   padding-right: 16px;
-  width: 100%;
-  max-width: 659px;
+`;
+
+const TabletRight = styled(PostRight)`
+  padding-right: 0;
 `;
 
 const PostLeft = styled.div`
@@ -266,9 +378,9 @@ const PostLeft = styled.div`
 `;
 
 const Post = styled.div`
-  display: flex;
   flex-grow: 1;
-  border-bottom: 1px solid #e4e6e8;
+  width: 100%;
+  max-width: 727px;
 `;
 
 const DetailHeader = styled.div`
@@ -316,6 +428,7 @@ const DateBlock = styled.div`
   order: 3;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const DateSpan = styled.span`

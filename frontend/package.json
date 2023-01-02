@@ -10,6 +10,7 @@
     "axios": "^1.2.1",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
+    "html-to-draftjs": "^1.5.0",
     "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -18,6 +19,7 @@
     "react-responsive": "^9.0.2",
     "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
+    "redux": "^4.2.0",
     "styled-components": "^5.3.6",
     "styled-reset": "^4.4.4",
     "web-vitals": "^2.1.4"
