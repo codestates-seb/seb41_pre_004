@@ -9,7 +9,6 @@ import java.util.List;
 
 public class TagDto {
 
-
     @Getter
     @Setter
     public static class Information{
