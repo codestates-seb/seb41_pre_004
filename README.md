@@ -18,22 +18,22 @@
 
 ## 💪 기술 스택
 
-### 공통
+### • 공통
 
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 
-### Front-end
+### • Front-end
 
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"> <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black"> <img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"> <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"> <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white">
 
-### Back-end
+### • Back-end
 
 <img src="https://img.shields.io/badge/java-F24E1E?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/SPRING DATA JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/spring boot-6DB33F?style=for-the-badge&logo=spring boot&logoColor=white"> <img src="https://img.shields.io/badge/spring security-6DB33F?style=for-the-badge&logo=spring security&logoColor=white"> <img src="https://img.shields.io/badge/JWT-d63aff?style=for-the-badge&logo=JSONWebTokens&logoColor=black"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">  
 <img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=amazon ec2&logoColor=white"> <img src="https://img.shields.io/badge/amazon s3-569A31?style=for-the-badge&logo=amazon s3&logoColor=white"> <img src="https://img.shields.io/badge/amazon rds-527FFF?style=for-the-badge&logo=amazon rds&logoColor=white"> 
 
 <br/>
 
-## 커밋메세지 컨벤션
+## 🗒 커밋메세지 컨벤션
 
 | 타입             | 설명                                                                                                           |
 | ---------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -54,7 +54,14 @@
 
 <br/>
 
-## 📃 APi 명세서
+## 🌼 사용자 요구사항 정의서
+
+![캡처](https://user-images.githubusercontent.com/110887604/210252492-cc4bf702-8b51-4014-bd17-b01b8db8e633.PNG)
+
+
+<br/>
+
+## 📋 APi 명세서
 https://documenter.getpostman.com/view/23681444/2s8Z6x1svW
 
 <br/>
