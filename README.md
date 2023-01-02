@@ -1,1 +1,12 @@
-# seb41_pre_004
+![header](https://capsule-render.vercel.app/api?type=waving&color=0:FF7400,100:FFAA00&height=200&section=header&text=StackOverFlow&fontSize=70&fontColor=272622)
+
+<br/>
+
+## 👨‍👨‍👧‍👧 팀원
+
+|                                     Backend (팀장)                                      |                                         Backend                                         |                                         Backend                                         |                                          Frontend                                          |                                         Frontend                                          |                                         Frontend                                          |
+| :--------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: |
+| <img src="https://user-images.githubusercontent.com/110887604/210201911-f7ba2df5-135b-4b4a-b063-fc4ae8820a58.jpg" width=150px alt="민혁"/> | <img src="https://user-images.githubusercontent.com/110887604/210201933-fbb36310-1ad0-4f65-8d87-245b42f77211.jpg" width=150px alt="민우"/> | <img src="https://user-images.githubusercontent.com/110887604/210201950-01c6a53b-8042-4289-8d75-e7162211b715.jpg" width=150px alt="현주"/> | <img src="https://user-images.githubusercontent.com/110887604/210201982-8a59bbad-973d-450f-9a13-b5e39f640833.jpg" width=150px alt="준호"/> | <img src="https://user-images.githubusercontent.com/110887604/210202068-f5e39305-7309-4cef-9cf6-ca50011ae23a.jpg" width=150px alt="동훈"/> | <img src="https://user-images.githubusercontent.com/110887604/210202036-b4191105-05ba-4911-b761-a6376649ae7a.jpg" width=150px alt="헌진"/> |
+|                          [최민혁](https://github.com/jackcmh1)                          |                           [박민우](https://github.com/MWJOB)                           |                          [주현주](https://github.com/Joo614)                           |                           [최준호](https://github.com/junpotatoes)                            |                          [김동훈](https://github.com/kimdong-hun)                          |                          [하헌진](https://github.com/gkgjswls)                          |
+
+<br/>
