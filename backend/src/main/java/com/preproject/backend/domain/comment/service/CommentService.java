@@ -52,11 +52,6 @@ public class CommentService {
         return commentRepository.save(findComment);
     }
 
-//    // comment 조회 - 필요 X
-//    public Comment findComment(long commentId) {
-//        return findVerifiedComment(commentId);
-//    }
-
     // comment 전체 조회
     public Page<Comment> findComments(int page, int size) {
         return commentRepository.findAll(PageRequest.of(page, size,

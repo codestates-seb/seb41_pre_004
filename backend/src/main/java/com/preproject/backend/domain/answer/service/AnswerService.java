@@ -51,13 +51,13 @@ public class AnswerService {
         return answerRepository.save(findAnswer);
     }
 
-    // answer 조회 - 필요 X
+    // answer 조회
     public Answer findAnswer(long answerId) {
         return findVerifiedAnswer(answerId);
     }
 
 
-    // answer 전체 조회
+    // answer 전체 조회 - 필요 X
     public Page<Answer> findAnswers(int page, int size) {
         return answerRepository.findAll(PageRequest.of(page, size,
                 Sort.by("answerId").descending()));

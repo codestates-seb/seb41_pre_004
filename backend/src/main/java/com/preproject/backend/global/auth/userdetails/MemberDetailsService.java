@@ -6,11 +6,13 @@ import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.domain.member.repository.MemberRepository;
 import com.preproject.backend.global.exception.BusinessLogicException;
 import com.preproject.backend.global.exception.ExceptionCode;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -19,7 +21,7 @@ import java.util.Optional;
  * - Custom UserDetails 사용
  * - User Role을 DB에서 조회한 후, HelloAuthorityUtils로 Spring Security에게 Role 정보 제공
  */
-@Component
+@Service
 public class MemberDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final CustomAuthorityUtils authorityUtils;
@@ -37,10 +39,12 @@ public class MemberDetailsService implements UserDetailsService {
         return new MemberDetails(findMember);
     }
 
-    private final class MemberDetails extends Member implements UserDetails {
+    @Data
+    public final class MemberDetails extends Member implements UserDetails {
         MemberDetails(Member member) {
             setMemberId(member.getMemberId());
             setEmail(member.getEmail());
+            setName(member.getName());
             setPassword(member.getPassword());
             setRoles(member.getRoles());
         }
@@ -53,6 +57,11 @@ public class MemberDetailsService implements UserDetailsService {
         @Override
         public String getUsername() {
             return getEmail();
+        }
+
+        @Override
+        public String getName() {
+            return super.getName();
         }
 
         @Override

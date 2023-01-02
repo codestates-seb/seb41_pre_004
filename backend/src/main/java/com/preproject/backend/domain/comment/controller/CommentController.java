@@ -25,6 +25,8 @@ public class CommentController {
     private final CommentService commentService;
     private final CommentMapper mapper;
 
+
+
     // comment 등록
     @PostMapping("answers/{answer-id}/comments")
     public ResponseEntity postComment(@PathVariable("answer-id") @Positive long answerId,
@@ -46,15 +48,6 @@ public class CommentController {
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.commentToCommentResponse(updateComment)), HttpStatus.CREATED);
     }
-
-//    // comment 조회 - 필요 X
-//    @GetMapping("comments/{comment-id}")
-//    public ResponseEntity getComment(@PathVariable("comment-id") @Positive long commentId) {
-//        Comment findComment = commentService.findComment(commentId);
-//
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(mapper.commentToCommentResponse(findComment)),HttpStatus.OK);
-//    }
 
     // comment 전체 조회
     @GetMapping("comments")

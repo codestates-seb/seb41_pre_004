@@ -45,7 +45,7 @@ public class AnswerController {
                 new SingleResponseDto<>(mapper.answerToAnswerResponse(updateAnswer)), HttpStatus.CREATED);
     }
 
-    // answer 조회 - 필요 X
+    // answer 조회
     @GetMapping("answers/{answer-id}")
     public ResponseEntity getAnswer(@PathVariable("answer-id") @Positive long answerId) {
         Answer answer = answerService.findAnswer(answerId);
@@ -54,7 +54,7 @@ public class AnswerController {
                 new SingleResponseDto<>(mapper.answerToAnswerResponse(answer)),HttpStatus.OK);
     }
 
-    // answer 전체 조회
+    // answer 전체 조회 - 필요 X
     @GetMapping("answers")
     public ResponseEntity getAnswers(@Positive @RequestParam int page,
                                         @Positive @RequestParam int size) {
