@@ -1,0 +1,16 @@
+
+k	java:S117%"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÃÇßÀÿÿÿÿÿ
+f	java:S117-"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ¦áÛ
+—
+java:S1186-"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Õ¦áÛ
+I
+java:S1172".Remove this unused method parameter "comment".(óòê¦üÿÿÿÿ
+I
+java:S1172 ".Remove this unused method parameter "comment".(®ñ“öûÿÿÿÿ
+L
+java:S1172%"1Remove this unused method parameter "comment_id".(ÃÇßÀÿÿÿÿÿ
+K
+java:S1172)"5Remove these unused method parameters "page", "size".(‰¡óÃ
+Q	java:S1251"<This block of commented-out lines of code should be removed.(¾Æ§¸
+P
+java:S1068"5Remove this unused "commentRepository" private field.(‚ ÇÎýÿÿÿÿ

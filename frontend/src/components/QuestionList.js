@@ -1,1 +1,15 @@
-//전체 질문리스트를 렌더링하는 박스
+import React from 'react';
+import Questionitem from './QuestionItem';
+
+function QuestionList({ questions }) {
+  return (
+    <>
+      {questions &&
+        questions.map((question) => {
+          return <Questionitem question={question} key={question.questionId} />;
+        })}
+    </>
+  );
+}
+
+export default QuestionList;
