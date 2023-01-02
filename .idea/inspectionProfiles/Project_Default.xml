@@ -5,6 +5,7 @@
       <option name="customHeaders">
         <set>
           <option value="Refresh" />
+          <option value="DisplayName" />
         </set>
       </option>
     </inspection_tool>

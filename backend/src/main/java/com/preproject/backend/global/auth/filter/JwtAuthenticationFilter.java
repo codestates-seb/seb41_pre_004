@@ -2,12 +2,10 @@ package com.preproject.backend.global.auth.filter;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonObject;
+import com.preproject.backend.domain.member.entity.Member;
 import com.preproject.backend.global.auth.dto.LoginDto;
 import com.preproject.backend.global.auth.jwt.JwtTokenizer;
-import com.preproject.backend.domain.member.entity.Member;
 import lombok.SneakyThrows;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -64,7 +62,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", member.getEmail());
         claims.put("roles", member.getRoles());
-        claims.put("DisplayName",member.getName());
 
         String subject = member.getEmail();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
