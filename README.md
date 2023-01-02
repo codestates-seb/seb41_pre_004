@@ -1,7 +1,5 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0:FF7400,100:FFAA00&height=200&section=header&text=StackOverFlow&fontSize=70&fontColor=272622)
 
-<br/>
-
 ## 👨‍👨‍👧‍👧 팀원
 
 |Backend (팀장)|Backend|Backend|
