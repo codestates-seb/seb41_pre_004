@@ -34,8 +34,7 @@ const QuestionEdit = () => {
       .then((data) => {
         setTitle(data.title);
         setContent(data.content);
-      })
-      .catch((error) => console.log(error));
+      });
   };
 
   useEffect(() => {
@@ -61,11 +60,15 @@ const QuestionEdit = () => {
       content: content,
     });
 
-    axios.patch(
-      `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
-      data,
-      header,
-    );
+    axios
+      .patch(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+        data,
+        header,
+      )
+      .catch((err) => {
+        alert('권한이 없습니다.');
+      });
 
     navigate(`/questions/${questionId}`);
     window.location.reload();

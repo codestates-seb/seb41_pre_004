@@ -28,8 +28,6 @@ function Homeitem({ question }) {
                   />
                 </UserImage>
                 <Username>{question.userName}</Username>
-                <AskTime>asked 1 min ago</AskTime>
-                {/* homeData.createdAt // 내장date함수시간에서 creat시간을 빼주고 문자열로 리터럴 문자열 */}
               </QuestionUserInfo>
             </QuestionUserBox>
           </QuestionContent>
@@ -58,7 +56,6 @@ function Homeitem({ question }) {
                   />
                 </UserImage>
                 <Username>{question.userName}</Username>
-                <AskTime>asked 1 min ago</AskTime>
               </QuestionUserInfo>
             </QuestionUserBox>
           </QuestionContent>
@@ -87,7 +84,6 @@ function Homeitem({ question }) {
                   />
                 </UserImage>
                 <Username>{question.userName}</Username>
-                <AskTime>asked 1 min ago</AskTime>
               </QuestionUserInfo>
             </QuestionUserBox>
           </QuestionContent>
@@ -175,14 +171,6 @@ const UserImage = styled.div`
 const Username = styled.h2`
   font-size: 12px;
   color: #0074cc;
-`;
-const UserScore = styled.span`
-  font-size: 12px;
-  color: #525960;
-`;
-const AskTime = styled.span`
-  font-size: 12px;
-  color: #6a737c;
 `;
 
 export default Homeitem;

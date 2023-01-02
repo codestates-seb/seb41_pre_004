@@ -23,9 +23,7 @@ function MyPage() {
                     alt=""
                   />
                 </UserImage>
-                <UserName>
-                  <h1>1</h1>
-                </UserName>
+                <UserName></UserName>
               </UserInfo>
             </UserBlock>
           </Content>

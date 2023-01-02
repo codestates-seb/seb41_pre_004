@@ -130,11 +130,8 @@ function AskQuestionList() {
         data,
         header,
       )
-      .then(function (response) {
-        console.log(response);
-      })
       .catch(function (error) {
-        console.log(error);
+        alert('로그인 후 이용바랍니다.');
       });
 
     navigate(`/`);

@@ -27,7 +27,7 @@ const QuestionDetailUser = ({ question }) => {
           header,
         )
         .catch((error) => {
-          console.log(error);
+          alert('권한이 없습니다.');
         });
 
       navigate('/questions');
@@ -38,89 +38,63 @@ const QuestionDetailUser = ({ question }) => {
 
   return (
     <>
-      {true ? (
-        <LoginBlock>
-          <ButtonBlock>
-            <Mobile>
-              <UDBlock>
-                <Link to={`/questions/edit/${question.questionId}`}>
-                  <DetailButton>Edit</DetailButton>
-                </Link>
-                <form onSubmit={handleDelete}>
-                  <DetailButton>Delete</DetailButton>
-                </form>
-              </UDBlock>
-            </Mobile>
+      <LoginBlock>
+        <ButtonBlock>
+          <Mobile>
+            <UDBlock>
+              <Link to={`/questions/edit/${question.questionId}`}>
+                <DetailButton>Edit</DetailButton>
+              </Link>
+              <form onSubmit={handleDelete}>
+                <DetailButton>Delete</DetailButton>
+              </form>
+            </UDBlock>
+          </Mobile>
 
-            <Tablet>
-              <UDBlock>
-                <Link to={`/questions/edit/${question.questionId}`}>
-                  <TabletDetailButton>Edit</TabletDetailButton>
-                </Link>
-                <form onSubmit={handleDelete}>
-                  <TabletDetailButton type="submit">Delete</TabletDetailButton>
-                </form>
-              </UDBlock>
-            </Tablet>
+          <Tablet>
+            <UDBlock>
+              <Link to={`/questions/edit/${question.questionId}`}>
+                <TabletDetailButton>Edit</TabletDetailButton>
+              </Link>
+              <form onSubmit={handleDelete}>
+                <TabletDetailButton type="submit">Delete</TabletDetailButton>
+              </form>
+            </UDBlock>
+          </Tablet>
 
-            <Desktop>
-              <UDBlock>
-                <Link to={`/questions/edit/${question.questionId}`}>
-                  <TabletDetailButton>Edit</TabletDetailButton>
-                </Link>
-                <form onSubmit={handleDelete}>
-                  <TabletDetailButton type="submit">Delete</TabletDetailButton>
-                </form>
-              </UDBlock>
-            </Desktop>
-          </ButtonBlock>
-          <UserBlock>
-            <EditBlock>
-              <EditText>edited 1 mins ago</EditText>
-            </EditBlock>
-            <AskBlock>
-              <AskUpBlock>
-                <AskText>asked 1 mins ago</AskText>
-                <User>
-                  <UserImage>
-                    <img
-                      src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
-                      alt="User"
-                    />
-                  </UserImage>
-                  <UserWrapper>
-                    <Username>{question.userName}</Username>
-                  </UserWrapper>
-                </User>
-              </AskUpBlock>
-            </AskBlock>
-          </UserBlock>
-        </LoginBlock>
-      ) : (
-        <LogoutBlock>
-          <UserBlock>
-            <EditBlock>
-              <EditText>edited 1 mins ago</EditText>
-            </EditBlock>
-            <AskBlock>
-              <AskUpBlock>
-                <AskText>asked 1 mins ago</AskText>
-                <User>
-                  <UserImage>
-                    <img
-                      src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
-                      alt="User"
-                    />
-                  </UserImage>
-                  <UserWrapper>
-                    <Username>{question.userName}</Username>
-                  </UserWrapper>
-                </User>
-              </AskUpBlock>
-            </AskBlock>
-          </UserBlock>
-        </LogoutBlock>
-      )}
+          <Desktop>
+            <UDBlock>
+              <Link to={`/questions/edit/${question.questionId}`}>
+                <TabletDetailButton>Edit</TabletDetailButton>
+              </Link>
+              <form onSubmit={handleDelete}>
+                <TabletDetailButton type="submit">Delete</TabletDetailButton>
+              </form>
+            </UDBlock>
+          </Desktop>
+        </ButtonBlock>
+        <UserBlock>
+          <EditBlock>
+            <EditText>edited 1 mins ago</EditText>
+          </EditBlock>
+          <AskBlock>
+            <AskUpBlock>
+              <AskText>asked 1 mins ago</AskText>
+              <User>
+                <UserImage>
+                  <img
+                    src="https://www.gravatar.com/avatar/ed02bd6c00c0fb529136773bacdd072e?s=32&d=identicon&r=PG&f=1"
+                    alt="User"
+                  />
+                </UserImage>
+                <UserWrapper>
+                  <Username>{question.userName}</Username>
+                </UserWrapper>
+              </User>
+            </AskUpBlock>
+          </AskBlock>
+        </UserBlock>
+      </LoginBlock>
     </>
   );
 };
@@ -210,11 +184,6 @@ const ButtonBlock = styled.div``;
 const LoginBlock = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-const LogoutBlock = styled.div`
-  display: flex;
-  justify-content: end;
 `;
 
 export default QuestionDetailUser;
