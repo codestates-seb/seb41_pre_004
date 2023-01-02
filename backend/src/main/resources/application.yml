@@ -9,7 +9,7 @@ spring:
       enabled: always
   jpa:
     hibernate:
-      ddl-auto: create # DB 스키마 자동 생성
+      ddl-auto: none # DB 스키마 자동 생성
     properties:
       hibernate:
         format_sql: true # SQL 쿼리 pretty print
