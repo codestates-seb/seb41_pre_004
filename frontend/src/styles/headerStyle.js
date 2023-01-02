@@ -23,6 +23,7 @@ export const HeaderContainer = styled.div`
 `;
 
 export const FlexBlock = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
 `;
@@ -194,6 +195,7 @@ export const StyledNavBlock = styled.div`
   width: 48px;
   height: 48px;
   transition: all 0.5s;
+  cursor: pointer;
 
   &:hover {
     background-color: #e3e6e8;

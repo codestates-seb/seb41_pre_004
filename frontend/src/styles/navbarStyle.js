@@ -47,7 +47,7 @@ export const NavTitle = styled.div`
 export const NavPrimary = styled.div`
   display: flex;
   align-items: center;
-  width: 164px;
+  width: 100%;
   height: 34px;
   padding: 4px 4px 4px 8px;
   font-size: 13px;
@@ -91,6 +91,7 @@ export const NavPrimary = styled.div`
 `;
 
 export const NavPublic = styled(NavPrimary)`
+  width: 100%;
   padding-left: 30px;
 `;
 

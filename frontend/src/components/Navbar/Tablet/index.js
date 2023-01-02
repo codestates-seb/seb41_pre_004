@@ -15,15 +15,25 @@ import {
   NavTeams,
   TeamsIcon,
 } from '../../../styles/navbarStyle';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const TabletNav = () => {
+  const activeTab = useSelector((state) => state.activeTab);
+  const dispatch = useDispatch();
+
   return (
     <NavbarWrapper>
       <NavbarBlock>
         <ol>
           <li aria-label="Go to Home page">
-            <Link to="/">
-              <NavPrimary className="home">Home</NavPrimary>
+            <Link
+              to="/"
+              onClick={() => dispatch({ type: 'ACTIVETAB', value: 0 })}
+            >
+              <NavPrimary selected={activeTab === 0} className="home">
+                Home
+              </NavPrimary>
             </Link>
           </li>
           <li>
@@ -32,21 +42,39 @@ const TabletNav = () => {
             </NavTitle>
             <ol>
               <li aria-label="Go to Questions page">
-                <Link to="/questions">
-                  <NavQuestion selected={true}>
+                <Link
+                  to="/questions"
+                  onClick={() => dispatch({ type: 'ACTIVETAB', value: 1 })}
+                >
+                  <NavQuestion selected={activeTab === 1}>
                     <QuestionIcon className="question" />
                     <span>Questions</span>
                   </NavQuestion>
                 </Link>
               </li>
               <li aria-label="Go to Tags page">
-                <NavPublic>Tags</NavPublic>
+                <Link
+                  to="/tags"
+                  onClick={() => dispatch({ type: 'ACTIVETAB', value: 2 })}
+                >
+                  <NavPublic selected={activeTab === 2}>Tags</NavPublic>
+                </Link>
               </li>
               <li aria-label="Go to Users page">
-                <NavPublic>Users</NavPublic>
+                <Link
+                  to="/users"
+                  onClick={() => dispatch({ type: 'ACTIVETAB', value: 3 })}
+                >
+                  <NavPublic selected={activeTab === 3}>Users</NavPublic>
+                </Link>
               </li>
               <li aria-label="Go to Companies">
-                <NavPublic>Companies</NavPublic>
+                <Link
+                  to="/jobs/Companies"
+                  onClick={() => dispatch({ type: 'ACTIVETAB', value: 4 })}
+                >
+                  <NavPublic selected={activeTab === 4}>Companies</NavPublic>
+                </Link>
               </li>
             </ol>
           </li>
@@ -55,9 +83,13 @@ const TabletNav = () => {
               <h2>Collectives</h2>
               <InfoIcon />
             </NavTitle>
-            <NavEtc>
+            <NavEtc selected={activeTab === 5}>
               <CollectiveIcon />
-              <Link to="/collectives" className="collective">
+              <Link
+                to="/collectives"
+                className="collective"
+                onClick={() => dispatch({ type: 'ACTIVETAB', value: 5 })}
+              >
                 Explore Collectives
               </Link>
             </NavEtc>

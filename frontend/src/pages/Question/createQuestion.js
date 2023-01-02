@@ -111,7 +111,6 @@ function AskQuestionList() {
 
     const token = localStorage.getItem('token');
     const parse = JSON.parse(token);
-    console.log(parse.authorization);
 
     const header = {
       headers: {
@@ -142,9 +141,8 @@ function AskQuestionList() {
     window.location.reload();
   }
 
-  const handleSetTitle = (event) => {
-    let e = event.target.value;
-    setTitle(e);
+  const handleSetTitle = (e) => {
+    setTitle(e.target.value);
   };
 
   return (

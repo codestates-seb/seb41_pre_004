@@ -14,19 +14,31 @@ import {
   NavTeams,
   TeamsIcon,
 } from '../../../styles/navbarStyle';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 const MobileNav = () => {
   const isOpen = useSelector((state) => state.menuOpen);
+  const activeTab = useSelector((state) => state.activeTab);
+  const dispatch = useDispatch();
+
+  const onToggle = () => {
+    dispatch({ type: 'TOGGLEMENU', value: isOpen });
+  };
 
   return (
     <>
       {isOpen ? (
         <MobileNavbar>
           <ol>
-            <li aria-label="Go to Home page">
-              <Link to="/">
-                <NavPrimary className="home">Home</NavPrimary>
+            <li aria-label="Go to Home page" onClick={onToggle}>
+              <Link
+                to="/"
+                onClick={() => dispatch({ type: 'ACTIVETAB', value: 0 })}
+              >
+                <NavPrimary selected={activeTab === 0} className="home">
+                  Home
+                </NavPrimary>
               </Link>
             </li>
             <li>
@@ -34,22 +46,40 @@ const MobileNav = () => {
                 <h2>Public</h2>
               </NavTitle>
               <ol>
-                <li aria-label="Go to Questions page">
-                  <Link to="/questions">
-                    <NavQuestion selected={true}>
+                <li aria-label="Go to Questions page" onClick={onToggle}>
+                  <Link
+                    to="/questions"
+                    onClick={() => dispatch({ type: 'ACTIVETAB', value: 1 })}
+                  >
+                    <NavQuestion selected={activeTab === 1}>
                       <QuestionIcon className="question" />
                       <span>Questions</span>
                     </NavQuestion>
                   </Link>
                 </li>
-                <li aria-label="Go to Tags page">
-                  <NavPublic>Tags</NavPublic>
+                <li aria-label="Go to Tags page" onClick={onToggle}>
+                  <Link
+                    to="/tags"
+                    onClick={() => dispatch({ type: 'ACTIVETAB', value: 2 })}
+                  >
+                    <NavPublic selected={activeTab === 2}>Tags</NavPublic>
+                  </Link>
                 </li>
-                <li aria-label="Go to Users page">
-                  <NavPublic>Users</NavPublic>
+                <li aria-label="Go to Users page" onClick={onToggle}>
+                  <Link
+                    to="/users"
+                    onClick={() => dispatch({ type: 'ACTIVETAB', value: 3 })}
+                  >
+                    <NavPublic selected={activeTab === 3}>Users</NavPublic>
+                  </Link>
                 </li>
-                <li aria-label="Go to Companies">
-                  <NavPublic>Companies</NavPublic>
+                <li aria-label="Go to Companies" onClick={onToggle}>
+                  <Link
+                    to="/jobs/Companies"
+                    onClick={() => dispatch({ type: 'ACTIVETAB', value: 4 })}
+                  >
+                    <NavPublic selected={activeTab === 4}>Companies</NavPublic>
+                  </Link>
                 </li>
               </ol>
             </li>
@@ -58,9 +88,13 @@ const MobileNav = () => {
                 <h2>Collectives</h2>
                 <InfoIcon />
               </NavTitle>
-              <NavEtc>
+              <NavEtc onClick={onToggle} selected={activeTab === 5}>
                 <CollectiveIcon />
-                <Link to="/collectives" className="collective">
+                <Link
+                  to="/collectives"
+                  className="collective"
+                  onClick={() => dispatch({ type: 'ACTIVETAB', value: 5 })}
+                >
                   Explore Collectives
                 </Link>
               </NavEtc>

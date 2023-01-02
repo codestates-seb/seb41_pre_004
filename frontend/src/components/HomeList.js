@@ -4,9 +4,10 @@ import Homeitem from './HomeItem';
 function HomeList({ questions }) {
   return (
     <>
-      {questions.map((question) => {
-        return <Homeitem question={question} key={question.questionId} />;
-      })}
+      {questions &&
+        questions.map((question) => {
+          return <Homeitem question={question} key={question.questionId} />;
+        })}
     </>
   );
 }

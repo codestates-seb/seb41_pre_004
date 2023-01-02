@@ -1,9 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Mobile, Tablet, Desktop } from '../../components/Responsive';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import TextEditor from '../../components/EditMarkdown';
+import EditSidebar from '../../components/EditSidebar';
 import {
   ContainerWrapper,
   ContainerFlex,
@@ -12,35 +13,71 @@ import {
   ContentBlock,
   DetailSideBlock,
 } from '../../styles/contentStyle';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 
 const QuestionEdit = () => {
-  const question = useLocation().state;
-
-  const [title, setTitle] = useState('');
-  const [tags, setTags] = useState('');
-  const [content, setContent] = useState('');
+  const questionId = useParams().questionId;
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const GetQuestion = async () => {
+    await axios
+      .get(
+        `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+      )
+      .then((res) => {
+        return res.data.data;
+      })
+      .then((data) => {
+        setTitle(data.title);
+        setContent(data.content);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    GetQuestion();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function handleUpdate(e) {
     e.preventDefault();
 
-    axios.put(`/questions`, {
-      title,
-      tags: tags.split(' '),
-      content,
+    const token = localStorage.getItem('token');
+    const parse = JSON.parse(token);
+
+    const header = {
+      headers: {
+        'Content-Type': `application/json`,
+        authorization: parse.authorization,
+      },
+    };
+
+    let data = JSON.stringify({
+      title: title,
+      content: content,
     });
 
-    navigate(`/`);
+    axios.patch(
+      `http://ec2-3-36-23-23.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+      data,
+      header,
+    );
+
+    navigate(`/questions/${questionId}`);
     window.location.reload();
   }
-  const handleSetTitle = (e) => {
+
+  const handleUpdateTitle = (e) => {
     setTitle(e.target.value);
   };
-  const handleSetTags = (e) => {
-    setTags(e.target.value);
-  };
+
+  const checkUndefined = useCallback(() => {
+    return title !== '' && content !== '';
+  }, [title, content]);
 
   return (
     <>
@@ -50,24 +87,19 @@ const QuestionEdit = () => {
           <Mobile>
             <MobileContent>
               <ContentBlock>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleUpdate}>
                   <Title>
                     <TitleLabel>Title</TitleLabel>
-                    <TitleInput
-                      value={question.title}
-                      onChange={handleSetTitle}
-                    />
+                    <TitleInput value={title} onChange={handleUpdateTitle} />
                   </Title>
                   <Body>
                     <TitleLabel>Body</TitleLabel>
-                    <TextEditor
-                      content={question.content}
-                      setContent={setContent}
-                    />
+                    {checkUndefined() && (
+                      <TextEditor content={content} setContent={setContent} />
+                    )}
                   </Body>
                   <ButtonBlock>
                     <EditButton type="submit">Save edits</EditButton>
-
                     <CancleButton onClick={() => navigate(-1)}>
                       Cancle
                     </CancleButton>
@@ -79,13 +111,56 @@ const QuestionEdit = () => {
 
           <Tablet>
             <MobileContent>
-              <ContentBlock></ContentBlock>
+              <ContentBlock>
+                <form onSubmit={handleUpdate}>
+                  <Title>
+                    <TabletLabel>Title</TabletLabel>
+                    <TitleInput value={title} onChange={handleUpdateTitle} />
+                  </Title>
+                  <Body>
+                    <TabletLabel>Body</TabletLabel>
+                    {checkUndefined() && (
+                      <TextEditor content={content} setContent={setContent} />
+                    )}
+                  </Body>
+                  <ButtonBlock>
+                    <EditButton type="submit">Save edits</EditButton>
+                    <CancleButton onClick={() => navigate(-1)}>
+                      Cancle
+                    </CancleButton>
+                  </ButtonBlock>
+                </form>
+              </ContentBlock>
             </MobileContent>
           </Tablet>
 
           <Desktop>
             <DesktopContent>
-              <ContentBlock></ContentBlock>
+              <ContentBlock>
+                <ContentSidebar>
+                  <form onSubmit={handleUpdate}>
+                    <Title>
+                      <TabletLabel>Title</TabletLabel>
+                      <TitleInput value={title} onChange={handleUpdateTitle} />
+                    </Title>
+                    <Body>
+                      <TabletLabel>Body</TabletLabel>
+                      {checkUndefined() && (
+                        <TextEditor content={content} setContent={setContent} />
+                      )}
+                    </Body>
+                    <ButtonBlock>
+                      <EditButton type="submit">Save edits</EditButton>
+                      <CancleButton onClick={() => navigate(-1)}>
+                        Cancle
+                      </CancleButton>
+                    </ButtonBlock>
+                  </form>
+                  <DetailSideBlock>
+                    <EditSidebar />
+                  </DetailSideBlock>
+                </ContentSidebar>
+              </ContentBlock>
             </DesktopContent>
           </Desktop>
         </ContainerFlex>
@@ -94,6 +169,10 @@ const QuestionEdit = () => {
     </>
   );
 };
+
+const ContentSidebar = styled.div`
+  display: flex;
+`;
 
 const CancleButton = styled.p`
   font-size: 13px;
@@ -146,6 +225,10 @@ const TitleLabel = styled.label`
   color: #0c0d0e;
   margin-bottom: 4px;
   padding: 0 2px;
+`;
+
+const TabletLabel = styled(TitleLabel)`
+  font-size: 15px;
 `;
 
 const Title = styled.div`
