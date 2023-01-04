@@ -1,5 +1,9 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=0:FF7400,100:FFAA00&height=200&section=header&text=StackOverFlow&fontSize=70&fontColor=272622)
 
+## ⏰ 프로젝트 기간  
+<h3>2022.12.15(목) - 2023.01.02(월)</h3>
+<br/>
+
 ## 👉 배포 사이트 
 http://pre41-deploy-test.s3-website.ap-northeast-2.amazonaws.com/
 
