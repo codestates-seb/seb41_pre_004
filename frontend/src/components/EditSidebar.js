@@ -4,7 +4,6 @@ import {
   SidebarWrapper,
   SidebarPost,
   PostTitle,
-  PostDesc,
   PostItem,
 } from '../styles/sidebarStyle';
 import styled from 'styled-components';
