@@ -123,7 +123,7 @@ https://documenter.getpostman.com/view/23681444/2s8Z6x1svW
 
 | 홈 |    
 |---|
-| <img alt="홈" src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/cf1072af-cad7-4ba4-b98c-a2aa370a8be1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230105T092153Z&X-Amz-Expires=86400&X-Amz-Signature=5d9a7b1f82736f5361f68aa615d04c2c62778958040f56814bf0440de859d54d&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"> |
+| <img alt="홈" src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/cf1072af-cad7-4ba4-b98c-a2aa370a8be1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230110%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230110T172426Z&X-Amz-Expires=86400&X-Amz-Signature=f1d7420883eb944a3df4941f52358311c7434d14907f63506c0c8a78f6ca282b&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"> |
 
 | 글 목록 |     
 |---|
