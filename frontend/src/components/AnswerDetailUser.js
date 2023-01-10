@@ -186,9 +186,4 @@ const LoginBlock = styled.div`
   justify-content: space-between;
 `;
 
-const LogoutBlock = styled.div`
-  display: flex;
-  justify-content: end;
-`;
-
 export default AnswerDetailUser;

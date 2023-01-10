@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import desktopLogo from '../../../assets/icons/desktopLogo.svg';
 import Search from '../Search';
-import NavButton from '../NavButton';
 import {
   LoginButton,
   SignupButton,
