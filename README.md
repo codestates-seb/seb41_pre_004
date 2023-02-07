@@ -1,9 +1,13 @@
-# [stackoverflow(클론코딩)](http://pre41-deploy-test.s3-website.ap-northeast-2.amazonaws.com/)
+# [stackoverflow(클론코딩) 스크린샷](https://www.notion.so/codestates/8b5d7104fa5141d085c422619bd3df10?v=363999953bac4ba18ab97e06c658bfd6)
 
 <br/>
 
 ## ⏰ 프로젝트 기간  
 <h3>2022.12.15(목) - 2023.01.02(월)</h3>
+
+[Notion](https://codestates.notion.site/4-07879a9b7e824034abca77f38443cc4c)
+
+[사용자 요구사항 정의서](https://codestates.notion.site/d98d2298f5654aa8a623c24beb1db0d6), [화면정의서](https://codestates.notion.site/bd364c33f8e048bcbd9f0c3725a307fb), [테이블명세서](https://codestates.notion.site/9109c9dc64e644ac95141dc7cb8c5681?v=96bc8e16bfb64816852f0743dda55855), [API명세서](https://documenter.getpostman.com/view/23681444/2s8Z6x1svW)
 
 <br/>
 
@@ -59,15 +63,5 @@
 
 <br/>
 
-## 🌼 사용자 요구사항 정의서
 
-![캡처](https://user-images.githubusercontent.com/110887604/210252492-cc4bf702-8b51-4014-bd17-b01b8db8e633.PNG)
-
-
-<br/>
-
-## 📋 APi 명세서
-https://documenter.getpostman.com/view/23681444/2s8Z6x1svW
-
-<br/>
 
