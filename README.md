@@ -1,13 +1,10 @@
-# [stackoverflow(클론코딩) 스크린샷](https://www.notion.so/codestates/8b5d7104fa5141d085c422619bd3df10?v=363999953bac4ba18ab97e06c658bfd6)
-
-<br/>
+![header](https://capsule-render.vercel.app/api?type=waving&color=0:FF7400,100:FFAA00&height=200&section=header&text=StackOverFlow&fontSize=70&fontColor=272622)
 
 ## ⏰ 프로젝트 기간  
 <h3>2022.12.15(목) - 2023.01.02(월)</h3>
 
-[Notion](https://codestates.notion.site/4-07879a9b7e824034abca77f38443cc4c)
-
-[사용자 요구사항 정의서](https://codestates.notion.site/d98d2298f5654aa8a623c24beb1db0d6), [화면정의서](https://codestates.notion.site/bd364c33f8e048bcbd9f0c3725a307fb), [테이블명세서](https://codestates.notion.site/9109c9dc64e644ac95141dc7cb8c5681?v=96bc8e16bfb64816852f0743dda55855), [API명세서](https://documenter.getpostman.com/view/23681444/2s8Z6x1svW)
+### [👉 Stackoverflow 클론 코딩 스크린샷](https://www.notion.so/codestates/8b5d7104fa5141d085c422619bd3df10?v=363999953bac4ba18ab97e06c658bfd6)
+( 배포 링크를 대신합니다. )
 
 <br/>
 
@@ -39,6 +36,15 @@
 
 <img src="https://img.shields.io/badge/java-F24E1E?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/SPRING DATA JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <img src="https://img.shields.io/badge/spring boot-6DB33F?style=for-the-badge&logo=spring boot&logoColor=white"> <img src="https://img.shields.io/badge/spring security-6DB33F?style=for-the-badge&logo=spring security&logoColor=white"> <img src="https://img.shields.io/badge/JWT-d63aff?style=for-the-badge&logo=JSONWebTokens&logoColor=black"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/h2-004088?style=for-the-badge&logo=h2&logoColor=white">  
 <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"> <img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=amazon ec2&logoColor=white"> <img src="https://img.shields.io/badge/amazon s3-569A31?style=for-the-badge&logo=amazon s3&logoColor=white"> <img src="https://img.shields.io/badge/amazon rds-527FFF?style=for-the-badge&logo=amazon rds&logoColor=white"> 
+
+<br/>
+
+## 📑 주요 문서
+- [불4조 Notion](https://codestates.notion.site/4-07879a9b7e824034abca77f38443cc4c)  
+- [사용자 요구사항 정의서](https://codestates.notion.site/d98d2298f5654aa8a623c24beb1db0d6)  
+- [화면 정의서](https://codestates.notion.site/bd364c33f8e048bcbd9f0c3725a307fb)  
+- [테이블 명세서](https://codestates.notion.site/9109c9dc64e644ac95141dc7cb8c5681?v=96bc8e16bfb64816852f0743dda55855)  
+- [API 명세서](https://documenter.getpostman.com/view/23681444/2s8Z6x1svW)
 
 <br/>
 
