@@ -3,8 +3,7 @@
 ## ⏰ 프로젝트 기간  
 <h3>2022.12.15(목) - 2023.01.02(월)</h3>
 
-### [👉 Stackoverflow 클론 코딩 스크린샷](https://www.notion.so/codestates/8b5d7104fa5141d085c422619bd3df10?v=363999953bac4ba18ab97e06c658bfd6)
-( 배포 링크를 대신합니다. )
+### [서비스 스크린샷](https://www.notion.so/codestates/8b5d7104fa5141d085c422619bd3df10?v=363999953bac4ba18ab97e06c658bfd6)
 
 <br/>
 
@@ -40,7 +39,7 @@
 <br/>
 
 ## 📑 주요 문서
-- [불4조 Notion](https://codestates.notion.site/4-07879a9b7e824034abca77f38443cc4c)  
+- [프로젝트 관리](https://codestates.notion.site/4-07879a9b7e824034abca77f38443cc4c)  
 - [사용자 요구사항 정의서](https://codestates.notion.site/d98d2298f5654aa8a623c24beb1db0d6)  
 - [화면 정의서](https://codestates.notion.site/bd364c33f8e048bcbd9f0c3725a307fb)  
 - [테이블 명세서](https://codestates.notion.site/9109c9dc64e644ac95141dc7cb8c5681?v=96bc8e16bfb64816852f0743dda55855)  
