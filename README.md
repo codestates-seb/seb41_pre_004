@@ -3,7 +3,7 @@
 ## ⏰ 프로젝트 기간  
 <h3>2022.12.15(목) - 2023.01.02(월)</h3>
 
-### [서비스 스크린샷](https://www.notion.so/codestates/8b5d7104fa5141d085c422619bd3df10?v=363999953bac4ba18ab97e06c658bfd6)
+### [서비스 화면](https://www.notion.so/codestates/8b5d7104fa5141d085c422619bd3df10?v=363999953bac4ba18ab97e06c658bfd6)
 
 <br/>
 
